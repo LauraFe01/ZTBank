@@ -1,0 +1,78 @@
+version: "3.9"
+services:
+
+  router:
+    build: ./router
+    container_name: router
+    networks:
+      net-lab:
+        ipv4_address: 192.168.200.2
+    cap_add:
+      - NET_ADMIN
+    tty: true
+
+  squid:
+    image: sameersbn/squid:3.5.27-2
+    container_name: squid
+    ports:
+      - "3128:3128"
+    networks:
+      net-lab:
+        ipv4_address: 192.168.200.3
+
+  snort:
+    image: dockurr/snort
+    container_name: snort
+    command: ["snort", "-A", "console", "-i", "eth0", "-c", "/etc/snort/snort.conf"]
+    networks:
+      net-lab:
+        ipv4_address: 192.168.200.4
+    tty: true
+
+  splunk:
+    image: splunk/splunk:latest
+    container_name: splunk
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=${SPLUNK_PASSWORD}
+    ports:
+      - "8000:8000"
+      - "8088:8088"
+    networks:
+      net-lab:
+        ipv4_address: 192.168.200.5
+
+  client:
+    image: ubuntu
+    container_name: client
+    networks:
+      net-lab:
+        ipv4_address: 192.168.200.10
+    tty: true
+    command: bash
+
+  server:
+    image: postgres:15
+    container_name: db-server
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    networks:
+      net-lab:
+        ipv4_address: 192.168.200.11
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+networks:
+  net-lab:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.200.0/24
+
+volumes:
+  pgdata:
+
