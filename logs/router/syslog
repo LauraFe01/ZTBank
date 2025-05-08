@@ -1,0 +1,6 @@
+May  8 16:01:19 99bf0cdb4989 rsyslogd: imklog: cannot open kernel log (/proc/kmsg): Operation not permitted.
+May  8 16:01:19 99bf0cdb4989 rsyslogd: activation of module imklog failed [v8.2102.0 try https://www.rsyslog.com/e/2145 ]
+May  8 16:01:19 99bf0cdb4989 rsyslogd: [origin software="rsyslogd" swVersion="8.2102.0" x-pid="14" x-info="https://www.rsyslog.com"] start
+May  8 16:04:29 eb660b6ec0fd rsyslogd: imklog: cannot open kernel log (/proc/kmsg): Operation not permitted.
+May  8 16:04:29 eb660b6ec0fd rsyslogd: activation of module imklog failed [v8.2102.0 try https://www.rsyslog.com/e/2145 ]
+May  8 16:04:29 eb660b6ec0fd rsyslogd: [origin software="rsyslogd" swVersion="8.2102.0" x-pid="15" x-info="https://www.rsyslog.com"] start

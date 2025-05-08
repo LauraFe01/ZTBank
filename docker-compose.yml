@@ -27,7 +27,6 @@ services:
   snort:
     image: dockurr/snort
     container_name: snort
-    command: ["snort", "-A", "console", "-i", "eth0", "-c", "/etc/snort/snort.conf"]
     volumes:
     - ./logs/snort:/var/log/snort
     networks:
