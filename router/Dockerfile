@@ -7,6 +7,12 @@ RUN apt-get update && apt-get install -y \
   net-tools \
   iputils-ping \
   curl \
-  vim
+  rsyslog \
+  vim \
+  && apt-get clean
 
-CMD ["bash"]
+# Copia uno script di avvio personalizzato
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]

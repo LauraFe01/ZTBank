@@ -10,12 +10,16 @@ services:
     cap_add:
       - NET_ADMIN
     tty: true
+    volumes:
+    - ./logs/router:/var/log
 
   squid:
     image: sameersbn/squid:3.5.27-2
     container_name: squid
     ports:
       - "3128:3128"
+    volumes:
+    - ./logs/squid:/var/log/squid
     networks:
       net-lab:
         ipv4_address: 192.168.200.3
@@ -24,6 +28,8 @@ services:
     image: dockurr/snort
     container_name: snort
     command: ["snort", "-A", "console", "-i", "eth0", "-c", "/etc/snort/snort.conf"]
+    volumes:
+    - ./logs/snort:/var/log/snort
     networks:
       net-lab:
         ipv4_address: 192.168.200.4
@@ -41,6 +47,8 @@ services:
     networks:
       net-lab:
         ipv4_address: 192.168.200.5
+    volumes:
+    - ./logs:/opt/splunk_logs
 
   client:
     image: ubuntu
@@ -64,7 +72,7 @@ services:
       net-lab:
         ipv4_address: 192.168.200.11
     volumes:
-      - pgdata:/var/lib/postgresql/data
+    - ./logs/postgres:/var/log/postgresql
 
 networks:
   net-lab:
