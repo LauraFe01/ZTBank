@@ -23,7 +23,6 @@ services:
   snort:
     image: dockurr/snort
     container_name: snort
-    command: ["snort", "-A", "console", "-i", "eth0", "-c", "/etc/snort/snort.conf"]
     networks:
       net-lab:
         ipv4_address: 192.168.200.4
