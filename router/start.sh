@@ -1,28 +1,20 @@
 #!/bin/bash
 
-# Avvio di rsyslog
+# Avvia rsyslog
 service rsyslog start
 
-# Aggiunta di una regola iptables che logga il traffico
-iptables -A FORWARD -j LOG --log-prefix "ROUTER-LOG: " --log-level 4
+# Avvia squid
+squid -z  # inizializza cache
+squid -NYCd 1 &
 
-# Mostra in tempo reale i log di sistema
-tail -F /var/log/syslog
+# Abilita IP forwarding (necessario per NAT/router)
+echo 1 > /proc/sys/net/ipv4/ip_forward
 
-#!/bin/bash
+# Masquerading per routing verso l'esterno (modifica eth0 se necessario)
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
-# Avvio di rsyslog
-#service rsyslog start
+# Reindirizzamento HTTP (modifica eth1 con interfaccia entrante client)
+iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 80 -j REDIRECT --to-port 3128
 
-# Aggiunta di regole iptables per logging e proxy
-#iptables -A FORWARD -j LOG --log-prefix "ROUTER-LOG: " --log-level 4
-#iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3128
-
-# Avvio di Snort
-#snort -c /etc/snort/snort.conf -i eth0 &
-
-# Avvio di Squid
-#service squid start
-
-# Mostra in tempo reale i log di sistema
-#tail -f /var/log/syslog /var/log/snort/alert /var/log/squid/access.log
+# Mantieni attivo
+tail -f /dev/null

@@ -9,9 +9,10 @@ RUN apt-get update && apt-get install -y \
   curl \
   rsyslog \
   vim \
+  squid \
   && apt-get clean
 
-# Copia uno script di avvio personalizzato
+COPY squid.conf /etc/squid/squid.conf
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
