@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Avvia rsyslog
+# Avvio di rsyslog
 service rsyslog start
 
-# Aggiungi una regola iptables che logga il traffico
+# Aggiunta di una regola iptables che logga il traffico
 iptables -A FORWARD -j LOG --log-prefix "ROUTER-LOG: " --log-level 4
 
 # Mostra in tempo reale i log di sistema

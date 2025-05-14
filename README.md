@@ -14,12 +14,12 @@ docker exec -it splunk bash // Si entra dentro il container splunk
 http://localhost:8000/  // Si entra nella Dashboard di splunk
 docker exec -it cient /bin/sh // Si entra dentro il container client
 
-
-
 // Prove per vedere se tutto è ok
 ping 192.168.200.11
 curl -i http://192.168.200.11:5432
 
-
 // Attivo il logging da iptables
 iptables -A OUTPUT -j LOG --log-prefix "OUT_TRAFFIC: "
+
+// Rende accessibile il file starts.sh
+chmod +x router/start.sh
