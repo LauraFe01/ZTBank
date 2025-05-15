@@ -1,0 +1,4 @@
+05/15-18:43:06.200191  [**] [1:1000001:1] ICMP Ping detected [**] [Priority: 0] {IPV6-ICMP} fe80::4c21:7eff:fe68:7f13 -> ff02::16
+05/15-18:43:06.230132  [**] [1:1000001:1] ICMP Ping detected [**] [Priority: 0] {IPV6-ICMP} fe80::4c21:7eff:fe68:7f13 -> ff02::16
+05/15-18:43:06.550089  [**] [1:1000001:1] ICMP Ping detected [**] [Priority: 0] {IPV6-ICMP} fe80::4c21:7eff:fe68:7f13 -> ff02::16
+05/15-18:43:06.710157  [**] [1:1000001:1] ICMP Ping detected [**] [Priority: 0] {IPV6-ICMP} fe80::4c21:7eff:fe68:7f13 -> ff02::16

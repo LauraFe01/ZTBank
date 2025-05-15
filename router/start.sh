@@ -4,7 +4,7 @@ set -e
 # Avvia rsyslog (ignora errore se già avviato)
 service rsyslog start || true
 
-# Gestione più robusta del PID file
+# Gestione robusta PID Squid
 if [ -f /run/squid.pid ]; then
     PID=$(cat /run/squid.pid)
     if ! ps -p "$PID" >/dev/null 2>&1; then
@@ -22,23 +22,29 @@ if [ -f /run/squid.pid ]; then
     fi
 fi
 
-# Pulisci eventuali lock file esistenti
-if [ -f /var/run/squid.pid ]; then
-    rm -f /var/run/squid.pid
-fi
+# Pulisce eventuali lock file
+rm -f /var/run/squid.pid || true
 
-# Inizializza cache solo se non già inizializzata
+# Inizializza cache se necessario
 if [ ! -d /var/spool/squid/00 ]; then
     echo "Inizializzo cache Squid..."
     squid -z
 fi
 
-# Assicurati che le directory di log esistano e abbiano i permessi corretti
+# Assicura permessi log Squid
 mkdir -p /var/log/squid
 chown -R proxy:proxy /var/log/squid
 chmod 755 /var/log/squid
 
-# Avvia squid in modalità foreground
+# Assicura log Snort
+mkdir -p /var/log/snort
+chmod 755 /var/log/snort
+
+# Avvia Snort (modalità IDS base su eth0)
+echo "Avvio Snort..."
+snort -i eth0 -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 &
+
+# Avvia Squid in foreground
 echo "Avvio Squid..."
 squid -NYCd 1 &
 SQUID_PID=$!
@@ -46,23 +52,19 @@ SQUID_PID=$!
 # Abilita IP forwarding
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
-# Pulisci regole iptables esistenti per evitare duplicazioni
+# Reset iptables
 iptables -t nat -F POSTROUTING
 iptables -t nat -F PREROUTING
 
-# Configura NAT (MASQUERADE)
+# NAT e redirect HTTP verso Squid
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-
-# Reindirizzamento HTTP
 iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 80 -j REDIRECT --to-port 3128
-
-# Aggiungi regole per le altre interfacce
 iptables -t nat -A PREROUTING -i eth2 -p tcp --dport 80 -j REDIRECT --to-port 3128
 iptables -t nat -A PREROUTING -i eth3 -p tcp --dport 80 -j REDIRECT --to-port 3128
 
 echo "Setup completato con successo!"
 
-# Mantieni il container attivo monitorando Squid
+# Loop per tenere vivo il container monitorando Squid
 while true; do
     if ! ps -p $SQUID_PID > /dev/null; then
         echo "Squid è terminato, riavvio..."
