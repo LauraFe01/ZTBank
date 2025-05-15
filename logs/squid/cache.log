@@ -354,3 +354,131 @@
 2025/05/14 13:38:54| Waiting 30 seconds for active connections to finish
 2025/05/14 13:38:54| Closing HTTP port [::]:3128
 2025/05/14 13:38:54| Closing Pinger socket on FD 14
+2025/05/14 19:21:31| Created PID file (/run/squid.pid)
+2025/05/14 19:21:31 kid1| Current Directory is /
+2025/05/14 19:21:31| FATAL: Squid is already running: Found fresh instance PID file (/run/squid.pid) with PID 27
+    exception location: Instance.cc(121) ThrowIfAlreadyRunningWith
+
+2025/05/14 19:21:31 kid1| Creating missing swap directories
+2025/05/14 19:21:31 kid1| /var/spool/squid exists
+2025/05/14 19:21:31 kid1| Making directories in /var/spool/squid/00
+2025/05/14 19:21:31 kid1| Making directories in /var/spool/squid/01
+2025/05/14 19:21:31 kid1| Making directories in /var/spool/squid/02
+2025/05/14 19:21:31| FATAL: Squid is already running: Found fresh instance PID file (/run/squid.pid) with PID 27
+    exception location: Instance.cc(121) ThrowIfAlreadyRunningWith
+
+2025/05/14 19:21:31 kid1| Making directories in /var/spool/squid/03
+2025/05/14 19:21:31 kid1| Making directories in /var/spool/squid/04
+2025/05/14 19:21:31 kid1| Making directories in /var/spool/squid/05
+2025/05/14 19:21:31 kid1| Making directories in /var/spool/squid/06
+2025/05/14 19:21:31 kid1| Making directories in /var/spool/squid/07
+2025/05/14 19:21:31 kid1| Making directories in /var/spool/squid/08
+2025/05/14 19:21:31 kid1| Making directories in /var/spool/squid/09
+2025/05/14 19:21:31 kid1| Making directories in /var/spool/squid/0A
+2025/05/14 19:21:31 kid1| Making directories in /var/spool/squid/0B
+2025/05/14 19:21:32 kid1| Making directories in /var/spool/squid/0C
+2025/05/14 19:21:32 kid1| Making directories in /var/spool/squid/0D
+2025/05/14 19:21:32 kid1| Making directories in /var/spool/squid/0E
+2025/05/14 19:21:32 kid1| Making directories in /var/spool/squid/0F
+2025/05/14 19:21:32| Removing PID file (/run/squid.pid)
+2025/05/14 19:21:41| Created PID file (/run/squid.pid)
+2025/05/14 19:21:41| Current Directory is /
+2025/05/14 19:21:41| Starting Squid Cache version 4.13 for x86_64-pc-linux-gnu...
+2025/05/14 19:21:41| Service Name: squid
+2025/05/14 19:21:41| Process ID 44
+2025/05/14 19:21:41| Process Roles: master worker
+2025/05/14 19:21:41| With 1048576 file descriptors available
+2025/05/14 19:21:41| Initializing IP Cache...
+2025/05/14 19:21:41| DNS Socket created at [::], FD 3
+2025/05/14 19:21:41| DNS Socket created at 0.0.0.0, FD 9
+2025/05/14 19:21:41| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/05/14 19:21:41| Adding ndots 1 from /etc/resolv.conf
+2025/05/14 19:21:41| Logfile: opening log /var/log/squid/access.log
+2025/05/14 19:21:41| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/05/14 19:21:42| Unlinkd pipe opened on FD 14
+2025/05/14 19:21:42| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/05/14 19:21:42| Store logging disabled
+2025/05/14 19:21:42| Swap maxSize 102400 + 262144 KB, estimated 28041 objects
+2025/05/14 19:21:42| Target number of buckets: 1402
+2025/05/14 19:21:42| Using 8192 Store buckets
+2025/05/14 19:21:42| Max Mem  size: 262144 KB
+2025/05/14 19:21:42| Max Swap size: 102400 KB
+2025/05/14 19:21:42| Rebuilding storage in /var/spool/squid (no log)
+2025/05/14 19:21:42| Using Least Load store dir selection
+2025/05/14 19:21:42| Current Directory is /
+2025/05/14 19:21:42| Finished loading MIME types and icons.
+2025/05/14 19:21:42| HTCP Disabled.
+2025/05/14 19:21:42| Pinger socket opened on FD 18
+2025/05/14 19:21:42| Squid plugin modules loaded: 0
+2025/05/14 19:21:42| Adaptation support is off.
+2025/05/14 19:21:42| Accepting HTTP Socket connections at local=[::]:3128 remote=[::] FD 16 flags=9
+2025/05/14 19:21:42| pinger: Initialising ICMP pinger ...
+2025/05/14 19:21:42| pinger: ICMP socket opened.
+2025/05/14 19:21:42| pinger: ICMPv6 socket opened
+2025/05/14 19:21:42| Done scanning /var/spool/squid dir (0 entries)
+2025/05/14 19:21:42| Finished rebuilding storage from disk.
+2025/05/14 19:21:42|         0 Entries scanned
+2025/05/14 19:21:42|         0 Invalid entries.
+2025/05/14 19:21:42|         0 With invalid flags.
+2025/05/14 19:21:42|         0 Objects loaded.
+2025/05/14 19:21:42|         0 Objects expired.
+2025/05/14 19:21:42|         0 Objects cancelled.
+2025/05/14 19:21:42|         0 Duplicate URLs purged.
+2025/05/14 19:21:42|         0 Swapfile clashes avoided.
+2025/05/14 19:21:42|   Took 0.05 seconds (  0.00 objects/sec).
+2025/05/14 19:21:42| Beginning Validation Procedure
+2025/05/14 19:21:42|   Completed Validation Procedure
+2025/05/14 19:21:42|   Validated 0 Entries
+2025/05/14 19:21:42|   store_swap_size = 0.00 KB
+2025/05/14 19:21:43| storeLateRelease: released 0 objects
+2025/05/15 13:25:58| Created PID file (/run/squid.pid)
+2025/05/15 13:25:58| Current Directory is /
+2025/05/15 13:25:58| Starting Squid Cache version 4.13 for x86_64-pc-linux-gnu...
+2025/05/15 13:25:58| Service Name: squid
+2025/05/15 13:25:58| Process ID 32
+2025/05/15 13:25:58| Process Roles: master worker
+2025/05/15 13:25:58| With 1048576 file descriptors available
+2025/05/15 13:25:58| Initializing IP Cache...
+2025/05/15 13:25:58| DNS Socket created at [::], FD 3
+2025/05/15 13:25:58| DNS Socket created at 0.0.0.0, FD 9
+2025/05/15 13:25:58| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/05/15 13:25:58| Adding ndots 1 from /etc/resolv.conf
+2025/05/15 13:25:58| Logfile: opening log /var/log/squid/access.log
+2025/05/15 13:25:58| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/05/15 13:25:58| Unlinkd pipe opened on FD 14
+2025/05/15 13:25:58| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/05/15 13:25:58| Store logging disabled
+2025/05/15 13:25:58| Swap maxSize 102400 + 262144 KB, estimated 28041 objects
+2025/05/15 13:25:58| Target number of buckets: 1402
+2025/05/15 13:25:58| Using 8192 Store buckets
+2025/05/15 13:25:58| Max Mem  size: 262144 KB
+2025/05/15 13:25:58| Max Swap size: 102400 KB
+2025/05/15 13:25:58| Rebuilding storage in /var/spool/squid (dirty log)
+2025/05/15 13:25:58| Using Least Load store dir selection
+2025/05/15 13:25:58| Current Directory is /
+2025/05/15 13:25:58| Finished loading MIME types and icons.
+2025/05/15 13:25:58| HTCP Disabled.
+2025/05/15 13:25:58| Pinger socket opened on FD 19
+2025/05/15 13:25:58| Squid plugin modules loaded: 0
+2025/05/15 13:25:58| Adaptation support is off.
+2025/05/15 13:25:58| Accepting HTTP Socket connections at local=[::]:3128 remote=[::] FD 17 flags=9
+2025/05/15 13:25:58| Done reading /var/spool/squid swaplog (0 entries)
+2025/05/15 13:25:58| Store rebuilding is 0.00% complete
+2025/05/15 13:25:58| Finished rebuilding storage from disk.
+2025/05/15 13:25:58|         0 Entries scanned
+2025/05/15 13:25:58|         0 Invalid entries.
+2025/05/15 13:25:58|         0 With invalid flags.
+2025/05/15 13:25:58|         0 Objects loaded.
+2025/05/15 13:25:58|         0 Objects expired.
+2025/05/15 13:25:58|         0 Objects cancelled.
+2025/05/15 13:25:58|         0 Duplicate URLs purged.
+2025/05/15 13:25:58|         0 Swapfile clashes avoided.
+2025/05/15 13:25:58|   Took 0.18 seconds (  0.00 objects/sec).
+2025/05/15 13:25:59| Beginning Validation Procedure
+2025/05/15 13:25:59|   Completed Validation Procedure
+2025/05/15 13:25:59|   Validated 0 Entries
+2025/05/15 13:25:59|   store_swap_size = 0.00 KB
+2025/05/15 13:25:59| pinger: Initialising ICMP pinger ...
+2025/05/15 13:25:59| pinger: ICMP socket opened.
+2025/05/15 13:25:59| pinger: ICMPv6 socket opened
+2025/05/15 13:25:59| storeLateRelease: released 0 objects

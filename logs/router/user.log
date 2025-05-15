@@ -5,3 +5,4 @@ May  8 17:43:37 eb660b6ec0fd rsyslogd: imklog: cannot open kernel log (/proc/kms
 May 14 08:13:23 7ed449f09f49 rsyslogd: imklog: cannot open kernel log (/proc/kmsg): Operation not permitted.
 May 14 08:19:19 7ed449f09f49 rsyslogd: imklog: cannot open kernel log (/proc/kmsg): Operation not permitted.
 May 14 08:35:56 7ed449f09f49 rsyslogd: imklog: cannot open kernel log (/proc/kmsg): Operation not permitted.
+May 14 19:15:03 cd22ec6f0e20 rsyslogd: imklog: cannot open kernel log (/proc/kmsg): Operation not permitted.
