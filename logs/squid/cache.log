@@ -482,3 +482,77 @@
 2025/05/15 13:25:59| pinger: ICMP socket opened.
 2025/05/15 13:25:59| pinger: ICMPv6 socket opened
 2025/05/15 13:25:59| storeLateRelease: released 0 objects
+2025/05/15 13:57:33| Created PID file (/run/squid.pid)
+2025/05/15 13:57:34 kid1| Current Directory is /
+2025/05/15 13:57:34 kid1| Creating missing swap directories
+2025/05/15 13:57:34 kid1| /var/spool/squid exists
+2025/05/15 13:57:34 kid1| Making directories in /var/spool/squid/00
+2025/05/15 13:57:34| FATAL: Squid is already running: Found fresh instance PID file (/run/squid.pid) with PID 27
+    exception location: Instance.cc(121) ThrowIfAlreadyRunningWith
+
+2025/05/15 13:57:34 kid1| Making directories in /var/spool/squid/01
+2025/05/15 13:57:34 kid1| Making directories in /var/spool/squid/02
+2025/05/15 13:57:34 kid1| Making directories in /var/spool/squid/03
+2025/05/15 13:57:34 kid1| Making directories in /var/spool/squid/04
+2025/05/15 13:57:34 kid1| Making directories in /var/spool/squid/05
+2025/05/15 13:57:35 kid1| Making directories in /var/spool/squid/06
+2025/05/15 13:57:35 kid1| Making directories in /var/spool/squid/07
+2025/05/15 13:57:35 kid1| Making directories in /var/spool/squid/08
+2025/05/15 13:57:35 kid1| Making directories in /var/spool/squid/09
+2025/05/15 13:57:35 kid1| Making directories in /var/spool/squid/0A
+2025/05/15 13:57:35 kid1| Making directories in /var/spool/squid/0B
+2025/05/15 13:57:35 kid1| Making directories in /var/spool/squid/0C
+2025/05/15 13:57:36 kid1| Making directories in /var/spool/squid/0D
+2025/05/15 13:57:36 kid1| Making directories in /var/spool/squid/0E
+2025/05/15 13:57:36 kid1| Making directories in /var/spool/squid/0F
+2025/05/15 13:57:36| Removing PID file (/run/squid.pid)
+2025/05/15 13:57:44| Created PID file (/run/squid.pid)
+2025/05/15 13:57:44| Current Directory is /
+2025/05/15 13:57:44| Starting Squid Cache version 4.13 for x86_64-pc-linux-gnu...
+2025/05/15 13:57:44| Service Name: squid
+2025/05/15 13:57:44| Process ID 43
+2025/05/15 13:57:44| Process Roles: master worker
+2025/05/15 13:57:44| With 1048576 file descriptors available
+2025/05/15 13:57:44| Initializing IP Cache...
+2025/05/15 13:57:44| DNS Socket created at [::], FD 3
+2025/05/15 13:57:44| DNS Socket created at 0.0.0.0, FD 9
+2025/05/15 13:57:44| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/05/15 13:57:44| Adding ndots 1 from /etc/resolv.conf
+2025/05/15 13:57:44| Logfile: opening log /var/log/squid/access.log
+2025/05/15 13:57:44| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/05/15 13:57:44| Unlinkd pipe opened on FD 14
+2025/05/15 13:57:44| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/05/15 13:57:44| Store logging disabled
+2025/05/15 13:57:44| Swap maxSize 102400 + 262144 KB, estimated 28041 objects
+2025/05/15 13:57:44| Target number of buckets: 1402
+2025/05/15 13:57:44| Using 8192 Store buckets
+2025/05/15 13:57:44| Max Mem  size: 262144 KB
+2025/05/15 13:57:44| Max Swap size: 102400 KB
+2025/05/15 13:57:44| Rebuilding storage in /var/spool/squid (no log)
+2025/05/15 13:57:44| Using Least Load store dir selection
+2025/05/15 13:57:44| Current Directory is /
+2025/05/15 13:57:44| Finished loading MIME types and icons.
+2025/05/15 13:57:44| HTCP Disabled.
+2025/05/15 13:57:44| Pinger socket opened on FD 18
+2025/05/15 13:57:44| Squid plugin modules loaded: 0
+2025/05/15 13:57:44| Adaptation support is off.
+2025/05/15 13:57:44| Accepting HTTP Socket connections at local=[::]:3128 remote=[::] FD 16 flags=9
+2025/05/15 13:57:44| pinger: Initialising ICMP pinger ...
+2025/05/15 13:57:44| pinger: ICMP socket opened.
+2025/05/15 13:57:44| pinger: ICMPv6 socket opened
+2025/05/15 13:57:44| Done scanning /var/spool/squid dir (0 entries)
+2025/05/15 13:57:44| Finished rebuilding storage from disk.
+2025/05/15 13:57:44|         0 Entries scanned
+2025/05/15 13:57:44|         0 Invalid entries.
+2025/05/15 13:57:44|         0 With invalid flags.
+2025/05/15 13:57:44|         0 Objects loaded.
+2025/05/15 13:57:44|         0 Objects expired.
+2025/05/15 13:57:44|         0 Objects cancelled.
+2025/05/15 13:57:44|         0 Duplicate URLs purged.
+2025/05/15 13:57:44|         0 Swapfile clashes avoided.
+2025/05/15 13:57:44|   Took 0.21 seconds (  0.00 objects/sec).
+2025/05/15 13:57:44| Beginning Validation Procedure
+2025/05/15 13:57:44|   Completed Validation Procedure
+2025/05/15 13:57:44|   Validated 0 Entries
+2025/05/15 13:57:44|   store_swap_size = 0.00 KB
+2025/05/15 13:57:45| storeLateRelease: released 0 objects
