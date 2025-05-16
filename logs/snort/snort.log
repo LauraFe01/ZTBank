@@ -51,9 +51,9 @@ Verifying Preprocessor Configurations!
 
 [ Port Based Pattern Matching Memory ]
 pcap DAQ configured to passive.
-Acquiring network traffic from "eth0".
+Acquiring network traffic from "eth1".
 Reload thread starting...
-Reload thread started, thread 0x7f6e247e2640 (30)
+Reload thread started, thread 0x7f130ade7640 (30)
 Decoding Ethernet
 
         --== Initialization Complete ==--
@@ -68,6 +68,8 @@ Decoding Ethernet
            Using ZLIB version: 1.2.11
 
 Commencing packet processing (pid=20)
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
 WARNING: No preprocessors configured for policy 0.
 WARNING: No preprocessors configured for policy 0.
 WARNING: No preprocessors configured for policy 0.

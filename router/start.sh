@@ -42,7 +42,8 @@ chmod 755 /var/log/snort
 
 # Avvia Snort (modalità IDS base su eth0)
 echo "Avvio Snort..."
-snort -i eth0 -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 &
+# snort -i eth0 -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 &
+snort -i eth1 -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 &
 
 # Avvia Squid in foreground
 echo "Avvio Squid..."

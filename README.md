@@ -24,12 +24,21 @@ iptables -A OUTPUT -j LOG --log-prefix "OUT_TRAFFIC: "
 // Rende accessibile il file starts.sh
 chmod +x router/start.sh
 
-// PROVA TEST FUNZIONANTE by Zazza
-1-docker-compose up --build
-2-docker inspect -f "{{.NetworkSettings.IPAddress}}" router (per ottenere l'ip del router)
-3-docker exec -it client-internal (entro dentro il container client-internal)
-4-curl -x http://<IP_PROXY>:3128 http://example.com (faccio la richiesta, IP_PROXY sarebbe l'ip del router)
-5-http://<IP_SPLUNK>:8000 accedo a splunk e vado su Search and Reporting
-6-index=main source="/var/log/squid/access.log (esempio di richiesta)
+// PROVA TEST FUNZIONANTE SQUID by Zazza
+1-docker-compose up --build  
+2-docker inspect -f "{{.NetworkSettings.IPAddress}}" router (per ottenere l'ip del router)  
+3-docker exec -it client-internal (entro dentro il container client-internal)  
+4-curl -x http://<IP_PROXY>:3128 http://example.com (faccio la richiesta, IP_PROXY sarebbe l'ip del router)  
+5-http://<IP_SPLUNK>:8000 accedo a splunk e vado su Search and Reporting  
+6-index=main source="/var/log/squid/access.log (esempio di richiesta)  
 
-NB: per testare anche snort si potrebbe generare un attacco simulato con ping o telnet (non ancora provato)
+// PROVA TEST FUNZIONANTE SNORT by Zazza
+
+1-docker-compose up --build  
+2-per generare traffico e testare il monitoraggio del traffico da parte di snort eseguo un ping dal container client-internal verso la rete internal-net del router nel seguente modo:   
+   - entro nel container client-internal con: docker exec -it client-internal bash  
+   - scarico ping con: apt update && apt install -y iputils-ping (questo è da sistemare, fare in modo che venga scaricato   direttamente)  
+   - eseguo il ping con: ping -c 4 192.168.10.254  
+
+dopo aver eseguito il ping andare su splunk all'indirizzo localhost 8000. Su splunk, per verificare le cartelle che vengono monitorate da splunk andare su Impostazioni -> Input dati -> file and directory (li ci saranno alert e snort.log), a quel punto si va su Search and reporting e si immette: source="/var/log/snort/alert" , source="/var/log/snort/snort.log"   
+
