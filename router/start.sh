@@ -40,10 +40,9 @@ chmod 755 /var/log/squid
 mkdir -p /var/log/snort
 chmod 755 /var/log/snort
 
-# Avvia Snort (modalità IDS base su eth0)
+# Avvia Snort
 echo "Avvio Snort..."
-# snort -i eth0 -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 &
-snort -i eth1 -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 &
+snort -i eth1 -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 & # in alternativa snort -i any
 
 # Avvia Squid in foreground
 echo "Avvio Squid..."
@@ -56,6 +55,11 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 # Reset iptables
 iptables -t nat -F POSTROUTING
 iptables -t nat -F PREROUTING
+
+# Default: nega l’accesso al DB (porta 5432), in uanto dobbiamo controllare dinamicamente chi può accedere
+iptables -A FORWARD -p tcp --dport 5432 -j DROP
+# Avvia il demone di controllo delle policy
+python3 /policy_enforcer.py &
 
 # NAT e redirect HTTP verso Squid
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE

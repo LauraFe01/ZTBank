@@ -39,17 +39,20 @@ services:
     ports:
       - "8000:8000"
       - "8088:8088"
+      - "8089:8089"
     networks:
       net-lab:
         ipv4_address: 192.168.200.5
     volumes:
-      - ./logs/squid:/var/log/squid:ro
-      - ./logs/snort:/var/log/snort:ro
+      - ./logs/squid:/var/log/squid
+      - ./logs/snort:/var/log/snort
       - ./splunk-apps:/opt/splunk/etc/apps/local  # (opzionale per monitor inputs)
 
   router:
     build: ./router
     container_name: router
+    environment:
+      - TZ=Europe/Rome
     privileged: true                      # permette ip_forward e iptables
     sysctls:
       net.ipv4.ip_forward: 1             # abilitazione forwarding
@@ -69,7 +72,18 @@ services:
       - ./logs/router:/var/log/router
       - ./logs/squid:/var/log/squid
       - ./logs/snort:/var/log/snort
-
+    
+  db:
+    image: postgres:14
+    container_name: db
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypass
+      POSTGRES_DB: mydb
+    networks:
+      net-lab:
+        ipv4_address: 192.168.200.10
+        
 networks:
   internal-net:
     driver: bridge

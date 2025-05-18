@@ -28,7 +28,7 @@ chmod +x router/start.sh
 1-docker-compose up --build  
 2-docker inspect -f "{{.NetworkSettings.IPAddress}}" router (per ottenere l'ip del router)  
 3-docker exec -it client-internal (entro dentro il container client-internal)  
-4-curl -x http://<IP_PROXY>:3128 http://example.com (faccio la richiesta, IP_PROXY sarebbe l'ip del router)  
+4-curl -x http://<IP_PROXY>:3128 http://example.com (faccio la richiesta, IP_PROXY sarebbe l'ip del router)  (per installare curl apt update && apt install -y curl)
 5-http://<IP_SPLUNK>:8000 accedo a splunk e vado su Search and Reporting  
 6-index=main source="/var/log/squid/access.log (esempio di richiesta)  
 
@@ -41,4 +41,6 @@ chmod +x router/start.sh
    - eseguo il ping con: ping -c 4 192.168.10.254  
 
 dopo aver eseguito il ping andare su splunk all'indirizzo localhost 8000. Su splunk, per verificare le cartelle che vengono monitorate da splunk andare su Impostazioni -> Input dati -> file and directory (li ci saranno alert e snort.log), a quel punto si va su Search and reporting e si immette: source="/var/log/snort/alert" , source="/var/log/snort/snort.log"   
+
+apt-get update && apt-get install netcat-openbsd -y
 

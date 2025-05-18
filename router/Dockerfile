@@ -2,7 +2,6 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Installa i pacchetti necessari, incluso Snort
 RUN apt-get update && apt-get install -y \
   iptables \
   iproute2 \
@@ -15,7 +14,12 @@ RUN apt-get update && apt-get install -y \
   squid \
   snort \
   procps \
+  python3 \
+  python3-pip \
   && apt-get clean
+
+# Installa il modulo requests con pip
+RUN pip3 install requests
 
 # Copia la configurazione di Squid e Snort e lo script di avvio
 COPY squid.conf /etc/squid/squid.conf
@@ -23,6 +27,7 @@ COPY start.sh /start.sh
 RUN chmod +x /start.sh
 COPY snort.conf /etc/snort/snort.conf
 COPY rules /etc/snort/rules
+COPY policy_enforcer.py /policy_enforcer.py
 
 
 # Crea e configura le directory di cache/log di Squid
