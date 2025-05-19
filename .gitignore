@@ -1,1 +1,7 @@
 .env
+# Ignora tutto in splunk-apps/
+splunk-apps/*
+
+# Ma non ignorare la tua app custom
+!splunk-apps/my_custom_alerts/
+!splunk-apps/log_inputs/

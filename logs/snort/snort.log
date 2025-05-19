@@ -51,27 +51,8 @@ Verifying Preprocessor Configurations!
 
 [ Port Based Pattern Matching Memory ]
 pcap DAQ configured to passive.
-Acquiring network traffic from "eth1".
+Acquiring network traffic from "any".
 Reload thread starting...
-Reload thread started, thread 0x7fa8cd6db640 (32)
-Decoding Ethernet
-
-        --== Initialization Complete ==--
-
-   ,,_     -*> Snort! <*-
-  o"  )~   Version 2.9.15.1 GRE (Build 15125) 
-   ''''    By Martin Roesch & The Snort Team: http://www.snort.org/contact#team
-           Copyright (C) 2014-2019 Cisco and/or its affiliates. All rights reserved.
-           Copyright (C) 1998-2013 Sourcefire, Inc., et al.
-           Using libpcap version 1.10.1 (with TPACKET_V3)
-           Using PCRE version: 8.39 2016-06-14
-           Using ZLIB version: 1.2.11
-
-Commencing packet processing (pid=20)
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
+Reload thread started, thread 0x7fc66d6bc640 (33)
+ERROR: Cannot decode data link type 113
+Fatal Error, Quitting..

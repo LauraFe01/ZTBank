@@ -44,3 +44,7 @@ dopo aver eseguito il ping andare su splunk all'indirizzo localhost 8000. Su spl
 
 apt-get update && apt-get install netcat-openbsd -y
 
+
+docker exec -it router bash
+ps aux | grep -i flask
+

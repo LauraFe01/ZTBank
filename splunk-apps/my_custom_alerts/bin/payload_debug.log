@@ -1,0 +1,8 @@
+2025-05-19T09:17:00.811240 - Payload ricevuto da Splunk:
+2025-05-19T09:17:00.813843 - {
+  "result": {
+    "src_ip": "192.168.1.1"
+  }
+}
+2025-05-19T09:17:00.851571 - Invio a Flask: 200 - {"ip":"192.168.1.1","output":"","status":"blocked"}
+

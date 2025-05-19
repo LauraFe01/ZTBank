@@ -42,7 +42,11 @@ chmod 755 /var/log/snort
 
 # Avvia Snort
 echo "Avvio Snort..."
-snort -i eth1 -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 & # in alternativa snort -i any
+snort -i any -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 &
+
+# Avvia Flask (modifica il percorso secondo dove si trova app.py)
+echo "Avvio Flask server..."
+python3 /router/api/app.py &
 
 # Avvia Squid in foreground
 echo "Avvio Squid..."
@@ -58,8 +62,6 @@ iptables -t nat -F PREROUTING
 
 # Default: nega l’accesso al DB (porta 5432), in uanto dobbiamo controllare dinamicamente chi può accedere
 iptables -A FORWARD -p tcp --dport 5432 -j DROP
-# Avvia il demone di controllo delle policy
-python3 /policy_enforcer.py &
 
 # NAT e redirect HTTP verso Squid
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE

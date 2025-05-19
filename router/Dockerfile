@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
 
 # Installa il modulo requests con pip
 RUN pip3 install requests
+RUN pip3 install flask
 
 # Copia la configurazione di Squid e Snort e lo script di avvio
 COPY squid.conf /etc/squid/squid.conf
@@ -27,7 +28,8 @@ COPY start.sh /start.sh
 RUN chmod +x /start.sh
 COPY snort.conf /etc/snort/snort.conf
 COPY rules /etc/snort/rules
-COPY policy_enforcer.py /policy_enforcer.py
+COPY api/app.py /router/api/app.py
+
 
 
 # Crea e configura le directory di cache/log di Squid

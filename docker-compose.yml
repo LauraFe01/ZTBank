@@ -46,11 +46,14 @@ services:
     volumes:
       - ./logs/squid:/var/log/squid
       - ./logs/snort:/var/log/snort
-      - ./splunk-apps:/opt/splunk/etc/apps/local  # (opzionale per monitor inputs)
+      - ./splunk-apps/log_inputs:/opt/splunk/etc/apps/log_inputs
+      - ./splunk-apps/my_custom_alerts:/opt/splunk/etc/apps/my_custom_alerts 
 
   router:
     build: ./router
     container_name: router
+    ports:
+      - "5000:5000"
     environment:
       - TZ=Europe/Rome
     privileged: true                      # permette ip_forward e iptables
@@ -66,7 +69,7 @@ services:
       net-lab:
         ipv4_address: 192.168.200.254
     cap_add:
-      - NET_ADMIN
+      - NET_ADMIN # per usare iptables
     tty: true
     volumes:
       - ./logs/router:/var/log/router
