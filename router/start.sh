@@ -44,14 +44,13 @@ chmod 755 /var/log/snort
 echo "Avvio Snort..."
 snort -i any -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 &
 
-# Avvia Flask (modifica il percorso secondo dove si trova app.py)
+# Avvia Flask in foreground (processo principale del container)
 echo "Avvio Flask server..."
-python3 /router/api/app.py &
+python3 /router/api/app.py
 
 # Avvia Squid in foreground
 echo "Avvio Squid..."
 squid -NYCd 1 &
-SQUID_PID=$!
 
 # Abilita IP forwarding
 echo 1 > /proc/sys/net/ipv4/ip_forward
@@ -71,12 +70,5 @@ iptables -t nat -A PREROUTING -i eth3 -p tcp --dport 80 -j REDIRECT --to-port 31
 
 echo "Setup completato con successo!"
 
-# Loop per tenere vivo il container monitorando Squid
-while true; do
-    if ! ps -p $SQUID_PID > /dev/null; then
-        echo "Squid è terminato, riavvio..."
-        squid -NYCd 1 &
-        SQUID_PID=$!
-    fi
-    sleep 10
-done
+echo "Avvio Flask server (in foreground)..."
+exec python3 /router/api/app.py

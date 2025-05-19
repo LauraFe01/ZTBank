@@ -6,7 +6,7 @@ import traceback
 from datetime import datetime
 
 LOG_FILE = "/opt/splunk/etc/apps/my_custom_alerts/bin/payload_debug.log"
-FLASK_URL = "http://router:5000/enforce"
+FLASK_URL = "http://192.168.200.254:5000/enforce"
 
 with open(LOG_FILE, "a") as f:
     f.write(f"{datetime.now().isoformat()} - Script policy_enforcer.py avviato\n")
@@ -21,12 +21,25 @@ def log_debug(message):
 
 def main():
     try:
-        # Legge lo stdin ricevuto da Splunk
-        payload = json.load(sys.stdin)
-        log_debug("Payload ricevuto da Splunk:")
-        log_debug(json.dumps(payload, indent=2))
+        if sys.stdin.isatty():
+            log_debug("❗ Nessun input ricevuto da Splunk (stdin è vuoto)")
+            return
 
-        # Estrae l'IP sorgente dalla struttura del payload
+        payload_str = sys.stdin.read().strip()
+        log_debug(f"📥 Payload grezzo da stdin:\n{payload_str!r}")
+
+        if not payload_str:
+            log_debug("❗ Stdin è vuoto: nessun payload JSON ricevuto.")
+            return
+
+        try:
+            payload = json.loads(payload_str)
+            log_debug("✅ Payload JSON ricevuto e parsato:")
+            log_debug(json.dumps(payload, indent=2))
+        except json.JSONDecodeError as e:
+            log_debug(f"❌ Errore di parsing JSON: {e}")
+            return
+
         result = payload.get("result", {})
         ip = result.get("src_ip") or result.get("client_ip")
 
@@ -39,14 +52,20 @@ def main():
             "action": "block"
         }
 
-        # Invio al server Flask sul router
-        response = requests.post(FLASK_URL, json=alert_data)
-        log_debug(f"Invio a Flask: {response.status_code} - {response.text}")
+        try:
+            response = requests.post(FLASK_URL, json=alert_data)
+            try:
+                json_response = response.json()
+                log_debug(f"✅ Risposta JSON da Flask: {json.dumps(json_response, indent=2)}")
+            except ValueError:
+                log_debug(f"⚠️ Risposta non-JSON da Flask: {response.text}")
+        except Exception as req_err:
+            log_debug("❌ Errore durante l'invio della richiesta POST:")
+            log_debug(str(req_err))
 
     except Exception as e:
-        log_debug("❌ Errore durante l'esecuzione:")
+        log_debug("❌ Errore generale durante l'esecuzione:")
         log_debug(traceback.format_exc())
-        print("Errore:", e)
 
 if __name__ == "__main__":
     main()
