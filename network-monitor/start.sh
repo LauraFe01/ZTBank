@@ -44,21 +44,9 @@ chmod 755 /var/log/snort
 mkdir -p /var/log/snort/eth0 /var/log/snort/eth1
 chmod 755 /var/log/snort/eth0 /var/log/snort/eth1
 
-# Avvia Snort su eth1
-echo "Avvio Snort su eth1..."
-snort -i eth1 -A fast -c /etc/snort/snort_eth1.conf -l /var/log/snort/eth1 > /var/log/snort/snort_eth1.log 2>&1 &
-
-# Avvia Snort su eth0
-echo "Avvio Snort su eth0..."
-snort -i eth0 -A fast -c /etc/snort/snort_eth0.conf -l /var/log/snort/eth0 > /var/log/snort/snort_eth0.log 2>&1 &
-
-# Avvia Snort su eth0
-echo "Avvio Snort su eth2..."
-snort -i eth2 -A fast -c /etc/snort/snort_eth2.conf -l /var/log/snort/eth2 > /var/log/snort/snort_eth2.log 2>&1 &
-
-# Avvia Snort su eth0
-echo "Avvio Snort su eth3..."
-snort -i eth3 -A fast -c /etc/snort/snort_eth3.conf -l /var/log/snort/eth3 > /var/log/snort/snort_eth3.log 2>&1 &
+# Avvia Flask in foreground (processo principale del container)
+echo "Avvio Flask server..."
+python3 /router/api/app.py
 
 # Avvia Squid in foreground
 echo "Avvio Squid..."
