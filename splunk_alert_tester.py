@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 import json
 
 # === CONFIGURA QUI ===
-splunk_host = "https://192.168.200.5:8089"
+splunk_host = "https://localhost:8089"
 username = "admin"
 password = "Chang3dP@ss!"
 index = "main"
