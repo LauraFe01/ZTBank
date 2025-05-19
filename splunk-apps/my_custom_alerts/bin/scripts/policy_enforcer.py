@@ -8,6 +8,10 @@ from datetime import datetime
 LOG_FILE = "/opt/splunk/etc/apps/my_custom_alerts/bin/payload_debug.log"
 FLASK_URL = "http://router:5000/enforce"
 
+with open(LOG_FILE, "a") as f:
+    f.write(f"{datetime.now().isoformat()} - Script policy_enforcer.py avviato\n")
+
+
 print("policy_enforcer.py eseguito correttamente")
 
 def log_debug(message):

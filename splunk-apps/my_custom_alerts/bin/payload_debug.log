@@ -1,8 +1,137 @@
-2025-05-19T09:17:00.811240 - Payload ricevuto da Splunk:
-2025-05-19T09:17:00.813843 - {
-  "result": {
-    "src_ip": "192.168.1.1"
-  }
-}
-2025-05-19T09:17:00.851571 - Invio a Flask: 200 - {"ip":"192.168.1.1","output":"","status":"blocked"}
+
+
+2025-05-19T13:20:24.331449 - Script policy_enforcer.py avviato
+2025-05-19T13:20:24.334124 - ❌ Errore durante l'esecuzione:
+2025-05-19T13:20:24.341652 - Traceback (most recent call last):
+  File "/opt/splunk/etc/apps/my_custom_alerts/bin/scripts/policy_enforcer.py", line 25, in main
+    payload = json.load(sys.stdin)
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2025-05-19T13:21:01.475635 - Script policy_enforcer.py avviato
+2025-05-19T13:21:01.478976 - ❌ Errore durante l'esecuzione:
+2025-05-19T13:21:01.488088 - Traceback (most recent call last):
+  File "/opt/splunk/etc/apps/my_custom_alerts/bin/scripts/policy_enforcer.py", line 25, in main
+    payload = json.load(sys.stdin)
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2025-05-19T13:22:00.890240 - Script policy_enforcer.py avviato
+2025-05-19T13:22:00.893674 - ❌ Errore durante l'esecuzione:
+2025-05-19T13:22:00.901014 - Traceback (most recent call last):
+  File "/opt/splunk/etc/apps/my_custom_alerts/bin/scripts/policy_enforcer.py", line 25, in main
+    payload = json.load(sys.stdin)
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2025-05-19T13:23:00.897505 - Script policy_enforcer.py avviato
+2025-05-19T13:23:00.901752 - ❌ Errore durante l'esecuzione:
+2025-05-19T13:23:00.914421 - Traceback (most recent call last):
+  File "/opt/splunk/etc/apps/my_custom_alerts/bin/scripts/policy_enforcer.py", line 25, in main
+    payload = json.load(sys.stdin)
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2025-05-19T13:24:01.085744 - Script policy_enforcer.py avviato
+2025-05-19T13:24:01.089202 - ❌ Errore durante l'esecuzione:
+2025-05-19T13:24:01.100258 - Traceback (most recent call last):
+  File "/opt/splunk/etc/apps/my_custom_alerts/bin/scripts/policy_enforcer.py", line 25, in main
+    payload = json.load(sys.stdin)
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2025-05-19T13:25:01.065922 - Script policy_enforcer.py avviato
+2025-05-19T13:25:01.069232 - ❌ Errore durante l'esecuzione:
+2025-05-19T13:25:01.080595 - Traceback (most recent call last):
+  File "/opt/splunk/etc/apps/my_custom_alerts/bin/scripts/policy_enforcer.py", line 25, in main
+    payload = json.load(sys.stdin)
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2025-05-19T13:26:01.077236 - Script policy_enforcer.py avviato
+2025-05-19T13:26:01.081027 - ❌ Errore durante l'esecuzione:
+2025-05-19T13:26:01.096682 - Traceback (most recent call last):
+  File "/opt/splunk/etc/apps/my_custom_alerts/bin/scripts/policy_enforcer.py", line 25, in main
+    payload = json.load(sys.stdin)
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2025-05-19T13:27:00.958668 - Script policy_enforcer.py avviato
+2025-05-19T13:27:00.962370 - ❌ Errore durante l'esecuzione:
+2025-05-19T13:27:00.973877 - Traceback (most recent call last):
+  File "/opt/splunk/etc/apps/my_custom_alerts/bin/scripts/policy_enforcer.py", line 25, in main
+    payload = json.load(sys.stdin)
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2025-05-19T13:28:00.950093 - Script policy_enforcer.py avviato
+2025-05-19T13:28:00.953614 - ❌ Errore durante l'esecuzione:
+2025-05-19T13:28:00.965223 - Traceback (most recent call last):
+  File "/opt/splunk/etc/apps/my_custom_alerts/bin/scripts/policy_enforcer.py", line 25, in main
+    payload = json.load(sys.stdin)
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/opt/splunk/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/opt/splunk/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 
