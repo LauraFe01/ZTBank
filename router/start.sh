@@ -40,9 +40,17 @@ chmod 755 /var/log/squid
 mkdir -p /var/log/snort
 chmod 755 /var/log/snort
 
-# Avvia Snort
-echo "Avvio Snort..."
-snort -i eth1 -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 &
+# Assicura log Snort per eth0 ed eth1
+mkdir -p /var/log/snort/eth0 /var/log/snort/eth1
+chmod 755 /var/log/snort/eth0 /var/log/snort/eth1
+
+# Avvia Snort su eth1
+echo "Avvio Snort su eth1..."
+snort -i eth1 -A fast -c /etc/snort/snort.conf -l /var/log/snort/eth1 > /var/log/snort/snort_eth1.log 2>&1 &
+
+# Avvia Snort su eth0
+echo "Avvio Snort su eth0..."
+snort -i eth0 -A fast -c /etc/snort/snort.conf -l /var/log/snort/eth0 > /var/log/snort/snort_eth0.log 2>&1 &
 
 # Avvia Flask (modifica il percorso secondo dove si trova app.py)
 echo "Avvio Flask server..."

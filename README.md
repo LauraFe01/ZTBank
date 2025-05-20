@@ -42,15 +42,8 @@ chmod +x router/start.sh
 
 dopo aver eseguito il ping andare su splunk all'indirizzo localhost 8000. Su splunk, per verificare le cartelle che vengono monitorate da splunk andare su Impostazioni -> Input dati -> file and directory (li ci saranno alert e snort.log), a quel punto si va su Search and reporting e si immette: source="/var/log/snort/alert" , source="/var/log/snort/snort.log"   
 
-apt-get update && apt-get install netcat-openbsd -y
 
-
-docker exec -it router bash
-ps aux | grep -i flask
-
-
-
-// PROVA DI IMPLEMENTAZIONE POLICY CON MECCANISMO WEBHOOK
+// PROVA DI IMPLEMENTAZIONE POLICY CON MECCANISMO WEBHOOK by Zazza
 
 Policy 8.2: Reputazione Storica delle Reti  
 "Reti (IP) con più di 10 tentativi di attacco negli ultimi 30 giorni → Riduzione automatica della fiducia di 25-30 punti e blocco preventivo"  
@@ -64,4 +57,17 @@ Questa policy prevede:
 
 - su snort.rules: la regola che ci interessa è quella commentata con Port scanning detection
 
+Per generare gli eventi relativi a questa policy, andare sul file local.rules. La rule relativa a questa policy è quella relativa alla "Port scanning detection", trovate li commentate le istruzioni per generare gli eventi. Vi ritroverete poi i log di questi eventi sul file logs/snort/eth0/alert  
+  
+A questo punto avete i log necessari per far attivare la policy. La search di splunk per ottenere i dati che ci interessano si trova nel file savedsearches.conf (saved search relativa alla policy 8.2). Potete testare la search direttamente dall'interfaccia di splunk utilizzando l'app Search and Reporting.  
+  
+Sempre sull'interfaccia di splunk, se volete verificare che splunk monitori effettivamente i files di log di squid e snort, andate su -> Impostazioni -> Input Dati -> File and Directory  
+  
+Se invece volete monitorare gli allarmi delle saved search e la loro struttura in generale, andate su -> Impostazioni -> Ricerche, Report e Allarmi -> Impostate come filtri App: My Custom Alerts, Proprietario: Tutto. Vedrete le saved search configurate e potrete monitorare quanti allarmi vengono inviati e altre informazioni utili.  
+  
+Per verificare invece i log del meccanismo di webhook potete andare su Impostazioni -> Azioni d'Allarme -> sulla riga relativa a webhook: Visualizza eventi di log.  
+
+Se il webhook è andato a buon fine, significa che effettivamente i dati del payload sono stati inviati al server Flask (per ora solo un server di prova che riceve i dati del payload). Potete verificarli così:
+- entrate dentro il container router: docker exec -it router bash
+- cat webhook.log
 

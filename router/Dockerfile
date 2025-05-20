@@ -46,7 +46,8 @@ RUN mkdir -p /var/spool/squid /var/log/squid && \
     chmod 755 /var/spool/squid /var/log/squid
 
 # Crea e configura la directory di log di Snort
-RUN mkdir -p /var/log/snort && chmod 755 /var/log/snort
+RUN mkdir -p /var/log/snort /var/log/snort/eth0 /var/log/snort/eth1 && \
+    chmod 755 /var/log/snort /var/log/snort/eth0 /var/log/snort/eth1
 
 # Crea directory per log del router
 RUN mkdir -p /var/log/router && chmod 755 /var/log/router

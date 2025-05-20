@@ -1,10 +1,17 @@
 # Regole Snort per Zero Trust monitoring
 
 # ICMP Ping detection
+# Per generare un evento di esempio che la attiva:
+# - docker exec -it client-internal bash
+# - apt update && apt install -y iputils-ping
+# - ping -c 4 ping -c 4 192.168.10.254 
 alert icmp any any -> $HOME_NET any (msg:"ICMP Ping detected"; sid:1000001; rev:1;)
 
 # Port scanning detection (UTILIZZATA PER LA POLICY 8.2)
-alert tcp any any -> $HOME_NET any (msg:"Port scan detected"; flags:S; threshold:type both, track by_src, count 10, seconds 60; sid:1000002; rev:1;)
+# docker exec -it client-external bash
+# apt update && apt install -y nmap
+# nmap -sS -p 20-40 192.168.20.254
+alert tcp any any -> $HOME_NET any (msg:"Port scan detected"; flags:S; detection_filter:track by_src, count 10, seconds 60; sid:1000002; rev:2;)
 
 # Database access attempts (PostgreSQL)
 alert tcp any any -> $HOME_NET 5432 (msg:"Database access attempt on port 5432"; sid:1000003; rev:1;)

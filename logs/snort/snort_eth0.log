@@ -6,11 +6,11 @@ Initializing Preprocessors!
 Initializing Plug-ins!
 Parsing Rules file "/etc/snort/snort.conf"
 Tagged Packet Limit: 256
-Log directory = /var/log/snort
+Log directory = /var/log/snort/eth0
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 Initializing rule chains...
-WARNING: /etc/snort/rules/local.rules(7) threshold (in rule) is deprecated; use detection_filter instead.
+WARNING: /etc/snort/rules/local.rules(21) threshold (in rule) is deprecated; use detection_filter instead.
 
 8 Snort rules read
     8 detection rules
@@ -31,7 +31,6 @@ WARNING: /etc/snort/rules/local.rules(7) threshold (in rule) is deprecated; use 
 +-----------------------[detection-filter-config]------------------------------
 | memory-cap : 1048576 bytes
 +-----------------------[detection-filter-rules]-------------------------------
-| none
 -------------------------------------------------------------------------------
 
 +-----------------------[rate-filter-config]-----------------------------------
@@ -45,7 +44,6 @@ WARNING: /etc/snort/rules/local.rules(7) threshold (in rule) is deprecated; use 
 +-----------------------[event-filter-global]----------------------------------
 | none
 +-----------------------[event-filter-local]-----------------------------------
-| gen-id=1      sig-id=1000002    type=Both      tracking=src count=10  seconds=60 
 | gen-id=1      sig-id=1000008    type=Both      tracking=src count=5   seconds=30 
 | gen-id=1      sig-id=1000004    type=Both      tracking=src count=5   seconds=60 
 +-----------------------[suppression]------------------------------------------
@@ -56,9 +54,9 @@ Verifying Preprocessor Configurations!
 
 [ Port Based Pattern Matching Memory ]
 pcap DAQ configured to passive.
-Acquiring network traffic from "eth1".
+Acquiring network traffic from "eth0".
 Reload thread starting...
-Reload thread started, thread 0x7f9e8882d640 (32)
+Reload thread started, thread 0x7f6a1f183640 (36)
 Decoding Ethernet
 
         --== Initialization Complete ==--
@@ -72,24 +70,7 @@ Decoding Ethernet
            Using PCRE version: 8.39 2016-06-14
            Using ZLIB version: 1.2.11
 
-Commencing packet processing (pid=20)
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
-WARNING: No preprocessors configured for policy 0.
+Commencing packet processing (pid=23)
 WARNING: No preprocessors configured for policy 0.
 WARNING: No preprocessors configured for policy 0.
 WARNING: No preprocessors configured for policy 0.
