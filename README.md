@@ -48,3 +48,20 @@ apt-get update && apt-get install netcat-openbsd -y
 docker exec -it router bash
 ps aux | grep -i flask
 
+
+
+// PROVA DI IMPLEMENTAZIONE POLICY CON MECCANISMO WEBHOOK
+
+Policy 8.2: Reputazione Storica delle Reti  
+"Reti (IP) con più di 10 tentativi di attacco negli ultimi 30 giorni → Riduzione automatica della fiducia di 25-30 punti e blocco preventivo"  
+Questa policy prevede:  
+
+1. Monitoraggio dei tentativi di attacco con Snort    
+2. Aggregazione dei dati in Splunk  
+3. Creazione di una saved search che identifichi IP con più di 10 tentativi di attacco  
+4. Attivazione del webhook quando la soglia viene superata  
+5. Implementazione della policy nel server Flask con blocco automatico dell'IP  
+
+- su snort.rules: la regola che ci interessa è quella commentata con Port scanning detection
+
+

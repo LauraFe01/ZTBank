@@ -42,7 +42,7 @@ chmod 755 /var/log/snort
 
 # Avvia Snort
 echo "Avvio Snort..."
-snort -i any -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 &
+snort -i eth1 -A fast -c /etc/snort/snort.conf -l /var/log/snort > /var/log/snort/snort.log 2>&1 &
 
 # Avvia Flask (modifica il percorso secondo dove si trova app.py)
 echo "Avvio Flask server..."

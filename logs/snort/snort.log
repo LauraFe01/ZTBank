@@ -10,19 +10,21 @@ Log directory = /var/log/snort
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 Initializing rule chains...
-3 Snort rules read
-    3 detection rules
+WARNING: /etc/snort/rules/local.rules(7) threshold (in rule) is deprecated; use detection_filter instead.
+
+8 Snort rules read
+    8 detection rules
     0 decoder rules
     0 preprocessor rules
-3 Option Chains linked into 3 Chain Headers
+8 Option Chains linked into 6 Chain Headers
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
 +-------------------[Rule Port Counts]---------------------------------------
 |             tcp     udp    icmp      ip
 |     src       0       0       0       0
-|     dst       2       0       0       0
-|     any       0       0       1       0
-|      nc       2       0       1       0
+|     dst       3       0       0       0
+|     any       4       0       1       0
+|      nc       7       0       1       0
 |     s+d       0       0       0       0
 +----------------------------------------------------------------------------
 
@@ -41,8 +43,11 @@ Initializing rule chains...
 +-----------------------[event-filter-config]----------------------------------
 | memory-cap : 1048576 bytes
 +-----------------------[event-filter-global]----------------------------------
-+-----------------------[event-filter-local]-----------------------------------
 | none
++-----------------------[event-filter-local]-----------------------------------
+| gen-id=1      sig-id=1000002    type=Both      tracking=src count=10  seconds=60 
+| gen-id=1      sig-id=1000008    type=Both      tracking=src count=5   seconds=30 
+| gen-id=1      sig-id=1000004    type=Both      tracking=src count=5   seconds=60 
 +-----------------------[suppression]------------------------------------------
 | none
 -------------------------------------------------------------------------------
@@ -51,8 +56,43 @@ Verifying Preprocessor Configurations!
 
 [ Port Based Pattern Matching Memory ]
 pcap DAQ configured to passive.
-Acquiring network traffic from "any".
+Acquiring network traffic from "eth1".
 Reload thread starting...
-Reload thread started, thread 0x7f1c8e02d640 (32)
-ERROR: Cannot decode data link type 113
-Fatal Error, Quitting..
+Reload thread started, thread 0x7f9e8882d640 (32)
+Decoding Ethernet
+
+        --== Initialization Complete ==--
+
+   ,,_     -*> Snort! <*-
+  o"  )~   Version 2.9.15.1 GRE (Build 15125) 
+   ''''    By Martin Roesch & The Snort Team: http://www.snort.org/contact#team
+           Copyright (C) 2014-2019 Cisco and/or its affiliates. All rights reserved.
+           Copyright (C) 1998-2013 Sourcefire, Inc., et al.
+           Using libpcap version 1.10.1 (with TPACKET_V3)
+           Using PCRE version: 8.39 2016-06-14
+           Using ZLIB version: 1.2.11
+
+Commencing packet processing (pid=20)
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
+WARNING: No preprocessors configured for policy 0.
