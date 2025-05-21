@@ -34,11 +34,12 @@ COPY start.sh /start.sh
 RUN chmod +x /start.sh
 COPY snort.conf /etc/snort/snort.conf
 COPY rules /etc/snort/rules
+
 COPY api/app.py /router/api/app.py
 # Aggiungi questa riga dopo COPY api/app.py /router/api/app.py
-COPY api/test_webhook.py /router/api/test_webhook.py
-COPY api/generate_portscan.py /router/api/generate_portscan.py
-COPY api/monitor_policy.py /router/api/monitor_policy.py
+# COPY api/test_webhook.py /router/api/test_webhook.py
+# COPY api/generate_portscan.py /router/api/generate_portscan.py
+# COPY api/monitor_policy.py /router/api/monitor_policy.py
 
 # Crea e configura le directory di cache/log di Squid
 RUN mkdir -p /var/spool/squid /var/log/squid && \
