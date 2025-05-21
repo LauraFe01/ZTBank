@@ -831,35 +831,3 @@ requests.exceptions.ConnectionError: HTTPConnectionPool(host='192.168.200.254', 
 2025-05-19T17:18:01.204366 - 📥 Payload grezzo da stdin:
 'sessionKey=VS3AdVlSJf6Z_So5Tgdq8NKBLRwHEeXcF87WjOxdRo3JH7mFCOo%5EYrNvQeoydDBYrh5qTPqrzMiytqazonXTfATRl0tLRh%5Eq0u8_Fdqvarkyn7Zd49CnPnPMTmroSs8waAL0Ctntza4ByaZLyF4FiZd9'
 2025-05-19T17:18:01.208386 - ❌ Errore di parsing JSON: Expecting value: line 1 column 1 (char 0)
-2025-05-19T17:23:01.636693 - Script policy_enforcer.py avviato
-2025-05-19T17:23:01.640033 - 📥 Payload grezzo da stdin:
-'sessionKey=oAqbCkWFsTGqMbtWXe4h8%5E5K1b9y9QwUqKnaA%5ELLgP9WZz5rdj%5EpRMzKnVhA8aNQ4fJ7AAsUJPlBanarIl2ze8aeGnr0FIKFnrf0gOtPyNTXcANm2yJeiKgdFrO0KSc6m%5ET9vXx146IrbMShfREsX3STA%5EetWN'
-2025-05-19T17:23:01.642957 - ❌ Errore di parsing JSON: Expecting value: line 1 column 1 (char 0)
-2025-05-19T17:24:01.410298 - Script policy_enforcer.py avviato
-2025-05-19T17:24:01.413608 - 📥 Payload grezzo da stdin:
-'sessionKey=2EDsZMy18qhZt9p0jlEYbddVhImM3JKtFfob_bMB4ThjwHyPQoTq%5ExAm5Tg2GHsNwD6AAJb%5EdBYhLHQHpime0EcLFzH2sxxXw5n1vyi3t_XbVrWSeP7nPXBen7jJx415VuCM7mJUNDD5mp3%5EWynmNJUD'
-2025-05-19T17:24:01.416577 - ❌ Errore di parsing JSON: Expecting value: line 1 column 1 (char 0)
-2025-05-19T17:25:01.641086 - Script policy_enforcer.py avviato
-2025-05-19T17:25:01.644831 - 📥 Payload grezzo da stdin:
-'sessionKey=gCjvVqjME7jjhWB5d_qgeAIP58gPqT9eycAhsneldjCeEXMnxXyqMFipQXu1Of2_Bfl6xMXqv7gt5%5EY5bd%5EUh7JtVVN_a2BFxCMRlZ3Gi4y0aauVE3Jf%5EcwI48IZ6%5ESqFnNGsZ8LGE24GzPiBHwNtDMmJoa'
-2025-05-19T17:25:01.648383 - ❌ Errore di parsing JSON: Expecting value: line 1 column 1 (char 0)
-2025-05-19T17:26:01.440022 - Script policy_enforcer.py avviato
-2025-05-19T17:26:01.443873 - 📥 Payload grezzo da stdin:
-'sessionKey=FUvSM1LMiOwy9_SN_mYHWLWO72r0jaaG3G9QxmvEL9ILVaxyq7zh4RISdCK8b_42hWB6244Sgg3TplJOk3v8yWdi1GyRnx8I1MlBN6lGWvbMX%5E5xqebnO1Jpw2%5EwYe2pKjPYwQPt2bfLGITLSrpMYBDQ'
-2025-05-19T17:26:01.447374 - ❌ Errore di parsing JSON: Expecting value: line 1 column 1 (char 0)
-2025-05-19T17:27:01.503706 - Script policy_enforcer.py avviato
-2025-05-19T17:27:01.506439 - 📥 Payload grezzo da stdin:
-'sessionKey=PqKHshhFlx3def6Rw1YfJnzut39AooGgnbYzKtFAnDAkxFml_fMiAahX0JZhC3x0VxXvNkbw0n03JMu2GA_5gZm2RxfdcjvBIUQvfynhXG8s0s2wiD9eMAID7veDhECiyaf_SE2k_9rKjfASmy6YbUY'
-2025-05-19T17:27:01.508672 - ❌ Errore di parsing JSON: Expecting value: line 1 column 1 (char 0)
-2025-05-19T17:28:01.762825 - Script policy_enforcer.py avviato
-2025-05-19T17:28:01.766201 - 📥 Payload grezzo da stdin:
-'sessionKey=mIs4Sx3_67exCsScKSTcfv4zSDrCzDhAdoGHnP1PK%5E_HlZQOFXSZ1Is%5EkB1CDDXRDGjAPwZn49ZpcJ9jVqq7c0_3ADyhMTjG5XkPCHq6eiPV%5Ee_2_WURo6IhB2JWUb1MN8yPLXBdDK7BrQdu7YG40Of0AF'
-2025-05-19T17:28:01.769434 - ❌ Errore di parsing JSON: Expecting value: line 1 column 1 (char 0)
-2025-05-19T17:29:01.536247 - Script policy_enforcer.py avviato
-2025-05-19T17:29:01.539139 - 📥 Payload grezzo da stdin:
-'sessionKey=xUOww3RIjI1FAx_6I3GBdDv_Wh8JcrgcLjnrUGagtKbywJcvrcBLZTRrfGl3aWNhBUvh7dIlF2Mf6glUWjr7IfJq9FoBtg408Ouis794UE1Pq%5EtSgR3cN4nLVm0IRGcFLglISy8675jfQvDIT2pqw0jM'
-2025-05-19T17:29:01.541802 - ❌ Errore di parsing JSON: Expecting value: line 1 column 1 (char 0)
-2025-05-19T17:30:01.737146 - Script policy_enforcer.py avviato
-2025-05-19T17:30:01.740963 - 📥 Payload grezzo da stdin:
-'sessionKey=d221wZhJ_tfgyIRC2xD_2sfHjP9Y0vu9YzF3XMjFy54ca0SKLkjGVcoK94U7QofLqxRGmEzHR7XHAOVv_k94wkdnJAjLf0usfsfZIVu0OT8IZRl651L3lrz%5EIY2eCkUk87DTWl8r3fnKOyBROzYQF3r3ahGlDcA'
-2025-05-19T17:30:01.744290 - ❌ Errore di parsing JSON: Expecting value: line 1 column 1 (char 0)
