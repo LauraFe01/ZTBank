@@ -7,7 +7,7 @@
 # - ping -c 4 ping -c 4 192.168.10.254 
 alert icmp any any -> $HOME_NET any (msg:"ICMP Ping detected"; sid:1000001; rev:1;)
 
-# Port scanning detection (UTILIZZATA PER LA POLICY 8.2)
+# Port scanning detection (UTILIZZATA PER LA POLICY 1, o 8.2 del nostro documento)
 # docker exec -it client-external bash
 # apt update && apt install -y nmap
 # nmap -sS -p 20-40 192.168.20.254

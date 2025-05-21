@@ -27,6 +27,7 @@ COPY api/requirements.txt /policy-engine/api/requirements.txt
 RUN pip3 install -r /policy-engine/api/requirements.txt
 
 COPY api/app.py /policy-engine/api/app.py
+COPY api/policies/ /policy-engine/api/policies/
 
 # Crea directory per log del router
 RUN mkdir -p /var/log/policy-engine && chmod 755 /var/log/policy-engine

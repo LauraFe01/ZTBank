@@ -1,0 +1,1 @@
+# qui si definiranno le funzioni utilizzate dagli handler per le operazioni che coinvolgono iptables
