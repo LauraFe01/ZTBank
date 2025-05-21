@@ -86,6 +86,9 @@ services:
     networks:
       net-lab:
         ipv4_address: 192.168.200.10
+    volumes:
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./db/data.sql:/docker-entrypoint-initdb.d/02-data.sql
         
 networks:
   internal-net:

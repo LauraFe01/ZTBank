@@ -67,3 +67,51 @@
 2025/05/21 07:51:55|   Validated 0 Entries
 2025/05/21 07:51:55|   store_swap_size = 0.00 KB
 2025/05/21 07:51:56| storeLateRelease: released 0 objects
+2025/05/21 14:49:12 kid1| Current Directory is /
+2025/05/21 14:49:12 kid1| Creating missing swap directories
+2025/05/21 14:49:12 kid1| /var/spool/squid exists
+2025/05/21 14:49:12 kid1| Making directories in /var/spool/squid/00
+2025/05/21 14:49:13 kid1| Making directories in /var/spool/squid/01
+2025/05/21 14:49:13 kid1| Making directories in /var/spool/squid/02
+2025/05/21 14:49:14 kid1| Making directories in /var/spool/squid/03
+2025/05/21 14:49:14 kid1| Making directories in /var/spool/squid/04
+2025/05/21 14:49:14 kid1| Making directories in /var/spool/squid/05
+2025/05/21 14:49:15 kid1| Making directories in /var/spool/squid/06
+2025/05/21 14:49:15 kid1| Making directories in /var/spool/squid/07
+2025/05/21 14:49:15 kid1| Making directories in /var/spool/squid/08
+2025/05/21 14:49:16 kid1| Making directories in /var/spool/squid/09
+2025/05/21 14:49:16 kid1| Making directories in /var/spool/squid/0A
+2025/05/21 14:49:16 kid1| Making directories in /var/spool/squid/0B
+2025/05/21 14:49:17 kid1| Making directories in /var/spool/squid/0C
+2025/05/21 14:49:17 kid1| Making directories in /var/spool/squid/0D
+2025/05/21 14:49:17 kid1| Making directories in /var/spool/squid/0E
+2025/05/21 14:49:18 kid1| Making directories in /var/spool/squid/0F
+2025/05/21 14:49:18| Removing PID file (/run/squid.pid)
+2025/05/21 15:02:02 kid1| Current Directory is /
+2025/05/21 15:02:02 kid1| Creating missing swap directories
+2025/05/21 15:02:02 kid1| /var/spool/squid exists
+2025/05/21 15:02:02 kid1| Making directories in /var/spool/squid/00
+2025/05/21 15:02:02 kid1| Making directories in /var/spool/squid/01
+2025/05/21 15:02:03 kid1| Making directories in /var/spool/squid/02
+2025/05/21 15:02:03 kid1| Making directories in /var/spool/squid/03
+2025/05/21 15:02:03 kid1| Making directories in /var/spool/squid/04
+2025/05/21 15:06:52 kid1| Current Directory is /
+2025/05/21 15:06:52 kid1| Creating missing swap directories
+2025/05/21 15:06:52 kid1| /var/spool/squid exists
+2025/05/21 15:06:52 kid1| Making directories in /var/spool/squid/00
+2025/05/21 15:06:52 kid1| Making directories in /var/spool/squid/01
+2025/05/21 15:06:53 kid1| Making directories in /var/spool/squid/02
+2025/05/21 15:06:53 kid1| Making directories in /var/spool/squid/03
+2025/05/21 15:06:53 kid1| Making directories in /var/spool/squid/04
+2025/05/21 15:06:53 kid1| Making directories in /var/spool/squid/05
+2025/05/21 15:06:53 kid1| Making directories in /var/spool/squid/06
+2025/05/21 15:06:54 kid1| Making directories in /var/spool/squid/07
+2025/05/21 15:06:54 kid1| Making directories in /var/spool/squid/08
+2025/05/21 15:06:54 kid1| Making directories in /var/spool/squid/09
+2025/05/21 15:06:54 kid1| Making directories in /var/spool/squid/0A
+2025/05/21 15:06:54 kid1| Making directories in /var/spool/squid/0B
+2025/05/21 15:06:54 kid1| Making directories in /var/spool/squid/0C
+2025/05/21 15:06:55 kid1| Making directories in /var/spool/squid/0D
+2025/05/21 15:06:55 kid1| Making directories in /var/spool/squid/0E
+2025/05/21 15:06:55 kid1| Making directories in /var/spool/squid/0F
+2025/05/21 15:06:55| Removing PID file (/run/squid.pid)

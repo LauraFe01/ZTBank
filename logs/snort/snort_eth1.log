@@ -44,8 +44,8 @@ WARNING: /etc/snort/rules/local.rules(20) threshold (in rule) is deprecated; use
 +-----------------------[event-filter-global]----------------------------------
 | none
 +-----------------------[event-filter-local]-----------------------------------
-| gen-id=1      sig-id=1000008    type=Both      tracking=src count=5   seconds=30 
 | gen-id=1      sig-id=1000004    type=Both      tracking=src count=5   seconds=60 
+| gen-id=1      sig-id=1000008    type=Both      tracking=src count=5   seconds=30 
 +-----------------------[suppression]------------------------------------------
 | none
 -------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ Verifying Preprocessor Configurations!
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth1".
 Reload thread starting...
-Reload thread started, thread 0x7ff496430640 (35)
+Reload thread started, thread 0x7f1057f10640 (25)
 Decoding Ethernet
 
         --== Initialization Complete ==--
