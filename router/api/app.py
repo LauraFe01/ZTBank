@@ -5,7 +5,7 @@ import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-# Parametri di connessione al DB (modifica in base al tuo docker-compose)
+# Parametri di connessione al DB
 DB_CONFIG = {
     "dbname": "mydb",
     "user": "myuser",
@@ -56,12 +56,12 @@ def verifica_accesso(ruolo, nome_file, sensibilita, azione):
         return True, "Manager ha accesso completo"
     if ruolo == 'cassiere':
         if sensibilita == 'non_sensibile' and azione == 'lettura':
-            return True, "Cassiere può leggere file non sensibili"
-        return False, "Cassiere non può accedere a questo file"
+            return True, "Cassiere puo' leggere file non sensibili"
+        return False, "Cassiere non puo' accedere a questo file"
     if ruolo == 'auditor':
         if sensibilita == 'sensibile' and azione == 'lettura' and nome_file.startswith("log_"):
-            return True, "Auditor può leggere log sensibili"
-        return False, "Auditor può solo leggere log sensibili"
+            return True, "Auditor puo' leggere log sensibili"
+        return False, "Auditor puo' solo leggere log sensibili"
     return False, "Ruolo non riconosciuto"
 
 @app.route('/splunk-webhook-db', methods=['POST'])

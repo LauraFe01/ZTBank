@@ -19,7 +19,7 @@
 
 La logica di controllo accessi è integrata nel file `router/api/app.py`:
 
-1. Flask riceve i webhook da Splunk (via `/splunk-webhook`)
+1. Flask riceve i webhook da Splunk (via `/splunk-webhook-db`)
 2. Viene estratto il payload (`username`, `file_name`, `azione`)
 3. Il server recupera dal DB le info su utente e file
 4. La funzione `verifica_accesso()` decide se consentire o negare
