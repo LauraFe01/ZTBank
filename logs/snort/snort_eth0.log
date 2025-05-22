@@ -56,7 +56,7 @@ Verifying Preprocessor Configurations!
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth0".
 Reload thread starting...
-Reload thread started, thread 0x7f64db261640 (36)
+Reload thread started, thread 0x7f3a5c985640 (27)
 Decoding Ethernet
 
         --== Initialization Complete ==--
@@ -71,7 +71,6 @@ Decoding Ethernet
            Using ZLIB version: 1.2.11
 
 Commencing packet processing (pid=23)
-WARNING: No preprocessors configured for policy 0.
 WARNING: No preprocessors configured for policy 0.
 WARNING: No preprocessors configured for policy 0.
 WARNING: No preprocessors configured for policy 0.
