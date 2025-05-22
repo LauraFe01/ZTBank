@@ -1,0 +1,1 @@
+# qui si definiranno le funzioni usate dagli handler per interagire con il db
