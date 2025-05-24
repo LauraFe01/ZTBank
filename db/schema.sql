@@ -68,3 +68,56 @@ CREATE TABLE access_log (
     esito BOOLEAN NOT NULL,
     motivazione TEXT
 );
+
+
+-- AGGIUNTA LA PARTE SEGUENTE PER POLICY 1
+
+-- Tabella per tracciare la fiducia delle reti/IP
+CREATE TABLE network_trust (
+    id SERIAL PRIMARY KEY,
+    ip_address INET NOT NULL UNIQUE,
+    initial_trust_score INTEGER DEFAULT 100,
+    current_trust_score INTEGER DEFAULT 100,
+    attack_count INTEGER DEFAULT 0,
+    last_attack_time TIMESTAMP,
+    last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_blocked BOOLEAN DEFAULT FALSE,
+    notes TEXT
+);
+
+-- Tabella per log delle riduzioni di fiducia
+CREATE TABLE trust_reduction_log (
+    id SERIAL PRIMARY KEY,
+    ip_address INET NOT NULL,
+    reduction_amount INTEGER NOT NULL,
+    reason TEXT NOT NULL,
+    attack_count INTEGER,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    applied_by TEXT DEFAULT 'system'
+);
+
+-- Funzione per aggiornare il trust score
+CREATE OR REPLACE FUNCTION update_network_trust(
+    p_ip_address INET,
+    p_reduction INTEGER,
+    p_reason TEXT,
+    p_attack_count INTEGER
+)
+RETURNS VOID AS $$
+BEGIN
+    -- Inserisci o aggiorna il record nella tabella network_trust
+    INSERT INTO network_trust (ip_address, current_trust_score, attack_count, last_attack_time, last_update)
+    VALUES (p_ip_address, 100 - p_reduction, p_attack_count, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+    ON CONFLICT (ip_address) 
+    DO UPDATE SET 
+        current_trust_score = GREATEST(network_trust.current_trust_score - p_reduction, 0),
+        attack_count = p_attack_count,
+        last_attack_time = CURRENT_TIMESTAMP,
+        last_update = CURRENT_TIMESTAMP,
+        is_blocked = CASE WHEN (network_trust.current_trust_score - p_reduction) <= 20 THEN TRUE ELSE network_trust.is_blocked END;
+    
+    -- Log della riduzione
+    INSERT INTO trust_reduction_log (ip_address, reduction_amount, reason, attack_count)
+    VALUES (p_ip_address, p_reduction, p_reason, p_attack_count);
+END;
+$$ LANGUAGE plpgsql;

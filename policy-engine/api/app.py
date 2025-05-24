@@ -1,10 +1,8 @@
-# qui in questo files le richieste che provengono dal meccanismo webhook vengono filtrate in base al nome della saved search da cui
+# qui in questo file le richieste che provengono dal meccanismo webhook vengono filtrate in base al nome della saved search da cui
 # provengono, in modo da implementare il meccanismo di gestione nel modulo corretto, per quella policy specifica
 
 from flask import Flask, request, jsonify
 import logging
-# RotatingFileHandler serve per scrivere i log su file con rotazione (cioè mantiene il file di log entro una certa dimensione,
-# ruotando i vecchi file).
 from logging.handlers import RotatingFileHandler
 import os
 
@@ -21,8 +19,6 @@ if not os.path.exists(log_file):
     open(log_file, 'a').close()
 
 # Crea un gestore di log che scrive sul file webhook.log.
-# La dimensione massima del file è 1 milione di byte (circa 1MB).
-# Quando il file supera questa dimensione, crea un nuovo file e conserva fino a 3 backup (es: webhook.log.1, webhook.log.2).
 handler = RotatingFileHandler(log_file, maxBytes=1_000_000, backupCount=3)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
@@ -32,8 +28,8 @@ app.logger.addHandler(handler)
 app.logger.setLevel(logging.INFO)
 
 # Mappa policy_id → funzione handler
-# Definisce un dizionario che associa ogni policy_id a una funzione handler corrispondente.
-# Serve per smistare dinamicamente le chiamate al metodo giusto in base al valore di policy_id ricevuto nel payload.
+# Definisce un dizionario che associa il nome di una saved search a una funzione handler corrispondente.
+# Serve per smistare dinamicamente le chiamate al metodo giusto 
 POLICY_MAP = {
     "TrustScoreReduction_AttackAttempts": policy_1.handle,
     "savedsearch_name_2": policy_2.handle,
