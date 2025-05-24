@@ -1,12 +1,11 @@
 """
 Policy 1 Handler: Riduzione automatica della fiducia delle reti
-- Le reti con più di 10 tentativi di attacco negli ultimi 30 giorni ricevono una riduzione automatica della fiducia di 25-30 punti
+--> Le reti con più di 10 tentativi di attacco negli ultimi 30 giorni ricevono una riduzione automatica della fiducia di 25-30 punti
 """
 
 import logging
 from flask import jsonify, current_app
-from utils.db import db_manager
-from utils.iptables import iptables_manager
+from utils import db_manager, iptables_manager
 
 logger = logging.getLogger("policy 1")
 
@@ -22,7 +21,6 @@ def handle(data):
     """
     try:
         current_app.logger.info("=== POLICY 1: Gestione riduzione trust score ===")
-        current_app.logger.info(f"Payload ricevuto: {data}")
         
         # Estrai i risultati dalla saved search
         results = data.get('result', {})
@@ -79,7 +77,7 @@ def handle(data):
                     if iptables_success:
                         processed_ips.append({
                             'ip': src_ip,
-                            'old_trust': 100,  # Assumiamo 100 come default iniziale
+                            'old_trust': trust_info.get('initial_trust_score', 100),
                             'new_trust': current_trust,
                             'reduction': trust_reduction,
                             'attack_count': attack_count,
@@ -122,9 +120,7 @@ def handle(data):
         }), 500
 
 def get_action_description(trust_score):
-    """
-    Restituisce descrizione dell'azione intrapresa basata sul trust score
-    """
+    """Restituisce descrizione dell'azione intrapresa basata sul trust score"""
     if trust_score <= 20:
         return "IP bloccato completamente"
     elif trust_score <= 40:
@@ -133,4 +129,3 @@ def get_action_description(trust_score):
         return "Banda limitata a 200 kbps"
     else:
         return "Nessuna restrizione aggiuntiva"
-

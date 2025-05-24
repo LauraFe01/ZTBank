@@ -23,7 +23,6 @@ handler = RotatingFileHandler(log_file, maxBytes=1_000_000, backupCount=3)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
 handler.setLevel(logging.INFO)
-
 app.logger.addHandler(handler)
 app.logger.setLevel(logging.INFO)
 

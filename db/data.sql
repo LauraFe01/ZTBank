@@ -26,3 +26,17 @@ INSERT INTO access_log (utente_id, file_id, azione, esito, motivazione) VALUES
 (2, 2, 'scrittura', TRUE, 'Aggiornamento saldo'),
 (3, 5, 'lettura', TRUE, 'Analisi investimento'),
 (4, 1, 'lettura', TRUE, 'Accesso ai propri dati');
+
+-- Dati di esempio per network trust
+INSERT INTO network_trust (ip_address, current_trust_score, attack_count, notes) VALUES
+('192.168.1.100', 85, 2, 'IP con alcuni tentativi di attacco precedenti'),
+('10.0.0.50', 45, 8, 'IP con molti tentativi di attacco'),
+('203.0.113.100', 100, 0, 'IP pulito'),
+('192.168.1.200', 25, 15, 'IP quasi bloccato');
+
+-- Log di riduzioni di esempio
+INSERT INTO trust_reduction_log (ip_address, reduction_amount, reason, attack_count) VALUES
+('192.168.1.100', 15, 'Tentativi di brute force rilevati', 2),
+('10.0.0.50', 25, 'Più di 10 tentativi di attacco negli ultimi 30 giorni', 8),
+('10.0.0.50', 30, 'Continuati tentativi di attacco', 15),
+('192.168.1.200', 75, 'Attacchi persistenti e multipli', 15);
