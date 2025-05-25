@@ -5,7 +5,7 @@ echo "=== Test di connettività dal client-external ==="
 echo ""
 
 # Test 1: Ping verso policy-engine (router)
-echo "1. Test ping verso policy-engine (router):"
+echo "1. Test ping verso (router):"
 ping -c 3 192.168.20.254
 echo ""
 
