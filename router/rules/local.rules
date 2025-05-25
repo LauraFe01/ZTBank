@@ -32,3 +32,6 @@ alert tcp any any -> $HOME_NET any (msg:"Large data transfer detected"; dsize:>1
 
 # Multiple failed connection attempts
 alert tcp any any -> $HOME_NET any (msg:"Multiple connection attempts"; flags:R; detection_filter:track by_src, count 5, seconds 30; sid:1000008; rev:1;)
+
+alert tcp any any -> 192.168.200.10 any (msg:"Accesso al DB da rete non aziendale"; sid:100001; rev:1;)
+
