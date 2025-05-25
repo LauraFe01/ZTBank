@@ -16,6 +16,11 @@ services:
       - net.ipv4.conf.all.accept_redirects=1
     cap_add:
       - NET_ADMIN
+    depends_on:
+      router:
+        condition: service_healthy
+      db:
+        condition: service_healthy
 
   # client external è nella rete external net
   client-external:
@@ -30,8 +35,12 @@ services:
     tty: true
     sysctls:
       - net.ipv4.conf.all.accept_redirects=1
-    cap_add:
-      - NET_ADMIN
+    depends_on:
+      router:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+
   
   # client wifi è nella rete wifi
   client-wifi:
@@ -46,6 +55,11 @@ services:
       - net.ipv4.conf.all.accept_redirects=1
     cap_add:
       - NET_ADMIN
+    depends_on:
+      router:
+        condition: service_healthy
+      db:
+        condition: service_healthy
   
   splunk:
     image: splunk/splunk:latest
@@ -65,7 +79,11 @@ services:
       - ./logs/snort:/var/log/snort
       - ./splunk-apps/log_inputs:/opt/splunk/etc/apps/log_inputs
       - ./splunk-apps/my_custom_alerts:/opt/splunk/etc/apps/my_custom_alerts 
-
+    depends_on:
+      router:
+        condition: service_healthy
+      db:
+        condition: service_healthy
   # policy-engine:
   #   build: ./policy-engine
   #   container_name: policy-engine
@@ -136,6 +154,14 @@ services:
       - ./logs/router:/var/log/router
       - ./logs/squid:/var/log/squid
       - ./logs/snort:/var/log/snort
+    healthcheck:
+      test: ["CMD", "ping", "-c", "1", "127.0.0.1"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+    depends_on:
+      db:
+        condition: service_healthy
     
   db:
     image: postgres:14
@@ -152,6 +178,13 @@ services:
     volumes:
       - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
       - ./db/data.sql:/docker-entrypoint-initdb.d/02-data.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+    
 
 # Reti bridge isolate: i container connessi a una rete possono comunicare solo con altri container sulla stessa rete.    
 networks:

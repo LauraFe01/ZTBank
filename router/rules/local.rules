@@ -32,3 +32,24 @@ alert tcp any any -> $HOME_NET any (msg:"Large data transfer detected"; dsize:>1
 
 # Multiple failed connection attempts
 alert tcp any any -> $HOME_NET any (msg:"Multiple connection attempts"; flags:R; detection_filter:track by_src, count 5, seconds 30; sid:1000008; rev:1;)
+
+
+
+
+
+
+###########
+
+
+# Accesso PostgreSQL
+alert tcp any any -> 192.168.200.10 5432 (msg:"Accesso al DB PostgreSQL"; flags:S; sid:1000009; rev:2;)
+
+
+# SQL Injection rudimentale
+alert tcp any any -> 192.168.200.10 5432 (content:"OR"; content:"'1'='1"; msg:"Tentativo SQL Injection rudimentale"; sid:1000010; rev:2;)
+
+# Ping verso DB
+alert icmp any any -> 192.168.200.10 any (msg:"Ping ICMP verso DB"; sid:1000011; rev:1;)
+
+# HTTP verso DB (curl)
+alert tcp any any -> 192.168.200.10 80 (msg:"Tentativo HTTP verso DB (curl)"; flags:S; sid:1000012; rev:2;)
