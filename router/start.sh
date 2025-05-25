@@ -75,60 +75,93 @@ echo "Setup di SQUID e SNORT completato con successo!"
 # - eth3: wifi-lan (192.168.30.0/24)
 
 
-# Abilita IP forwarding: per permettere al router di inoltrare i pacchetti tra le interfacce:
+### IPTABLES ###
+
+# Abilita IP forwarding
 echo 1 > /proc/sys/net/ipv4/ip_forward
-sysctl -w net.ipv4.conf.all.forwarding=1:contentReference[oaicite:33]{index=33}
+sysctl -w net.ipv4.conf.all.forwarding=1
+
+# Pulisce regole esistenti
+iptables -F
+iptables -t nat -F
+iptables -t mangle -F
+
+# Policy predefinite (cambiate alla fine)
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
+
+# Mapping interfacce:
+# eth0: external-net (192.168.20.0/24)
+# eth1: internal-net (192.168.10.0/24)  
+# eth2: net-lab (192.168.200.0/24)
+# eth3: wifi-lan (192.168.30.0/24)
 
 # Redirezione del traffico HTTP verso Squid (porta 3128)
-# Per intercettare e monitorare il traffico HTTP, bisogna redirigere le richieste sulla porta 80 verso Squid:
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3128 # external net
-iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 80 -j REDIRECT --to-port 3128 # internal net
-iptables -t nat -A PREROUTING -i eth3 -p tcp --dport 80 -j REDIRECT --to-port 3128 # wifi
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3128
+iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 80 -j REDIRECT --to-port 3128
+iptables -t nat -A PREROUTING -i eth3 -p tcp --dport 80 -j REDIRECT --to-port 3128
 
-#### NAT/MASQUERADING per il traffico in uscita ###########
-# Per permettere ai client di comunicare con il database e altri servizi nella rete net-lab, configurare il masquerading
+### NAT/MASQUERADING per il traffico in uscita ###
+# Permette ai client di comunicare con altre reti attraverso il router
 
-# stabilisce che chi si trova sulla rete internal net (192.168.10.0/24) quindi client-internal, può comunicare con il db (net-lab)
-# tramite quindi eth2 (vedi sopra). 
-iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth2 -j MASQUERADE
+# Internal net -> tutte le altre reti
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE  # -> external
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth2 -j MASQUERADE  # -> net-lab
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth3 -j MASQUERADE  # -> wifi
 
-# stabilisce che chi si trova sulla rete external net (192.168.20.0/24) quindi client-internal, può comunicare con il db (net-lab)
-# tramite quindi eth0 (vedi sopra).
-iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -o eth2 -j MASQUERADE
+# External net -> tutte le altre reti  
+iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -o eth1 -j MASQUERADE  # -> internal
+iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -o eth2 -j MASQUERADE  # -> net-lab
+iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -o eth3 -j MASQUERADE  # -> wifi
 
-# stabilisce che chi si trova sulla rete wifi net (192.168.30.0/24) quindi client-internal, può comunicare con il db (net-lab)
-# tramite quindi eth0 (vedi sopra).
-iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -o eth2 -j MASQUERADE
+# WiFi net -> tutte le altre reti
+iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -o eth0 -j MASQUERADE  # -> external
+iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -o eth1 -j MASQUERADE  # -> internal  
+iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -o eth2 -j MASQUERADE  # -> net-lab
 
-iptables -t nat -
+### REGOLE DI FORWARDING ###
 
-###### REGOLE DI FORWARDING per il traffico verso il database #########
+# Consente il traffico tra le reti tramite il router
+# Traffico verso database (PostgreSQL porta 5432)
+iptables -A FORWARD -p tcp --dport 5432 -d 192.168.200.10 -j ACCEPT
+iptables -A FORWARD -p tcp --sport 5432 -s 192.168.200.10 -j ACCEPT
 
-# Consente il forwarding dei pacchetti TCP che:
-#  - entrano dall'interfaccia eth1 (client-internal),
-#  - escono dall'interfaccia eth2 (verso net-lab quindi),
-#  - sono destinati alla porta TCP 5432 (porta standard di PostgreSQL),
-#  - con IP di destinazione 192.168.200.10 (container db)
-# in modo che questi pacchetti possano essere inoltrati attraverso il router.
-# andata e ritorno???? PORCODDIO??
-iptables -A FORWARD -i eth1 -o eth2 -p tcp --dport 5432 -d 192.168.200.10 -j ACCEPT
-iptables -A FORWARD -i eth0 -o eth2 -p tcp --dport 5432 -d 192.168.200.10 -j ACCEPT
-iptables -A FORWARD -i eth3 -o eth2 -p tcp --dport 5432 -d 192.168.200.10 -j ACCEPT
+# Traffico generico tra reti (per telnet e altri servizi)
+# Internal <-> External
+iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.20.0/24 -j ACCEPT
+iptables -A FORWARD -s 192.168.20.0/24 -d 192.168.10.0/24 -j ACCEPT
 
-iptables -A FORWARD -i eth2 -o eth1 -p tcp --sport 5432 -s 192.168.200.10 -j ACCEPT
-iptables -A FORWARD -i eth2 -o eth0 -p tcp --sport 5432 -s 192.168.200.10 -j ACCEPT
-iptables -A FORWARD -i eth2 -o eth3 -p tcp --sport 5432 -s 192.168.200.10 -j ACCEPT
+# Internal <-> WiFi
+iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.30.0/24 -j ACCEPT
+iptables -A FORWARD -s 192.168.30.0/24 -d 192.168.10.0/24 -j ACCEPT
 
-iptables -A FORWARD -s 192.168.20.0/24 -d 192.168.200.10 -p tcp --dport 5432 -j ACCEPT
-iptables -A FORWARD -s 192.168.200.10 -d 192.168.20.0/24 -p tcp --sport 5432 -j ACCEPT
+# External <-> WiFi  
+iptables -A FORWARD -s 192.168.20.0/24 -d 192.168.30.0/24 -j ACCEPT
+iptables -A FORWARD -s 192.168.30.0/24 -d 192.168.20.0/24 -j ACCEPT
 
-# FORWARD - SSH access
-#iptables -A FORWARD -i eth2 -o eth1 -p tcp --dport 22 -d 192.168.10.10 -j ACCEPT
-#iptables -A FORWARD -i eth1 -o eth2 -p tcp --sport 22 -s 192.168.10.10 -j ACCEPT
+# Tutte le reti client <-> net-lab
+iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.200.0/24 -j ACCEPT
+iptables -A FORWARD -s 192.168.200.0/24 -d 192.168.10.0/24 -j ACCEPT
 
-# regole predefinite
-iptables -P FORWARD DROP
+iptables -A FORWARD -s 192.168.20.0/24 -d 192.168.200.0/24 -j ACCEPT
+iptables -A FORWARD -s 192.168.200.0/24 -d 192.168.20.0/24 -j ACCEPT
+
+iptables -A FORWARD -s 192.168.30.0/24 -d 192.168.200.0/24 -j ACCEPT
+iptables -A FORWARD -s 192.168.200.0/24 -d 192.168.30.0/24 -j ACCEPT
+
+# Consente traffico loopback e established/related
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Consenti ping (ICMP)
+iptables -A FORWARD -p icmp -j ACCEPT
+iptables -A INPUT -p icmp -j ACCEPT
+
+# Policy finali (più restrittive)
 iptables -P INPUT DROP
+iptables -P FORWARD DROP  
 iptables -P OUTPUT ACCEPT
 
 
