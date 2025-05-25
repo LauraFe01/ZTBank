@@ -5,3 +5,52 @@ Initializing Output Plugins!
 Initializing Preprocessors!
 Initializing Plug-ins!
 Parsing Rules file "/etc/snort/snort_eth2.conf"
+Detection:
+   Search-Method = AC-Full-Q
+    Split Any/Any group = enabled
+    Search-Method-Optimizations = enabled
+    Maximum pattern length = 20
+Tagged Packet Limit: 256
+Log directory = /var/log/snort/eth2
+Frag3 global config:
+    Max frags: 65536
+    Fragment memory cap: 4194304 bytes
+Frag3 engine config:
+    Bound Address: default
+    Target-based policy: FIRST
+    Fragment timeout: 180 seconds
+    Fragment min_ttl:   1
+    Fragment Anomalies: Alert
+    Overlap Limit:     10
+    Min fragment Length:     100
+      Max Expected Streams: 768
+Stream global config:
+    Track TCP sessions: ACTIVE
+    Max TCP sessions: 262144
+    TCP cache pruning timeout: 30 seconds
+    TCP cache nominal timeout: 180 seconds
+    Memcap (for reassembly packet storage): 8388608
+    Track UDP sessions: ACTIVE
+    Max UDP sessions: 131072
+    UDP cache pruning timeout: 30 seconds
+    UDP cache nominal timeout: 180 seconds
+    Track ICMP sessions: INACTIVE
+    Track IP sessions: INACTIVE
+    Log info if session memory consumption exceeds 1048576
+    Send up to 0 active responses
+    Protocol Aware Flushing: ACTIVE
+        Maximum Flush Point: 16384
+Stream TCP Policy config:
+    Bound Address: default
+    Reassembly Policy: FIRST
+    Timeout: 180 seconds
+    Maximum number of bytes to queue per session: 1048576
+    Maximum number of segs to queue per session: 2621
+    Reassembly Ports:
+Stream UDP Policy config:
+    Timeout: 30 seconds
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+Initializing rule chains...
+ERROR: /etc/snort/rules/local.rules(37) Unknown ClassType: policy-violation
+Fatal Error, Quitting..
