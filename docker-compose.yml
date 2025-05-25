@@ -7,33 +7,45 @@ services:
 
   # client internal è nella rete internal net 
   client-internal:
-    image: ubuntu
+    build:
+      context: ./client-internal
     container_name: client-internal
     networks:
       internal-net:
         ipv4_address: 192.168.10.10
     tty: true
-    command: bash
-  
+    sysctls:
+      - net.ipv4.conf.all.accept_redirects=1
+    cap_add:
+      - NET_ADMIN
+
   # client external è nella rete external net
   client-external:
-    image: ubuntu
+    build:
+      context: ./client-external
     container_name: client-external
     networks:
       external-net:
         ipv4_address: 192.168.20.10
     tty: true
-    command: bash
+    sysctls:
+      - net.ipv4.conf.all.accept_redirects=1
+    cap_add:
+      - NET_ADMIN
   
   # client wifi è nella rete wifi
   client-wifi:
-    image: ubuntu
+    build:
+      context: ./client-wifi
     container_name: client-wifi
     networks:
       wifi-lan:
         ipv4_address: 192.168.30.10
     tty: true
-    command: bash
+    sysctls:
+      - net.ipv4.conf.all.accept_redirects=1
+    cap_add:
+      - NET_ADMIN
   
   splunk:
     image: splunk/splunk:latest
@@ -132,6 +144,8 @@ services:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypass
       POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
     networks:
       net-lab:
         ipv4_address: 192.168.200.10
