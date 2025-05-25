@@ -71,3 +71,6 @@ Se il webhook è andato a buon fine, significa che effettivamente i dati del pay
 - entrate dentro il container router: docker exec -it router bash
 - cat webhook.log
 
+docker exec -it router bash
+ip addr
+
