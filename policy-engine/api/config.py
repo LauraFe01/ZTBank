@@ -1,1 +1,0 @@
-# non so a che servirà sto script ma potrebbe essere utile :)

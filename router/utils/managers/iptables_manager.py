@@ -1,18 +1,18 @@
 import subprocess
 import logging
-from typing import List, Dict
+from typing import List
 
 logger = logging.getLogger(__name__)
 
 class IPTablesManager:
+    """Manager per gestione regole IPTables - Compatibile con policy_1.py"""
+    
     def __init__(self):
         self.chain_name = "ZERO_TRUST_POLICY"
         self.setup_chain()
     
     def setup_chain(self):
-        """
-        Inizializza la catena IPTables per le policy Zero Trust
-        """
+        """Inizializza la catena IPTables per le policy Zero Trust"""
         try:
             # Crea catena personalizzata se non esiste
             subprocess.run([
@@ -36,9 +36,7 @@ class IPTablesManager:
             logger.error(f"Errore durante setup catena IPTables: {e}")
     
     def block_ip(self, ip_address: str, reason: str = "Trust score ridotto") -> bool:
-        """
-        Blocca un IP aggiungendo regola IPTables
-        """
+        """Blocca un IP aggiungendo regola IPTables"""
         try:
             # Verifica se la regola esiste già
             check_result = subprocess.run([
@@ -64,28 +62,8 @@ class IPTablesManager:
             logger.error(f"Errore durante blocco IP {ip_address}: {e}")
             return False
     
-    def unblock_ip(self, ip_address: str) -> bool:
-        """
-        Sblocca un IP rimuovendo regola IPTables
-        """
-        try:
-            # Rimuovi regola di blocco
-            subprocess.run([
-                "iptables", "-t", "filter", "-D", self.chain_name,
-                "-s", ip_address, "-j", "DROP"
-            ], check=True)
-            
-            logger.info(f"IP {ip_address} sbloccato")
-            return True
-            
-        except Exception as e:
-            logger.error(f"Errore durante sblocco IP {ip_address}: {e}")
-            return False
-    
     def limit_ip_bandwidth(self, ip_address: str, limit_kbps: int = 100) -> bool:
-        """
-        Limita la banda per un IP con trust score basso
-        """
+        """Limita la banda per un IP con trust score basso"""
         try:
             # Verifica se la regola esiste già
             check_result = subprocess.run([
@@ -112,36 +90,8 @@ class IPTablesManager:
             logger.error(f"Errore durante limitazione banda IP {ip_address}: {e}")
             return False
     
-    def get_blocked_ips(self) -> List[str]:
-        """
-        Ottiene lista degli IP attualmente bloccati
-        """
-        try:
-            result = subprocess.run([
-                "iptables", "-t", "filter", "-L", self.chain_name, "-n", "--line-numbers"
-            ], capture_output=True, text=True, check=True)
-            
-            blocked_ips = []
-            for line in result.stdout.split('\n'):
-                if 'DROP' in line and '-s' in line:
-                    # Estrai IP dalla riga
-                    parts = line.split()
-                    for i, part in enumerate(parts):
-                        if part == '-s' and i + 1 < len(parts):
-                            ip = parts[i + 1].split('/')[0]  # Rimuovi eventuale subnet mask
-                            blocked_ips.append(ip)
-                            break
-            
-            return blocked_ips
-            
-        except Exception as e:
-            logger.error(f"Errore durante lettura IP bloccati da IPTables: {e}")
-            return []
-    
     def apply_trust_based_rules(self, ip_address: str, trust_score: int) -> bool:
-        """
-        Applica regole basate sul trust score
-        """
+        """Applica regole basate sul trust score - USATO DA POLICY_1"""
         try:
             if trust_score <= 20:
                 # Trust score molto basso: blocca completamente
@@ -163,22 +113,6 @@ class IPTablesManager:
         except Exception as e:
             logger.error(f"Errore durante applicazione regole trust-based per IP {ip_address}: {e}")
             return False
-    
-    def flush_zero_trust_rules(self) -> bool:
-        """
-        Rimuove tutte le regole Zero Trust (per reset/manutenzione)
-        """
-        try:
-            subprocess.run([
-                "iptables", "-t", "filter", "-F", self.chain_name
-            ], check=True)
-            
-            logger.info("Tutte le regole Zero Trust sono state rimosse")
-            return True
-            
-        except Exception as e:
-            logger.error(f"Errore durante flush regole Zero Trust: {e}")
-            return False
 
-# Istanza globale
+# Istanza globale per compatibilità con policy_1.py
 iptables_manager = IPTablesManager()

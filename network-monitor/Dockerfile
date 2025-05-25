@@ -26,7 +26,7 @@ RUN mkdir -p /etc/snort/rules \
     && mkdir -p /var/log/squid \
     && mkdir -p /var/spool/squid
 
-# Copia file di configurazione
+# Copia files di configurazione
 COPY rules/local.rules /etc/snort/rules/
 COPY snort_eth0.conf /etc/snort/
 COPY snort_eth1.conf /etc/snort/
@@ -41,7 +41,7 @@ RUN chmod +x /usr/local/bin/start.sh \
     && chmod 755 /var/log/snort/eth* \
     && chmod 644 /etc/snort/rules/local.rules
 
-# Espone porte
+# Espone porta
 EXPOSE 3128
 
 # Avvia lo script
