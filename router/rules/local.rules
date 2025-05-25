@@ -37,5 +37,5 @@ alert tcp any any -> $HOME_NET any (msg:"Multiple connection attempts"; flags:R;
 alert ip 192.168.20.0/24 any -> any any (msg:"[POLICY] External-net access to management network"; sid:1000009; rev:1; classtype:policy-violation; priority:2;)
 
  
-alert tcp any any -> 192.168.200.10 any (msg:"Accesso al DB da rete non aziendale"; sid:100001; rev:1;)
+#alert tcp any any -> 192.168.200.10 any (msg:"Accesso al DB da rete non aziendale"; sid:100001; rev:1;)
 
