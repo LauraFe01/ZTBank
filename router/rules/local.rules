@@ -1,55 +1,8 @@
-# Regole Snort per Zero Trust monitoring
-
-# ICMP Ping detection
-# Per generare un evento di esempio che la attiva:
-# - docker exec -it client-internal bash
-# - apt update && apt install -y iputils-ping
-# - ping -c 4 192.168.10.254 
-alert icmp any any -> $HOME_NET any (msg:"ICMP Ping detected"; sid:1000001; rev:1;)
-
-# Port scanning detection (UTILIZZATA PER LA POLICY 1, o 8.2 del nostro documento)
-# la scansione di porte è considerata una fase preliminare tipica di un attacco informatico (nell'esempio
-# vedi su file alert, ho eseguito una serie di scansioni da client-external verso external net del router)
-# docker exec -it client-external bash
-# apt update && apt install -y nmap
-# nmap -sS -p 20-40 192.168.20.253
-alert tcp any any -> $HOME_NET any (msg:"Port scan detected"; flags:S; detection_filter:track by_src, count 10, seconds 60; sid:1000002; rev:2;)
-
-# Database access attempts (PostgreSQL)
-alert tcp any any -> $HOME_NET 5432 (msg:"Database access attempt on port 5432"; sid:1000003; rev:1;)
-
-# SSH brute force attempts
-alert tcp any any -> $HOME_NET 22 (msg:"SSH connection attempt"; detection_filter:track by_src, count 5, seconds 60; sid:1000004; rev:1;)
-
-# HTTP traffic to proxy
-alert tcp any any -> $HOME_NET 3128 (msg:"HTTP proxy access"; sid:1000005; rev:1;)
-
-# Suspicious outbound connections
-alert tcp $HOME_NET any -> !$HOME_NET [1024:65535] (msg:"Suspicious outbound connection"; sid:1000006; rev:1;)
-
-# Large data transfers
-alert tcp any any -> $HOME_NET any (msg:"Large data transfer detected"; dsize:>10000; sid:1000007; rev:1;)
-
-# Multiple failed connection attempts
-alert tcp any any -> $HOME_NET any (msg:"Multiple connection attempts"; flags:R; detection_filter:track by_src, count 5, seconds 30; sid:1000008; rev:1;)
-
-
-
-
-
-
-###########
-
-
-# Accesso PostgreSQL
-alert tcp any any -> 192.168.200.10 5432 (msg:"Accesso al DB PostgreSQL"; flags:S; sid:1000009; rev:2;)
-
-
-# SQL Injection rudimentale
-alert tcp any any -> 192.168.200.10 5432 (content:"OR"; content:"'1'='1"; msg:"Tentativo SQL Injection rudimentale"; sid:1000010; rev:2;)
-
-# Ping verso DB
-alert icmp any any -> 192.168.200.10 any (msg:"Ping ICMP verso DB"; sid:1000011; rev:1;)
-
-# HTTP verso DB (curl)
-alert tcp any any -> 192.168.200.10 80 (msg:"Tentativo HTTP verso DB (curl)"; flags:S; sid:1000012; rev:2;)
+alert tcp any any -> any any (msg:"[ZTA] TCP packet (any direction)"; sid:1000002; rev:1;)
+alert tcp any any -> 192.168.200.10 5432 (msg:"[POST-NAT] TCP from router to DB"; sid:1000015; rev:1;)
+alert tcp 192.168.20.10 any -> 192.168.200.10 5432 (msg:"TCP packet external client"; sid:1000001; rev:1;)
+alert tcp 192.168.30.10 any -> 192.168.200.10 5432 (msg:"TCP packet wifi client"; sid:1000003; rev:1;)
+alert tcp 192.168.10.10 any -> 192.168.200.10 5432 (msg:"TCP packet internal client"; sid:1000004; rev:1;)
+alert icmp 192.168.20.10 any -> 192.168.200.10 5432 (msg:"ICMP packet external client"; sid:1000013; rev:1;)
+alert icmp 192.168.30.10 any -> 192.168.200.10 5432 (msg:"ICMP packet wifi client"; sid:1000011; rev:1;)
+alert icmp 192.168.10.10 any -> 192.168.200.10 5432 (msg:"ICMP packet internal client"; sid:1000012; rev:1;)

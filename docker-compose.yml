@@ -132,7 +132,7 @@ services:
     build: ./router
     container_name: router
     ports:
-      - "5000:5000"
+      - "5005:5005"
     environment:
       - TZ=Europe/Rome
     privileged: true                      # permette ip_forward e iptables                     

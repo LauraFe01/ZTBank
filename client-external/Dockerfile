@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     bash \
     curl \
     netcat \
+    telnet \
     postgresql-client \
     && apt-get clean
 
