@@ -1,0 +1,7 @@
+policies:
+  - client: external_client
+    decision: deny
+  - client: internal_client
+    decision: allow
+  - client: wifi_client
+    decision: allow

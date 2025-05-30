@@ -1,210 +1,64 @@
 version: '3.8'
+
 services:
-  # Ogni client è in una rete separata, simulando segmenti diversi (LAN interna, esterna, WiFi).
-  # Hanno solo una rete → possono comunicare solo con i container sulla stessa rete.
 
-  # client internal è nella rete internal net 
-  client-internal:
-    build:
-      context: ./client-internal
-    container_name: client-internal
+  external_client:
+    image: alpine
+    container_name: external_client
+    command: tail -f /dev/null
     networks:
-      internal-net:
-        ipv4_address: 192.168.10.10
-    tty: true
-    sysctls:
-      - net.ipv4.conf.all.accept_redirects=1
-    cap_add:
-      - NET_ADMIN
-    depends_on:
-      router:
-        condition: service_healthy
-      db:
-        condition: service_healthy
+      - client_net
 
-  # client external è nella rete external net
-  client-external:
-    build:
-      context: ./client-external
-    container_name: client-external
+  internal_client:
+    image: alpine
+    container_name: internal_client
+    command: tail -f /dev/null
     networks:
-      external-net:
-        ipv4_address: 192.168.20.10
-    cap_add:
-      - NET_ADMIN
-    tty: true
-    sysctls:
-      - net.ipv4.conf.all.accept_redirects=1
-    depends_on:
-      router:
-        condition: service_healthy
-      db:
-        condition: service_healthy
+      - client_net
 
-  
-  # client wifi è nella rete wifi
-  client-wifi:
-    build:
-      context: ./client-wifi
-    container_name: client-wifi
+  wifi_client:
+    image: alpine
+    container_name: wifi_client
+    command: tail -f /dev/null
     networks:
-      wifi-lan:
-        ipv4_address: 192.168.30.10
-    tty: true
-    sysctls:
-      - net.ipv4.conf.all.accept_redirects=1
-    cap_add:
-      - NET_ADMIN
+      - client_net
+
+  gateway:
+    build: ./gateway
+    container_name: gateway
+    privileged: true
+    networks:
+      - client_net
+      - backend_net
     depends_on:
-      router:
-        condition: service_healthy
-      db:
-        condition: service_healthy
-  
-  splunk:
-    image: splunk/splunk:latest
-    container_name: splunk
-    environment:
-      - SPLUNK_START_ARGS=--accept-license
-      - SPLUNK_PASSWORD=${SPLUNK_PASSWORD}
-    ports:
-      - "8000:8000"
-      - "8088:8088"
-      - "8089:8089"
-    networks:
-      net-lab:
-        ipv4_address: 192.168.200.5
+      - db
     volumes:
-      - ./logs/squid:/var/log/squid
-      - ./logs/snort:/var/log/snort
-      - ./splunk-apps/log_inputs:/opt/splunk/etc/apps/log_inputs
-      - ./splunk-apps/my_custom_alerts:/opt/splunk/etc/apps/my_custom_alerts 
-    depends_on:
-      router:
-        condition: service_healthy
-      db:
-        condition: service_healthy
-  # policy-engine:
-  #   build: ./policy-engine
-  #   container_name: policy-engine
-  #   ports:
-  #     - "5000:5000"  # API Flask per enforcement delle policy
-  #   environment:
-  #     - TZ=Europe/Rome
-  #   privileged: true
-  #   sysctls:
-  #     net.ipv4.ip_forward: 1
-  #   networks:
-  #     internal-net:
-  #       ipv4_address: 192.168.10.254
-  #     external-net:
-  #       ipv4_address: 192.168.20.254
-  #     wifi-lan:
-  #       ipv4_address: 192.168.30.254
-  #     net-lab:
-  #       ipv4_address: 192.168.200.254
-  #   cap_add:
-  #     - NET_ADMIN
-  #   tty: true
-  #   volumes:
-  #     - ./logs/policy-engine:/var/log/policy-engine
+      - ./gateway/logs:/var/logs
+      - /dev/kmsg:/dev/kmsg
 
-  # network-monitor:
-  #   build: ./network-monitor
-  #   container_name: network-monitor
-  #   environment:
-  #     - TZ=Europe/Rome
-  #   networks:
-  #     internal-net:
-  #       ipv4_address: 192.168.10.253
-  #     external-net:
-  #       ipv4_address: 192.168.20.253
-  #     wifi-lan:
-  #       ipv4_address: 192.168.30.253
-  #     net-lab:
-  #       ipv4_address: 192.168.200.253
-  #   tty: true
-  #   volumes:
-  #     - ./logs/squid:/var/log/squid
-  #     - ./logs/snort:/var/log/snort
-
-  router:
-    build: ./router
-    container_name: router
-    ports:
-      - "5005:5005"
-    environment:
-      - TZ=Europe/Rome
-    privileged: true                      # permette ip_forward e iptables                     
-    sysctls:
-      net.ipv4.ip_forward: 1             # abilitazione forwarding           
+  pdp:
+    build: ./pdp
+    container_name: pdp
     networks:
-      internal-net:
-        ipv4_address: 192.168.10.254
-      external-net:
-        ipv4_address: 192.168.20.254
-      wifi-lan:
-        ipv4_address: 192.168.30.254
-      net-lab:
-        ipv4_address: 192.168.200.254
-    cap_add:
-      - NET_ADMIN 
-    tty: true
-    volumes:
-      - ./logs/router:/var/log/router
-      - ./logs/squid:/var/log/squid
-      - ./logs/snort:/var/log/snort
-    healthcheck:
-      test: ["CMD", "ping", "-c", "1", "127.0.0.1"]
-      interval: 5s
-      timeout: 2s
-      retries: 5
-    depends_on:
-      db:
-        condition: service_healthy
-    
+      - backend_net
+
+
   db:
     image: postgres:14
     container_name: db
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypass
-      POSTGRES_DB: mydb
-    ports:
-      - "5432:5432"
-    networks:
-      net-lab:
-        ipv4_address: 192.168.200.10
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: zerotrust
     volumes:
-      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
-      - ./db/data.sql:/docker-entrypoint-initdb.d/02-data.sql
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-  
-    
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - backend_net
 
-# Reti bridge isolate: i container connessi a una rete possono comunicare solo con altri container sulla stessa rete.    
+volumes:
+  db_data:
+  splunk_data:
+
 networks:
-  internal-net:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.10.0/24
-  external-net:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.20.0/24
-  wifi-lan:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.30.0/24
-  net-lab:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.200.0/24
+  client_net:
+  backend_net:
