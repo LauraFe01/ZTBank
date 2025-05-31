@@ -1,138 +1,187 @@
-# docker-compose.yml
 services:
-  # Ogni client è in una rete separata, simulando segmenti diversi (LAN interna, esterna, WiFi).
-  # Hanno solo una rete → possono comunicare solo con i container sulla stessa rete.
 
-  # client internal è nella rete internal net 
-  client-internal:
+  # client-internal su rete interna
+  client_internal:
     build:
-      context: ./client-internal
-    container_name: client-internal
+      context: ./client_internal
+    container_name: client_internal
     networks:
       internal-net:
-        ipv4_address: 192.168.10.10
+        ipv4_address: 172.20.0.2
     tty: true
     sysctls:
       - net.ipv4.conf.all.accept_redirects=1
     cap_add:
       - NET_ADMIN
-
-  # client external è nella rete external net
-  client-external:
+    command: tail -f /dev/null
+  
+  # client-external su rete esterna
+  client_external:
     build:
-      context: ./client-external
-    container_name: client-external
+      context: ./client_external
+    container_name: client_external
     networks:
       external-net:
-        ipv4_address: 192.168.20.10
+        ipv4_address: 172.21.0.2
     tty: true
     sysctls:
       - net.ipv4.conf.all.accept_redirects=1
     cap_add:
       - NET_ADMIN
+    command: tail -f /dev/null
   
-  # client wifi è nella rete wifi
-  client-wifi:
+  # client wifi su rete wifi
+  client_wifi:
     build:
-      context: ./client-wifi
-    container_name: client-wifi
+      context: ./client_internal
+    container_name: client_wifi
     networks:
-      wifi-lan:
-        ipv4_address: 192.168.30.10
+      wifi-net:
+        ipv4_address: 172.22.0.2
     tty: true
     sysctls:
       - net.ipv4.conf.all.accept_redirects=1
     cap_add:
       - NET_ADMIN
+    command: tail -f /dev/null
   
-  splunk:
-    image: splunk/splunk:latest
-    container_name: splunk
-    environment:
-      - SPLUNK_START_ARGS=--accept-license
-      - SPLUNK_PASSWORD=${SPLUNK_PASSWORD}
-    ports:
-      - "8000:8000"
-      - "8088:8088"
-      - "8089:8089"
-    networks:
-      net-lab:
-        ipv4_address: 192.168.200.5
+  # Snort + Squid + iptables. Smista richieste verso pep.
+  gateway:
+    build:
+      context: ./gateway
+    container_name: gateway
     volumes:
       - ./logs/squid:/var/log/squid
       - ./logs/snort:/var/log/snort
       - ./splunk-apps/log_inputs:/opt/splunk/etc/apps/log_inputs
       - ./splunk-apps/my_custom_alerts:/opt/splunk/etc/apps/my_custom_alerts 
 
+  # policy-engine:
+  #   build: ./policy-engine
+  #   container_name: policy-engine
+  #   ports:
+  #     - "5000:5000"  # API Flask per enforcement delle policy
+  #   environment:
+  #     - TZ=Europe/Rome
+  #   privileged: true
+  #   sysctls:
+  #     net.ipv4.ip_forward: 1
+  #   networks:
+  #     internal-net:
+  #       ipv4_address: 192.168.10.254
+  #     external-net:
+  #       ipv4_address: 192.168.20.254
+  #     wifi-lan:
+  #       ipv4_address: 192.168.30.254
+  #     net-lab:
+  #       ipv4_address: 192.168.200.254
+  #   cap_add:
+  #     - NET_ADMIN
+  #   tty: true
+  #   volumes:
+  #     - ./logs/policy-engine:/var/log/policy-engine
+
+  # network-monitor:
+  #   build: ./network-monitor
+  #   container_name: network-monitor
+  #   environment:
+  #     - TZ=Europe/Rome
+  #   networks:
+  #     internal-net:
+  #       ipv4_address: 192.168.10.253
+  #     external-net:
+  #       ipv4_address: 192.168.20.253
+  #     wifi-lan:
+  #       ipv4_address: 192.168.30.253
+  #     net-lab:
+  #       ipv4_address: 192.168.200.253
+  #   tty: true
+  #   volumes:
+  #     - ./logs/squid:/var/log/squid
+  #     - ./logs/snort:/var/log/snort
 
   router:
     build: ./router
     container_name: router
     ports:
-      - "5000:5000"
-    environment:
-      - TZ=Europe/Rome
-    privileged: true                      # permette ip_forward e iptables                     
-    sysctls:
-      net.ipv4.ip_forward: 1             # abilitazione forwarding           
+      - "3128:3128"
     networks:
       internal-net:
-        ipv4_address: 192.168.10.254
+        ipv4_address: 172.20.0.3
       external-net:
-        ipv4_address: 192.168.20.254
-      wifi-lan:
-        ipv4_address: 192.168.30.254
-      net-lab:
-        ipv4_address: 192.168.200.254
+        ipv4_address: 172.21.0.3
+      wifi-net:
+        ipv4_address: 172.22.0.3
+      zt-gateway:
+        ipv4_address: 172.24.0.2
     cap_add:
       - NET_ADMIN
-      - SYS_MODULE 
     devices:
       - /dev/net/tun
     tty: true
-    volumes:
-      - ./logs/router:/var/log/router
-      - ./logs/squid:/var/log/squid
-      - ./logs/snort:/var/log/snort
-      - /lib/modules:/lib/modules:ro 
-    
+    command: ["/bin/bash", "-c", "/etc/init.d/squid start && tail -f /dev/null"]
+  
+  # Verifica politiche di accesso e chiama il PDP
+  pep:
+    build:
+      context: ./pep
+    container_name: pep
+    ports:
+      - "3100:3100"
+    networks:
+      zt-gateway:
+        ipv4_address: 172.24.0.3
+      zt-core:
+        ipv4_address: 172.25.0.2
+    depends_on:
+      - pdp
+  
+  # Decide in base a policy (es. reputazione IP, orario, etc.)
+  pdp:
+    build:
+      context: ./pdp
+    container_name: pdp
+    networks:
+      zt-core:
+        ipv4_address: 172.25.0.3
+  
+  # Risorsa protetta
   db:
-    image: postgres:14
+    image: postgres:latest
     container_name: db
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypass
-      POSTGRES_DB: mydb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testdb
+    networks:
+      zt-core:
+        ipv4_address: 172.25.0.4
     ports:
       - "5432:5432"
-    networks:
-      net-lab:
-        ipv4_address: 192.168.200.10
-    volumes:
-      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
-      - ./db/data.sql:/docker-entrypoint-initdb.d/02-data.sql
 
-# Reti bridge isolate: i container connessi a una rete possono comunicare solo con altri container sulla stessa rete.    
 networks:
   internal-net:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.10.0/24
+        - subnet: 172.20.0.0/16
   external-net:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.20.0/24
-  wifi-lan:
+        - subnet: 172.21.0.0/16
+  wifi-net:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.30.0/24
-  net-lab:
+        - subnet: 172.22.0.0/16
+  zt-gateway:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.200.0/24
-
-# docker-compose build --build-arg DNS1=8.8.8.8 --build-arg DNS2=8.8.4.4
+        - subnet: 172.24.0.0/16
+  zt-core:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16

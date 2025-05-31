@@ -4,25 +4,9 @@ Running in IDS mode
 Initializing Output Plugins!
 Initializing Preprocessors!
 Initializing Plug-ins!
-Parsing Rules file "/etc/snort/snort_eth2.conf"
-Detection:
-   Search-Method = AC-Full-Q
-    Split Any/Any group = enabled
-    Search-Method-Optimizations = enabled
-    Maximum pattern length = 20
+Parsing Rules file "/etc/snort/snort.conf"
 Tagged Packet Limit: 256
-Log directory = /var/log/snort/eth2
-Frag3 global config:
-    Max frags: 65536
-    Fragment memory cap: 4194304 bytes
-Frag3 engine config:
-    Bound Address: default
-    Target-based policy: FIRST
-    Fragment timeout: 180 seconds
-    Fragment min_ttl:   1
-    Fragment Anomalies: Alert
-    Overlap Limit:     10
-    Min fragment Length:     100
+Log directory = /var/log/snort
       Max Expected Streams: 768
 Stream global config:
     Track TCP sessions: ACTIVE
@@ -43,29 +27,103 @@ Stream global config:
         Maximum Flush Point: 16384
 Stream TCP Policy config:
     Bound Address: default
-    Reassembly Policy: FIRST
+    Reassembly Policy: LINUX
     Timeout: 180 seconds
+    Limit on TCP Overlaps: 10
     Maximum number of bytes to queue per session: 1048576
     Maximum number of segs to queue per session: 2621
+    Options:
+        Require 3-Way Handshake: YES
+        3-Way Handshake Timeout: 180
+        Detect Anomalies: YES
     Reassembly Ports:
-Stream UDP Policy config:
-    Timeout: 30 seconds
+Frag3 global config:
+    Max frags: 65536
+    Fragment memory cap: 4194304 bytes
+HttpInspect Config:
+    GLOBAL CONFIG
+      Detect Proxy Usage:       NO
+      IIS Unicode Map Filename: /etc/snort/unicode.map
+      IIS Unicode Map Codepage: 1252
+      Memcap used for logging URI and Hostname: 150994944
+      Max Gzip Memory: 838860
+      Max Gzip Sessions: 1613
+      Gzip Compress Depth: 1460
+      Gzip Decompress Depth: 2920
+    DEFAULT SERVER CONFIG:
+      Server profile: All
+      Ports (PAF): 80 8080 8180 
+      Server Flow Depth: 300
+      Client Flow Depth: 300
+      Max Chunk Length: 500000
+      Max Header Field Length: 0
+      Max Number Header Fields: 0
+      Max Number of WhiteSpaces allowed with header folding: 200
+      Inspect Pipeline Requests: YES
+      URI Discovery Strict Mode: NO
+      Allow Proxy Usage: NO
+      Disable Alerting: NO
+      Oversize Dir Length: 0
+      Only inspect URI: NO
+      Normalize HTTP Headers: NO
+      Inspect HTTP Cookies: NO
+      Inspect HTTP Responses: NO
+      Extract Gzip from responses: NO
+      Decompress response files:   
+      Unlimited decompression of gzip data from responses: NO
+      Normalize Javascripts in HTTP Responses: NO
+      Normalize HTTP Cookies: NO
+      Enable XFF and True Client IP: NO
+      Log HTTP URI data: NO
+      Log HTTP Hostname data: NO
+      Extended ASCII code support in URI: NO
+      Ascii: YES alert: NO
+      Double Decoding: YES alert: YES
+      %U Encoding: YES alert: YES
+      Bare Byte: YES alert: YES
+      UTF 8: OFF
+      IIS Unicode: YES alert: YES
+      Multiple Slash: YES alert: NO
+      IIS Backslash: YES alert: NO
+      Directory Traversal: YES alert: NO
+      Web Root Traversal: YES alert: YES
+      Apache WhiteSpace: YES alert: NO
+      IIS Delimiter: YES alert: NO
+      IIS Unicode Map: GLOBAL IIS UNICODE MAP CONFIG
+      Non-RFC Compliant Characters: NONE
+      Whitespace Characters: 0x09 0x0b 0x0c 0x0d 
+      Legacy mode: NO
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 Initializing rule chains...
+<<<<<<< HEAD
 10 Snort rules read
     10 detection rules
     0 decoder rules
     0 preprocessor rules
 10 Option Chains linked into 10 Chain Headers
+=======
+3 Snort rules read
+    3 detection rules
+    0 decoder rules
+    0 preprocessor rules
+3 Option Chains linked into 2 Chain Headers
+>>>>>>> origin/main
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
 +-------------------[Rule Port Counts]---------------------------------------
 |             tcp     udp    icmp      ip
+<<<<<<< HEAD
 |     src       1       0       0       0
 |     dst       5       0       0       0
 |     any       1       0       3       0
 |      nc       7       0       3       0
+=======
+|     src       0       0       0       0
+|     dst       1       0       0       0
+|     any       2       0       0       0
+|      nc       3       0       0       0
+>>>>>>> origin/main
 |     s+d       0       0       0       0
 +----------------------------------------------------------------------------
 
@@ -93,11 +151,25 @@ Rule application order: pass->drop->sdrop->reject->alert->log
 Verifying Preprocessor Configurations!
 
 [ Port Based Pattern Matching Memory ]
-[ Number of patterns truncated to 20 bytes: 0 ]
++-[AC-BNFA Search Info Summary]------------------------------
+| Instances        : 2
+| Patterns         : 4
+| Pattern Chars    : 37
+| Num States       : 37
+| Num Match States : 4
+| Memory           :   3.81Kbytes
+|   Patterns       :   0.19K
+|   Match Lists    :   0.41K
+|   Transitions    :   2.41K
++-------------------------------------------------
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth2".
 Reload thread starting...
+<<<<<<< HEAD
 Reload thread started, thread 0x7f48e5712640 (45)
+=======
+Reload thread started, thread 0x7fc6a861d640 (45)
+>>>>>>> origin/main
 Decoding Ethernet
 
         --== Initialization Complete ==--
