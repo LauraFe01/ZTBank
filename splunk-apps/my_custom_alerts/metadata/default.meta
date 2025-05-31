@@ -1,7 +1,0 @@
-[default]
-access = read : [ * ], write : [ admin ]
-export = system
-
-
-
-
