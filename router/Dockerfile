@@ -48,7 +48,7 @@ COPY snort_eth0.conf /etc/snort/
 COPY snort_eth1.conf /etc/snort/
 COPY snort_eth2.conf /etc/snort/
 COPY snort_eth3.conf /etc/snort/
-COPY squid.conf /etc/squid/
+COPY squid.conf /etc/squid/squid.conf
 
 # Copia gli scripts necessari al meccanismo di policies
 COPY requirements.txt /router/requirements.txt
@@ -64,6 +64,7 @@ RUN pip3 install psycopg2-binary
 RUN groupadd -r squid && useradd -r -g squid squid \
     && chown -R proxy:proxy /var/log/squid \
     && chown -R proxy:proxy /var/spool/squid \
+    && chmod 755 /var/spool/squid /var/log/squid \
     && chmod 755 /var/log/snort \
     && chmod 755 /var/log/snort/eth0 \
     && chmod 755 /var/log/snort/eth1 \
@@ -71,7 +72,6 @@ RUN groupadd -r squid && useradd -r -g squid squid \
     && chmod 755 /var/log/snort/eth3 \
     && chmod 644 /etc/snort/rules/local.rules \
     && chmod -R 777 /var/log/snort
-
 
 # Aggiunge PYTHONPATH
 ENV PYTHONPATH="/router:${PYTHONPATH}"

@@ -3,15 +3,7 @@ set -e
 
 echo "=== Avvio script start.sh ==="
 
-
-##########################
-# 2. Preparazione Squid  #
-##########################
-
-# Assicura permessi log Squid
-mkdir -p /var/log/squid
-chown -R proxy:proxy /var/log/squid
-chmod 755 /var/log/squid
+#### SQUID #####
 
 # Gestione robusta PID Squid
 if [ -f /run/squid.pid ]; then
@@ -40,11 +32,25 @@ if [ ! -d /var/spool/squid/00 ]; then
     squid -z
 fi
 
+# Assicura permessi log Squid
+mkdir -p /var/log/squid
+chown -R proxy:proxy /var/log/squid
+chmod 755 /var/log/squid
+
 # Avvia Squid in foreground
 echo "Avvio Squid..."
 squid -NYCd 1 &
+SQUID_PID=$!
 
-echo "Setup di SQUID completato con successo!"
+# Loop per tenere vivo il container monitorando Squid
+while true; do
+    if ! ps -p $SQUID_PID > /dev/null; then
+        echo "Squid è terminato, riavvio..."
+        squid -NYCd 1 &
+        SQUID_PID=$!
+    fi
+    sleep 10
+done
 
 ##########################
 # 3. Preparazione Snort  #
@@ -104,66 +110,62 @@ echo "Setup di SNORT completato con successo!"
 echo 1 > /proc/sys/net/ipv4/ip_forward
 sysctl -w net.ipv4.conf.all.forwarding=1
 
-# 2. Pulisci tutte le regole precedenti
-iptables -F
-iptables -t nat -F
-iptables -t mangle -F
+echo "[Gateway] Avvio iptables..."
 
-# 3. Imposta policy di default
+# Flush delle regole precedenti
+iptables -F
+iptables -X
+
+# Policy predefinite
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
 
-# 4. Permetti loopback (IMPORTANTE)
+# Permetti localhost
 iptables -A INPUT -i lo -j ACCEPT
-iptables -A OUTPUT -o lo -j ACCEPT
 
-# 5. Permetti connessioni ESTABLISHED,RELATED
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+# Permetti connessioni già stabilite
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
-# 6. Regole NAT - PREROUTING per redirect HTTP a Squid (proxy trasparente)
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3128
-iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 80 -j REDIRECT --to-port 3128
-iptables -t nat -A PREROUTING -i eth3 -p tcp --dport 80 -j REDIRECT --to-port 3128
+# Attesa attiva finché il DNS Docker risolve correttamente
+echo "[Gateway] Attendo che internal_client sia raggiungibile..."
+while true; do
+  INT_IP=$(getent hosts internal_client | awk '{ print $1 }')
+  if [[ -n "$INT_IP" ]]; then break; fi
+  sleep 1
+done
+echo "[Gateway] IP di internal_client: $INT_IP"
 
-# SNAT per traffico da ciascuna rete client verso il DB (192.168.200.10) nella rete net-lab
-# iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -d 192.168.200.0/24 -o eth2 -j SNAT --to-source 192.168.200.254
-# iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -d 192.168.200.0/24 -o eth2 -j SNAT --to-source 192.168.200.254
-# iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -d 192.168.200.0/24 -o eth2 -j SNAT --to-source 192.168.200.254
+echo "[Gateway] Attendo che external_client sia raggiungibile..."
+while true; do
+  EXT_IP=$(getent hosts external_client | awk '{ print $1 }')
+  if [[ -n "$EXT_IP" ]]; then break; fi
+  sleep 1
+done
+echo "[Gateway] IP di external_client: $EXT_IP"
 
-# # 8. Consenti traffico ICMP (ping) su INPUT e FORWARD
-# iptables -A INPUT -p icmp -j ACCEPT
-# iptables -A FORWARD -p icmp -j ACCEPT
+# Rimuove eventuali zeri iniziali (es. 172.18.0.04 → 172.18.0.4)
+INT_IP=$(echo "$INT_IP" | sed 's/\b0\+\([0-9]\)/\1/g')
+EXT_IP=$(echo "$EXT_IP" | sed 's/\b0\+\([0-9]\)/\1/g')
 
-# # 9. FORWARD - traffico verso DB PostgreSQL (porta 5432)
-# iptables -A FORWARD -p tcp -d 192.168.200.10 --dport 5432 -j ACCEPT
-# iptables -A FORWARD -p tcp -s 192.168.200.10 --sport 5432 -j ACCEPT
+# Permetti solo internal_client
+iptables -A INPUT -s "$INT_IP" -j ACCEPT
 
-# # 11. FORWARD - traffico tra client e rete DB (bidirezionale)
-# iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.200.0/24 -j ACCEPT
-# iptables -A FORWARD -s 192.168.200.0/24 -d 192.168.10.0/24 -j ACCEPT
+# Mostra le regole attive
+echo "[INFO] Regole attive:"
+iptables -L -n
 
-# iptables -A FORWARD -s 192.168.20.0/24 -d 192.168.200.0/24 -j ACCEPT
-# iptables -A FORWARD -s 192.168.200.0/24 -d 192.168.20.0/24 -j ACCEPT
-
-# iptables -A FORWARD -s 192.168.30.0/24 -d 192.168.200.0/24 -j ACCEPT
-# iptables -A FORWARD -s 192.168.200.0/24 -d 192.168.30.0/24 -j ACCEPT
-
-# # 12. Consenti traffico DNS (porta 53 UDP/TCP) per risoluzione nomi
-# iptables -A FORWARD -p udp --dport 53 -j ACCEPT
-# iptables -A FORWARD -p tcp --dport 53 -j ACCEPT
-
+# exit 0
 
 #################################
 # 7. Avvio Applicazione Flask   #
 #################################
 
-# Avvia l'applicazione Flask
-echo "Avvio Flask server..."
-python3 /router/api/app.py 
+# # Avvia l'applicazione Flask
+# echo "Avvio Flask server..."
+# python3 /router/api/app.py 
 
-echo "Setup di FLASK completato con successo!"
+# echo "Setup di FLASK completato con successo!"
 
 # Mantiene il container attivo
 tail -f /dev/null
