@@ -27,11 +27,14 @@ fi
 echo "[Entrypoint] Processi attivi:"
 ps aux | grep squid || echo "Nessun processo squid trovato"
 
-# 6) Inizializza cache solo se necessario
-if [ ! -d /var/spool/squid/00 ]; then
-    echo "[Entrypoint] Inizializzo la cache di Squid..."
-    squid -z
-fi
+# Ho disattivato momentaneamente la cache per fare dei test perchè secondo chat se squid gestisce richieste uguali utilizzando la cache
+# potrebbe impedire a snort di rilevare il traffico, non so se è na cazzata :)
+
+# # 6) Inizializza cache solo se necessario
+# if [ ! -d /var/spool/squid/00 ]; then
+#     echo "[Entrypoint] Inizializzo la cache di Squid..."
+#     squid -z
+# fi
 
 # 7) Avvia regole iptables
 echo "[Entrypoint] Configuro iptables..."
@@ -43,6 +46,19 @@ if [ -f /run/squid.pid ]; then
     rm -f /run/squid.pid
 fi
 
+
+#################
+## AVVIO SNORT ##
+#################
+
+for iface in eth0 eth1 eth2 eth3; do
+  echo "[INFO] Avvio Snort su $iface"
+  snort -i "$iface" -c /etc/snort/snort.conf -A full -k none -l /var/log/snort -v > "/var/log/snort/snort_${iface}.log" 2>&1 &
+done
+
 # 9) Avvia Squid
+# Quando si usa exec in bash, quel comando sostituisce il processo corrente. Di conseguenza, il codice che segue non viene mai eseguito.
+# (quindi va messo per ultimo)
 echo "[Entrypoint] Avvio Squid in foreground..."
 exec squid -N -d 1
+

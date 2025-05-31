@@ -1,11 +1,24 @@
 FROM ubuntu:22.04
 
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Installazione pacchetti essenziali in un solo layer, con pulizia cache per ridurre dimensioni immagine
 RUN apt-get update && apt-get install -y \
     iptables \
     squid \
+    snort \
     python3 \
     python3-pip \
-    net-tools
+    net-tools \
+    tshark \
+    tcpdump \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+
+#################
+##   SQUID     ##
+#################
 
 # 1) Creiamo le directory necessarie per Squid
 RUN mkdir -p /var/log/squid \
@@ -14,6 +27,25 @@ RUN mkdir -p /var/log/squid \
 
 # 2) Copiamo il nostro file squid.conf custom
 COPY squid.conf /etc/squid/squid.conf
+
+
+#################
+##   SNORT     ##
+#################
+
+# 1) Creiamo la directory necessarie per Snort
+RUN mkdir -p /var/log/snort \
+    && mkdir -p /etc/snort/rules 
+
+# 2) Copiamo i nostri file snort.conf e local.rules
+COPY local.rules /etc/snort/rules/local.rules
+COPY pcap_to_csv.sh /opt/pcap_to_csv.sh
+COPY snort.conf /etc/snort/
+
+
+##########################
+##  SCRIPT E DEPENDENCY ##
+##########################
 
 # (il resto rimane invariato)
 COPY rules.sh /opt/rules.sh

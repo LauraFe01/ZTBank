@@ -99,3 +99,6 @@ tail -f ./logs/squid/access.log
 ---
 
 Realizzato per scopi educativi in un contesto di simulazione Zero Trust.
+
+Per testare:
+# curl http://172.24.0.3:3100/request -H "Content-Type: application/json" -d '{"client": "test3"}'

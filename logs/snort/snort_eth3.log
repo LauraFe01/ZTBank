@@ -1,0 +1,329 @@
+Running in IDS mode
+
+        --== Initializing Snort ==--
+Initializing Output Plugins!
+Initializing Preprocessors!
+Initializing Plug-ins!
+Parsing Rules file "/etc/snort/snort.conf"
+Tagged Packet Limit: 256
+Log directory = /var/log/snort
+      Max Expected Streams: 768
+Stream global config:
+    Track TCP sessions: ACTIVE
+    Max TCP sessions: 262144
+    TCP cache pruning timeout: 30 seconds
+    TCP cache nominal timeout: 180 seconds
+    Memcap (for reassembly packet storage): 8388608
+    Track UDP sessions: ACTIVE
+    Max UDP sessions: 131072
+    UDP cache pruning timeout: 30 seconds
+    UDP cache nominal timeout: 180 seconds
+    Track ICMP sessions: INACTIVE
+    Track IP sessions: INACTIVE
+    Log info if session memory consumption exceeds 1048576
+    Send up to 0 active responses
+    Protocol Aware Flushing: ACTIVE
+        Maximum Flush Point: 16384
+Stream TCP Policy config:
+    Bound Address: default
+    Reassembly Policy: LINUX
+    Timeout: 180 seconds
+    Limit on TCP Overlaps: 10
+    Maximum number of bytes to queue per session: 1048576
+    Maximum number of segs to queue per session: 2621
+    Options:
+        Require 3-Way Handshake: YES
+        3-Way Handshake Timeout: 180
+        Detect Anomalies: YES
+    Reassembly Ports:
+Frag3 global config:
+    Max frags: 65536
+    Fragment memory cap: 4194304 bytes
+HttpInspect Config:
+    GLOBAL CONFIG
+      Detect Proxy Usage:       NO
+      IIS Unicode Map Filename: /etc/snort/unicode.map
+      IIS Unicode Map Codepage: 1252
+      Memcap used for logging URI and Hostname: 150994944
+      Max Gzip Memory: 838860
+      Max Gzip Sessions: 1613
+      Gzip Compress Depth: 1460
+      Gzip Decompress Depth: 2920
+    DEFAULT SERVER CONFIG:
+      Server profile: All
+      Ports (PAF): 80 8080 8180 
+      Server Flow Depth: 300
+      Client Flow Depth: 300
+      Max Chunk Length: 500000
+      Max Header Field Length: 0
+      Max Number Header Fields: 0
+      Max Number of WhiteSpaces allowed with header folding: 200
+      Inspect Pipeline Requests: YES
+      URI Discovery Strict Mode: NO
+      Allow Proxy Usage: NO
+      Disable Alerting: NO
+      Oversize Dir Length: 0
+      Only inspect URI: NO
+      Normalize HTTP Headers: NO
+      Inspect HTTP Cookies: NO
+      Inspect HTTP Responses: NO
+      Extract Gzip from responses: NO
+      Decompress response files:   
+      Unlimited decompression of gzip data from responses: NO
+      Normalize Javascripts in HTTP Responses: NO
+      Normalize HTTP Cookies: NO
+      Enable XFF and True Client IP: NO
+      Log HTTP URI data: NO
+      Log HTTP Hostname data: NO
+      Extended ASCII code support in URI: NO
+      Ascii: YES alert: NO
+      Double Decoding: YES alert: YES
+      %U Encoding: YES alert: YES
+      Bare Byte: YES alert: YES
+      UTF 8: OFF
+      IIS Unicode: YES alert: YES
+      Multiple Slash: YES alert: NO
+      IIS Backslash: YES alert: NO
+      Directory Traversal: YES alert: NO
+      Web Root Traversal: YES alert: YES
+      Apache WhiteSpace: YES alert: NO
+      IIS Delimiter: YES alert: NO
+      IIS Unicode Map: GLOBAL IIS UNICODE MAP CONFIG
+      Non-RFC Compliant Characters: NONE
+      Whitespace Characters: 0x09 0x0b 0x0c 0x0d 
+      Legacy mode: NO
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+Initializing rule chains...
+3 Snort rules read
+    3 detection rules
+    0 decoder rules
+    0 preprocessor rules
+3 Option Chains linked into 2 Chain Headers
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
++-------------------[Rule Port Counts]---------------------------------------
+|             tcp     udp    icmp      ip
+|     src       0       0       0       0
+|     dst       1       0       0       0
+|     any       2       0       0       0
+|      nc       3       0       0       0
+|     s+d       0       0       0       0
++----------------------------------------------------------------------------
+
++-----------------------[detection-filter-config]------------------------------
+| memory-cap : 1048576 bytes
++-----------------------[detection-filter-rules]-------------------------------
+-------------------------------------------------------------------------------
+
++-----------------------[rate-filter-config]-----------------------------------
+| memory-cap : 1048576 bytes
++-----------------------[rate-filter-rules]------------------------------------
+| none
+-------------------------------------------------------------------------------
+
++-----------------------[event-filter-config]----------------------------------
+| memory-cap : 1048576 bytes
++-----------------------[event-filter-global]----------------------------------
++-----------------------[event-filter-local]-----------------------------------
+| none
++-----------------------[suppression]------------------------------------------
+| none
+-------------------------------------------------------------------------------
+Rule application order: pass->drop->sdrop->reject->alert->log
+Verifying Preprocessor Configurations!
+
+[ Port Based Pattern Matching Memory ]
++-[AC-BNFA Search Info Summary]------------------------------
+| Instances        : 2
+| Patterns         : 4
+| Pattern Chars    : 37
+| Num States       : 37
+| Num Match States : 4
+| Memory           :   3.81Kbytes
+|   Patterns       :   0.19K
+|   Match Lists    :   0.41K
+|   Transitions    :   2.41K
++-------------------------------------------------
+pcap DAQ configured to passive.
+Acquiring network traffic from "eth3".
+Reload thread starting...
+Reload thread started, thread 0x7f6ae03c4640 (46)
+Decoding Ethernet
+
+        --== Initialization Complete ==--
+
+   ,,_     -*> Snort! <*-
+  o"  )~   Version 2.9.15.1 GRE (Build 15125) 
+   ''''    By Martin Roesch & The Snort Team: http://www.snort.org/contact#team
+           Copyright (C) 2014-2019 Cisco and/or its affiliates. All rights reserved.
+           Copyright (C) 1998-2013 Sourcefire, Inc., et al.
+           Using libpcap version 1.10.1 (with TPACKET_V3)
+           Using PCRE version: 8.39 2016-06-14
+           Using ZLIB version: 1.2.11
+
+Commencing packet processing (pid=25)
+05/31-20:47:25.062849 172.24.0.2:36560 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:41796 IpLen:20 DgmLen:60 DF
+******S* Seq: 0xDE6B54E6  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 3799098089 0 NOP WS: 7 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.062888 172.24.0.3:3100 -> 172.24.0.2:36560
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:60 DF
+***A**S* Seq: 0xDD6F9C1D  Ack: 0xDE6B54E7  Win: 0xFE88  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 3926147880 3799098089 
+TCP Options => NOP WS: 7 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.062898 172.24.0.2:36560 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:41797 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0xDE6B54E7  Ack: 0xDD6F9C1E  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3799098089 3926147880 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.063112 172.24.0.2:36560 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:41798 IpLen:20 DgmLen:232 DF
+***AP*** Seq: 0xDE6B54E7  Ack: 0xDD6F9C1E  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3799098089 3926147880 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.063129 172.24.0.3:3100 -> 172.24.0.2:36560
+TCP TTL:64 TOS:0x0 ID:42338 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0xDD6F9C1E  Ack: 0xDE6B559B  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3926147880 3799098089 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.063188 172.24.0.2 -> 172.24.0.3
+ICMP TTL:64 TOS:0x0 ID:1757 IpLen:20 DgmLen:55 DF
+Type:8  Code:0  ID:12288   Seq:512  ECHO
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.063218 172.24.0.3 -> 172.24.0.2
+ICMP TTL:64 TOS:0x0 ID:30988 IpLen:20 DgmLen:55
+Type:0  Code:0  ID:12288  Seq:512  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.064798 172.24.0.3:3100 -> 172.24.0.2:36560
+TCP TTL:64 TOS:0x0 ID:42339 IpLen:20 DgmLen:234 DF
+***AP*** Seq: 0xDD6F9C1E  Ack: 0xDE6B559B  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3926147881 3799098089 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.064811 172.24.0.2:36560 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:41799 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0xDE6B559B  Ack: 0xDD6F9CD4  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3799098091 3926147881 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.064859 172.24.0.3:3100 -> 172.24.0.2:36560
+TCP TTL:64 TOS:0x0 ID:42340 IpLen:20 DgmLen:259 DF
+***AP*** Seq: 0xDD6F9CD4  Ack: 0xDE6B559B  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3926147882 3799098091 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.064863 172.24.0.2:36560 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:41800 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0xDE6B559B  Ack: 0xDD6F9DA3  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3799098091 3926147882 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.065042 172.24.0.2:36560 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:41801 IpLen:20 DgmLen:52 DF
+***A***F Seq: 0xDE6B559B  Ack: 0xDD6F9DA3  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3799098091 3926147882 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.065235 172.24.0.3:3100 -> 172.24.0.2:36560
+TCP TTL:64 TOS:0x0 ID:42341 IpLen:20 DgmLen:52 DF
+***A***F Seq: 0xDD6F9DA3  Ack: 0xDE6B559C  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3926147882 3799098091 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:25.065245 172.24.0.2:36560 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:41802 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0xDE6B559C  Ack: 0xDD6F9DA4  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3799098091 3926147882 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.440440 172.24.0.2:36568 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:61167 IpLen:20 DgmLen:60 DF
+******S* Seq: 0x17C3F7C5  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 3799104466 0 NOP WS: 7 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.440475 172.24.0.3:3100 -> 172.24.0.2:36568
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:60 DF
+***A**S* Seq: 0x233EBCFD  Ack: 0x17C3F7C6  Win: 0xFE88  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 3926154257 3799104466 
+TCP Options => NOP WS: 7 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.440483 172.24.0.2:36568 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:61168 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x17C3F7C6  Ack: 0x233EBCFE  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3799104466 3926154257 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.440641 172.24.0.2:36568 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:61169 IpLen:20 DgmLen:310 DF
+***AP*** Seq: 0x17C3F7C6  Ack: 0x233EBCFE  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3799104466 3926154257 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.440651 172.24.0.3:3100 -> 172.24.0.2:36568
+TCP TTL:64 TOS:0x0 ID:20318 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x233EBCFE  Ack: 0x17C3F8C8  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3926154257 3799104466 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.440664 172.24.0.2:36568 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:61170 IpLen:20 DgmLen:71 DF
+***AP*** Seq: 0x17C3F8C8  Ack: 0x233EBCFE  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3799104466 3926154257 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.440670 172.24.0.3:3100 -> 172.24.0.2:36568
+TCP TTL:64 TOS:0x0 ID:20319 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x233EBCFE  Ack: 0x17C3F8DB  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3926154257 3799104466 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.448905 172.24.0.3:3100 -> 172.24.0.2:36568
+TCP TTL:64 TOS:0x0 ID:20320 IpLen:20 DgmLen:218 DF
+***AP*** Seq: 0x233EBCFE  Ack: 0x17C3F8DB  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3926154266 3799104466 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.448921 172.24.0.2:36568 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:61171 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x17C3F8DB  Ack: 0x233EBDA4  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3799104475 3926154266 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.448989 172.24.0.3:3100 -> 172.24.0.2:36568
+TCP TTL:64 TOS:0x0 ID:20321 IpLen:20 DgmLen:80 DF
+***AP*** Seq: 0x233EBDA4  Ack: 0x17C3F8DB  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3926154266 3799104475 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.448995 172.24.0.2:36568 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:61172 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x17C3F8DB  Ack: 0x233EBDC0  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3799104475 3926154266 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.449202 172.24.0.2:36568 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:61173 IpLen:20 DgmLen:52 DF
+***A***F Seq: 0x17C3F8DB  Ack: 0x233EBDC0  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3799104475 3926154266 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.449403 172.24.0.3:3100 -> 172.24.0.2:36568
+TCP TTL:64 TOS:0x0 ID:20322 IpLen:20 DgmLen:52 DF
+***A***F Seq: 0x233EBDC0  Ack: 0x17C3F8DC  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 3926154266 3799104475 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+05/31-20:47:31.449411 172.24.0.2:36568 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:6117

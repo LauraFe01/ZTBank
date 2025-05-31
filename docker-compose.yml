@@ -51,8 +51,8 @@ services:
       context: ./gateway
     container_name: gateway
     volumes:
-      - ./gateway/squid.conf:/etc/squid/squid.conf
       - ./logs/squid:/var/log/squid
+      - ./logs/snort:/var/log/snort
     ports:
       - "3128:3128"
     networks:

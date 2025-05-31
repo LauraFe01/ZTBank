@@ -4,6 +4,7 @@ echo "[Gateway] Configurazione iptables..."
 
 # 1️⃣ Abilita l'inoltro IP (fondamentale per il NAT)
 echo 1 > /proc/sys/net/ipv4/ip_forward
+sysctl -w net.ipv4.conf.all.forwarding=1
 
 # 2️⃣ Flush delle regole precedenti
 iptables -F
