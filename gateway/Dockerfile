@@ -6,7 +6,15 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip
 
+# 1) Creiamo le directory necessarie per Squid
+RUN mkdir -p /var/log/squid \
+    && mkdir -p /var/spool/squid \
+    && chown -R proxy:proxy /var/log/squid /var/spool/squid
 
+# 2) Copiamo il nostro file squid.conf custom
+COPY squid/squid.conf /etc/squid/squid.conf
+
+# (il resto rimane invariato)
 COPY pep.py /opt/pep.py
 COPY rules.sh /opt/rules.sh
 COPY requirements.txt /opt/requirements.txt
@@ -15,4 +23,7 @@ COPY logs /var/logs
 RUN pip install -r /opt/requirements.txt
 RUN chmod +x /opt/rules.sh && mkdir -p /var/logs
 
-CMD ["/opt/rules.sh"]
+COPY entrypoint.sh /opt/entrypoint.sh
+RUN chmod +x /opt/entrypoint.sh
+
+ENTRYPOINT ["/opt/entrypoint.sh"]

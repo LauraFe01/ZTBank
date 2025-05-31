@@ -3,51 +3,42 @@ version: '3.8'
 services:
 
   external_client:
-    image: alpine
+    image: ubuntu:22.04
     container_name: external_client
     command: tail -f /dev/null
     networks:
-      - client_net
+      client_net:
+        ipv4_address: 172.18.0.2
 
   internal_client:
-    image: alpine
+    image: ubuntu:22.04
     container_name: internal_client
     command: tail -f /dev/null
     networks:
-      - client_net
-
-  wifi_client:
-    image: alpine
-    container_name: wifi_client
-    command: tail -f /dev/null
-    networks:
-      - client_net
+      client_net:
+        ipv4_address: 172.18.0.3
 
   gateway:
-    build: ./gateway
+    build:
+      context: ./gateway        # cartella dove risiede Dockerfile e squid/
+      dockerfile: Dockerfile
     container_name: gateway
-    privileged: true
+    cap_add:
+      - NET_ADMIN              # serve per leggere/applicare iptables
     networks:
-      - client_net
-      - backend_net
+      client_net:
+        ipv4_address: 172.18.0.4
+      backend_net:
+        ipv4_address: 172.19.0.4
     depends_on:
       - db
     volumes:
-      - ./gateway/logs:/var/logs
-      - /dev/kmsg:/dev/kmsg
-
-  pdp:
-    build: ./pdp
-    container_name: pdp
-    networks:
-      - backend_net
-
+      - ./logs/squid:/var/log/squid
 
   db:
-    image: postgres:14
+    image: postgres:15
     container_name: db
     environment:
-      POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: zerotrust
     volumes:
@@ -57,8 +48,16 @@ services:
 
 volumes:
   db_data:
-  splunk_data:
 
 networks:
   client_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+
   backend_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
