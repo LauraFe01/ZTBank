@@ -1,6 +1,4 @@
 # docker-compose.yml
-version: '3.8'
-
 services:
   # Ogni client è in una rete separata, simulando segmenti diversi (LAN interna, esterna, WiFi).
   # Hanno solo una rete → possono comunicare solo con i container sulla stessa rete.
@@ -66,49 +64,6 @@ services:
       - ./splunk-apps/log_inputs:/opt/splunk/etc/apps/log_inputs
       - ./splunk-apps/my_custom_alerts:/opt/splunk/etc/apps/my_custom_alerts 
 
-  # policy-engine:
-  #   build: ./policy-engine
-  #   container_name: policy-engine
-  #   ports:
-  #     - "5000:5000"  # API Flask per enforcement delle policy
-  #   environment:
-  #     - TZ=Europe/Rome
-  #   privileged: true
-  #   sysctls:
-  #     net.ipv4.ip_forward: 1
-  #   networks:
-  #     internal-net:
-  #       ipv4_address: 192.168.10.254
-  #     external-net:
-  #       ipv4_address: 192.168.20.254
-  #     wifi-lan:
-  #       ipv4_address: 192.168.30.254
-  #     net-lab:
-  #       ipv4_address: 192.168.200.254
-  #   cap_add:
-  #     - NET_ADMIN
-  #   tty: true
-  #   volumes:
-  #     - ./logs/policy-engine:/var/log/policy-engine
-
-  # network-monitor:
-  #   build: ./network-monitor
-  #   container_name: network-monitor
-  #   environment:
-  #     - TZ=Europe/Rome
-  #   networks:
-  #     internal-net:
-  #       ipv4_address: 192.168.10.253
-  #     external-net:
-  #       ipv4_address: 192.168.20.253
-  #     wifi-lan:
-  #       ipv4_address: 192.168.30.253
-  #     net-lab:
-  #       ipv4_address: 192.168.200.253
-  #   tty: true
-  #   volumes:
-  #     - ./logs/squid:/var/log/squid
-  #     - ./logs/snort:/var/log/snort
 
   router:
     build: ./router
@@ -130,12 +85,16 @@ services:
       net-lab:
         ipv4_address: 192.168.200.254
     cap_add:
-      - NET_ADMIN 
+      - NET_ADMIN
+      - SYS_MODULE 
+    devices:
+      - /dev/net/tun
     tty: true
     volumes:
       - ./logs/router:/var/log/router
       - ./logs/squid:/var/log/squid
       - ./logs/snort:/var/log/snort
+      - /lib/modules:/lib/modules:ro 
     
   db:
     image: postgres:14
@@ -175,3 +134,5 @@ networks:
     ipam:
       config:
         - subnet: 192.168.200.0/24
+
+# docker-compose build --build-arg DNS1=8.8.8.8 --build-arg DNS2=8.8.4.4

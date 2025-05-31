@@ -34,7 +34,8 @@ Stream global config:
     Max UDP sessions: 131072
     UDP cache pruning timeout: 30 seconds
     UDP cache nominal timeout: 180 seconds
-    Track ICMP sessions: INACTIVE
+    Track ICMP sessions: ACTIVE
+    Max ICMP sessions: 65536
     Track IP sessions: INACTIVE
     Log info if session memory consumption exceeds 1048576
     Send up to 0 active responses
@@ -52,25 +53,26 @@ Stream UDP Policy config:
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 Initializing rule chains...
-8 Snort rules read
-    8 detection rules
+10 Snort rules read
+    10 detection rules
     0 decoder rules
     0 preprocessor rules
-8 Option Chains linked into 6 Chain Headers
+10 Option Chains linked into 10 Chain Headers
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
 +-------------------[Rule Port Counts]---------------------------------------
 |             tcp     udp    icmp      ip
-|     src       0       0       0       0
-|     dst       3       0       0       0
-|     any       4       0       1       0
-|      nc       7       0       1       0
+|     src       1       0       0       0
+|     dst       5       0       0       0
+|     any       1       0       3       0
+|      nc       7       0       3       0
 |     s+d       0       0       0       0
 +----------------------------------------------------------------------------
 
 +-----------------------[detection-filter-config]------------------------------
 | memory-cap : 1048576 bytes
 +-----------------------[detection-filter-rules]-------------------------------
+| none
 -------------------------------------------------------------------------------
 
 +-----------------------[rate-filter-config]-----------------------------------
@@ -95,7 +97,7 @@ Verifying Preprocessor Configurations!
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth2".
 Reload thread starting...
-Reload thread started, thread 0x7f4e3b9be640 (37)
+Reload thread started, thread 0x7fdc05b16640 (39)
 Decoding Ethernet
 
         --== Initialization Complete ==--
@@ -109,4 +111,4 @@ Decoding Ethernet
            Using PCRE version: 8.39 2016-06-14
            Using ZLIB version: 1.2.11
 
-Commencing packet processing (pid=24)
+Commencing packet processing (pid=27)

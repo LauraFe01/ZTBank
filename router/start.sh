@@ -1,8 +1,17 @@
 #!/bin/bash
 set -e
 
-# Avvia rsyslog (ignora errore se già avviato)
-service rsyslog start || true
+echo "=== Avvio script start.sh ==="
+
+
+##########################
+# 2. Preparazione Squid  #
+##########################
+
+# Assicura permessi log Squid
+mkdir -p /var/log/squid
+chown -R proxy:proxy /var/log/squid
+chmod 755 /var/log/squid
 
 # Gestione robusta PID Squid
 if [ -f /run/squid.pid ]; then
@@ -31,40 +40,57 @@ if [ ! -d /var/spool/squid/00 ]; then
     squid -z
 fi
 
-# Assicura permessi log Squid
-mkdir -p /var/log/squid
-chown -R proxy:proxy /var/log/squid
-chmod 755 /var/log/squid
-
-# Assicura log Snort
-mkdir -p /var/log/snort
-chmod 755 /var/log/snort
-
-# Assicura log Snort per eth0 ed eth1
-mkdir -p /var/log/snort/eth0 /var/log/snort/eth1
-chmod 755 /var/log/snort/eth0 /var/log/snort/eth1
-
-# Avvia Snort su eth1
-echo "Avvio Snort su eth1..."
-snort -i eth1 -A fast -c /etc/snort/snort_eth1.conf -l /var/log/snort/eth1 > /var/log/snort/snort_eth1.log 2>&1 &
-
-# Avvia Snort su eth0
-echo "Avvio Snort su eth0..."
-snort -i eth0 -A fast -c /etc/snort/snort_eth0.conf -l /var/log/snort/eth0 > /var/log/snort/snort_eth0.log 2>&1 &
-
-# Avvia Snort su eth0
-echo "Avvio Snort su eth2..."
-snort -i eth2 -A fast -c /etc/snort/snort_eth2.conf -l /var/log/snort/eth2 > /var/log/snort/snort_eth2.log 2>&1 &
-
-# Avvia Snort su eth0
-echo "Avvio Snort su eth3..."
-snort -i eth3 -A fast -c /etc/snort/snort_eth3.conf -l /var/log/snort/eth3 > /var/log/snort/snort_eth3.log 2>&1 &
-
 # Avvia Squid in foreground
 echo "Avvio Squid..."
 squid -NYCd 1 &
 
-echo "Setup di SQUID e SNORT completato con successo!"
+echo "Setup di SQUID completato con successo!"
+
+##########################
+# 3. Preparazione Snort  #
+##########################
+
+# Array delle interfacce da monitorare
+interfaces=("eth0" "eth1" "eth2" "eth3")
+
+# Funzione per controllare se interfaccia è UP
+is_interface_up() {
+  ip link show "$1" | grep -q "state UP"
+  return $?
+}
+
+# Funzione per creare directory log con permessi corretti
+prepare_log_dir() {
+  local dir="/var/log/snort/$1"
+  if [ ! -d "$dir" ]; then
+    mkdir -p "$dir"
+    echo "Creata directory log $dir"
+  fi
+  chmod 755 "$dir"
+}
+
+# Avvio Snort per ogni interfaccia UP
+for intf in "${interfaces[@]}"
+do
+  if is_interface_up "$intf"; then
+    prepare_log_dir "$intf"
+    echo "Avvio Snort su $intf..."
+    snort -i "$intf" -A fast -c "/etc/snort/snort_${intf}.conf" -l "/var/log/snort/$intf" > /var/log/snort/snort_$intf.log 2>&1 &
+    if [ $? -eq 0 ]; then
+      echo "Snort avviato con successo su $intf"
+    else
+      echo "Errore nell'avvio di Snort su $intf"
+    fi
+  else
+    echo "Interfaccia $intf DOWN, salto avvio Snort"
+  fi
+done
+
+echo "Setup di SNORT completato con successo!"
+
+##########################
+# 6. Configurazione IP   #
+##########################
 
 ### IPTABLES ###
 
@@ -74,96 +100,64 @@ echo "Setup di SQUID e SNORT completato con successo!"
 # - eth2: net-lab (192.168.200.0/24)
 # - eth3: wifi-lan (192.168.30.0/24)
 
-
-### IPTABLES ###
-
-# Abilita IP forwarding
+# 1. Abilita IP forwarding
 echo 1 > /proc/sys/net/ipv4/ip_forward
 sysctl -w net.ipv4.conf.all.forwarding=1
 
-# Pulisce regole esistenti
+# 2. Pulisci tutte le regole precedenti
 iptables -F
 iptables -t nat -F
 iptables -t mangle -F
 
-# Policy predefinite (cambiate alla fine)
-iptables -P INPUT ACCEPT
-iptables -P FORWARD ACCEPT
+# 3. Imposta policy di default
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
 
-# Mapping interfacce:
-# eth0: external-net (192.168.20.0/24)
-# eth1: internal-net (192.168.10.0/24)  
-# eth2: net-lab (192.168.200.0/24)
-# eth3: wifi-lan (192.168.30.0/24)
+# 4. Permetti loopback (IMPORTANTE)
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
 
-# Redirezione del traffico HTTP verso Squid (porta 3128)
+# 5. Permetti connessioni ESTABLISHED,RELATED
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# 6. Regole NAT - PREROUTING per redirect HTTP a Squid (proxy trasparente)
 iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3128
 iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 80 -j REDIRECT --to-port 3128
 iptables -t nat -A PREROUTING -i eth3 -p tcp --dport 80 -j REDIRECT --to-port 3128
 
-### NAT/MASQUERADING per il traffico in uscita ###
-# Permette ai client di comunicare con altre reti attraverso il router
+# SNAT per traffico da ciascuna rete client verso il DB (192.168.200.10) nella rete net-lab
+# iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -d 192.168.200.0/24 -o eth2 -j SNAT --to-source 192.168.200.254
+# iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -d 192.168.200.0/24 -o eth2 -j SNAT --to-source 192.168.200.254
+# iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -d 192.168.200.0/24 -o eth2 -j SNAT --to-source 192.168.200.254
 
-# Internal net -> tutte le altre reti
-iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE  # -> external
-iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth2 -j MASQUERADE  # -> net-lab
-iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth3 -j MASQUERADE  # -> wifi
+# # 8. Consenti traffico ICMP (ping) su INPUT e FORWARD
+# iptables -A INPUT -p icmp -j ACCEPT
+# iptables -A FORWARD -p icmp -j ACCEPT
 
-# External net -> tutte le altre reti  
-iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -o eth1 -j MASQUERADE  # -> internal
-iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -o eth2 -j MASQUERADE  # -> net-lab
-iptables -t nat -A POSTROUTING -s 192.168.20.0/24 -o eth3 -j MASQUERADE  # -> wifi
+# # 9. FORWARD - traffico verso DB PostgreSQL (porta 5432)
+# iptables -A FORWARD -p tcp -d 192.168.200.10 --dport 5432 -j ACCEPT
+# iptables -A FORWARD -p tcp -s 192.168.200.10 --sport 5432 -j ACCEPT
 
-# WiFi net -> tutte le altre reti
-iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -o eth0 -j MASQUERADE  # -> external
-iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -o eth1 -j MASQUERADE  # -> internal  
-iptables -t nat -A POSTROUTING -s 192.168.30.0/24 -o eth2 -j MASQUERADE  # -> net-lab
+# # 11. FORWARD - traffico tra client e rete DB (bidirezionale)
+# iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.200.0/24 -j ACCEPT
+# iptables -A FORWARD -s 192.168.200.0/24 -d 192.168.10.0/24 -j ACCEPT
 
-### REGOLE DI FORWARDING ###
+# iptables -A FORWARD -s 192.168.20.0/24 -d 192.168.200.0/24 -j ACCEPT
+# iptables -A FORWARD -s 192.168.200.0/24 -d 192.168.20.0/24 -j ACCEPT
 
-# Consente il traffico tra le reti tramite il router
-# Traffico verso database (PostgreSQL porta 5432)
-iptables -A FORWARD -p tcp --dport 5432 -d 192.168.200.10 -j ACCEPT
-iptables -A FORWARD -p tcp --sport 5432 -s 192.168.200.10 -j ACCEPT
+# iptables -A FORWARD -s 192.168.30.0/24 -d 192.168.200.0/24 -j ACCEPT
+# iptables -A FORWARD -s 192.168.200.0/24 -d 192.168.30.0/24 -j ACCEPT
 
-# Traffico generico tra reti (per telnet e altri servizi)
-# Internal <-> External
-iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.20.0/24 -j ACCEPT
-iptables -A FORWARD -s 192.168.20.0/24 -d 192.168.10.0/24 -j ACCEPT
+# # 12. Consenti traffico DNS (porta 53 UDP/TCP) per risoluzione nomi
+# iptables -A FORWARD -p udp --dport 53 -j ACCEPT
+# iptables -A FORWARD -p tcp --dport 53 -j ACCEPT
 
-# Internal <-> WiFi
-iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.30.0/24 -j ACCEPT
-iptables -A FORWARD -s 192.168.30.0/24 -d 192.168.10.0/24 -j ACCEPT
 
-# External <-> WiFi  
-iptables -A FORWARD -s 192.168.20.0/24 -d 192.168.30.0/24 -j ACCEPT
-iptables -A FORWARD -s 192.168.30.0/24 -d 192.168.20.0/24 -j ACCEPT
-
-# Tutte le reti client <-> net-lab
-iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.200.0/24 -j ACCEPT
-iptables -A FORWARD -s 192.168.200.0/24 -d 192.168.10.0/24 -j ACCEPT
-
-iptables -A FORWARD -s 192.168.20.0/24 -d 192.168.200.0/24 -j ACCEPT
-iptables -A FORWARD -s 192.168.200.0/24 -d 192.168.20.0/24 -j ACCEPT
-
-iptables -A FORWARD -s 192.168.30.0/24 -d 192.168.200.0/24 -j ACCEPT
-iptables -A FORWARD -s 192.168.200.0/24 -d 192.168.30.0/24 -j ACCEPT
-
-# Consente traffico loopback e established/related
-iptables -A INPUT -i lo -j ACCEPT
-iptables -A OUTPUT -o lo -j ACCEPT
-iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-# Consenti ping (ICMP)
-iptables -A FORWARD -p icmp -j ACCEPT
-iptables -A INPUT -p icmp -j ACCEPT
-
-# Policy finali (più restrittive)
-iptables -P INPUT DROP
-iptables -P FORWARD DROP  
-iptables -P OUTPUT ACCEPT
-
+#################################
+# 7. Avvio Applicazione Flask   #
+#################################
 
 # Avvia l'applicazione Flask
 echo "Avvio Flask server..."
