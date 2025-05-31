@@ -1,0 +1,101 @@
+# Simulazione Zero Trust con Squid, PEP, PDP e iptables
+
+## Panoramica
+
+Questo progetto simula un'architettura di accesso Zero Trust utilizzando container Docker. Include:
+
+* **PEP (Policy Enforcement Point)**: Riceve richieste HTTP e decide se simulare un accesso al database.
+* **PDP (Policy Decision Point)**: Valuta l'identità del client e risponde con una decisione (`allow` o `deny`).
+* **Squid Proxy**: Agisce come proxy HTTP, filtrando le richieste in base all'IP sorgente e inoltrandole al PEP.
+* **iptables**: Configurato nel container gateway per limitare l'accesso al proxy e al database.
+* **Client Interno/Esterno**: Client simulati che tentano di effettuare richieste HTTP tramite il proxy.
+* **Database PostgreSQL**: Presente come obiettivo, ma le connessioni sono attualmente simulate.
+
+## Architettura
+
+```
+[internal_client] --HTTP--> [Squid Proxy (gateway)] --HTTP--> [PEP] --(chiamata PDP)--> [PDP]
+                                                               └--(futuro)--> [DB]
+```
+
+## Componenti
+
+### 1. PEP (`pep.py`)
+
+* Applicazione Flask che espone l'endpoint `/request`
+* Contatta il PDP per ottenere una decisione
+* Se consentito, simula l'accesso al database stampando un messaggio
+
+### 2. PDP (`pdp.py`)
+
+* Applicazione Flask che espone l'endpoint `/decide`
+* Consente ogni client tranne `external_client`
+
+### 3. Squid (`squid.conf`)
+
+* Ascolta sulla porta 3128
+* Consente richieste solo da `internal_client`
+* Inoltra `/request` al PEP
+
+### 4. iptables
+
+* Configurato nel container `gateway` per:
+
+  * Consentire la porta 3128 solo da `internal_client`
+  * Consentire l'accesso al DB (porta 5432) solo da `pep`
+
+## Come utilizzare
+
+### 1. Avvio del sistema
+
+Assicurati che la struttura delle cartelle contenga tutti i file necessari (Dockerfile, script Python, squid.conf). Poi esegui:
+
+```bash
+docker-compose up --build
+```
+
+### 2. Dal client interno
+
+Invia una richiesta tramite il proxy:
+
+```bash
+docker exec internal_client curl -x http://gateway:3128 \
+     -H "Content-Type: application/json" \
+     -d '{"client": "internal_client"}' \
+     http://pep:5000/request
+```
+
+### 3. Dal client esterno
+
+Questa richiesta dovrebbe essere bloccata da Squid:
+
+```bash
+docker exec external_client curl -x http://gateway:3128 \
+     -H "Content-Type: application/json" \
+     -d '{"client": "external_client"}' \
+     http://pep:5000/request
+```
+
+## Log
+
+Per visualizzare i log di accesso di Squid:
+
+```bash
+docker exec gateway tail -f /var/log/squid/access.log
+```
+
+Oppure, se i log sono montati sul sistema host:
+
+```bash
+tail -f ./logs/squid/access.log
+```
+
+## Note
+
+* La connessione reale al database PostgreSQL è attualmente simulata.
+* `iptables.sh` configura le restrizioni di rete all'interno del container gateway.
+* Aggiornamenti futuri possono includere query reali al DB tramite `psycopg2` nel file `pep.py`.
+
+---
+
+Realizzato per scopi educativi in un contesto di simulazione Zero Trust.

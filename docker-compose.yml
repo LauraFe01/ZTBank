@@ -1,63 +1,71 @@
-version: '3.8'
+version: "3.8"
 
 services:
-
-  external_client:
-    image: ubuntu:22.04
-    container_name: external_client
-    command: tail -f /dev/null
+  gateway:
+    image: ubuntu:latest
+    container_name: gateway
+    build:
+      context: ./gateway
+    volumes:
+      - ./gateway/squid.conf:/etc/squid/squid.conf
+      - ./logs/squid:/var/log/squid
+    ports:
+      - "3128:3128"
     networks:
-      client_net:
+      zero_trust_net:
         ipv4_address: 172.18.0.2
+    command: ["/bin/bash", "-c", "/etc/squid/squid.conf && tail -f /dev/null"]
+
+  pep:
+    build:
+      context: ./pep
+    container_name: pep
+    networks:
+      zero_trust_net:
+        ipv4_address: 172.18.0.3
+    depends_on:
+      - pdp
+
+  pdp:
+    build:
+      context: ./pdp
+    container_name: pdp
+    networks:
+      zero_trust_net:
+        ipv4_address: 172.18.0.4
 
   internal_client:
-    image: ubuntu:22.04
+    image: curlimages/curl
     container_name: internal_client
+    networks:
+      zero_trust_net:
+        ipv4_address: 172.18.0.5
     command: tail -f /dev/null
-    networks:
-      client_net:
-        ipv4_address: 172.18.0.3
 
-  gateway:
-    build:
-      context: ./gateway        # cartella dove risiede Dockerfile e squid/
-      dockerfile: Dockerfile
-    container_name: gateway
-    cap_add:
-      - NET_ADMIN              # serve per leggere/applicare iptables
+  external_client:
+    image: curlimages/curl
+    container_name: external_client
     networks:
-      client_net:
-        ipv4_address: 172.18.0.4
-      backend_net:
-        ipv4_address: 172.19.0.4
-    depends_on:
-      - db
-    volumes:
-      - ./logs/squid:/var/log/squid
+      zero_trust_net:
+        ipv4_address: 172.18.0.6
+    command: tail -f /dev/null
 
   db:
-    image: postgres:15
+    image: postgres:latest
     container_name: db
     environment:
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: zerotrust
-    volumes:
-      - db_data:/var/lib/postgresql/data
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testdb
     networks:
-      - backend_net
-
-volumes:
-  db_data:
+      zero_trust_net:
+        ipv4_address: 172.18.0.7
+    ports:
+      - "5432:5432"
 
 networks:
-  client_net:
+  zero_trust_net:
     driver: bridge
     ipam:
       config:
         - subnet: 172.18.0.0/16
-
-  backend_net:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.19.0.0/16

@@ -1,4 +1,2 @@
-1748690813.237    387 172.18.0.3 TCP_MISS/200 1630 GET http://example.com/ - HIER_DIRECT/96.7.128.175 text/html
-1748690863.756      0 172.18.0.3 TCP_MEM_HIT/200 1637 GET http://example.com/ - HIER_NONE/- text/html
-1748690905.928      0 172.18.0.3 NONE_NONE/000 0 - error:transaction-end-before-headers - HIER_NONE/- -
-1748690976.008      0 172.18.0.3 TCP_MEM_HIT/200 1638 GET http://example.com/ - HIER_NONE/- text/html
+1748692014.827      0 172.18.0.6 TCP_DENIED/403 3971 POST http://pep:5000/request - HIER_NONE/- text/html
+1748692042.843      9 172.18.0.5 TCP_MISS/200 312 POST http://pep:5000/request - HIER_DIRECT/172.18.0.3 application/json

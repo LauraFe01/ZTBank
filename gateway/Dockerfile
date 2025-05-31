@@ -12,10 +12,9 @@ RUN mkdir -p /var/log/squid \
     && chown -R proxy:proxy /var/log/squid /var/spool/squid
 
 # 2) Copiamo il nostro file squid.conf custom
-COPY squid/squid.conf /etc/squid/squid.conf
+COPY squid.conf /etc/squid/squid.conf
 
 # (il resto rimane invariato)
-COPY pep.py /opt/pep.py
 COPY rules.sh /opt/rules.sh
 COPY requirements.txt /opt/requirements.txt
 COPY logs /var/logs
