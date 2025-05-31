@@ -4,7 +4,8 @@ RUN apt-get update && apt-get install -y \
     iptables \
     squid \
     python3 \
-    python3-pip
+    python3-pip \
+    net-tools
 
 # 1) Creiamo le directory necessarie per Squid
 RUN mkdir -p /var/log/squid \
@@ -17,7 +18,6 @@ COPY squid.conf /etc/squid/squid.conf
 # (il resto rimane invariato)
 COPY rules.sh /opt/rules.sh
 COPY requirements.txt /opt/requirements.txt
-COPY logs /var/logs
 
 RUN pip install -r /opt/requirements.txt
 RUN chmod +x /opt/rules.sh && mkdir -p /var/logs

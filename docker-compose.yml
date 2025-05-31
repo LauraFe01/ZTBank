@@ -1,55 +1,101 @@
-version: "3.8"
-
 services:
+
+  # client-internal su rete interna
+  client_internal:
+    build:
+      context: ./client_internal
+    container_name: client_internal
+    networks:
+      internal-net:
+        ipv4_address: 172.20.0.2
+    tty: true
+    sysctls:
+      - net.ipv4.conf.all.accept_redirects=1
+    cap_add:
+      - NET_ADMIN
+    command: tail -f /dev/null
+  
+  # client-external su rete esterna
+  client_external:
+    build:
+      context: ./client_external
+    container_name: client_external
+    networks:
+      external-net:
+        ipv4_address: 172.21.0.2
+    tty: true
+    sysctls:
+      - net.ipv4.conf.all.accept_redirects=1
+    cap_add:
+      - NET_ADMIN
+    command: tail -f /dev/null
+  
+  # client wifi su rete wifi
+  client_wifi:
+    build:
+      context: ./client_internal
+    container_name: client_wifi
+    networks:
+      wifi-net:
+        ipv4_address: 172.22.0.2
+    tty: true
+    sysctls:
+      - net.ipv4.conf.all.accept_redirects=1
+    cap_add:
+      - NET_ADMIN
+    command: tail -f /dev/null
+  
+  # Snort + Squid + iptables. Smista richieste verso pep.
   gateway:
-    image: ubuntu:latest
-    container_name: gateway
     build:
       context: ./gateway
+    container_name: gateway
     volumes:
       - ./gateway/squid.conf:/etc/squid/squid.conf
       - ./logs/squid:/var/log/squid
     ports:
       - "3128:3128"
     networks:
-      zero_trust_net:
-        ipv4_address: 172.18.0.2
-    command: ["/bin/bash", "-c", "/etc/squid/squid.conf && tail -f /dev/null"]
-
+      internal-net:
+        ipv4_address: 172.20.0.3
+      external-net:
+        ipv4_address: 172.21.0.3
+      wifi-net:
+        ipv4_address: 172.22.0.3
+      zt-gateway:
+        ipv4_address: 172.24.0.2
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    tty: true
+    command: ["/bin/bash", "-c", "/etc/init.d/squid start && tail -f /dev/null"]
+  
+  # Verifica politiche di accesso e chiama il PDP
   pep:
     build:
       context: ./pep
     container_name: pep
+    ports:
+      - "3100:3100"
     networks:
-      zero_trust_net:
-        ipv4_address: 172.18.0.3
+      zt-gateway:
+        ipv4_address: 172.24.0.3
+      zt-core:
+        ipv4_address: 172.25.0.2
     depends_on:
       - pdp
-
+  
+  # Decide in base a policy (es. reputazione IP, orario, etc.)
   pdp:
     build:
       context: ./pdp
     container_name: pdp
     networks:
-      zero_trust_net:
-        ipv4_address: 172.18.0.4
-
-  internal_client:
-    image: curlimages/curl
-    container_name: internal_client
-    networks:
-      zero_trust_net:
-        ipv4_address: 172.18.0.5
-    command: tail -f /dev/null
-
-  external_client:
-    image: curlimages/curl
-    container_name: external_client
-    networks:
-      zero_trust_net:
-        ipv4_address: 172.18.0.6
-    command: tail -f /dev/null
-
+      zt-core:
+        ipv4_address: 172.25.0.3
+  
+  # Risorsa protetta
   db:
     image: postgres:latest
     container_name: db
@@ -58,14 +104,34 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: testdb
     networks:
-      zero_trust_net:
-        ipv4_address: 172.18.0.7
+      zt-core:
+        ipv4_address: 172.25.0.4
     ports:
       - "5432:5432"
 
 networks:
-  zero_trust_net:
+  internal-net:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.18.0.0/16
+        - subnet: 172.20.0.0/16
+  external-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+  wifi-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.22.0.0/16
+  zt-gateway:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.24.0.0/16
+  zt-core:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
