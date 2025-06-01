@@ -18,8 +18,7 @@ Stream global config:
     Max UDP sessions: 131072
     UDP cache pruning timeout: 30 seconds
     UDP cache nominal timeout: 180 seconds
-    Track ICMP sessions: ACTIVE
-    Max ICMP sessions: 65536
+    Track ICMP sessions: INACTIVE
     Track IP sessions: INACTIVE
     Log info if session memory consumption exceeds 1048576
     Send up to 0 active responses
@@ -96,41 +95,25 @@ HttpInspect Config:
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 Initializing rule chains...
-<<<<<<< HEAD
-10 Snort rules read
-    10 detection rules
-    0 decoder rules
-    0 preprocessor rules
-10 Option Chains linked into 10 Chain Headers
-=======
 3 Snort rules read
     3 detection rules
     0 decoder rules
     0 preprocessor rules
 3 Option Chains linked into 2 Chain Headers
->>>>>>> origin/main
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
 +-------------------[Rule Port Counts]---------------------------------------
 |             tcp     udp    icmp      ip
-<<<<<<< HEAD
-|     src       1       0       0       0
-|     dst       5       0       0       0
-|     any       1       0       3       0
-|      nc       7       0       3       0
-=======
 |     src       0       0       0       0
 |     dst       1       0       0       0
 |     any       2       0       0       0
 |      nc       3       0       0       0
->>>>>>> origin/main
 |     s+d       0       0       0       0
 +----------------------------------------------------------------------------
 
 +-----------------------[detection-filter-config]------------------------------
 | memory-cap : 1048576 bytes
 +-----------------------[detection-filter-rules]-------------------------------
-| none
 -------------------------------------------------------------------------------
 
 +-----------------------[rate-filter-config]-----------------------------------
@@ -165,11 +148,7 @@ Verifying Preprocessor Configurations!
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth2".
 Reload thread starting...
-<<<<<<< HEAD
-Reload thread started, thread 0x7f48e5712640 (45)
-=======
-Reload thread started, thread 0x7fc6a861d640 (45)
->>>>>>> origin/main
+Reload thread started, thread 0x7f26a5c64640 (48)
 Decoding Ethernet
 
         --== Initialization Complete ==--
@@ -183,4 +162,4 @@ Decoding Ethernet
            Using PCRE version: 8.39 2016-06-14
            Using ZLIB version: 1.2.11
 
-Commencing packet processing (pid=27)
+Commencing packet processing (pid=24)

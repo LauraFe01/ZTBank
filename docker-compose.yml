@@ -53,56 +53,6 @@ services:
     volumes:
       - ./logs/squid:/var/log/squid
       - ./logs/snort:/var/log/snort
-      - ./splunk-apps/log_inputs:/opt/splunk/etc/apps/log_inputs
-      - ./splunk-apps/my_custom_alerts:/opt/splunk/etc/apps/my_custom_alerts 
-
-  # policy-engine:
-  #   build: ./policy-engine
-  #   container_name: policy-engine
-  #   ports:
-  #     - "5000:5000"  # API Flask per enforcement delle policy
-  #   environment:
-  #     - TZ=Europe/Rome
-  #   privileged: true
-  #   sysctls:
-  #     net.ipv4.ip_forward: 1
-  #   networks:
-  #     internal-net:
-  #       ipv4_address: 192.168.10.254
-  #     external-net:
-  #       ipv4_address: 192.168.20.254
-  #     wifi-lan:
-  #       ipv4_address: 192.168.30.254
-  #     net-lab:
-  #       ipv4_address: 192.168.200.254
-  #   cap_add:
-  #     - NET_ADMIN
-  #   tty: true
-  #   volumes:
-  #     - ./logs/policy-engine:/var/log/policy-engine
-
-  # network-monitor:
-  #   build: ./network-monitor
-  #   container_name: network-monitor
-  #   environment:
-  #     - TZ=Europe/Rome
-  #   networks:
-  #     internal-net:
-  #       ipv4_address: 192.168.10.253
-  #     external-net:
-  #       ipv4_address: 192.168.20.253
-  #     wifi-lan:
-  #       ipv4_address: 192.168.30.253
-  #     net-lab:
-  #       ipv4_address: 192.168.200.253
-  #   tty: true
-  #   volumes:
-  #     - ./logs/squid:/var/log/squid
-  #     - ./logs/snort:/var/log/snort
-
-  router:
-    build: ./router
-    container_name: router
     ports:
       - "3128:3128"
     networks:
@@ -158,6 +108,24 @@ services:
         ipv4_address: 172.25.0.4
     ports:
       - "5432:5432"
+
+  splunk:
+    image: splunk/splunk:latest
+    container_name: splunk
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=${SPLUNK_PASSWORD}
+    ports:
+      - "8000:8000"
+      - "8088:8088"
+      - "8089:8089"
+    networks:
+      zt-core:
+        ipv4_address: 172.25.0.5
+    volumes:
+      - ./logs/squid:/var/log/squid
+      - ./logs/snort:/var/log/snort
+      - ./splunk-apps/log_inputs:/opt/splunk/etc/apps/log_inputs
 
 networks:
   internal-net:

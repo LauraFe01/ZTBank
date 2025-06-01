@@ -18,8 +18,7 @@ Stream global config:
     Max UDP sessions: 131072
     UDP cache pruning timeout: 30 seconds
     UDP cache nominal timeout: 180 seconds
-    Track ICMP sessions: ACTIVE
-    Max ICMP sessions: 65536
+    Track ICMP sessions: INACTIVE
     Track IP sessions: INACTIVE
     Log info if session memory consumption exceeds 1048576
     Send up to 0 active responses
@@ -96,41 +95,25 @@ HttpInspect Config:
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 Initializing rule chains...
-<<<<<<< HEAD
-10 Snort rules read
-    10 detection rules
-    0 decoder rules
-    0 preprocessor rules
-10 Option Chains linked into 10 Chain Headers
-=======
 3 Snort rules read
     3 detection rules
     0 decoder rules
     0 preprocessor rules
 3 Option Chains linked into 2 Chain Headers
->>>>>>> origin/main
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
 +-------------------[Rule Port Counts]---------------------------------------
 |             tcp     udp    icmp      ip
-<<<<<<< HEAD
-|     src       1       0       0       0
-|     dst       5       0       0       0
-|     any       1       0       3       0
-|      nc       7       0       3       0
-=======
 |     src       0       0       0       0
 |     dst       1       0       0       0
 |     any       2       0       0       0
 |      nc       3       0       0       0
->>>>>>> origin/main
 |     s+d       0       0       0       0
 +----------------------------------------------------------------------------
 
 +-----------------------[detection-filter-config]------------------------------
 | memory-cap : 1048576 bytes
 +-----------------------[detection-filter-rules]-------------------------------
-| none
 -------------------------------------------------------------------------------
 
 +-----------------------[rate-filter-config]-----------------------------------
@@ -165,11 +148,7 @@ Verifying Preprocessor Configurations!
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth1".
 Reload thread starting...
-<<<<<<< HEAD
-Reload thread started, thread 0x7f3441a93640 (43)
-=======
-Reload thread started, thread 0x7f2e8128f640 (43)
->>>>>>> origin/main
+Reload thread started, thread 0x7f32fc8ec640 (50)
 Decoding Ethernet
 
         --== Initialization Complete ==--
@@ -184,77 +163,3 @@ Decoding Ethernet
            Using ZLIB version: 1.2.11
 
 Commencing packet processing (pid=23)
-<<<<<<< HEAD
-=======
-05/31-20:47:31.439671 172.20.0.2:55440 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:43946 IpLen:20 DgmLen:60 DF
-******S* Seq: 0x57CE0885  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
-TCP Options (5) => MSS: 1460 SackOK TS: 2580866467 0 NOP WS: 7 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-05/31-20:47:31.439692 172.24.0.3:3100 -> 172.20.0.2:55440
-TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:60 DF
-***A**S* Seq: 0xCFE5D9E4  Ack: 0x57CE0886  Win: 0xFE88  TcpLen: 40
-TCP Options (5) => MSS: 1460 SackOK TS: 2204859602 2580866467 
-TCP Options => NOP WS: 7 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-05/31-20:47:31.439705 172.20.0.2:55440 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:43947 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x57CE0886  Ack: 0xCFE5D9E5  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2580866467 2204859602 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-05/31-20:47:31.439779 172.20.0.2:55440 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:43948 IpLen:20 DgmLen:210 DF
-***AP*** Seq: 0x57CE0886  Ack: 0xCFE5D9E5  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2580866467 2204859602 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-05/31-20:47:31.439784 172.24.0.3:3100 -> 172.20.0.2:55440
-TCP TTL:64 TOS:0x0 ID:25530 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0xCFE5D9E5  Ack: 0x57CE0924  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2204859602 2580866467 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-05/31-20:47:31.449268 172.24.0.3:3100 -> 172.20.0.2:55440
-TCP TTL:64 TOS:0x0 ID:25531 IpLen:20 DgmLen:336 DF
-***AP*** Seq: 0xCFE5D9E5  Ack: 0x57CE0924  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2204859612 2580866467 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-05/31-20:47:31.449307 172.20.0.2:55440 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:43949 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x57CE0924  Ack: 0xCFE5DB01  Win: 0x1F5  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2580866477 2204859612 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-05/31-20:47:31.449330 172.24.0.3:3100 -> 172.20.0.2:55440
-TCP TTL:64 TOS:0x0 ID:25532 IpLen:20 DgmLen:80 DF
-***AP*** Seq: 0xCFE5DB01  Ack: 0x57CE0924  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2204859612 2580866477 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-05/31-20:47:31.449344 172.20.0.2:55440 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:43950 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x57CE0924  Ack: 0xCFE5DB1D  Win: 0x1F5  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2580866477 2204859612 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-05/31-20:47:31.449557 172.20.0.2:55440 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:43951 IpLen:20 DgmLen:52 DF
-***A***F Seq: 0x57CE0924  Ack: 0xCFE5DB1D  Win: 0x1F5  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2580866477 2204859612 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-05/31-20:47:31.449949 172.24.0.3:3100 -> 172.20.0.2:55440
-TCP TTL:64 TOS:0x0 ID:25533 IpLen:20 DgmLen:52 DF
-***A***F Seq: 0xCFE5DB1D  Ack: 0x57CE0925  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2204859613 2580866477 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-05/31-20:47:31.449982 172.20.0.2:55440 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:43952 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x57CE0925  Ack: 0xCFE5DB1E  Win: 0x1F5  TcpLen: 32
-TCP Options (3) => NOP NOP T
->>>>>>> origin/main
