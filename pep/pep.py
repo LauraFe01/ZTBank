@@ -7,36 +7,51 @@ PDP_URL = "http://pdp:5000/decide"
 @app.route("/request", methods=["POST"])
 def handle_request():
     data = request.get_json()
-    client_id = data.get("client", "")
-    print(f"[PEP] Ricevuta richiesta dal client: {client_id}")
 
+    client_id = data.get("client", "")
+    role = data.get("role", "")
+    operation = data.get("operation", "")
+    document_type = data.get("document_type", "")
+
+    print(f"[PEP] Richiesta ricevuta da {client_id} - Ruolo: {role}, Op: {operation}, Documento: {document_type}")
+
+    # Inoltra tutto al PDP
     try:
-        # Inoltra al PDP il client ID
-        response = requests.post(PDP_URL, json={"client": client_id}, timeout=2)
+        response = requests.post(PDP_URL, json={
+            "client": client_id,
+            "role": role,
+            "operation": operation,
+            "document_type": document_type
+        }, timeout=2)
+
         pdp_response = response.json()
         decision = pdp_response.get("decision", "deny")
         trust = pdp_response.get("trust", "unknown")
+        required = pdp_response.get("required", "unknown")
+
     except Exception as e:
         print(f"[PEP] Errore nella comunicazione con PDP: {e}")
         decision = "deny"
         trust = "unknown"
+        required = "unknown"
 
-    print(f"[PEP] Decisione PDP: {decision} (Trust: {trust})")
+    print(f"[PEP] Decisione PDP: {decision} (Trust: {trust}, Soglia: {required})")
 
     if decision == "allow":
-        # 🔒 Simulazione accesso al DB (in futuro sostituire con query reale)
-        print("[PEP] (Simulazione) Connessione al DB CONCESSA.")
+        print("[PEP] Accesso CONCESSO (simulazione DB).")
         return jsonify({
             "result": "access granted",
             "client": client_id,
-            "trust": trust
+            "trust": trust,
+            "required": required
         }), 200
     else:
-        print("[PEP] Accesso al DB NEGATO.")
+        print("[PEP] Accesso NEGATO.")
         return jsonify({
             "result": "access denied",
             "client": client_id,
-            "trust": trust
+            "trust": trust,
+            "required": required
         }), 403
 
 if __name__ == "__main__":
