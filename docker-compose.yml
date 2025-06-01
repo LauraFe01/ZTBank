@@ -109,6 +109,24 @@ services:
     ports:
       - "5432:5432"
 
+  splunk:
+    image: splunk/splunk:latest
+    container_name: splunk
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=${SPLUNK_PASSWORD}
+    ports:
+      - "8000:8000"
+      - "8088:8088"
+      - "8089:8089"
+    networks:
+      zt-core:
+        ipv4_address: 172.25.0.5
+    volumes:
+      - ./logs/squid:/var/log/squid
+      - ./logs/snort:/var/log/snort
+      - ./splunk-apps/log_inputs:/opt/splunk/etc/apps/log_inputs
+
 networks:
   internal-net:
     driver: bridge

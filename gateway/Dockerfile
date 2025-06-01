@@ -39,7 +39,6 @@ RUN mkdir -p /var/log/snort \
 
 # 2) Copiamo i nostri file snort.conf e local.rules
 COPY local.rules /etc/snort/rules/local.rules
-COPY pcap_to_csv.sh /opt/pcap_to_csv.sh
 COPY snort.conf /etc/snort/
 
 
