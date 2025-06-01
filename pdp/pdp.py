@@ -3,14 +3,22 @@ import requests
 import datetime
 import json
 import os
+from cryptography.fernet import Fernet
+from dotenv import load_dotenv
 
+# Carica la chiave dal file .env
+load_dotenv()
+KEY = os.getenv("TRUST_KEY")
+if not KEY:
+    raise RuntimeError("TRUST_KEY non impostata nell'ambiente")
+
+fernet = Fernet(KEY.encode())
 app = Flask(__name__)
 
 TRUST_FILE = "trust_db.json"
 trust_db = {}
 DEFAULT_TRUST = 100
 
-# Punteggio base per ruolo
 ROLE_BASE_TRUST = {
     "Direttore": 85,
     "Cassiere": 70,
@@ -18,7 +26,6 @@ ROLE_BASE_TRUST = {
     "Cliente": 60
 }
 
-# Soglie per tipo documento e operazione
 OPERATION_THRESHOLDS = {
     "Dati Personali": {"read": 60, "write": 80},
     "Dati Transazionali": {"read": 65, "write": 75},
@@ -30,16 +37,26 @@ OPERATION_THRESHOLDS = {
 def load_trust_db():
     global trust_db
     if os.path.exists(TRUST_FILE):
-        with open(TRUST_FILE, "r") as f:
-            trust_db.update(json.load(f))
-            print("[PDP] trust_db caricato da file.")
+        try:
+            with open(TRUST_FILE, "rb") as f:
+                encrypted = f.read()
+            raw = fernet.decrypt(encrypted)
+            trust_db.update(json.loads(raw))
+            print("[PDP] trust_db caricato da file cifrato.")
+        except Exception as e:
+            print(f"[PDP] Errore nella decifratura del trust_db: {e}")
     else:
         print("[PDP] Nessun trust_db.json trovato, uso database vuoto.")
 
 def save_trust_db():
-    with open(TRUST_FILE, "w") as f:
-        json.dump(trust_db, f, indent=2)
-        print("[PDP] trust_db salvato su file.")
+    try:
+        raw = json.dumps(trust_db).encode()
+        encrypted = fernet.encrypt(raw)
+        with open(TRUST_FILE, "wb") as f:
+            f.write(encrypted)
+        print("[PDP] trust_db salvato su file cifrato.")
+    except Exception as e:
+        print(f"[PDP] Errore nella cifratura del trust_db: {e}")
 
 # --- Logica trust ---
 
