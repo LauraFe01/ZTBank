@@ -148,7 +148,7 @@ Verifying Preprocessor Configurations!
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth0".
 Reload thread starting...
-Reload thread started, thread 0x7fdc98a8d640 (49)
+Reload thread started, thread 0x7f0ef57c7640 (50)
 Decoding Ethernet
 
         --== Initialization Complete ==--
