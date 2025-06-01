@@ -94,6 +94,8 @@ services:
     networks:
       zt-core:
         ipv4_address: 172.25.0.3
+    volumes:
+    - ./pdp/data/trust_db.json:/app/trust_db.json
   
   # Risorsa protetta
   db:
