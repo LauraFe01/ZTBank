@@ -1,29 +1,38 @@
 from flask import Flask, request, jsonify
 import requests
 import psycopg2
+import logging
 
 app = Flask(__name__)
-PDP_URL = "http://pdp:5000/decide"
+PDP_URL = "http://pdp:5050/decide"
+logging.basicConfig(level=logging.INFO)
+
 
 @app.route("/request", methods=["POST"])
 def handle_request():
     data = request.get_json()
 
-    client_id = data.get("client", "")
+    #client_id = data.get("client", "")
     role = data.get("role", "")
     operation = data.get("operation", "")
     document_type = data.get("document_type", "")
 
-    print(f"[PEP] Richiesta ricevuta da {client_id} - Ruolo: {role}, Op: {operation}, Documento: {document_type}")
+    logging.info(f"[PEP] Richiesta ricevuta da  Ruolo: {role}, Op: {operation}, Documento: {document_type}")
+    if request.headers.getlist("X-Forwarded-For"):
+        client_ip = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        client_ip = request.remote_addr
+    logging.info(f"client_ip: {client_ip}")
 
     # Inoltra tutto al PDP
     try:
         response = requests.post(PDP_URL, json={
-            "client": client_id,
+            "client_ip": client_ip,
             "role": role,
             "operation": operation,
             "document_type": document_type
-        }, timeout=2)
+        }, timeout=20)
+        logging.info(f"Response: {response.json()}")
 
         pdp_response = response.json()
         decision = pdp_response.get("decision", "deny")
@@ -31,26 +40,24 @@ def handle_request():
         required = pdp_response.get("required", "unknown")
 
     except Exception as e:
-        print(f"[PEP] Errore nella comunicazione con PDP: {e}")
+        logging.info(f"[PEP] Errore nella comunicazione con PDP: {e}")
         decision = "deny"
         trust = "unknown"
         required = "unknown"
 
-    print(f"[PEP] Decisione PDP: {decision} (Trust: {trust}, Soglia: {required})")
+    logging.info(f"[PEP] Decisione PDP: {decision} (Trust: {trust}, Soglia: {required})")
 
     if decision == "allow":
-        print("[PEP] Accesso CONCESSO (simulazione DB).")
+        logging.info("[PEP] Accesso CONCESSO (simulazione DB).")
         return jsonify({
             "result": "access granted",
-            "client": client_id,
             "trust": trust,
             "required": required
         }), 200
     else:
-        print("[PEP] Accesso NEGATO.")
+        logging.info("[PEP] Accesso NEGATO.")
         return jsonify({
             "result": "access denied",
-            "client": client_id,
             "trust": trust,
             "required": required
         }), 403

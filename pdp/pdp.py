@@ -5,6 +5,13 @@ import json
 import os
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
+from splunk_methods import splunk_search
+import logging
+import re
+import ipaddress
+import time
+
+logging.basicConfig(level=logging.INFO)
 
 # Carica la chiave dal file .env
 load_dotenv()
@@ -42,11 +49,12 @@ def load_trust_db():
                 encrypted = f.read()
             raw = fernet.decrypt(encrypted)
             trust_db.update(json.loads(raw))
-            print("[PDP] trust_db caricato da file cifrato.")
+            logging.info("[PDP] trust_db caricato da file cifrato.")
         except Exception as e:
-            print(f"[PDP] Errore nella decifratura del trust_db: {e}")
+            logging.info(f"[PDP] Errore nella decifratura del trust_db: {e}")
     else:
-        print("[PDP] Nessun trust_db.json trovato, uso database vuoto.")
+        logging.info("[PDP] Nessun trust_db.json trovato, uso database vuoto.")
+
 
 def save_trust_db():
     try:
@@ -54,60 +62,87 @@ def save_trust_db():
         encrypted = fernet.encrypt(raw)
         with open(TRUST_FILE, "wb") as f:
             f.write(encrypted)
-        print("[PDP] trust_db salvato su file cifrato.")
+        logging.info("[PDP] trust_db salvato su file cifrato.")
     except Exception as e:
-        print(f"[PDP] Errore nella cifratura del trust_db: {e}")
+        logging.info(f"[PDP] Errore nella cifratura del trust_db: {e}")
 
 # --- Logica trust ---
 
 def adjust_trust(ip, change, reason):
     global trust_db
     now = datetime.datetime.now().isoformat()
-    trust = trust_db.get(ip, {"score": DEFAULT_TRUST, "last_seen": now})
+    load_trust_db()
+    trust = trust_db.get(ip)
+
+    logging.info(f"Trust DB {trust_db}")
+    logging.info(f"Dizionario trust {trust}")
 
     trust["score"] = max(0, min(100, trust["score"] + change))
     trust["last_seen"] = now
     trust["last_reason"] = reason
     trust_db[ip] = trust
 
-    print(f"[PDP] Trust per {ip} aggiornata a {trust['score']} ({reason})")
+    logging.info(f"[PDP] Trust per {ip} aggiornata a {trust['score']} ({reason})")
     save_trust_db()
 
-# --- API ---
-
-@app.route("/update_trust", methods=["POST"])
+""" @app.route('/update_trust', methods=['POST'])
 def update_trust():
-    data = request.json
-    trust_type = data.get("type")
+    data = request.get_json()
+    logging.info("✅ Payload ricevuto da Splunk:")
+    logging.info(f"[PDP] payload : {data} ")
 
-    if trust_type == "blacklist":
-        ips = data.get("ips", "").split()
-        for ip in ips:
-            adjust_trust(ip, -30, "Blacklist match")
+    raw = data.get("result", {}).get("_raw", "")
+    trust_type = data.get("search_name", "")
+    
+    # Regex: IP address (3rd field del log squid)
+    match = re.search(r"\d+\.\d+\.\d+\.\d+", raw)
 
-    elif trust_type == "attack":
-        ip = data.get("src_ip")
-        count = int(data.get("count", 0))
-        if count > 10:
-            adjust_trust(ip, -30, f"{count} attacks detected")
+    logging.info(f"[PDP] indirizzo IP : {match} ")
+    
+    if match:
+        ip = match.group()
+        logging.info(f"✅ IP sorgente estratto: {ip}")
 
-    elif trust_type == "anomaly":
-        ip = data.get("src_ip")
-        count = int(data.get("count", 0))
-        if count > 30:
-            adjust_trust(ip, -20, f"{count} anomalous accesses")
+        if trust_type == "blacklist":
+            ips = data.get("ips", "").split()
+            for ip in ips:
+                adjust_trust(ip, -30, "Blacklist match")
 
-    return jsonify({"status": "trust updated"}), 200
+        elif trust_type == "attack":
+            count = int(data.get("count", 0))
+            if count > 10:
+                adjust_trust(ip, -30, f"{count} attacks detected")
+
+        elif trust_type == "anomaly":
+            count = int(data.get("count", 0))
+            if count > 30:
+                adjust_trust(ip, -20, f"{count} anomalous accesses")
+        
+        elif trust_type == "External-Net-Detection":
+            logging.info(f"Individuata una external request")
+            adjust_trust(ip, -20, f"External net access")
+    
+    else:
+        print("❌ Nessun IP trovato nel campo _raw.")
+
+
+    # Risposta al chiamante (Splunk)
+    return jsonify({"status": "received"}), 200 """
+
+def evaluate_external_net_activity(ip):
+    if ipaddress.IPv4Address(ip) not in ipaddress.IPv4Network("172.20.0.0/24"):
+        adjust_trust(ip, -20, "External net detected")
+
 
 @app.route("/decide", methods=["POST"])
 def decide():
     data = request.json
-    client_ip = data.get("client")
+    client_ip = data.get("client_ip")
     role = data.get("role")
-    operation = data.get("operation")  # "read" / "write"
-    document_type = data.get("document_type")  # "Dati Personali" etc.
+    operation = data.get("operation")
+    document_type = data.get("document_type")
 
-    print(f"[PDP] Valuto {operation.upper()} su {document_type} da {client_ip} (ruolo: {role})")
+    logging.info(f"[PDP] Valuto {operation.upper()} su {document_type} da {role}")
 
     # Inizializza se non esiste
     if client_ip not in trust_db:
@@ -119,6 +154,8 @@ def decide():
         }
         save_trust_db()
 
+    evaluate_external_net_activity(client_ip)
+
     score = trust_db[client_ip]["score"]
     min_required = OPERATION_THRESHOLDS.get(document_type, {}).get(operation)
 
@@ -127,7 +164,7 @@ def decide():
 
     decision = "allow" if score >= min_required else "deny"
 
-    print(f"[PDP] Trust: {score} / Soglia richiesta: {min_required} → Decisione: {decision}")
+    logging.info(f"[PDP] Trust: {score} / Soglia richiesta: {min_required} → Decisione: {decision}")
 
     return jsonify({
         "decision": decision,
@@ -151,4 +188,4 @@ def dump():
 
 if __name__ == "__main__":
     load_trust_db()
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5050)
