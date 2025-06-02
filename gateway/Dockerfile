@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     net-tools \
+    curl \
     tshark \
     tcpdump \
     && apt-get clean \
