@@ -1,6 +1,11 @@
+import os
 from flask import Flask, request, jsonify
 import requests
 import psycopg2
+from dotenv import load_dotenv
+
+# Carica le variabili dal file .env
+load_dotenv()
 
 app = Flask(__name__)
 PDP_URL = "http://pdp:5000/decide"
@@ -59,10 +64,10 @@ def handle_request():
 def get_data():
     try:
         conn = psycopg2.connect(
-            host="172.25.0.4",  # IP del container db (zt-core)
-            dbname="bankDB",
-            user="user",
-            password="cyber_pwd"
+            host=os.getenv("DB_HOST"),
+            dbname=os.getenv("DB_NAME"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD")
         )
         cur = conn.cursor()
         cur.execute("SELECT * FROM file_documenti")

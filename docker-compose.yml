@@ -76,6 +76,8 @@ services:
     build:
       context: ./pep
     container_name: pep
+    env_file:
+      - ./pep/.env
     ports:
       - "3100:3100"
     networks:
@@ -105,9 +107,9 @@ services:
     image: postgres:latest
     container_name: db
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: cyber_pwd
-      POSTGRES_DB: bankDB
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     networks:
       zt-core:
         ipv4_address: 172.25.0.4
