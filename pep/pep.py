@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import requests
+import psycopg2
 
 app = Flask(__name__)
 PDP_URL = "http://pdp:5000/decide"
@@ -53,6 +54,24 @@ def handle_request():
             "trust": trust,
             "required": required
         }), 403
+
+@app.route("/get_data", methods=["GET"]) # dobbiamo modificarlo con il tipo di richiesta che ci serve
+def get_data():
+    try:
+        conn = psycopg2.connect(
+            host="172.25.0.4",  # IP del container db (zt-core)
+            dbname="bankDB",
+            user="user",
+            password="cyber_pwd"
+        )
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM file_documenti")
+        rows = cur.fetchall()
+        cur.close()
+        conn.close()
+        return jsonify(rows)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3100)

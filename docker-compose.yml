@@ -106,13 +106,16 @@ services:
     container_name: db
     environment:
       POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: testdb
+      POSTGRES_PASSWORD: cyber_pwd
+      POSTGRES_DB: bankDB
     networks:
       zt-core:
         ipv4_address: 172.25.0.4
     ports:
       - "5432:5432"
+    volumes:
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./db/data.sql:/docker-entrypoint-initdb.d/02_data.sql
 
   splunk:
     image: splunk/splunk:latest
