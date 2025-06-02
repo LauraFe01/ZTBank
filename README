@@ -111,3 +111,7 @@ Per testare completo con livelli di fiducia:
 Prova richiesta ottenimento dati dal db:
 # docker exec -it client_internal bash
 # curl http://172.24.0.3:3100/get_data
+
+Prova per vedere che SSL è attivo:
+# docker exec -it db bash
+# psql "sslmode=require host=localhost dbname=bankDB user=user password=cyber_pwd"

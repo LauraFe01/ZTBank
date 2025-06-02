@@ -107,6 +107,7 @@ services:
     image: postgres:latest
     container_name: db
     environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
@@ -118,6 +119,9 @@ services:
     volumes:
       - ./db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
       - ./db/data.sql:/docker-entrypoint-initdb.d/02_data.sql
+      - ./db/certs:/certs:ro
+      - ./db/init/03_ssl.sh:/docker-entrypoint-initdb.d/03_ssl.sh:ro
+
 
   splunk:
     image: splunk/splunk:latest
