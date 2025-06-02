@@ -57,3 +57,14 @@
 1748791548.513     21 172.21.0.2 TCP_MISS/200 346 POST http://pep:3100/request - FIRSTUP_PARENT/172.24.0.3 application/json
 1748795098.270     81 172.20.0.2 TCP_MISS/403 365 POST http://pep:3100/request - FIRSTUP_PARENT/172.24.0.3 application/json
 1748797923.842     47 172.20.0.2 TCP_MISS/403 365 POST http://pep:3100/request - FIRSTUP_PARENT/172.24.0.3 application/json
+1748860055.262      1 172.20.0.2 NONE_NONE/400 3897 POST /request - HIER_NONE/- text/html
+1748860055.262      0 172.20.0.2 NONE_NONE/000 0 - error:transaction-end-before-headers - HIER_NONE/- -
+1748860109.609      0 172.20.0.2 NONE_NONE/400 3897 POST /request - HIER_NONE/- text/html
+1748860109.609      0 172.20.0.2 NONE_NONE/000 0 - error:transaction-end-before-headers - HIER_NONE/- -
+1748860182.156     10 172.20.0.2 TCP_MISS/400 469 POST http://pep:3100/request - FIRSTUP_PARENT/172.24.0.3 text/html
+1748860202.286     14 172.20.0.2 TCP_MISS/403 365 POST http://pep:3100/request - FIRSTUP_PARENT/172.24.0.3 application/json
+1748860219.695      0 172.20.0.2 NONE_NONE/400 3897 POST /request - HIER_NONE/- text/html
+1748860219.695      0 172.20.0.2 NONE_NONE/000 0 - error:transaction-end-before-headers - HIER_NONE/- -
+1748860314.444      0 172.20.0.2 NONE_NONE/400 3897 POST /request - HIER_NONE/- text/html
+1748860314.444      0 172.20.0.2 NONE_NONE/000 0 - error:transaction-end-before-headers - HIER_NONE/- -
+1748861146.994     11 172.20.0.2 TCP_MISS/403 365 POST http://172.24.0.3:3100/request - FIRSTUP_PARENT/172.24.0.3 application/json
