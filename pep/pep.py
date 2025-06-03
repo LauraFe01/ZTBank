@@ -2,20 +2,21 @@ from flask import Flask, request, jsonify
 import requests
 import psycopg2
 import logging
+import pytz
+from datetime import datetime
 
 app = Flask(__name__)
-
-# rotta attraverso la quale il PEP invia i dati al PDP per la valutazione diretta della fiducia
 PDP_URL = "http://pdp:5050/decide"
-
 logging.basicConfig(level=logging.INFO)
 
-# rotta attraverso la quale il PEP riceve la richiesta dal client(gateway)
+rome = pytz.timezone("Europe/Rome")
+
 @app.route("/request", methods=["POST"])
 def handle_request():
     data = request.get_json()
 
-    #client_id = data.get("client", "")
+    timestamp = datetime.now(rome).strftime("%Y-%m-%d %H:%M:%S")
+
     role = data.get("role", "")
     operation = data.get("operation", "")
     document_type = data.get("document_type", "")
@@ -30,6 +31,7 @@ def handle_request():
     # Inoltra tutto al PDP
     try:
         response = requests.post(PDP_URL, json={
+            "timestamp": timestamp,
             "client_ip": client_ip,
             "role": role,
             "operation": operation,
@@ -64,7 +66,6 @@ def handle_request():
             "trust": trust,
             "required": required
         }), 403
-
 
 @app.route("/get_data", methods=["GET"]) # dobbiamo modificarlo con il tipo di richiesta che ci serve
 def get_data():

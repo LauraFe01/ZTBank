@@ -49,6 +49,12 @@ if [ -f /run/squid.pid ]; then
     rm -f /run/squid.pid
 fi
 
+########################
+## AVVIO BLACKLIST.SH ##
+########################
+
+echo "[Entrypoint] Avvio apply_blacklist.sh in background..."
+/opt/apply_blacklist.sh &
 
 #################
 ## AVVIO SNORT ##
@@ -67,4 +73,3 @@ done
 # (quindi va messo per ultimo)
 echo "[Entrypoint] Avvio Squid in foreground..."
 exec squid -N -d 1
-

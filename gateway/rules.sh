@@ -1,6 +1,8 @@
 #!/bin/bash
 
 echo "[Gateway] Configurazione iptables..."
+BLACKLIST_FILE="/app/blacklist/blacklist.txt"
+touch "$BLACKLIST_FILE"
 
 # 1️⃣ Abilita l'inoltro IP (fondamentale per il NAT)
 echo 1 > /proc/sys/net/ipv4/ip_forward

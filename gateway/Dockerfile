@@ -3,6 +3,7 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Installazione pacchetti essenziali in un solo layer, con pulizia cache per ridurre dimensioni immagine
+# Installazione pacchetti essenziali in un solo layer, con pulizia cache per ridurre dimensioni immagine
 RUN apt-get update && apt-get install -y \
     iptables \
     squid \
@@ -10,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     net-tools \
+    inotify-tools \
     curl \
     tshark \
     tcpdump \
@@ -29,6 +31,8 @@ RUN mkdir -p /var/log/squid \
 # 2) Copiamo il nostro file squid.conf custom
 COPY squid.conf /etc/squid/squid.conf
 
+COPY apply_blacklist.sh /opt/apply_blacklist.sh
+RUN chmod +x /opt/apply_blacklist.sh
 
 #################
 ##   SNORT     ##
@@ -44,14 +48,22 @@ COPY snort.conf /etc/snort/
 
 
 ##########################
-##  SCRIPT E DEPENDENCY ##
+##  IPTABLES            ##
 ##########################
 
 COPY rules.sh /opt/rules.sh
 RUN chmod +x /opt/rules.sh && mkdir -p /var/logs
 
+##########################
+##  REQUIREMENTS        ##
+##########################
+
 COPY requirements.txt /opt/requirements.txt
 RUN pip install -r /opt/requirements.txt
+
+##########################
+##  START               ##
+##########################
 
 COPY entrypoint.sh /opt/entrypoint.sh
 RUN chmod +x /opt/entrypoint.sh

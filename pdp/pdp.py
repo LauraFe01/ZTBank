@@ -6,9 +6,11 @@ import os
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 from splunk_methods import splunk_search
+from utils import block_ip
 import logging
 import re
 import ipaddress
+import geoip2.database
 import time
 
 logging.basicConfig(level=logging.INFO)
@@ -19,12 +21,20 @@ KEY = os.getenv("TRUST_KEY")
 if not KEY:
     raise RuntimeError("TRUST_KEY non impostata nell'ambiente")
 
+BLACKLIST_THRESHOLD = 0
 fernet = Fernet(KEY.encode())
 app = Flask(__name__)
 
 TRUST_FILE = "trust_db.json"
 trust_db = {}
 DEFAULT_TRUST = 100
+
+# Carica il database GeoLite (devi scaricarlo prima)
+GEOIP_DB_PATH = 'GeoLite2-Country.mmdb'
+geo_reader = geoip2.database.Reader(GEOIP_DB_PATH)
+
+fernet = Fernet(KEY.encode())
+app = Flask(__name__)
 
 ROLE_BASE_TRUST = {
     "Direttore": 85,
@@ -67,6 +77,15 @@ def save_trust_db():
     except Exception as e:
         logging.info(f"[PDP] ⚠️ Errore nella cifratura del trust_db: {e}")
 
+def reset_trust():
+    global trust_db
+    for ip in trust_db:
+        trust_db[ip]["score"] = 100
+        trust_db[ip]["last_reason"] = "Reset globale"
+        trust_db[ip]["last_seen"] = datetime.now().isoformat()
+    save_trust_db()
+    logging.info("[PDP] Tutti i punteggi di fiducia sono stati resettati a 100.")
+
 # --- Logica trust ---
 
 def adjust_trust(ip, change, reason):
@@ -91,7 +110,34 @@ def adjust_trust(ip, change, reason):
     trust_db[ip] = trust
 
     logging.info(f"[PDP] 🎉 Trust per {ip} aggiornata a {trust['score']} ({reason})")
+
+    if trust["score"] <= BLACKLIST_THRESHOLD:
+        logging.warning(f"[PDP] IP {ip} ha fiducia bassa ({trust['score']}) → blacklist")
+        block_ip(ip)
     save_trust_db()
+
+def evaluate_strange_activity(ip, timestamp):
+    dt = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
+    hour = dt.hour
+    logging.info(f"🕒 Orario accesso: {hour}")
+
+    # Geolocalizzazione IP
+    try:
+        response = geo_reader.country(ip)
+        country = response.country.name
+        logging.info(f"🌍 Accesso da: {country}")
+        if country != "Italy":
+            adjust_trust(ip, -40, f"Connessione da paese esterno: {country}")
+    except Exception as e:
+        logging.warning(f"❗ Impossibile geolocalizzare IP {ip}: {e}")
+
+    # Rilevamento rete interna
+    if ipaddress.IPv4Address(ip) not in ipaddress.IPv4Network("172.20.0.0/24"):
+        adjust_trust(ip, -5, "Rete esterna rilevata")
+
+    # Rilevamento orario notturno DA TOGLIERE VIENE BLOCCATO DA SQUID
+    if hour < 7 or hour >= 20:
+        adjust_trust(ip, -10, "Accesso notturno rilevato")
 
 """ @app.route('/update_trust', methods=['POST'])
 def update_trust():
@@ -234,6 +280,36 @@ def reward_check():
 def dump():
     return jsonify(trust_db)
 
+@app.route("/block_ip", methods=["POST"])
+def snort_alert():
+    data = request.get_json()
+    logging.info("✅ Payload ricevuto da Splunk:")
+    logging.info(f"[PDP] payload : {data} ")
+
+    raw = data.get("result", {}).get("_raw", "")
+    
+    # Regex: IP address (3rd field del log squid)
+    match = re.search(r"\d+\.\d+\.\d+\.\d+", raw)
+
+    logging.info(f"[PDP] indirizzo IP : {match} ")
+    
+    if match:
+        ip = match.group()
+        logging.info(f"✅ IP sorgente estratto: {ip}")
+        
+    logging.info(f"[PDP] Allarme Snort ricevuto: {data}")
+
+    if not ip:
+        return jsonify({"error": "IP mancante"}), 400
+
+    # Diminuisci il trust di 200 punti
+    logging.info(f"Indirizzo ip che ha fatt DoS: {ip}")
+    adjust_trust(ip, -200, "DoS detect")
+
+    return jsonify({"status": "trust updated", "ip": ip}), 200
+
+
 if __name__ == "__main__":
+    reset_trust()
     load_trust_db()
     app.run(host="0.0.0.0", port=5050)

@@ -53,6 +53,7 @@ services:
     volumes:
       - ./logs/squid:/var/log/squid
       - ./logs/snort:/var/log/snort
+      - ./pdp/data/blacklist:/app/blacklist
     ports:
       - "3128:3128"
     networks:
@@ -95,7 +96,8 @@ services:
       zt-core:
         ipv4_address: 172.25.0.3
     volumes:
-    - ./pdp/data/trust_db.json:/app/trust_db.json
+      - ./pdp/data/trust_db.json:/app/trust_db.json
+      - ./pdp/data/blacklist:/app/blacklist
     env_file:
     - ./pdp/.env
 
