@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import requests
-import datetime
+from datetime import datetime, timezone
 import json
 import os
 from cryptography.fernet import Fernet
@@ -50,10 +50,11 @@ def load_trust_db():
             raw = fernet.decrypt(encrypted)
             trust_db.update(json.loads(raw))
             logging.info("[PDP] trust_db caricato da file cifrato.")
+            logging.info("Trust DB (decifrato):\n%s", json.dumps(trust_db, indent=2))
         except Exception as e:
-            logging.info(f"[PDP] Errore nella decifratura del trust_db: {e}")
+            logging.info(f"[PDP] ⚠️ Errore nella decifratura del trust_db: {e}")
     else:
-        logging.info("[PDP] Nessun trust_db.json trovato, uso database vuoto.")
+        logging.info("[PDP] ⚠️ Nessun trust_db.json trovato, uso database vuoto.")
 
 
 def save_trust_db():
@@ -64,25 +65,32 @@ def save_trust_db():
             f.write(encrypted)
         logging.info("[PDP] trust_db salvato su file cifrato.")
     except Exception as e:
-        logging.info(f"[PDP] Errore nella cifratura del trust_db: {e}")
+        logging.info(f"[PDP] ⚠️ Errore nella cifratura del trust_db: {e}")
 
 # --- Logica trust ---
 
 def adjust_trust(ip, change, reason):
     global trust_db
-    now = datetime.datetime.now().isoformat()
+    now = datetime.now(timezone.utc).isoformat()
     load_trust_db()
     trust = trust_db.get(ip)
 
-    logging.info(f"Trust DB {trust_db}")
-    logging.info(f"Dizionario trust {trust}")
+    # Se non esiste ancora, inizializzalo
+    if trust is None:
+        trust = {
+            "score": 100,  # oppure altro valore iniziale
+            "last_seen": now,
+            "last_reason": "Initial trust level"
+        }
+        trust_db[ip] = trust
+        logging.info(f"[PDP] Trust inizializzata per {ip} a {trust['score']}")
 
     trust["score"] = max(0, min(100, trust["score"] + change))
     trust["last_seen"] = now
     trust["last_reason"] = reason
     trust_db[ip] = trust
 
-    logging.info(f"[PDP] Trust per {ip} aggiornata a {trust['score']} ({reason})")
+    logging.info(f"[PDP] 🎉 Trust per {ip} aggiornata a {trust['score']} ({reason})")
     save_trust_db()
 
 """ @app.route('/update_trust', methods=['POST'])
@@ -128,6 +136,38 @@ def update_trust():
 
     # Risposta al chiamante (Splunk)
     return jsonify({"status": "received"}), 200 """
+
+@app.route('/update_trust', methods=['POST'])
+def update_trust():
+    data = request.get_json()
+    logging.info("Payload ricevuto da Splunk")
+    #logging.info(json.dumps(data, indent=2))  # Stampa il payload ben formattato
+
+    trust_type = data.get("search_name", "")
+
+    # Policy: TrustReputation-Increase
+    if trust_type == "TrustReputation-Increase":
+        result = data.get("result", {})
+        logging.info(result) # stampa le informazioni di interesse contenute nel payload (ip)
+
+        # Normalizza in lista, anche se è un solo elemento
+        results = [result] if isinstance(result, dict) else result
+
+        updated_ips = []
+
+        for entry in results:
+            ip = entry.get("src_ip") 
+            if ip:
+                adjust_trust(ip, +1, "Consistent benign behavior")
+                updated_ips.append(ip)
+
+        if not updated_ips:
+            logging.warning("⚠️ Nessun IP valido trovato nel payload")
+    else:
+        logging.warning(f"⚠️ search_name non riconosciuto: {trust_type}")
+
+    return jsonify({"status": "received"}), 200
+
 
 # toglie 10 punti di fiducia nel caso di richieste proveniente da reti esterne
 def evaluate_external_net_activity(ip):
