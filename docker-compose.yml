@@ -123,6 +123,7 @@ services:
       - ./db/data.sql:/docker-entrypoint-initdb.d/02_data.sql
       - ./db/certs:/certs:ro
       - ./db/init/03_ssl.sh:/docker-entrypoint-initdb.d/03_ssl.sh:ro
+      - db_data:/var/lib/postgresql/data
 
 
   splunk:
@@ -144,6 +145,8 @@ services:
       - ./logs/snort:/var/log/snort
       - ./splunk-apps/log_inputs:/opt/splunk/etc/apps/log_inputs
       - ./splunk-apps/lookups:/opt/splunk/etc/apps/search/lookups
+      - splunk_etc:/opt/splunk/etc
+      - splunk_var:/opt/splunk/var
 
 networks:
   internal-net:
@@ -171,3 +174,8 @@ networks:
     ipam:
       config:
         - subnet: 172.25.0.0/16
+
+volumes:
+  db_data:
+  splunk_etc:
+  splunk_var:
