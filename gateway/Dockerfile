@@ -47,14 +47,12 @@ COPY snort.conf /etc/snort/
 ##  SCRIPT E DEPENDENCY ##
 ##########################
 
-# (il resto rimane invariato)
 COPY rules.sh /opt/rules.sh
-COPY requirements.txt /opt/requirements.txt
-
-RUN pip install -r /opt/requirements.txt
 RUN chmod +x /opt/rules.sh && mkdir -p /var/logs
+
+COPY requirements.txt /opt/requirements.txt
+RUN pip install -r /opt/requirements.txt
 
 COPY entrypoint.sh /opt/entrypoint.sh
 RUN chmod +x /opt/entrypoint.sh
-
 ENTRYPOINT ["/opt/entrypoint.sh"]
