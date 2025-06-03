@@ -6,7 +6,8 @@ import os
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 from splunk_methods import splunk_search
-from utils import block_ip
+from utils import block_ip, check_blacklist_file
+from encrypt_existing import encrypt_trust_file
 import logging
 import re
 import ipaddress
@@ -89,9 +90,11 @@ def reset_trust():
 # --- Logica trust ---
 
 def adjust_trust(ip, change, reason):
+    logging.info(f"[PDP] Dentro ADJUST: {ip}, {change}, {reason}")
     global trust_db
-    now = datetime.now(timezone.utc).isoformat()
     load_trust_db()
+    
+    now = datetime.now(timezone.utc).isoformat()
     trust = trust_db.get(ip)
 
     # Se non esiste ancora, inizializzalo
@@ -228,6 +231,8 @@ def evaluate_internal_net_activity(ip):
 # attraverso questa rotta il PDP riceve i dati dal PEP e valuta la fiducia e se l'accesso è consentito o meno
 @app.route("/decide", methods=["POST"])
 def decide():
+    load_trust_db()  # ✅ Assicurati che trust_db sia aggiornato
+
     data = request.json
     client_ip = data.get("client_ip")
     role = data.get("role")
@@ -236,12 +241,16 @@ def decide():
 
     logging.info(f"[PDP] Valuto {operation.upper()} su {document_type} da {role}")
 
-    # Inizializza se non esiste
+    if check_blacklist_file(client_ip):
+        logging.info("[PDP] IP %s presente in blacklist", client_ip)
+        adjust_trust(client_ip, -30, "IP in static blacklist (file)")
+
+    # 🧾 Inizializza se non esiste ancora
     if client_ip not in trust_db:
         base = ROLE_BASE_TRUST.get(role, DEFAULT_TRUST)
         trust_db[client_ip] = {
             "score": base,
-            "last_seen": datetime.datetime.now().isoformat(),
+            "last_seen": datetime.now().isoformat(),
             "last_reason": "Ruolo iniziale: " + role
         }
         save_trust_db()
@@ -274,6 +283,7 @@ def reward_check():
         delta = now - last_seen
         if delta.days >= 60:
             adjust_trust(ip, +5, "No incidents in 60+ days")
+    
     return jsonify({"status": "rewards applied"}), 200
 
 @app.route("/dump", methods=["GET"])
@@ -310,6 +320,7 @@ def snort_alert():
 
 
 if __name__ == "__main__":
-    reset_trust()
+    #reset_trust()
+    #encrypt_trust_file()
     load_trust_db()
     app.run(host="0.0.0.0", port=5050)

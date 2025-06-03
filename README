@@ -106,7 +106,7 @@ Per testare:
 Per testare completo con livelli di fiducia:
 # docker exec -it client_internal bash
 # curl http://172.24.0.3:3100/request -H "Content-Type: application/json" -d '{"clie
-# nt": "172.20.0.2", "role": "Cassiere", "operation": "write", "document_type": "Dati Transazionali"}' 
+# nt": "172.20.0.2", "role": "Cassiere", "operation": "write", "document_type": "Dati Transazionali"}'
 
 Prova richiesta ottenimento dati dal db:
 # docker exec -it client_internal bash
