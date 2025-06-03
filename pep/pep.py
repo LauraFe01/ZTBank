@@ -4,10 +4,13 @@ import psycopg2
 import logging
 
 app = Flask(__name__)
+
+# rotta attraverso la quale il PEP invia i dati al PDP per la valutazione diretta della fiducia
 PDP_URL = "http://pdp:5050/decide"
+
 logging.basicConfig(level=logging.INFO)
 
-
+# rotta attraverso la quale il PEP riceve la richiesta dal client(gateway)
 @app.route("/request", methods=["POST"])
 def handle_request():
     data = request.get_json()
@@ -61,6 +64,7 @@ def handle_request():
             "trust": trust,
             "required": required
         }), 403
+
 
 @app.route("/get_data", methods=["GET"]) # dobbiamo modificarlo con il tipo di richiesta che ci serve
 def get_data():

@@ -129,11 +129,17 @@ def update_trust():
     # Risposta al chiamante (Splunk)
     return jsonify({"status": "received"}), 200 """
 
+# toglie 10 punti di fiducia nel caso di richieste proveniente da reti esterne
 def evaluate_external_net_activity(ip):
     if ipaddress.IPv4Address(ip) not in ipaddress.IPv4Network("172.20.0.0/24"):
         adjust_trust(ip, -20, "External net detected")
 
+# aggiunge 10 punti di fiducia nel caso di richieste provenienti da reti interne
+def evaluate_internal_net_activity(ip):
+    if ipaddress.IPv4Address(ip) in ipaddress.IPv4Network("172.20.0.0/16"):
+        adjust_trust(ip, +10, "Internal net access")
 
+# attraverso questa rotta il PDP riceve i dati dal PEP e valuta la fiducia e se l'accesso è consentito o meno
 @app.route("/decide", methods=["POST"])
 def decide():
     data = request.json
@@ -155,6 +161,7 @@ def decide():
         save_trust_db()
 
     evaluate_external_net_activity(client_ip)
+    evaluate_internal_net_activity(client_ip)
 
     score = trust_db[client_ip]["score"]
     min_required = OPERATION_THRESHOLDS.get(document_type, {}).get(operation)
@@ -171,6 +178,7 @@ def decide():
         "trust": score,
         "required": min_required
     }), 200
+
 
 @app.route("/reward_check", methods=["POST"])
 def reward_check():
