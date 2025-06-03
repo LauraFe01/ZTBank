@@ -9,7 +9,6 @@ echo "Simulazione attacco DoS al PEP"
 
 # 20 richieste POST
 for i in {1..3}; do
-  echo "Attacco"
   curl -s -H "Content-Type: application/json" \
        -d '{"role":"analyst","operation":"read","document_type":"report"}' \
        http://$PEP_IP:$PEP_PORT/request > /dev/null &
