@@ -135,6 +135,7 @@ services:
       - ./logs/squid:/var/log/squid
       - ./logs/snort:/var/log/snort
       - ./splunk-apps/log_inputs:/opt/splunk/etc/apps/log_inputs
+      - ./splunk-apps/lookups:/opt/splunk/etc/apps/search/lookups
 
 networks:
   internal-net:
