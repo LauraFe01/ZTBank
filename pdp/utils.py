@@ -2,7 +2,7 @@ import os
 import subprocess
 import logging 
 
-BLACKLIST_FILE = "/app/blacklist/blacklist.txt"
+BLACKLIST_FILE = "/app/data/blacklist/blacklist.txt"
 
 def block_ip(ip):
     try:

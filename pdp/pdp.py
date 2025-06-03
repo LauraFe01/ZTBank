@@ -212,6 +212,22 @@ def update_trust():
 
         if not updated_ips:
             logging.warning("⚠️ Nessun IP valido trovato nel payload")
+    elif trust_type == "Snort-Attack-Detection-30Days":
+        result = data.get("result", {})
+        logging.info(result)
+
+        results = [result] if isinstance(result, dict) else result
+
+        updated_ips = []
+
+        for entry in results:
+            ip = entry.get("src_ip") 
+            if ip:
+                adjust_trust(ip, -25, "More than 10 attacks detected in the last 30 days")
+                updated_ips.append(ip)
+
+        if not updated_ips:
+            logging.warning("⚠️ Nessun IP valido trovato nel payload")
     else:
         logging.warning(f"⚠️ search_name non riconosciuto: {trust_type}")
 
