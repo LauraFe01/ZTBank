@@ -228,6 +228,22 @@ def update_trust():
 
         if not updated_ips:
             logging.warning("⚠️ Nessun IP valido trovato nel payload")
+    elif trust_type == "Non-Working-Hours-Detection-More-Than-10-IPs":
+        result = data.get("result", {})
+        logging.info(result)
+
+        results = [result] if isinstance(result, dict) else result
+
+        updated_ips = []
+
+        for entry in results:
+            ip = entry.get("src_ip") 
+            if ip:
+                adjust_trust(ip, -15, "More than 30 anomalous accesses detected outside working hours")
+                updated_ips.append(ip)
+
+        if not updated_ips:
+            logging.warning("⚠️ Nessun IP valido trovato nel payload")
     else:
         logging.warning(f"⚠️ search_name non riconosciuto: {trust_type}")
 

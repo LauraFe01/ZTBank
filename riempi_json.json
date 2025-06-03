@@ -1,0 +1,17 @@
+{
+  "172.20.0.2": {
+    "score": 90,
+    "last_seen": "2025-06-01T16:42:12.123456",
+    "last_reason": "IP in static blacklist (file)"
+  },
+  "172.21.0.2": {
+    "score": 85,
+    "last_seen": "2025-06-01T15:32:45.789000",
+    "last_reason": "Ruolo iniziale: Direttore"
+  },
+  "172.22.0.2": {
+    "score": 85,
+    "last_seen": "2025-06-01T14:00:00.000000",
+    "last_reason": "35 anomalous accesses"
+  }
+}
