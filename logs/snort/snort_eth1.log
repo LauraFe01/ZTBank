@@ -95,17 +95,19 @@ HttpInspect Config:
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 Initializing rule chains...
-3 Snort rules read
-    3 detection rules
+WARNING: /etc/snort/rules/local.rules(4) threshold (in rule) is deprecated; use detection_filter instead.
+
+4 Snort rules read
+    4 detection rules
     0 decoder rules
     0 preprocessor rules
-3 Option Chains linked into 2 Chain Headers
+4 Option Chains linked into 3 Chain Headers
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
 +-------------------[Rule Port Counts]---------------------------------------
 |             tcp     udp    icmp      ip
 |     src       0       0       0       0
-|     dst       1       0       0       0
+|     dst       2       0       0       0
 |     any       2       0       0       0
 |      nc       3       0       0       0
 |     s+d       0       0       0       0
@@ -125,8 +127,9 @@ Initializing rule chains...
 +-----------------------[event-filter-config]----------------------------------
 | memory-cap : 1048576 bytes
 +-----------------------[event-filter-global]----------------------------------
-+-----------------------[event-filter-local]-----------------------------------
 | none
++-----------------------[event-filter-local]-----------------------------------
+| gen-id=1      sig-id=1000005    type=Both      tracking=src count=3   seconds=3  
 +-----------------------[suppression]------------------------------------------
 | none
 -------------------------------------------------------------------------------
@@ -135,20 +138,20 @@ Verifying Preprocessor Configurations!
 
 [ Port Based Pattern Matching Memory ]
 +-[AC-BNFA Search Info Summary]------------------------------
-| Instances        : 2
-| Patterns         : 4
-| Pattern Chars    : 37
-| Num States       : 37
-| Num Match States : 4
-| Memory           :   3.81Kbytes
-|   Patterns       :   0.19K
-|   Match Lists    :   0.41K
-|   Transitions    :   2.41K
+| Instances        : 3
+| Patterns         : 5
+| Pattern Chars    : 51
+| Num States       : 51
+| Num Match States : 5
+| Memory           :   5.56Kbytes
+|   Patterns       :   0.24K
+|   Match Lists    :   0.55K
+|   Transitions    :   3.57K
 +-------------------------------------------------
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth1".
 Reload thread starting...
-Reload thread started, thread 0x7fbce8b0b640 (50)
+Reload thread started, thread 0x7f36dfb86640 (54)
 Decoding Ethernet
 
         --== Initialization Complete ==--
@@ -162,4 +165,4 @@ Decoding Ethernet
            Using PCRE version: 8.39 2016-06-14
            Using ZLIB version: 1.2.11
 
-Commencing packet processing (pid=24)
+Commencing packet processing (pid=23)
