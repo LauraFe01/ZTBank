@@ -97,11 +97,13 @@ services:
     networks:
       zt-core:
         ipv4_address: 172.25.0.3
+    cap_add:
+      - NET_ADMIN
     volumes:
       - ./pdp/data/trust_db.json:/app/trust_db.json
       - ./pdp/data/blacklist:/app/data/blacklist
     env_file:
-    - ./pdp/.env
+      - ./pdp/.env
 
   
   # Risorsa protetta
