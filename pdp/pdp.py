@@ -32,18 +32,25 @@ OPERATION_THRESHOLDS = {
 
 app = Flask(__name__)
 
-def extract_src_ip(result):
+""" def extract_src_ip(result):
     raw = result.get('_raw', '')
     match = re.search(r'->\s+(\d{1,3}(?:\.\d{1,3}){3})', raw)
     if match:
         return match.group(1)
-    return None
+    return None """
+
+IP_RE = re.compile(r'(?<!\d)(\d{1,3}(?:\.\d{1,3}){3})(?::\d+)?\s*->')
+
+def extract_src_ip(entry):
+    raw = entry.get("_raw", "")
+    match = IP_RE.search(raw)
+    return match.group(1) if match else None
 
 @app.route('/update_trust', methods=['POST'])
 def update_trust():
     data = request.get_json()
     logging.info("Payload ricevuto da Splunk")
-    #logging.info(json.dumps(data, indent=2))  # Stampa il payload ben formattato
+    logging.info(json.dumps(data, indent=2))  # Stampa il payload ben formattato
 
     trust_type = data.get("search_name", "")
 
@@ -58,7 +65,7 @@ def update_trust():
         updated_ips = []
 
         for entry in results:
-            ip = entry.get("src_ip") 
+            ip = entry.get("src_ip")
             if ip:
                 penalize_all_on_ip(ip, +1, "Consistent benign behavior")
                 updated_ips.append(ip)
@@ -67,34 +74,30 @@ def update_trust():
             logging.warning("⚠️ Nessun IP valido trovato nel payload")
 
     # Policy: Snort-Attack-Detection-30Days
-    elif trust_type == "Snort-Attack-Detection-30Days":
+    elif trust_type.strip() == "Snort-Attack-Detection-30Days":
         result = data.get("result", {})
-        logging.info(result)
+        logging.info(f"RESULT - SPLUNK: {result}")
 
         results = [result] if isinstance(result, dict) else result
 
         updated_ips = []
 
         for entry in results:
-            ip = entry.get("src_ip") or extract_src_ip(entry)
+            ip = extract_src_ip(entry)
             if ip:
-                penalize_all_on_ip(ip, -25, "More than 10 attacks detected in the last 30 days")
-                updated_ips.append(ip)
-
-        if not updated_ips:
-            logging.warning("⚠️ Nessun IP valido trovato nel payload")
+                block_ip(ip)  # Blocca l'IP
 
     # Policy: Non-Working-Hours-Detection-More-Than-10-IPs
     elif trust_type == "Non-Working-Hours-Detection-More-Than-10-IPs":
         result = data.get("result", {})
-        logging.info(result)
+        logging.info(f"RESULT - SQUID: {result}")
 
         results = [result] if isinstance(result, dict) else result
 
         updated_ips = []
 
         for entry in results:
-            ip = entry.get("src_ip") 
+            ip = extract_src_ip(entry)
             if ip:
                 penalize_all_on_ip(ip, -15, "More than 30 anomalous accesses detected outside working hours")
                 updated_ips.append(ip)
