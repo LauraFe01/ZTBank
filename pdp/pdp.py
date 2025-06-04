@@ -58,6 +58,8 @@ def update_trust():
 
         if not updated_ips:
             logging.warning("⚠️ Nessun IP valido trovato nel payload")
+
+    # Policy: Snort-Attack-Detection-30Days
     elif trust_type == "Snort-Attack-Detection-30Days":
         result = data.get("result", {})
         logging.info(result)
@@ -74,6 +76,8 @@ def update_trust():
 
         if not updated_ips:
             logging.warning("⚠️ Nessun IP valido trovato nel payload")
+
+    # Policy: Non-Working-Hours-Detection-More-Than-10-IPs
     elif trust_type == "Non-Working-Hours-Detection-More-Than-10-IPs":
         result = data.get("result", {})
         logging.info(result)
@@ -90,7 +94,8 @@ def update_trust():
 
         if not updated_ips:
             logging.warning("⚠️ Nessun IP valido trovato nel payload")
-
+    
+    # Policy: TrustReputation-Decrease
     elif trust_type == "TrustReputation-Decrease":
         result = data.get("result", {})
         logging.info(result)
