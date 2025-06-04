@@ -1,55 +1,36 @@
-[**] [1:1000005:1] HTTP POST DoS Detected on PEP /request [**]
-[Priority: 0] 
-06/03-11:04:28.252543 172.24.0.2:38822 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:6918 IpLen:20 DgmLen:310 DF
-***AP*** Seq: 0xBF91ECA2  Ack: 0x36F6C709  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1029724086 2388635249 
+05/31-17:44:36.114418  [**] [1:1000001:1] HTTP request detected [**] [Priority: 0] {TCP} 172.24.0.3:3100 -> 172.21.0.2:41326
+05/31-17:48:10.495200  [**] [1:1000001:1] HTTP request detected [**] [Priority: 0] {TCP} 172.24.0.3:3100 -> 172.21.0.2:42590
+05/31-17:53:53.512332  [**] [1:1000001:1] HTTP request detected [**] [Priority: 0] {TCP} 172.24.0.2:55346 -> 172.24.0.3:3100
+05/31-18:53:44.943780  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 172.24.0.2:58542 -> 172.24.0.3:3100
+05/31-19:59:20.820783  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.821087  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.821196  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.821293  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.821362  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.821461  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.821478  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.821602  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.821682  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.821750  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.821814  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.821829  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.821891  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.822072  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.822151  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+05/31-19:59:20.822365  [**] [1:1000001:1] HTTP request detected 1 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.125.190.36:80 -> 172.21.0.3:46334
+06/03-16:16:15.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:16:10.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:16:05.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:16:00.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:15:55.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:15:50.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:15:45.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:15:40.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:15:35.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:15:30.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:15:25.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:15:20.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:15:15.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:15:10.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
+06/03-16:15:05.136  [**] [1:9999999:1] Simulated test alert [**] [Classification: Test Attack] [Priority: 1] {TCP} 172.22.0.2:12345 -> 10.0.0.5:80
 
-[**] [1:1000005:1] HTTP POST DoS Detected on PEP /request [**]
-[Priority: 0] 
-06/03-11:04:28.246291 172.20.0.2:36250 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:57669 IpLen:20 DgmLen:253 DF
-***AP*** Seq: 0xCF2E544C  Ack: 0x9B4BC305  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 3009047707 2013248404 
-
-[**] [1:1000005:1] HTTP POST DoS Detected on PEP /request [**]
-[Priority: 0] 
-06/03-11:11:34.805749 172.24.0.2:38194 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:64610 IpLen:20 DgmLen:310 DF
-***AP*** Seq: 0x2FE63B08  Ack: 0xF495C0E6  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1030150642 2389061805 
-
-[**] [1:1000005:1] HTTP POST DoS Detected on PEP /request [**]
-[Priority: 0] 
-06/03-11:11:34.794178 172.20.0.2:51076 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:45957 IpLen:20 DgmLen:253 DF
-***AP*** Seq: 0x3BF49E50  Ack: 0x6F50EF1A  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 3009474259 2013674955 
-
-[**] [1:1000005:1] HTTP POST DoS Detected on PEP /request [**]
-[Priority: 0] 
-06/03-11:15:43.003212 172.24.0.2:47196 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:18543 IpLen:20 DgmLen:310 DF
-***AP*** Seq: 0x77558A8A  Ack: 0xB651776D  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1030398842 2389310005 
-
-[**] [1:1000005:1] HTTP POST DoS Detected on PEP /request [**]
-[Priority: 0] 
-06/03-11:15:42.998520 172.20.0.2:50988 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:44714 IpLen:20 DgmLen:253 DF
-***AP*** Seq: 0x9A2B605F  Ack: 0x54F67FB9  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 3009722465 2013923162 
-
-[**] [1:1000005:1] HTTP POST DoS Detected on PEP /request [**]
-[Priority: 0] 
-06/03-11:23:58.451085 172.20.0.2:34436 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:52775 IpLen:20 DgmLen:253 DF
-***AP*** Seq: 0xF33ADE6  Ack: 0xEA7A4A8  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 3010217921 2014418618 
-
-[**] [1:1000005:1] HTTP POST DoS Detected on PEP /request [**]
-[Priority: 0] 
-06/03-11:23:58.458535 172.24.0.2:36282 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:51261 IpLen:20 DgmLen:310 DF
-***AP*** Seq: 0x8C03B7C8  Ack: 0x74733B01  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1030894301 2389805464 

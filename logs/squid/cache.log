@@ -1,785 +1,2073 @@
-2025/06/03 08:58:31| Preparing for shutdown after 4 requests
-2025/06/03 08:58:31| Waiting 30 seconds for active connections to finish
-2025/06/03 08:58:31| Closing HTTP(S) port [::]:8888
-2025/06/03 08:58:31| Closing HTTP(S) port [::]:3128
-2025/06/03 08:58:31| Closing Pinger socket on FD 14
-2025/06/03 09:00:28| Current Directory is /
-2025/06/03 09:00:38| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/03 09:00:38| Service Name: squid
-2025/06/03 09:00:38| Process ID 1
-2025/06/03 09:00:38| Process Roles: master worker
-2025/06/03 09:00:38| With 1048576 file descriptors available
-2025/06/03 09:00:38| Initializing IP Cache...
-2025/06/03 09:00:38| DNS Socket created at [::], FD 8
-2025/06/03 09:00:38| DNS Socket created at 0.0.0.0, FD 9
-2025/06/03 09:00:38| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/03 09:00:38| Adding ndots 1 from /etc/resolv.conf
-2025/06/03 09:00:38| Logfile: opening log /var/log/squid/access.log
-2025/06/03 09:00:38| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/03 09:00:38| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/03 09:00:38| Store logging disabled
-2025/06/03 09:00:38| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/03 09:00:38| Target number of buckets: 1008
-2025/06/03 09:00:38| Using 8192 Store buckets
-2025/06/03 09:00:38| Max Mem  size: 262144 KB
-2025/06/03 09:00:38| Max Swap size: 0 KB
-2025/06/03 09:00:38| Using Least Load store dir selection
-2025/06/03 09:00:38| Current Directory is /
-2025/06/03 09:00:39| Finished loading MIME types and icons.
-2025/06/03 09:00:39| HTCP Disabled.
-2025/06/03 09:00:39| Pinger socket opened on FD 14
-2025/06/03 09:00:39| Configuring Parent 172.24.0.3/3100/0
-2025/06/03 09:00:39| Squid plugin modules loaded: 0
-2025/06/03 09:00:39| Adaptation support is off.
-2025/06/03 09:00:39| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/03 09:00:39| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/03 09:00:39| pinger: Initialising ICMP pinger ...
-2025/06/03 09:00:39| pinger: ICMP socket opened.
-2025/06/03 09:00:39| pinger: ICMPv6 socket opened
-2025/06/03 09:00:39| storeLateRelease: released 0 objects
-2025/06/03 09:03:26| Preparing for shutdown after 1 requests
-2025/06/03 09:03:26| Waiting 30 seconds for active connections to finish
-2025/06/03 09:03:26| Closing HTTP(S) port [::]:8888
-2025/06/03 09:03:26| Closing HTTP(S) port [::]:3128
-2025/06/03 09:03:26| Closing Pinger socket on FD 14
-2025/06/03 09:03:34| Pinger exiting.
-2025/06/03 09:07:11| Current Directory is /
-2025/06/03 09:07:14| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/03 09:07:14| Service Name: squid
-2025/06/03 09:07:14| Process ID 1
-2025/06/03 09:07:14| Process Roles: master worker
-2025/06/03 09:07:14| With 1048576 file descriptors available
-2025/06/03 09:07:14| Initializing IP Cache...
-2025/06/03 09:07:14| DNS Socket created at [::], FD 8
-2025/06/03 09:07:14| DNS Socket created at 0.0.0.0, FD 9
-2025/06/03 09:07:14| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/03 09:07:14| Adding ndots 1 from /etc/resolv.conf
-2025/06/03 09:07:14| Logfile: opening log /var/log/squid/access.log
-2025/06/03 09:07:14| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/03 09:07:15| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/03 09:07:15| Store logging disabled
-2025/06/03 09:07:15| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/03 09:07:15| Target number of buckets: 1008
-2025/06/03 09:07:15| Using 8192 Store buckets
-2025/06/03 09:07:15| Max Mem  size: 262144 KB
-2025/06/03 09:07:15| Max Swap size: 0 KB
-2025/06/03 09:07:15| Using Least Load store dir selection
-2025/06/03 09:07:15| Current Directory is /
-2025/06/03 09:07:15| Finished loading MIME types and icons.
-2025/06/03 09:07:15| HTCP Disabled.
-2025/06/03 09:07:15| Pinger socket opened on FD 14
-2025/06/03 09:07:15| Configuring Parent 172.24.0.3/3100/0
-2025/06/03 09:07:15| Squid plugin modules loaded: 0
-2025/06/03 09:07:15| Adaptation support is off.
-2025/06/03 09:07:15| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/03 09:07:15| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/03 09:07:15| pinger: Initialising ICMP pinger ...
-2025/06/03 09:07:15| pinger: ICMP socket opened.
-2025/06/03 09:07:15| pinger: ICMPv6 socket opened
-2025/06/03 09:07:16| storeLateRelease: released 0 objects
-2025/06/03 09:10:08| Preparing for shutdown after 2 requests
-2025/06/03 09:10:08| Waiting 30 seconds for active connections to finish
-2025/06/03 09:10:08| Closing HTTP(S) port [::]:8888
-2025/06/03 09:10:08| Closing HTTP(S) port [::]:3128
-2025/06/03 09:10:08| Closing Pinger socket on FD 14
-2025/06/03 09:10:08| Pinger exiting.
-2025/06/03 09:11:28| Current Directory is /
-2025/06/03 09:11:30| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/03 09:11:30| Service Name: squid
-2025/06/03 09:11:30| Process ID 1
-2025/06/03 09:11:30| Process Roles: master worker
-2025/06/03 09:11:30| With 1048576 file descriptors available
-2025/06/03 09:11:30| Initializing IP Cache...
-2025/06/03 09:11:30| DNS Socket created at [::], FD 8
-2025/06/03 09:11:30| DNS Socket created at 0.0.0.0, FD 9
-2025/06/03 09:11:30| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/03 09:11:30| Adding ndots 1 from /etc/resolv.conf
-2025/06/03 09:11:30| Logfile: opening log /var/log/squid/access.log
-2025/06/03 09:11:30| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/03 09:11:31| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/03 09:11:31| Store logging disabled
-2025/06/03 09:11:31| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/03 09:11:31| Target number of buckets: 1008
-2025/06/03 09:11:31| Using 8192 Store buckets
-2025/06/03 09:11:31| Max Mem  size: 262144 KB
-2025/06/03 09:11:31| Max Swap size: 0 KB
-2025/06/03 09:11:31| Using Least Load store dir selection
-2025/06/03 09:11:31| Current Directory is /
-2025/06/03 09:11:31| Finished loading MIME types and icons.
-2025/06/03 09:11:31| HTCP Disabled.
-2025/06/03 09:11:31| Pinger socket opened on FD 14
-2025/06/03 09:11:31| Configuring Parent 172.24.0.3/3100/0
-2025/06/03 09:11:31| Squid plugin modules loaded: 0
-2025/06/03 09:11:31| pinger: Initialising ICMP pinger ...
-2025/06/03 09:11:31| Adaptation support is off.
-2025/06/03 09:11:31| pinger: ICMP socket opened.
-2025/06/03 09:11:31| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/03 09:11:31| pinger: ICMPv6 socket opened
-2025/06/03 09:11:31| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/03 09:11:32| storeLateRelease: released 0 objects
-2025/06/03 09:15:40| Preparing for shutdown after 3 requests
-2025/06/03 09:15:40| Waiting 30 seconds for active connections to finish
-2025/06/03 09:15:40| Closing HTTP(S) port [::]:8888
-2025/06/03 09:15:40| Closing HTTP(S) port [::]:3128
-2025/06/03 09:15:40| Closing Pinger socket on FD 14
-2025/06/03 09:16:50| Current Directory is /
-2025/06/03 09:16:54| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/03 09:16:54| Service Name: squid
-2025/06/03 09:16:54| Process ID 1
-2025/06/03 09:16:54| Process Roles: master worker
-2025/06/03 09:16:54| With 1048576 file descriptors available
-2025/06/03 09:16:54| Initializing IP Cache...
-2025/06/03 09:16:54| DNS Socket created at [::], FD 8
-2025/06/03 09:16:54| DNS Socket created at 0.0.0.0, FD 9
-2025/06/03 09:16:54| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/03 09:16:54| Adding ndots 1 from /etc/resolv.conf
-2025/06/03 09:16:54| Logfile: opening log /var/log/squid/access.log
-2025/06/03 09:16:54| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/03 09:16:54| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/03 09:16:54| Store logging disabled
-2025/06/03 09:16:54| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/03 09:16:54| Target number of buckets: 1008
-2025/06/03 09:16:54| Using 8192 Store buckets
-2025/06/03 09:16:54| Max Mem  size: 262144 KB
-2025/06/03 09:16:54| Max Swap size: 0 KB
-2025/06/03 09:16:54| Using Least Load store dir selection
-2025/06/03 09:16:54| Current Directory is /
-2025/06/03 09:16:54| Finished loading MIME types and icons.
-2025/06/03 09:16:54| HTCP Disabled.
-2025/06/03 09:16:54| Pinger socket opened on FD 14
-2025/06/03 09:16:54| Configuring Parent 172.24.0.3/3100/0
-2025/06/03 09:16:54| Squid plugin modules loaded: 0
-2025/06/03 09:16:54| Adaptation support is off.
-2025/06/03 09:16:54| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/03 09:16:54| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/03 09:16:54| pinger: Initialising ICMP pinger ...
-2025/06/03 09:16:54| pinger: ICMP socket opened.
-2025/06/03 09:16:54| pinger: ICMPv6 socket opened
-2025/06/03 09:16:55| storeLateRelease: released 0 objects
-2025/06/04 09:40:31| Current Directory is /
-2025/06/04 09:40:42| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 09:40:42| Service Name: squid
-2025/06/04 09:40:42| Process ID 1
-2025/06/04 09:40:42| Process Roles: master worker
-2025/06/04 09:40:42| With 1048576 file descriptors available
-2025/06/04 09:40:42| Initializing IP Cache...
-2025/06/04 09:40:42| DNS Socket created at [::], FD 8
-2025/06/04 09:40:42| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 09:40:42| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 09:40:42| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 09:40:43| Logfile: opening log /var/log/squid/access.log
-2025/06/04 09:40:43| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 09:40:43| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 09:40:43| Store logging disabled
-2025/06/04 09:40:43| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 09:40:43| Target number of buckets: 1008
-2025/06/04 09:40:43| Using 8192 Store buckets
-2025/06/04 09:40:43| Max Mem  size: 262144 KB
-2025/06/04 09:40:43| Max Swap size: 0 KB
-2025/06/04 09:40:43| Using Least Load store dir selection
-2025/06/04 09:40:43| Current Directory is /
-2025/06/04 09:40:43| Finished loading MIME types and icons.
-2025/06/04 09:40:43| HTCP Disabled.
-2025/06/04 09:40:43| Pinger socket opened on FD 14
-2025/06/04 09:40:43| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 09:40:43| Squid plugin modules loaded: 0
-2025/06/04 09:40:43| Adaptation support is off.
-2025/06/04 09:40:43| pinger: Initialising ICMP pinger ...
-2025/06/04 09:40:43| pinger: ICMP socket opened.
-2025/06/04 09:40:43| pinger: ICMPv6 socket opened
-2025/06/04 09:40:43| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 09:40:43| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 09:40:44| storeLateRelease: released 0 objects
-2025/06/04 09:41:10| Preparing for shutdown after 0 requests
-2025/06/04 09:41:10| Waiting 30 seconds for active connections to finish
-2025/06/04 09:41:10| Closing HTTP(S) port [::]:8888
-2025/06/04 09:41:10| Closing HTTP(S) port [::]:3128
-2025/06/04 09:41:10| Closing Pinger socket on FD 14
-2025/06/04 09:43:56| Current Directory is /
-2025/06/04 09:43:57| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 09:43:57| Service Name: squid
-2025/06/04 09:43:57| Process ID 1
-2025/06/04 09:43:57| Process Roles: master worker
-2025/06/04 09:43:57| With 1048576 file descriptors available
-2025/06/04 09:43:57| Initializing IP Cache...
-2025/06/04 09:43:57| DNS Socket created at [::], FD 8
-2025/06/04 09:43:57| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 09:43:57| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 09:43:57| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 09:43:57| Logfile: opening log /var/log/squid/access.log
-2025/06/04 09:43:57| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 09:43:57| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 09:43:57| Store logging disabled
-2025/06/04 09:43:57| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 09:43:57| Target number of buckets: 1008
-2025/06/04 09:43:57| Using 8192 Store buckets
-2025/06/04 09:43:57| Max Mem  size: 262144 KB
-2025/06/04 09:43:57| Max Swap size: 0 KB
-2025/06/04 09:43:57| Using Least Load store dir selection
-2025/06/04 09:43:57| Current Directory is /
-2025/06/04 09:43:57| Finished loading MIME types and icons.
-2025/06/04 09:43:57| HTCP Disabled.
-2025/06/04 09:43:57| Pinger socket opened on FD 14
-2025/06/04 09:43:57| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 09:43:57| Squid plugin modules loaded: 0
-2025/06/04 09:43:57| Adaptation support is off.
-2025/06/04 09:43:57| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 09:43:57| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 09:43:57| pinger: Initialising ICMP pinger ...
-2025/06/04 09:43:57| pinger: ICMP socket opened.
-2025/06/04 09:43:57| pinger: ICMPv6 socket opened
-2025/06/04 09:43:58| storeLateRelease: released 0 objects
-2025/06/04 09:54:41| Preparing for shutdown after 0 requests
-2025/06/04 09:54:41| Waiting 30 seconds for active connections to finish
-2025/06/04 09:54:41| Closing HTTP(S) port [::]:8888
-2025/06/04 09:54:41| Closing HTTP(S) port [::]:3128
-2025/06/04 09:54:41| Closing Pinger socket on FD 14
-2025/06/04 09:54:49| Pinger exiting.
-2025/06/04 09:57:37| Current Directory is /
-2025/06/04 09:57:50| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 09:57:50| Service Name: squid
-2025/06/04 09:57:50| Process ID 1
-2025/06/04 09:57:50| Process Roles: master worker
-2025/06/04 09:57:50| With 1048576 file descriptors available
-2025/06/04 09:57:50| Initializing IP Cache...
-2025/06/04 09:57:50| DNS Socket created at [::], FD 8
-2025/06/04 09:57:50| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 09:57:50| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 09:57:50| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 09:57:50| Logfile: opening log /var/log/squid/access.log
-2025/06/04 09:57:50| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 09:57:50| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 09:57:50| Store logging disabled
-2025/06/04 09:57:50| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 09:57:50| Target number of buckets: 1008
-2025/06/04 09:57:50| Using 8192 Store buckets
-2025/06/04 09:57:50| Max Mem  size: 262144 KB
-2025/06/04 09:57:50| Max Swap size: 0 KB
-2025/06/04 09:57:50| Using Least Load store dir selection
-2025/06/04 09:57:50| Current Directory is /
-2025/06/04 09:57:50| Finished loading MIME types and icons.
-2025/06/04 09:57:50| HTCP Disabled.
-2025/06/04 09:57:50| Pinger socket opened on FD 14
-2025/06/04 09:57:50| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 09:57:50| Squid plugin modules loaded: 0
-2025/06/04 09:57:50| Adaptation support is off.
-2025/06/04 09:57:50| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 09:57:50| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 09:57:50| pinger: Initialising ICMP pinger ...
-2025/06/04 09:57:50| pinger: ICMP socket opened.
-2025/06/04 09:57:50| pinger: ICMPv6 socket opened
-2025/06/04 09:57:51| storeLateRelease: released 0 objects
-2025/06/04 10:01:54| Preparing for shutdown after 0 requests
-2025/06/04 10:01:54| Waiting 30 seconds for active connections to finish
-2025/06/04 10:01:54| Closing HTTP(S) port [::]:8888
-2025/06/04 10:01:54| Closing HTTP(S) port [::]:3128
-2025/06/04 10:01:54| Closing Pinger socket on FD 14
-2025/06/04 10:02:02| Pinger exiting.
-2025/06/04 10:04:22| Current Directory is /
-2025/06/04 10:04:22| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 10:04:22| Service Name: squid
-2025/06/04 10:04:22| Process ID 1
-2025/06/04 10:04:22| Process Roles: master worker
-2025/06/04 10:04:22| With 1048576 file descriptors available
-2025/06/04 10:04:22| Initializing IP Cache...
-2025/06/04 10:04:22| DNS Socket created at [::], FD 8
-2025/06/04 10:04:22| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 10:04:22| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 10:04:22| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 10:04:22| Logfile: opening log /var/log/squid/access.log
-2025/06/04 10:04:22| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 10:04:23| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 10:04:23| Store logging disabled
-2025/06/04 10:04:23| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 10:04:23| Target number of buckets: 1008
-2025/06/04 10:04:23| Using 8192 Store buckets
-2025/06/04 10:04:23| Max Mem  size: 262144 KB
-2025/06/04 10:04:23| Max Swap size: 0 KB
-2025/06/04 10:04:23| Using Least Load store dir selection
-2025/06/04 10:04:23| Current Directory is /
-2025/06/04 10:04:23| Finished loading MIME types and icons.
-2025/06/04 10:04:23| HTCP Disabled.
-2025/06/04 10:04:23| Pinger socket opened on FD 14
-2025/06/04 10:04:23| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 10:04:23| Squid plugin modules loaded: 0
-2025/06/04 10:04:23| Adaptation support is off.
-2025/06/04 10:04:23| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 10:04:23| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 10:04:23| pinger: Initialising ICMP pinger ...
-2025/06/04 10:04:23| pinger: ICMP socket opened.
-2025/06/04 10:04:23| pinger: ICMPv6 socket opened
-2025/06/04 10:04:24| storeLateRelease: released 0 objects
-2025/06/04 10:14:47| Preparing for shutdown after 0 requests
-2025/06/04 10:14:47| Waiting 30 seconds for active connections to finish
-2025/06/04 10:14:47| Closing HTTP(S) port [::]:8888
-2025/06/04 10:14:47| Closing HTTP(S) port [::]:3128
-2025/06/04 10:14:47| Closing Pinger socket on FD 14
-2025/06/04 10:16:52| Current Directory is /
-2025/06/04 10:16:57| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 10:16:57| Service Name: squid
-2025/06/04 10:16:57| Process ID 1
-2025/06/04 10:16:57| Process Roles: master worker
-2025/06/04 10:16:58| With 1048576 file descriptors available
-2025/06/04 10:16:58| Initializing IP Cache...
-2025/06/04 10:16:58| DNS Socket created at [::], FD 8
-2025/06/04 10:16:58| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 10:16:58| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 10:16:58| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 10:16:58| Logfile: opening log /var/log/squid/access.log
-2025/06/04 10:16:58| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 10:16:59| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 10:16:59| Store logging disabled
-2025/06/04 10:16:59| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 10:16:59| Target number of buckets: 1008
-2025/06/04 10:16:59| Using 8192 Store buckets
-2025/06/04 10:16:59| Max Mem  size: 262144 KB
-2025/06/04 10:16:59| Max Swap size: 0 KB
-2025/06/04 10:16:59| Using Least Load store dir selection
-2025/06/04 10:16:59| Current Directory is /
-2025/06/04 10:17:00| Finished loading MIME types and icons.
-2025/06/04 10:17:00| HTCP Disabled.
-2025/06/04 10:17:00| Pinger socket opened on FD 14
-2025/06/04 10:17:00| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 10:17:00| Squid plugin modules loaded: 0
-2025/06/04 10:17:00| Adaptation support is off.
-2025/06/04 10:17:00| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 10:17:00| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 10:17:00| pinger: Initialising ICMP pinger ...
-2025/06/04 10:17:00| pinger: ICMP socket opened.
-2025/06/04 10:17:00| pinger: ICMPv6 socket opened
-2025/06/04 10:17:00| storeLateRelease: released 0 objects
-2025/06/04 10:21:52| Preparing for shutdown after 0 requests
-2025/06/04 10:21:52| Waiting 30 seconds for active connections to finish
-2025/06/04 10:21:52| Closing HTTP(S) port [::]:8888
-2025/06/04 10:21:52| Closing HTTP(S) port [::]:3128
-2025/06/04 10:21:52| Closing Pinger socket on FD 14
-2025/06/04 10:22:02| Pinger exiting.
-2025/06/04 11:12:21| Current Directory is /
-2025/06/04 11:12:21| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 11:12:21| Service Name: squid
-2025/06/04 11:12:21| Process ID 1
-2025/06/04 11:12:21| Process Roles: master worker
-2025/06/04 11:12:21| With 1048576 file descriptors available
-2025/06/04 11:12:21| Initializing IP Cache...
-2025/06/04 11:12:21| DNS Socket created at [::], FD 8
-2025/06/04 11:12:21| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 11:12:21| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 11:12:21| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 11:12:21| Logfile: opening log /var/log/squid/access.log
-2025/06/04 11:12:21| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 11:12:21| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 11:12:21| Store logging disabled
-2025/06/04 11:12:21| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 11:12:21| Target number of buckets: 1008
-2025/06/04 11:12:21| Using 8192 Store buckets
-2025/06/04 11:12:21| Max Mem  size: 262144 KB
-2025/06/04 11:12:21| Max Swap size: 0 KB
-2025/06/04 11:12:21| Using Least Load store dir selection
-2025/06/04 11:12:21| Current Directory is /
-2025/06/04 11:12:21| Finished loading MIME types and icons.
-2025/06/04 11:12:21| HTCP Disabled.
-2025/06/04 11:12:21| Pinger socket opened on FD 14
-2025/06/04 11:12:21| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 11:12:21| Squid plugin modules loaded: 0
-2025/06/04 11:12:21| Adaptation support is off.
-2025/06/04 11:12:21| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 11:12:21| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 11:12:21| pinger: Initialising ICMP pinger ...
-2025/06/04 11:12:21| pinger: ICMP socket opened.
-2025/06/04 11:12:21| pinger: ICMPv6 socket opened
-2025/06/04 11:12:22| storeLateRelease: released 0 objects
-2025/06/04 11:27:30| Preparing for shutdown after 0 requests
-2025/06/04 11:27:30| Waiting 30 seconds for active connections to finish
-2025/06/04 11:27:30| Closing HTTP(S) port [::]:8888
-2025/06/04 11:27:30| Closing HTTP(S) port [::]:3128
-2025/06/04 11:27:30| Closing Pinger socket on FD 14
-2025/06/04 11:27:38| Pinger exiting.
-2025/06/04 11:32:30| Current Directory is /
-2025/06/04 11:32:30| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 11:32:30| Service Name: squid
-2025/06/04 11:32:30| Process ID 1
-2025/06/04 11:32:30| Process Roles: master worker
-2025/06/04 11:32:30| With 1048576 file descriptors available
-2025/06/04 11:32:30| Initializing IP Cache...
-2025/06/04 11:32:30| DNS Socket created at [::], FD 8
-2025/06/04 11:32:30| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 11:32:30| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 11:32:30| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 11:32:30| Logfile: opening log /var/log/squid/access.log
-2025/06/04 11:32:30| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 11:32:30| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 11:32:30| Store logging disabled
-2025/06/04 11:32:30| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 11:32:30| Target number of buckets: 1008
-2025/06/04 11:32:30| Using 8192 Store buckets
-2025/06/04 11:32:30| Max Mem  size: 262144 KB
-2025/06/04 11:32:30| Max Swap size: 0 KB
-2025/06/04 11:32:30| Using Least Load store dir selection
-2025/06/04 11:32:30| Current Directory is /
-2025/06/04 11:32:30| Finished loading MIME types and icons.
-2025/06/04 11:32:30| HTCP Disabled.
-2025/06/04 11:32:30| Pinger socket opened on FD 14
-2025/06/04 11:32:30| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 11:32:30| Squid plugin modules loaded: 0
-2025/06/04 11:32:30| Adaptation support is off.
-2025/06/04 11:32:30| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 11:32:30| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 11:32:30| pinger: Initialising ICMP pinger ...
-2025/06/04 11:32:30| pinger: ICMP socket opened.
-2025/06/04 11:32:30| pinger: ICMPv6 socket opened
-2025/06/04 11:32:31| storeLateRelease: released 0 objects
-2025/06/04 11:43:54| Preparing for shutdown after 0 requests
-2025/06/04 11:43:54| Waiting 30 seconds for active connections to finish
-2025/06/04 11:43:54| Closing HTTP(S) port [::]:8888
-2025/06/04 11:43:54| Closing HTTP(S) port [::]:3128
-2025/06/04 11:43:54| Closing Pinger socket on FD 14
-2025/06/04 11:44:02| Preparing for shutdown after 0 requests
-2025/06/04 11:44:02| Waiting 30 seconds for active connections to finish
-2025/06/04 11:44:03| Preparing for shutdown after 0 requests
-2025/06/04 11:44:03| Waiting 30 seconds for active connections to finish
-2025/06/04 11:44:03| Preparing for shutdown after 0 requests
-2025/06/04 11:44:03| Waiting 30 seconds for active connections to finish
-2025/06/04 11:44:03| Preparing for shutdown after 0 requests
-2025/06/04 11:44:03| Waiting 30 seconds for active connections to finish
-2025/06/04 11:44:03| Shutdown: NTLM authentication.
-2025/06/04 11:44:03| Shutdown: Negotiate authentication.
-2025/06/04 11:44:03| Shutdown: Digest authentication.
-2025/06/04 11:44:03| Shutdown: Basic authentication.
-2025/06/04 11:44:03| Preparing for shutdown after 0 requests
-2025/06/04 11:44:03| Waiting 30 seconds for active connections to finish
-2025/06/04 11:44:03| Preparing for shutdown after 0 requests
-2025/06/04 11:44:03| Waiting 30 seconds for active connections to finish
-2025/06/04 11:44:04| Shutting down...
-2025/06/04 11:44:04| storeDirWriteCleanLogs: Starting...
-2025/06/04 11:44:04|   Finished.  Wrote 0 entries.
-2025/06/04 11:44:04|   Took 0.00 seconds (  0.00 entries/sec).
-CPU Usage: 0.333 seconds = 0.086 user + 0.247 sys
-Maximum Resident Size: 689520 KB
+2025/06/02 16:38:13| Current Directory is /
+2025/06/02 16:38:13| Starting Squid Cache version 5.9 for aarch64-unknown-linux-gnu...
+2025/06/02 16:38:13| Service Name: squid
+2025/06/02 16:38:13| Process ID 1
+2025/06/02 16:38:13| Process Roles: master worker
+2025/06/02 16:38:13| With 1048576 file descriptors available
+2025/06/02 16:38:13| Initializing IP Cache...
+2025/06/02 16:38:13| DNS Socket created at [::], FD 8
+2025/06/02 16:38:13| DNS Socket created at 0.0.0.0, FD 9
+2025/06/02 16:38:13| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/02 16:38:13| Adding ndots 1 from /etc/resolv.conf
+2025/06/02 16:38:13| Logfile: opening log /var/log/squid/access.log
+2025/06/02 16:38:13| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/02 16:38:13| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/02 16:38:13| Store logging disabled
+2025/06/02 16:38:13| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/02 16:38:13| Target number of buckets: 1008
+2025/06/02 16:38:13| Using 8192 Store buckets
+2025/06/02 16:38:13| Max Mem  size: 262144 KB
+2025/06/02 16:38:13| Max Swap size: 0 KB
+2025/06/02 16:38:13| Using Least Load store dir selection
+2025/06/02 16:38:13| Current Directory is /
+2025/06/02 16:38:13| Finished loading MIME types and icons.
+2025/06/02 16:38:13| HTCP Disabled.
+2025/06/02 16:38:13| Pinger socket opened on FD 14
+2025/06/02 16:38:13| Configuring Parent 172.24.0.3/3100/0
+2025/06/02 16:38:13| Squid plugin modules loaded: 0
+2025/06/02 16:38:13| Adaptation support is off.
+2025/06/02 16:38:13| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/02 16:38:13| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/02 16:38:13| pinger: Initialising ICMP pinger ...
+2025/06/02 16:38:13| pinger: ICMP socket opened.
+2025/06/02 16:38:13| pinger: ICMPv6 socket opened
+2025/06/02 16:38:14| storeLateRelease: released 0 objects
+2025/06/02 16:53:44| Preparing for shutdown after 1 requests
+2025/06/02 16:53:44| Waiting 30 seconds for active connections to finish
+2025/06/02 16:53:44| Closing HTTP(S) port [::]:8888
+2025/06/02 16:53:44| Closing HTTP(S) port [::]:3128
+2025/06/02 16:53:44| Closing Pinger socket on FD 14
+2025/06/02 16:53:50| Pinger exiting.
+2025/06/02 16:54:57| Current Directory is /
+2025/06/02 16:54:57| Starting Squid Cache version 5.9 for aarch64-unknown-linux-gnu...
+2025/06/02 16:54:57| Service Name: squid
+2025/06/02 16:54:57| Process ID 1
+2025/06/02 16:54:57| Process Roles: master worker
+2025/06/02 16:54:57| With 1048576 file descriptors available
+2025/06/02 16:54:57| Initializing IP Cache...
+2025/06/02 16:54:57| DNS Socket created at [::], FD 8
+2025/06/02 16:54:57| DNS Socket created at 0.0.0.0, FD 9
+2025/06/02 16:54:57| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/02 16:54:57| Adding ndots 1 from /etc/resolv.conf
+2025/06/02 16:54:57| Logfile: opening log /var/log/squid/access.log
+2025/06/02 16:54:57| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/02 16:54:57| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/02 16:54:57| Store logging disabled
+2025/06/02 16:54:57| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/02 16:54:57| Target number of buckets: 1008
+2025/06/02 16:54:57| Using 8192 Store buckets
+2025/06/02 16:54:57| Max Mem  size: 262144 KB
+2025/06/02 16:54:57| Max Swap size: 0 KB
+2025/06/02 16:54:57| Using Least Load store dir selection
+2025/06/02 16:54:57| Current Directory is /
+2025/06/02 16:54:57| Finished loading MIME types and icons.
+2025/06/02 16:54:57| HTCP Disabled.
+2025/06/02 16:54:57| Pinger socket opened on FD 14
+2025/06/02 16:54:57| Configuring Parent 172.24.0.3/3100/0
+2025/06/02 16:54:57| Squid plugin modules loaded: 0
+2025/06/02 16:54:57| Adaptation support is off.
+2025/06/02 16:54:57| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/02 16:54:57| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/02 16:54:57| pinger: Initialising ICMP pinger ...
+2025/06/02 16:54:57| pinger: ICMP socket opened.
+2025/06/02 16:54:57| pinger: ICMPv6 socket opened
+2025/06/02 16:54:58| storeLateRelease: released 0 objects
+2025/06/02 16:58:30| Preparing for shutdown after 1 requests
+2025/06/02 16:58:30| Waiting 30 seconds for active connections to finish
+2025/06/02 16:58:30| Closing HTTP(S) port [::]:8888
+2025/06/02 16:58:30| Closing HTTP(S) port [::]:3128
+2025/06/02 16:58:30| Closing Pinger socket on FD 14
+2025/06/02 16:58:34| Pinger exiting.
+2025/06/02 16:59:13| Current Directory is /
+2025/06/02 16:59:13| Starting Squid Cache version 5.9 for aarch64-unknown-linux-gnu...
+2025/06/02 16:59:13| Service Name: squid
+2025/06/02 16:59:13| Process ID 1
+2025/06/02 16:59:13| Process Roles: master worker
+2025/06/02 16:59:13| With 1048576 file descriptors available
+2025/06/02 16:59:13| Initializing IP Cache...
+2025/06/02 16:59:13| DNS Socket created at [::], FD 8
+2025/06/02 16:59:13| DNS Socket created at 0.0.0.0, FD 9
+2025/06/02 16:59:13| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/02 16:59:13| Adding ndots 1 from /etc/resolv.conf
+2025/06/02 16:59:13| Logfile: opening log /var/log/squid/access.log
+2025/06/02 16:59:13| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/02 16:59:13| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/02 16:59:13| Store logging disabled
+2025/06/02 16:59:13| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/02 16:59:13| Target number of buckets: 1008
+2025/06/02 16:59:13| Using 8192 Store buckets
+2025/06/02 16:59:13| Max Mem  size: 262144 KB
+2025/06/02 16:59:13| Max Swap size: 0 KB
+2025/06/02 16:59:13| Using Least Load store dir selection
+2025/06/02 16:59:13| Current Directory is /
+2025/06/02 16:59:13| Finished loading MIME types and icons.
+2025/06/02 16:59:13| HTCP Disabled.
+2025/06/02 16:59:13| Pinger socket opened on FD 14
+2025/06/02 16:59:13| Configuring Parent 172.24.0.3/3100/0
+2025/06/02 16:59:13| Squid plugin modules loaded: 0
+2025/06/02 16:59:13| Adaptation support is off.
+2025/06/02 16:59:13| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/02 16:59:13| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/02 16:59:13| pinger: Initialising ICMP pinger ...
+2025/06/02 16:59:13| pinger: ICMP socket opened.
+2025/06/02 16:59:13| pinger: ICMPv6 socket opened
+2025/06/02 16:59:14| storeLateRelease: released 0 objects
+2025/06/02 17:07:20| Preparing for shutdown after 1 requests
+2025/06/02 17:07:20| Waiting 30 seconds for active connections to finish
+2025/06/02 17:07:20| Closing HTTP(S) port [::]:8888
+2025/06/02 17:07:20| Closing HTTP(S) port [::]:3128
+2025/06/02 17:07:20| Closing Pinger socket on FD 14
+2025/06/02 17:08:25| Current Directory is /
+2025/06/02 17:08:26| Starting Squid Cache version 5.9 for aarch64-unknown-linux-gnu...
+2025/06/02 17:08:26| Service Name: squid
+2025/06/02 17:08:26| Process ID 1
+2025/06/02 17:08:26| Process Roles: master worker
+2025/06/02 17:08:26| With 1048576 file descriptors available
+2025/06/02 17:08:26| Initializing IP Cache...
+2025/06/02 17:08:26| DNS Socket created at [::], FD 8
+2025/06/02 17:08:26| DNS Socket created at 0.0.0.0, FD 9
+2025/06/02 17:08:26| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/02 17:08:26| Adding ndots 1 from /etc/resolv.conf
+2025/06/02 17:08:26| Logfile: opening log /var/log/squid/access.log
+2025/06/02 17:08:26| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/02 17:08:26| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/02 17:08:26| Store logging disabled
+2025/06/02 17:08:26| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/02 17:08:26| Target number of buckets: 1008
+2025/06/02 17:08:26| Using 8192 Store buckets
+2025/06/02 17:08:26| Max Mem  size: 262144 KB
+2025/06/02 17:08:26| Max Swap size: 0 KB
+2025/06/02 17:08:26| Using Least Load store dir selection
+2025/06/02 17:08:26| Current Directory is /
+2025/06/02 17:08:26| Finished loading MIME types and icons.
+2025/06/02 17:08:26| HTCP Disabled.
+2025/06/02 17:08:26| Pinger socket opened on FD 14
+2025/06/02 17:08:26| Configuring Parent 172.24.0.3/3100/0
+2025/06/02 17:08:26| Squid plugin modules loaded: 0
+2025/06/02 17:08:26| Adaptation support is off.
+2025/06/02 17:08:26| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/02 17:08:26| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/02 17:08:26| pinger: Initialising ICMP pinger ...
+2025/06/02 17:08:26| pinger: ICMP socket opened.
+2025/06/02 17:08:26| pinger: ICMPv6 socket opened
+2025/06/02 17:08:27| storeLateRelease: released 0 objects
+2025/06/02 17:15:35| Preparing for shutdown after 2 requests
+2025/06/02 17:15:35| Waiting 30 seconds for active connections to finish
+2025/06/02 17:15:35| Closing HTTP(S) port [::]:8888
+2025/06/02 17:15:35| Closing HTTP(S) port [::]:3128
+2025/06/02 17:15:35| Closing Pinger socket on FD 14
+2025/06/02 17:50:25| Current Directory is /
+2025/06/02 17:50:25| Starting Squid Cache version 5.9 for aarch64-unknown-linux-gnu...
+2025/06/02 17:50:25| Service Name: squid
+2025/06/02 17:50:25| Process ID 1
+2025/06/02 17:50:25| Process Roles: master worker
+2025/06/02 17:50:25| With 1048576 file descriptors available
+2025/06/02 17:50:25| Initializing IP Cache...
+2025/06/02 17:50:25| DNS Socket created at [::], FD 8
+2025/06/02 17:50:25| DNS Socket created at 0.0.0.0, FD 9
+2025/06/02 17:50:25| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/02 17:50:25| Adding ndots 1 from /etc/resolv.conf
+2025/06/02 17:50:25| Logfile: opening log /var/log/squid/access.log
+2025/06/02 17:50:25| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/02 17:50:25| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/02 17:50:25| Store logging disabled
+2025/06/02 17:50:25| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/02 17:50:25| Target number of buckets: 1008
+2025/06/02 17:50:25| Using 8192 Store buckets
+2025/06/02 17:50:25| Max Mem  size: 262144 KB
+2025/06/02 17:50:25| Max Swap size: 0 KB
+2025/06/02 17:50:25| Using Least Load store dir selection
+2025/06/02 17:50:25| Current Directory is /
+2025/06/02 17:50:25| Finished loading MIME types and icons.
+2025/06/02 17:50:25| HTCP Disabled.
+2025/06/02 17:50:25| Pinger socket opened on FD 14
+2025/06/02 17:50:25| Configuring Parent 172.24.0.3/3100/0
+2025/06/02 17:50:25| Squid plugin modules loaded: 0
+2025/06/02 17:50:25| Adaptation support is off.
+2025/06/02 17:50:25| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/02 17:50:25| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/02 17:50:25| pinger: Initialising ICMP pinger ...
+2025/06/02 17:50:25| pinger: ICMP socket opened.
+2025/06/02 17:50:25| pinger: ICMPv6 socket opened
+2025/06/02 17:50:26| storeLateRelease: released 0 objects
+2025/06/02 17:51:09| Preparing for shutdown after 0 requests
+2025/06/02 17:51:09| Waiting 30 seconds for active connections to finish
+2025/06/02 17:51:09| Closing HTTP(S) port [::]:8888
+2025/06/02 17:51:09| Closing HTTP(S) port [::]:3128
+2025/06/02 17:51:09| Closing Pinger socket on FD 14
+2025/06/02 17:52:34| Current Directory is /
+2025/06/02 17:52:34| Starting Squid Cache version 5.9 for aarch64-unknown-linux-gnu...
+2025/06/02 17:52:34| Service Name: squid
+2025/06/02 17:52:34| Process ID 1
+2025/06/02 17:52:34| Process Roles: master worker
+2025/06/02 17:52:34| With 1048576 file descriptors available
+2025/06/02 17:52:34| Initializing IP Cache...
+2025/06/02 17:52:34| DNS Socket created at [::], FD 8
+2025/06/02 17:52:34| DNS Socket created at 0.0.0.0, FD 9
+2025/06/02 17:52:34| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/02 17:52:34| Adding ndots 1 from /etc/resolv.conf
+2025/06/02 17:52:34| Logfile: opening log /var/log/squid/access.log
+2025/06/02 17:52:34| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/02 17:52:34| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/02 17:52:34| Store logging disabled
+2025/06/02 17:52:34| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/02 17:52:34| Target number of buckets: 1008
+2025/06/02 17:52:34| Using 8192 Store buckets
+2025/06/02 17:52:34| Max Mem  size: 262144 KB
+2025/06/02 17:52:34| Max Swap size: 0 KB
+2025/06/02 17:52:34| Using Least Load store dir selection
+2025/06/02 17:52:34| Current Directory is /
+2025/06/02 17:52:34| Finished loading MIME types and icons.
+2025/06/02 17:52:34| HTCP Disabled.
+2025/06/02 17:52:34| Pinger socket opened on FD 14
+2025/06/02 17:52:34| Configuring Parent 172.24.0.3/3100/0
+2025/06/02 17:52:34| Squid plugin modules loaded: 0
+2025/06/02 17:52:34| Adaptation support is off.
+2025/06/02 17:52:34| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/02 17:52:34| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/02 17:52:34| pinger: Initialising ICMP pinger ...
+2025/06/02 17:52:34| pinger: ICMP socket opened.
+2025/06/02 17:52:34| pinger: ICMPv6 socket opened
+2025/06/02 17:52:35| storeLateRelease: released 0 objects
+2025/06/02 17:56:39| Preparing for shutdown after 1 requests
+2025/06/02 17:56:39| Waiting 30 seconds for active connections to finish
+2025/06/02 17:56:39| Closing HTTP(S) port [::]:8888
+2025/06/02 17:56:39| Closing HTTP(S) port [::]:3128
+2025/06/02 17:56:39| Closing Pinger socket on FD 14
+2025/06/02 17:56:41| Pinger exiting.
+2025/06/02 17:58:45| Current Directory is /
+2025/06/02 17:58:45| Starting Squid Cache version 5.9 for aarch64-unknown-linux-gnu...
+2025/06/02 17:58:45| Service Name: squid
+2025/06/02 17:58:45| Process ID 1
+2025/06/02 17:58:45| Process Roles: master worker
+2025/06/02 17:58:45| With 1048576 file descriptors available
+2025/06/02 17:58:45| Initializing IP Cache...
+2025/06/02 17:58:45| DNS Socket created at [::], FD 8
+2025/06/02 17:58:45| DNS Socket created at 0.0.0.0, FD 9
+2025/06/02 17:58:45| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/02 17:58:45| Adding ndots 1 from /etc/resolv.conf
+2025/06/02 17:58:45| Logfile: opening log /var/log/squid/access.log
+2025/06/02 17:58:45| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/02 17:58:45| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/02 17:58:45| Store logging disabled
+2025/06/02 17:58:45| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/02 17:58:45| Target number of buckets: 1008
+2025/06/02 17:58:45| Using 8192 Store buckets
+2025/06/02 17:58:45| Max Mem  size: 262144 KB
+2025/06/02 17:58:45| Max Swap size: 0 KB
+2025/06/02 17:58:45| Using Least Load store dir selection
+2025/06/02 17:58:45| Current Directory is /
+2025/06/02 17:58:45| Finished loading MIME types and icons.
+2025/06/02 17:58:45| HTCP Disabled.
+2025/06/02 17:58:45| Pinger socket opened on FD 14
+2025/06/02 17:58:45| Configuring Parent 172.24.0.3/3100/0
+2025/06/02 17:58:45| Squid plugin modules loaded: 0
+2025/06/02 17:58:45| Adaptation support is off.
+2025/06/02 17:58:45| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/02 17:58:45| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/02 17:58:45| pinger: Initialising ICMP pinger ...
+2025/06/02 17:58:45| pinger: ICMP socket opened.
+2025/06/02 17:58:45| pinger: ICMPv6 socket opened
+2025/06/02 17:58:46| storeLateRelease: released 0 objects
+2025/06/02 17:59:48| Preparing for shutdown after 0 requests
+2025/06/02 17:59:48| Waiting 30 seconds for active connections to finish
+2025/06/02 17:59:48| Closing HTTP(S) port [::]:8888
+2025/06/02 17:59:48| Closing HTTP(S) port [::]:3128
+2025/06/02 17:59:48| Closing Pinger socket on FD 14
+2025/06/02 18:00:26| Current Directory is /
+2025/06/02 18:00:26| Starting Squid Cache version 5.9 for aarch64-unknown-linux-gnu...
+2025/06/02 18:00:26| Service Name: squid
+2025/06/02 18:00:26| Process ID 1
+2025/06/02 18:00:26| Process Roles: master worker
+2025/06/02 18:00:26| With 1048576 file descriptors available
+2025/06/02 18:00:26| Initializing IP Cache...
+2025/06/02 18:00:26| DNS Socket created at [::], FD 8
+2025/06/02 18:00:26| DNS Socket created at 0.0.0.0, FD 9
+2025/06/02 18:00:26| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/02 18:00:26| Adding ndots 1 from /etc/resolv.conf
+2025/06/02 18:00:26| Logfile: opening log /var/log/squid/access.log
+2025/06/02 18:00:26| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/02 18:00:26| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/02 18:00:26| Store logging disabled
+2025/06/02 18:00:26| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/02 18:00:26| Target number of buckets: 1008
+2025/06/02 18:00:26| Using 8192 Store buckets
+2025/06/02 18:00:26| Max Mem  size: 262144 KB
+2025/06/02 18:00:26| Max Swap size: 0 KB
+2025/06/02 18:00:26| Using Least Load store dir selection
+2025/06/02 18:00:26| Current Directory is /
+2025/06/02 18:00:26| Finished loading MIME types and icons.
+2025/06/02 18:00:26| HTCP Disabled.
+2025/06/02 18:00:26| Pinger socket opened on FD 14
+2025/06/02 18:00:26| Configuring Parent 172.24.0.3/3100/0
+2025/06/02 18:00:26| Squid plugin modules loaded: 0
+2025/06/02 18:00:26| Adaptation support is off.
+2025/06/02 18:00:26| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/02 18:00:26| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/02 18:00:26| pinger: Initialising ICMP pinger ...
+2025/06/02 18:00:26| pinger: ICMP socket opened.
+2025/06/02 18:00:26| pinger: ICMPv6 socket opened
+2025/06/02 18:00:27| storeLateRelease: released 0 objects
+2025/06/02 18:45:51| Logfile: opening log stdio:/var/spool/squid/netdb.state
+2025/06/02 18:45:51| Logfile: closing log stdio:/var/spool/squid/netdb.state
+2025/06/02 18:45:51| NETDB state saved; 1 entries, 17 msec
+2025/06/02 19:34:41| Logfile: opening log stdio:/var/spool/squid/netdb.state
+2025/06/02 19:34:41| Logfile: closing log stdio:/var/spool/squid/netdb.state
+2025/06/02 19:34:41| NETDB state saved; 1 entries, 1 msec
+2025/06/02 19:35:55| Preparing for shutdown after 69 requests
+2025/06/02 19:35:55| Waiting 30 seconds for active connections to finish
+2025/06/02 19:35:55| Closing HTTP(S) port [::]:8888
+2025/06/02 19:35:55| Closing HTTP(S) port [::]:3128
+2025/06/02 19:35:55| Closing Pinger socket on FD 14
+2025/06/03 07:54:30| Current Directory is /
+2025/06/03 07:54:30| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 07:54:30| Service Name: squid
+2025/06/03 07:54:30| Process ID 1
+2025/06/03 07:54:30| Process Roles: master worker
+2025/06/03 07:54:30| With 1048576 file descriptors available
+2025/06/03 07:54:30| Initializing IP Cache...
+2025/06/03 07:54:30| DNS Socket created at [::], FD 8
+2025/06/03 07:54:30| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 07:54:30| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 07:54:30| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 07:54:30| Logfile: opening log /var/log/squid/access.log
+2025/06/03 07:54:30| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 07:54:30| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 07:54:30| Store logging disabled
+2025/06/03 07:54:30| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 07:54:30| Target number of buckets: 1008
+2025/06/03 07:54:30| Using 8192 Store buckets
+2025/06/03 07:54:30| Max Mem  size: 262144 KB
+2025/06/03 07:54:30| Max Swap size: 0 KB
+2025/06/03 07:54:30| Using Least Load store dir selection
+2025/06/03 07:54:30| Current Directory is /
+2025/06/03 07:54:30| Finished loading MIME types and icons.
+2025/06/03 07:54:30| HTCP Disabled.
+2025/06/03 07:54:30| Pinger socket opened on FD 14
+2025/06/03 07:54:30| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 07:54:30| Squid plugin modules loaded: 0
+2025/06/03 07:54:30| Adaptation support is off.
+2025/06/03 07:54:30| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 07:54:30| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 07:54:31| pinger: Initialising ICMP pinger ...
+2025/06/03 07:54:31| pinger: ICMP socket opened.
+2025/06/03 07:54:31| pinger: ICMPv6 socket opened
+2025/06/03 07:54:31| storeLateRelease: released 0 objects
+2025/06/03 08:00:08| Preparing for shutdown after 5 requests
+2025/06/03 08:00:08| Waiting 30 seconds for active connections to finish
+2025/06/03 08:00:08| Closing HTTP(S) port [::]:8888
+2025/06/03 08:00:08| Closing HTTP(S) port [::]:3128
+2025/06/03 08:00:08| Closing Pinger socket on FD 14
+2025/06/03 08:00:18| Pinger exiting.
+2025/06/03 08:55:38| Current Directory is /
+2025/06/03 08:55:38| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 08:55:38| Service Name: squid
+2025/06/03 08:55:38| Process ID 1
+2025/06/03 08:55:38| Process Roles: master worker
+2025/06/03 08:55:38| With 1048576 file descriptors available
+2025/06/03 08:55:38| Initializing IP Cache...
+2025/06/03 08:55:38| DNS Socket created at [::], FD 8
+2025/06/03 08:55:38| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 08:55:38| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 08:55:38| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 08:55:38| Logfile: opening log /var/log/squid/access.log
+2025/06/03 08:55:38| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 08:55:38| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 08:55:38| Store logging disabled
+2025/06/03 08:55:38| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 08:55:38| Target number of buckets: 1008
+2025/06/03 08:55:38| Using 8192 Store buckets
+2025/06/03 08:55:38| Max Mem  size: 262144 KB
+2025/06/03 08:55:38| Max Swap size: 0 KB
+2025/06/03 08:55:38| Using Least Load store dir selection
+2025/06/03 08:55:38| Current Directory is /
+2025/06/03 08:55:38| Finished loading MIME types and icons.
+2025/06/03 08:55:38| HTCP Disabled.
+2025/06/03 08:55:38| Pinger socket opened on FD 14
+2025/06/03 08:55:38| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 08:55:38| Squid plugin modules loaded: 0
+2025/06/03 08:55:38| Adaptation support is off.
+2025/06/03 08:55:38| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 08:55:38| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 08:55:38| pinger: Initialising ICMP pinger ...
+2025/06/03 08:55:38| pinger: ICMP socket opened.
+2025/06/03 08:55:38| pinger: ICMPv6 socket opened
+2025/06/03 08:55:39| storeLateRelease: released 0 objects
+2025/06/03 09:11:05| Preparing for shutdown after 0 requests
+2025/06/03 09:11:05| Waiting 30 seconds for active connections to finish
+2025/06/03 09:11:05| Closing HTTP(S) port [::]:8888
+2025/06/03 09:11:05| Closing HTTP(S) port [::]:3128
+2025/06/03 09:11:05| Closing Pinger socket on FD 14
+2025/06/03 09:11:06| Pinger exiting.
+2025/06/03 09:17:11| Current Directory is /
+2025/06/03 09:17:11| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 09:17:11| Service Name: squid
+2025/06/03 09:17:11| Process ID 1
+2025/06/03 09:17:11| Process Roles: master worker
+2025/06/03 09:17:11| With 1048576 file descriptors available
+2025/06/03 09:17:11| Initializing IP Cache...
+2025/06/03 09:17:11| DNS Socket created at [::], FD 8
+2025/06/03 09:17:11| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 09:17:11| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 09:17:11| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 09:17:11| Logfile: opening log /var/log/squid/access.log
+2025/06/03 09:17:11| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 09:17:11| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 09:17:11| Store logging disabled
+2025/06/03 09:17:11| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 09:17:11| Target number of buckets: 1008
+2025/06/03 09:17:11| Using 8192 Store buckets
+2025/06/03 09:17:11| Max Mem  size: 262144 KB
+2025/06/03 09:17:11| Max Swap size: 0 KB
+2025/06/03 09:17:11| Using Least Load store dir selection
+2025/06/03 09:17:11| Current Directory is /
+2025/06/03 09:17:11| Finished loading MIME types and icons.
+2025/06/03 09:17:11| HTCP Disabled.
+2025/06/03 09:17:11| Pinger socket opened on FD 14
+2025/06/03 09:17:11| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 09:17:11| Squid plugin modules loaded: 0
+2025/06/03 09:17:11| Adaptation support is off.
+2025/06/03 09:17:11| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 09:17:11| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 09:17:11| pinger: Initialising ICMP pinger ...
+2025/06/03 09:17:11| pinger: ICMP socket opened.
+2025/06/03 09:17:11| pinger: ICMPv6 socket opened
+2025/06/03 09:17:12| storeLateRelease: released 0 objects
+2025/06/03 09:19:47| Preparing for shutdown after 0 requests
+2025/06/03 09:19:47| Waiting 30 seconds for active connections to finish
+2025/06/03 09:19:47| Closing HTTP(S) port [::]:8888
+2025/06/03 09:19:47| Closing HTTP(S) port [::]:3128
+2025/06/03 09:19:47| Closing Pinger socket on FD 14
+2025/06/03 09:25:47| Current Directory is /
+2025/06/03 09:25:48| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 09:25:48| Service Name: squid
+2025/06/03 09:25:48| Process ID 1
+2025/06/03 09:25:48| Process Roles: master worker
+2025/06/03 09:25:48| With 1048576 file descriptors available
+2025/06/03 09:25:48| Initializing IP Cache...
+2025/06/03 09:25:48| DNS Socket created at [::], FD 8
+2025/06/03 09:25:48| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 09:25:48| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 09:25:48| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 09:25:48| Logfile: opening log /var/log/squid/access.log
+2025/06/03 09:25:48| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 09:25:48| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 09:25:48| Store logging disabled
+2025/06/03 09:25:48| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 09:25:48| Target number of buckets: 1008
+2025/06/03 09:25:48| Using 8192 Store buckets
+2025/06/03 09:25:48| Max Mem  size: 262144 KB
+2025/06/03 09:25:48| Max Swap size: 0 KB
+2025/06/03 09:25:48| Using Least Load store dir selection
+2025/06/03 09:25:48| Current Directory is /
+2025/06/03 09:25:48| Finished loading MIME types and icons.
+2025/06/03 09:25:48| HTCP Disabled.
+2025/06/03 09:25:48| Pinger socket opened on FD 14
+2025/06/03 09:25:48| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 09:25:48| Squid plugin modules loaded: 0
+2025/06/03 09:25:48| Adaptation support is off.
+2025/06/03 09:25:48| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 09:25:48| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 09:25:48| pinger: Initialising ICMP pinger ...
+2025/06/03 09:25:48| pinger: ICMP socket opened.
+2025/06/03 09:25:48| pinger: ICMPv6 socket opened
+2025/06/03 09:25:49| storeLateRelease: released 0 objects
+2025/06/03 09:31:45| Preparing for shutdown after 0 requests
+2025/06/03 09:31:45| Waiting 30 seconds for active connections to finish
+2025/06/03 09:31:45| Closing HTTP(S) port [::]:8888
+2025/06/03 09:31:45| Closing HTTP(S) port [::]:3128
+2025/06/03 09:31:45| Closing Pinger socket on FD 14
+2025/06/03 09:57:08| Current Directory is /
+2025/06/03 09:57:08| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 09:57:08| Service Name: squid
+2025/06/03 09:57:08| Process ID 1
+2025/06/03 09:57:08| Process Roles: master worker
+2025/06/03 09:57:08| With 1048576 file descriptors available
+2025/06/03 09:57:08| Initializing IP Cache...
+2025/06/03 09:57:08| DNS Socket created at [::], FD 8
+2025/06/03 09:57:08| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 09:57:08| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 09:57:08| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 09:57:08| Logfile: opening log /var/log/squid/access.log
+2025/06/03 09:57:08| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 09:57:08| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 09:57:08| Store logging disabled
+2025/06/03 09:57:08| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 09:57:08| Target number of buckets: 1008
+2025/06/03 09:57:08| Using 8192 Store buckets
+2025/06/03 09:57:08| Max Mem  size: 262144 KB
+2025/06/03 09:57:08| Max Swap size: 0 KB
+2025/06/03 09:57:08| Using Least Load store dir selection
+2025/06/03 09:57:08| Current Directory is /
+2025/06/03 09:57:08| Finished loading MIME types and icons.
+2025/06/03 09:57:08| HTCP Disabled.
+2025/06/03 09:57:08| Pinger socket opened on FD 14
+2025/06/03 09:57:08| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 09:57:08| Squid plugin modules loaded: 0
+2025/06/03 09:57:08| Adaptation support is off.
+2025/06/03 09:57:08| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 09:57:08| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 09:57:08| pinger: Initialising ICMP pinger ...
+2025/06/03 09:57:08| pinger: ICMP socket opened.
+2025/06/03 09:57:08| pinger: ICMPv6 socket opened
+2025/06/03 09:57:09| storeLateRelease: released 0 objects
+2025/06/03 09:59:14| Preparing for shutdown after 0 requests
+2025/06/03 09:59:14| Waiting 30 seconds for active connections to finish
+2025/06/03 09:59:14| Closing HTTP(S) port [::]:8888
+2025/06/03 09:59:14| Closing HTTP(S) port [::]:3128
+2025/06/03 09:59:14| Closing Pinger socket on FD 14
+2025/06/03 10:33:05| Current Directory is /
+2025/06/03 10:33:05| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 10:33:05| Service Name: squid
+2025/06/03 10:33:05| Process ID 1
+2025/06/03 10:33:05| Process Roles: master worker
+2025/06/03 10:33:05| With 1048576 file descriptors available
+2025/06/03 10:33:05| Initializing IP Cache...
+2025/06/03 10:33:05| DNS Socket created at [::], FD 8
+2025/06/03 10:33:05| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 10:33:05| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 10:33:05| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 10:33:05| Logfile: opening log /var/log/squid/access.log
+2025/06/03 10:33:05| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 10:33:05| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 10:33:05| Store logging disabled
+2025/06/03 10:33:05| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 10:33:05| Target number of buckets: 1008
+2025/06/03 10:33:05| Using 8192 Store buckets
+2025/06/03 10:33:05| Max Mem  size: 262144 KB
+2025/06/03 10:33:05| Max Swap size: 0 KB
+2025/06/03 10:33:05| Using Least Load store dir selection
+2025/06/03 10:33:05| Current Directory is /
+2025/06/03 10:33:05| Finished loading MIME types and icons.
+2025/06/03 10:33:05| HTCP Disabled.
+2025/06/03 10:33:05| Pinger socket opened on FD 14
+2025/06/03 10:33:05| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 10:33:05| Squid plugin modules loaded: 0
+2025/06/03 10:33:05| Adaptation support is off.
+2025/06/03 10:33:05| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 10:33:05| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 10:33:05| pinger: Initialising ICMP pinger ...
+2025/06/03 10:33:05| pinger: ICMP socket opened.
+2025/06/03 10:33:05| pinger: ICMPv6 socket opened
+2025/06/03 10:33:06| storeLateRelease: released 0 objects
+2025/06/03 10:36:31| Preparing for shutdown after 0 requests
+2025/06/03 10:36:31| Waiting 30 seconds for active connections to finish
+2025/06/03 10:36:31| Closing HTTP(S) port [::]:8888
+2025/06/03 10:36:31| Closing HTTP(S) port [::]:3128
+2025/06/03 10:36:31| Closing Pinger socket on FD 14
+2025/06/03 10:41:24| Current Directory is /
+2025/06/03 10:41:24| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 10:41:24| Service Name: squid
+2025/06/03 10:41:24| Process ID 1
+2025/06/03 10:41:24| Process Roles: master worker
+2025/06/03 10:41:24| With 1048576 file descriptors available
+2025/06/03 10:41:24| Initializing IP Cache...
+2025/06/03 10:41:24| DNS Socket created at [::], FD 8
+2025/06/03 10:41:24| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 10:41:24| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 10:41:24| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 10:41:24| Logfile: opening log /var/log/squid/access.log
+2025/06/03 10:41:24| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 10:41:24| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 10:41:24| Store logging disabled
+2025/06/03 10:41:24| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 10:41:24| Target number of buckets: 1008
+2025/06/03 10:41:24| Using 8192 Store buckets
+2025/06/03 10:41:24| Max Mem  size: 262144 KB
+2025/06/03 10:41:24| Max Swap size: 0 KB
+2025/06/03 10:41:24| Using Least Load store dir selection
+2025/06/03 10:41:24| Current Directory is /
+2025/06/03 10:41:24| Finished loading MIME types and icons.
+2025/06/03 10:41:24| HTCP Disabled.
+2025/06/03 10:41:24| Pinger socket opened on FD 14
+2025/06/03 10:41:24| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 10:41:24| Squid plugin modules loaded: 0
+2025/06/03 10:41:24| Adaptation support is off.
+2025/06/03 10:41:24| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 10:41:24| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 10:41:24| pinger: Initialising ICMP pinger ...
+2025/06/03 10:41:24| pinger: ICMP socket opened.
+2025/06/03 10:41:24| pinger: ICMPv6 socket opened
+2025/06/03 10:41:25| storeLateRelease: released 0 objects
+2025/06/03 10:45:58| Preparing for shutdown after 0 requests
+2025/06/03 10:45:58| Waiting 30 seconds for active connections to finish
+2025/06/03 10:45:58| Closing HTTP(S) port [::]:8888
+2025/06/03 10:45:58| Closing HTTP(S) port [::]:3128
+2025/06/03 10:45:58| Closing Pinger socket on FD 14
+2025/06/03 10:46:01| Pinger exiting.
+2025/06/03 10:52:40| Current Directory is /
+2025/06/03 10:52:40| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 10:52:40| Service Name: squid
+2025/06/03 10:52:40| Process ID 1
+2025/06/03 10:52:40| Process Roles: master worker
+2025/06/03 10:52:40| With 1048576 file descriptors available
+2025/06/03 10:52:40| Initializing IP Cache...
+2025/06/03 10:52:40| DNS Socket created at [::], FD 8
+2025/06/03 10:52:40| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 10:52:40| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 10:52:40| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 10:52:40| Logfile: opening log /var/log/squid/access.log
+2025/06/03 10:52:40| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 10:52:40| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 10:52:40| Store logging disabled
+2025/06/03 10:52:40| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 10:52:40| Target number of buckets: 1008
+2025/06/03 10:52:40| Using 8192 Store buckets
+2025/06/03 10:52:40| Max Mem  size: 262144 KB
+2025/06/03 10:52:40| Max Swap size: 0 KB
+2025/06/03 10:52:40| Using Least Load store dir selection
+2025/06/03 10:52:40| Current Directory is /
+2025/06/03 10:52:40| Finished loading MIME types and icons.
+2025/06/03 10:52:40| HTCP Disabled.
+2025/06/03 10:52:40| Pinger socket opened on FD 14
+2025/06/03 10:52:40| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 10:52:40| Squid plugin modules loaded: 0
+2025/06/03 10:52:40| Adaptation support is off.
+2025/06/03 10:52:40| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 10:52:40| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 10:52:40| pinger: Initialising ICMP pinger ...
+2025/06/03 10:52:40| pinger: ICMP socket opened.
+2025/06/03 10:52:40| pinger: ICMPv6 socket opened
+2025/06/03 10:52:41| storeLateRelease: released 0 objects
+2025/06/03 11:05:04| Preparing for shutdown after 0 requests
+2025/06/03 11:05:04| Waiting 30 seconds for active connections to finish
+2025/06/03 11:05:04| Closing HTTP(S) port [::]:8888
+2025/06/03 11:05:04| Closing HTTP(S) port [::]:3128
+2025/06/03 11:05:04| Closing Pinger socket on FD 14
+2025/06/03 11:11:53| Current Directory is /
+2025/06/03 11:11:53| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 11:11:53| Service Name: squid
+2025/06/03 11:11:53| Process ID 1
+2025/06/03 11:11:53| Process Roles: master worker
+2025/06/03 11:11:53| With 1048576 file descriptors available
+2025/06/03 11:11:53| Initializing IP Cache...
+2025/06/03 11:11:53| DNS Socket created at [::], FD 8
+2025/06/03 11:11:53| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 11:11:53| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 11:11:53| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 11:11:53| Logfile: opening log /var/log/squid/access.log
+2025/06/03 11:11:53| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 11:11:53| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 11:11:53| Store logging disabled
+2025/06/03 11:11:53| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 11:11:53| Target number of buckets: 1008
+2025/06/03 11:11:53| Using 8192 Store buckets
+2025/06/03 11:11:53| Max Mem  size: 262144 KB
+2025/06/03 11:11:53| Max Swap size: 0 KB
+2025/06/03 11:11:53| Using Least Load store dir selection
+2025/06/03 11:11:53| Current Directory is /
+2025/06/03 11:11:53| Finished loading MIME types and icons.
+2025/06/03 11:11:53| HTCP Disabled.
+2025/06/03 11:11:53| Pinger socket opened on FD 14
+2025/06/03 11:11:53| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 11:11:53| Squid plugin modules loaded: 0
+2025/06/03 11:11:53| Adaptation support is off.
+2025/06/03 11:11:53| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 11:11:53| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 11:11:53| pinger: Initialising ICMP pinger ...
+2025/06/03 11:11:53| pinger: ICMP socket opened.
+2025/06/03 11:11:53| pinger: ICMPv6 socket opened
+2025/06/03 11:11:54| storeLateRelease: released 0 objects
+2025/06/03 11:15:20| Preparing for shutdown after 0 requests
+2025/06/03 11:15:20| Waiting 30 seconds for active connections to finish
+2025/06/03 11:15:20| Closing HTTP(S) port [::]:8888
+2025/06/03 11:15:20| Closing HTTP(S) port [::]:3128
+2025/06/03 11:15:20| Closing Pinger socket on FD 14
+2025/06/03 11:15:28| Preparing for shutdown after 0 requests
+2025/06/03 11:15:28| Waiting 30 seconds for active connections to finish
+2025/06/03 11:15:28| Preparing for shutdown after 0 requests
+2025/06/03 11:15:28| Waiting 30 seconds for active connections to finish
+2025/06/03 11:15:28| Preparing for shutdown after 0 requests
+2025/06/03 11:15:28| Waiting 30 seconds for active connections to finish
+2025/06/03 11:15:28| Preparing for shutdown after 0 requests
+2025/06/03 11:15:28| Waiting 30 seconds for active connections to finish
+2025/06/03 11:15:28| Preparing for shutdown after 0 requests
+2025/06/03 11:15:28| Waiting 30 seconds for active connections to finish
+2025/06/03 11:15:29| Preparing for shutdown after 0 requests
+2025/06/03 11:15:29| Waiting 30 seconds for active connections to finish
+2025/06/03 11:15:29| Shutdown: NTLM authentication.
+2025/06/03 11:15:29| Shutdown: Negotiate authentication.
+2025/06/03 11:15:29| Shutdown: Digest authentication.
+2025/06/03 11:15:29| Shutdown: Basic authentication.
+2025/06/03 11:15:29| Preparing for shutdown after 0 requests
+2025/06/03 11:15:29| Waiting 30 seconds for active connections to finish
+2025/06/03 11:15:29| Preparing for shutdown after 0 requests
+2025/06/03 11:15:29| Waiting 30 seconds for active connections to finish
+2025/06/03 11:15:29| Shutting down...
+2025/06/03 11:15:29| storeDirWriteCleanLogs: Starting...
+2025/06/03 11:15:29|   Finished.  Wrote 0 entries.
+2025/06/03 11:15:29|   Took 0.00 seconds (  0.00 entries/sec).
+CPU Usage: 0.253 seconds = 0.125 user + 0.128 sys
+Maximum Resident Size: 688512 KB
 Page faults with physical i/o: 107
-2025/06/04 11:44:04| Logfile: closing log stdio:/var/log/squid/access.log
-2025/06/04 11:44:04| Open FD UNSTARTED     0 stdin
-2025/06/04 11:44:04| Open FD UNSTARTED     1 stdout
-2025/06/04 11:44:04| Open FD UNSTARTED     2 stderr
-2025/06/04 11:44:04| Squid Cache (Version 5.9): Exiting normally.
-2025/06/04 11:44:04| Removing PID file (/run/squid.pid)
-2025/06/04 11:50:54| Current Directory is /
-2025/06/04 11:50:54| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 11:50:54| Service Name: squid
-2025/06/04 11:50:54| Process ID 1
-2025/06/04 11:50:54| Process Roles: master worker
-2025/06/04 11:50:54| With 1048576 file descriptors available
-2025/06/04 11:50:54| Initializing IP Cache...
-2025/06/04 11:50:54| DNS Socket created at [::], FD 8
-2025/06/04 11:50:54| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 11:50:54| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 11:50:54| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 11:50:54| Logfile: opening log /var/log/squid/access.log
-2025/06/04 11:50:54| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 11:50:54| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 11:50:54| Store logging disabled
-2025/06/04 11:50:54| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 11:50:54| Target number of buckets: 1008
-2025/06/04 11:50:54| Using 8192 Store buckets
-2025/06/04 11:50:54| Max Mem  size: 262144 KB
-2025/06/04 11:50:54| Max Swap size: 0 KB
-2025/06/04 11:50:54| Using Least Load store dir selection
-2025/06/04 11:50:54| Current Directory is /
-2025/06/04 11:50:54| Finished loading MIME types and icons.
-2025/06/04 11:50:54| HTCP Disabled.
-2025/06/04 11:50:54| Pinger socket opened on FD 14
-2025/06/04 11:50:54| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 11:50:54| Squid plugin modules loaded: 0
-2025/06/04 11:50:54| Adaptation support is off.
-2025/06/04 11:50:54| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 11:50:54| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 11:50:54| pinger: Initialising ICMP pinger ...
-2025/06/04 11:50:54| pinger: ICMP socket opened.
-2025/06/04 11:50:54| pinger: ICMPv6 socket opened
-2025/06/04 11:50:55| storeLateRelease: released 0 objects
-2025/06/04 11:52:28| Preparing for shutdown after 0 requests
-2025/06/04 11:52:28| Waiting 30 seconds for active connections to finish
-2025/06/04 11:52:28| Closing HTTP(S) port [::]:8888
-2025/06/04 11:52:28| Closing HTTP(S) port [::]:3128
-2025/06/04 11:52:28| Closing Pinger socket on FD 14
-2025/06/04 11:52:31| Pinger exiting.
-2025/06/04 11:52:37| Preparing for shutdown after 0 requests
-2025/06/04 11:52:37| Waiting 30 seconds for active connections to finish
-2025/06/04 11:52:37| Preparing for shutdown after 0 requests
-2025/06/04 11:52:37| Waiting 30 seconds for active connections to finish
-2025/06/04 11:52:37| Preparing for shutdown after 0 requests
-2025/06/04 11:52:37| Waiting 30 seconds for active connections to finish
-2025/06/04 11:58:26| Current Directory is /
-2025/06/04 11:58:26| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 11:58:26| Service Name: squid
-2025/06/04 11:58:26| Process ID 1
-2025/06/04 11:58:26| Process Roles: master worker
-2025/06/04 11:58:26| With 1048576 file descriptors available
-2025/06/04 11:58:26| Initializing IP Cache...
-2025/06/04 11:58:26| DNS Socket created at [::], FD 8
-2025/06/04 11:58:26| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 11:58:26| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 11:58:26| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 11:58:26| Logfile: opening log /var/log/squid/access.log
-2025/06/04 11:58:26| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 11:58:26| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 11:58:26| Store logging disabled
-2025/06/04 11:58:26| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 11:58:26| Target number of buckets: 1008
-2025/06/04 11:58:26| Using 8192 Store buckets
-2025/06/04 11:58:26| Max Mem  size: 262144 KB
-2025/06/04 11:58:26| Max Swap size: 0 KB
-2025/06/04 11:58:26| Using Least Load store dir selection
-2025/06/04 11:58:26| Current Directory is /
-2025/06/04 11:58:26| Finished loading MIME types and icons.
-2025/06/04 11:58:26| HTCP Disabled.
-2025/06/04 11:58:26| Pinger socket opened on FD 14
-2025/06/04 11:58:26| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 11:58:26| Squid plugin modules loaded: 0
-2025/06/04 11:58:26| Adaptation support is off.
-2025/06/04 11:58:26| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 11:58:26| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 11:58:26| pinger: Initialising ICMP pinger ...
-2025/06/04 11:58:26| pinger: ICMP socket opened.
-2025/06/04 11:58:26| pinger: ICMPv6 socket opened
-2025/06/04 11:58:27| storeLateRelease: released 0 objects
-2025/06/04 12:01:01| Preparing for shutdown after 0 requests
-2025/06/04 12:01:01| Waiting 30 seconds for active connections to finish
-2025/06/04 12:01:01| Closing HTTP(S) port [::]:8888
-2025/06/04 12:01:01| Closing HTTP(S) port [::]:3128
-2025/06/04 12:01:01| Closing Pinger socket on FD 14
-2025/06/04 12:01:03| Pinger exiting.
-2025/06/04 12:07:59| Current Directory is /
-2025/06/04 12:07:59| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 12:07:59| Service Name: squid
-2025/06/04 12:07:59| Process ID 1
-2025/06/04 12:07:59| Process Roles: master worker
-2025/06/04 12:07:59| With 1048576 file descriptors available
-2025/06/04 12:07:59| Initializing IP Cache...
-2025/06/04 12:07:59| DNS Socket created at [::], FD 8
-2025/06/04 12:07:59| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 12:07:59| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 12:07:59| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 12:07:59| Logfile: opening log /var/log/squid/access.log
-2025/06/04 12:07:59| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 12:07:59| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 12:07:59| Store logging disabled
-2025/06/04 12:07:59| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 12:07:59| Target number of buckets: 1008
-2025/06/04 12:07:59| Using 8192 Store buckets
-2025/06/04 12:07:59| Max Mem  size: 262144 KB
-2025/06/04 12:07:59| Max Swap size: 0 KB
-2025/06/04 12:07:59| Using Least Load store dir selection
-2025/06/04 12:07:59| Current Directory is /
-2025/06/04 12:07:59| Finished loading MIME types and icons.
-2025/06/04 12:07:59| HTCP Disabled.
-2025/06/04 12:07:59| Pinger socket opened on FD 14
-2025/06/04 12:07:59| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 12:07:59| Squid plugin modules loaded: 0
-2025/06/04 12:07:59| Adaptation support is off.
-2025/06/04 12:07:59| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 12:07:59| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 12:07:59| pinger: Initialising ICMP pinger ...
-2025/06/04 12:07:59| pinger: ICMP socket opened.
-2025/06/04 12:07:59| pinger: ICMPv6 socket opened
-2025/06/04 12:08:00| storeLateRelease: released 0 objects
-2025/06/04 12:15:26| Preparing for shutdown after 0 requests
-2025/06/04 12:15:26| Waiting 30 seconds for active connections to finish
-2025/06/04 12:15:26| Closing HTTP(S) port [::]:8888
-2025/06/04 12:15:26| Closing HTTP(S) port [::]:3128
-2025/06/04 12:15:26| Closing Pinger socket on FD 14
-2025/06/04 12:21:59| Current Directory is /
-2025/06/04 12:21:59| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 12:21:59| Service Name: squid
-2025/06/04 12:21:59| Process ID 1
-2025/06/04 12:21:59| Process Roles: master worker
-2025/06/04 12:21:59| With 1048576 file descriptors available
-2025/06/04 12:21:59| Initializing IP Cache...
-2025/06/04 12:21:59| DNS Socket created at [::], FD 8
-2025/06/04 12:21:59| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 12:21:59| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 12:21:59| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 12:21:59| Logfile: opening log /var/log/squid/access.log
-2025/06/04 12:21:59| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 12:21:59| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 12:21:59| Store logging disabled
-2025/06/04 12:21:59| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 12:21:59| Target number of buckets: 1008
-2025/06/04 12:21:59| Using 8192 Store buckets
-2025/06/04 12:21:59| Max Mem  size: 262144 KB
-2025/06/04 12:21:59| Max Swap size: 0 KB
-2025/06/04 12:21:59| Using Least Load store dir selection
-2025/06/04 12:21:59| Current Directory is /
-2025/06/04 12:21:59| Finished loading MIME types and icons.
-2025/06/04 12:21:59| HTCP Disabled.
-2025/06/04 12:21:59| Pinger socket opened on FD 14
-2025/06/04 12:21:59| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 12:21:59| Squid plugin modules loaded: 0
-2025/06/04 12:21:59| Adaptation support is off.
-2025/06/04 12:21:59| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 12:21:59| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 12:21:59| pinger: Initialising ICMP pinger ...
-2025/06/04 12:21:59| pinger: ICMP socket opened.
-2025/06/04 12:21:59| pinger: ICMPv6 socket opened
-2025/06/04 12:22:00| storeLateRelease: released 0 objects
-2025/06/04 12:24:31| Preparing for shutdown after 0 requests
-2025/06/04 12:24:31| Waiting 30 seconds for active connections to finish
-2025/06/04 12:24:31| Closing HTTP(S) port [::]:8888
-2025/06/04 12:24:31| Closing HTTP(S) port [::]:3128
-2025/06/04 12:24:31| Closing Pinger socket on FD 14
-2025/06/04 12:31:44| Current Directory is /
-2025/06/04 12:31:45| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 12:31:45| Service Name: squid
-2025/06/04 12:31:45| Process ID 1
-2025/06/04 12:31:45| Process Roles: master worker
-2025/06/04 12:31:45| With 1048576 file descriptors available
-2025/06/04 12:31:45| Initializing IP Cache...
-2025/06/04 12:31:45| DNS Socket created at [::], FD 8
-2025/06/04 12:31:45| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 12:31:45| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 12:31:45| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 12:31:45| Logfile: opening log /var/log/squid/access.log
-2025/06/04 12:31:45| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 12:31:45| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 12:31:45| Store logging disabled
-2025/06/04 12:31:45| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 12:31:45| Target number of buckets: 1008
-2025/06/04 12:31:45| Using 8192 Store buckets
-2025/06/04 12:31:45| Max Mem  size: 262144 KB
-2025/06/04 12:31:45| Max Swap size: 0 KB
-2025/06/04 12:31:45| Using Least Load store dir selection
-2025/06/04 12:31:45| Current Directory is /
-2025/06/04 12:31:45| Finished loading MIME types and icons.
-2025/06/04 12:31:45| HTCP Disabled.
-2025/06/04 12:31:45| Pinger socket opened on FD 14
-2025/06/04 12:31:45| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 12:31:45| Squid plugin modules loaded: 0
-2025/06/04 12:31:45| Adaptation support is off.
-2025/06/04 12:31:45| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 12:31:45| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 12:31:45| pinger: Initialising ICMP pinger ...
-2025/06/04 12:31:45| pinger: ICMP socket opened.
-2025/06/04 12:31:45| pinger: ICMPv6 socket opened
-2025/06/04 12:31:46| storeLateRelease: released 0 objects
-2025/06/04 12:36:04| Preparing for shutdown after 0 requests
-2025/06/04 12:36:04| Waiting 30 seconds for active connections to finish
-2025/06/04 12:36:04| Closing HTTP(S) port [::]:8888
-2025/06/04 12:36:04| Closing HTTP(S) port [::]:3128
-2025/06/04 12:36:04| Closing Pinger socket on FD 14
-2025/06/04 12:36:11| Preparing for shutdown after 0 requests
-2025/06/04 12:36:11| Waiting 30 seconds for active connections to finish
-2025/06/04 12:36:12| Preparing for shutdown after 0 requests
-2025/06/04 12:36:12| Waiting 30 seconds for active connections to finish
-2025/06/04 12:36:12| Preparing for shutdown after 0 requests
-2025/06/04 12:36:12| Waiting 30 seconds for active connections to finish
-2025/06/04 12:36:12| Preparing for shutdown after 0 requests
-2025/06/04 12:36:12| Waiting 30 seconds for active connections to finish
-2025/06/04 12:36:12| Shutdown: NTLM authentication.
-2025/06/04 12:36:12| Shutdown: Negotiate authentication.
-2025/06/04 12:36:12| Shutdown: Digest authentication.
-2025/06/04 12:36:12| Shutdown: Basic authentication.
-2025/06/04 12:36:12| Preparing for shutdown after 0 requests
-2025/06/04 12:36:12| Waiting 30 seconds for active connections to finish
-2025/06/04 12:36:12| Preparing for shutdown after 0 requests
-2025/06/04 12:36:12| Waiting 30 seconds for active connections to finish
-2025/06/04 12:36:13| Shutting down...
-2025/06/04 12:36:13| storeDirWriteCleanLogs: Starting...
-2025/06/04 12:36:13|   Finished.  Wrote 0 entries.
-2025/06/04 12:36:13|   Took 0.00 seconds (  0.00 entries/sec).
-CPU Usage: 0.227 seconds = 0.113 user + 0.113 sys
-Maximum Resident Size: 689104 KB
+2025/06/03 11:15:29| Logfile: closing log stdio:/var/log/squid/access.log
+2025/06/03 11:15:29| Open FD UNSTARTED     0 stdin
+2025/06/03 11:15:29| Open FD UNSTARTED     1 stdout
+2025/06/03 11:15:29| Open FD UNSTARTED     2 stderr
+2025/06/03 11:15:29| Squid Cache (Version 5.9): Exiting normally.
+2025/06/03 11:15:29| Removing PID file (/run/squid.pid)
+2025/06/03 11:19:19| Current Directory is /
+2025/06/03 11:19:19| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 11:19:19| Service Name: squid
+2025/06/03 11:19:19| Process ID 1
+2025/06/03 11:19:19| Process Roles: master worker
+2025/06/03 11:19:19| With 1048576 file descriptors available
+2025/06/03 11:19:19| Initializing IP Cache...
+2025/06/03 11:19:19| DNS Socket created at [::], FD 8
+2025/06/03 11:19:19| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 11:19:19| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 11:19:19| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 11:19:19| Logfile: opening log /var/log/squid/access.log
+2025/06/03 11:19:19| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 11:19:19| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 11:19:19| Store logging disabled
+2025/06/03 11:19:19| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 11:19:19| Target number of buckets: 1008
+2025/06/03 11:19:19| Using 8192 Store buckets
+2025/06/03 11:19:19| Max Mem  size: 262144 KB
+2025/06/03 11:19:19| Max Swap size: 0 KB
+2025/06/03 11:19:19| Using Least Load store dir selection
+2025/06/03 11:19:19| Current Directory is /
+2025/06/03 11:19:19| Finished loading MIME types and icons.
+2025/06/03 11:19:19| HTCP Disabled.
+2025/06/03 11:19:19| Pinger socket opened on FD 14
+2025/06/03 11:19:19| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 11:19:19| Squid plugin modules loaded: 0
+2025/06/03 11:19:19| Adaptation support is off.
+2025/06/03 11:19:19| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 11:19:19| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 11:19:19| pinger: Initialising ICMP pinger ...
+2025/06/03 11:19:19| pinger: ICMP socket opened.
+2025/06/03 11:19:19| pinger: ICMPv6 socket opened
+2025/06/03 11:19:20| storeLateRelease: released 0 objects
+2025/06/03 11:21:28| Preparing for shutdown after 0 requests
+2025/06/03 11:21:28| Waiting 30 seconds for active connections to finish
+2025/06/03 11:21:28| Closing HTTP(S) port [::]:8888
+2025/06/03 11:21:28| Closing HTTP(S) port [::]:3128
+2025/06/03 11:21:28| Closing Pinger socket on FD 14
+2025/06/03 11:21:36| Preparing for shutdown after 0 requests
+2025/06/03 11:21:36| Waiting 30 seconds for active connections to finish
+2025/06/03 11:21:36| Pinger exiting.
+2025/06/03 11:21:36| Preparing for shutdown after 0 requests
+2025/06/03 11:21:36| Waiting 30 seconds for active connections to finish
+2025/06/03 11:21:37| Preparing for shutdown after 0 requests
+2025/06/03 11:21:37| Waiting 30 seconds for active connections to finish
+2025/06/03 11:21:37| Preparing for shutdown after 0 requests
+2025/06/03 11:21:37| Waiting 30 seconds for active connections to finish
+2025/06/03 11:21:37| Preparing for shutdown after 0 requests
+2025/06/03 11:21:37| Waiting 30 seconds for active connections to finish
+2025/06/03 11:21:37| Shutdown: NTLM authentication.
+2025/06/03 11:21:37| Shutdown: Negotiate authentication.
+2025/06/03 11:21:37| Shutdown: Digest authentication.
+2025/06/03 11:21:37| Shutdown: Basic authentication.
+2025/06/03 11:21:37| Preparing for shutdown after 0 requests
+2025/06/03 11:21:37| Waiting 30 seconds for active connections to finish
+2025/06/03 11:21:37| Preparing for shutdown after 0 requests
+2025/06/03 11:21:37| Waiting 30 seconds for active connections to finish
+2025/06/03 11:21:37| Shutting down...
+2025/06/03 11:21:37| storeDirWriteCleanLogs: Starting...
+2025/06/03 11:21:37|   Finished.  Wrote 0 entries.
+2025/06/03 11:21:37|   Took 0.00 seconds (  0.00 entries/sec).
+CPU Usage: 0.213 seconds = 0.077 user + 0.136 sys
+Maximum Resident Size: 689056 KB
 Page faults with physical i/o: 107
-2025/06/04 12:36:13| Logfile: closing log stdio:/var/log/squid/access.log
-2025/06/04 12:36:13| Open FD UNSTARTED     0 stdin
-2025/06/04 12:36:13| Open FD UNSTARTED     1 stdout
-2025/06/04 12:36:13| Open FD UNSTARTED     2 stderr
-2025/06/04 12:36:13| Squid Cache (Version 5.9): Exiting normally.
-2025/06/04 12:36:13| Removing PID file (/run/squid.pid)
-2025/06/04 12:43:07| Current Directory is /
-2025/06/04 12:43:07| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 12:43:07| Service Name: squid
-2025/06/04 12:43:07| Process ID 1
-2025/06/04 12:43:07| Process Roles: master worker
-2025/06/04 12:43:07| With 1048576 file descriptors available
-2025/06/04 12:43:07| Initializing IP Cache...
-2025/06/04 12:43:07| DNS Socket created at [::], FD 8
-2025/06/04 12:43:07| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 12:43:07| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 12:43:07| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 12:43:07| Logfile: opening log /var/log/squid/access.log
-2025/06/04 12:43:07| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 12:43:07| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 12:43:07| Store logging disabled
-2025/06/04 12:43:07| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 12:43:07| Target number of buckets: 1008
-2025/06/04 12:43:07| Using 8192 Store buckets
-2025/06/04 12:43:07| Max Mem  size: 262144 KB
-2025/06/04 12:43:07| Max Swap size: 0 KB
-2025/06/04 12:43:07| Using Least Load store dir selection
-2025/06/04 12:43:07| Current Directory is /
-2025/06/04 12:43:07| Finished loading MIME types and icons.
-2025/06/04 12:43:07| HTCP Disabled.
-2025/06/04 12:43:07| Pinger socket opened on FD 14
-2025/06/04 12:43:07| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 12:43:07| Squid plugin modules loaded: 0
-2025/06/04 12:43:07| Adaptation support is off.
-2025/06/04 12:43:07| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 12:43:07| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 12:43:07| pinger: Initialising ICMP pinger ...
-2025/06/04 12:43:07| pinger: ICMP socket opened.
-2025/06/04 12:43:07| pinger: ICMPv6 socket opened
-2025/06/04 12:43:08| storeLateRelease: released 0 objects
-2025/06/04 12:51:12| Preparing for shutdown after 0 requests
-2025/06/04 12:51:12| Waiting 30 seconds for active connections to finish
-2025/06/04 12:51:12| Closing HTTP(S) port [::]:8888
-2025/06/04 12:51:12| Closing HTTP(S) port [::]:3128
-2025/06/04 12:51:12| Closing Pinger socket on FD 14
-2025/06/04 12:51:22| Preparing for shutdown after 0 requests
-2025/06/04 12:51:22| Waiting 30 seconds for active connections to finish
-2025/06/04 12:51:22| Preparing for shutdown after 0 requests
-2025/06/04 12:51:22| Waiting 30 seconds for active connections to finish
-2025/06/04 12:51:22| Preparing for shutdown after 0 requests
-2025/06/04 12:51:22| Waiting 30 seconds for active connections to finish
-2025/06/04 12:51:22| Preparing for shutdown after 0 requests
-2025/06/04 12:51:22| Waiting 30 seconds for active connections to finish
-2025/06/04 12:51:22| Preparing for shutdown after 0 requests
-2025/06/04 12:51:22| Waiting 30 seconds for active connections to finish
-2025/06/04 12:57:48| Current Directory is /
-2025/06/04 12:57:49| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
-2025/06/04 12:57:49| Service Name: squid
-2025/06/04 12:57:49| Process ID 1
-2025/06/04 12:57:49| Process Roles: master worker
-2025/06/04 12:57:49| With 1048576 file descriptors available
-2025/06/04 12:57:49| Initializing IP Cache...
-2025/06/04 12:57:49| DNS Socket created at [::], FD 8
-2025/06/04 12:57:49| DNS Socket created at 0.0.0.0, FD 9
-2025/06/04 12:57:49| Adding nameserver 127.0.0.11 from /etc/resolv.conf
-2025/06/04 12:57:49| Adding ndots 1 from /etc/resolv.conf
-2025/06/04 12:57:49| Logfile: opening log /var/log/squid/access.log
-2025/06/04 12:57:49| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
-2025/06/04 12:57:49| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
-2025/06/04 12:57:49| Store logging disabled
-2025/06/04 12:57:49| Swap maxSize 0 + 262144 KB, estimated 20164 objects
-2025/06/04 12:57:49| Target number of buckets: 1008
-2025/06/04 12:57:49| Using 8192 Store buckets
-2025/06/04 12:57:49| Max Mem  size: 262144 KB
-2025/06/04 12:57:49| Max Swap size: 0 KB
-2025/06/04 12:57:49| Using Least Load store dir selection
-2025/06/04 12:57:49| Current Directory is /
-2025/06/04 12:57:49| Finished loading MIME types and icons.
-2025/06/04 12:57:49| HTCP Disabled.
-2025/06/04 12:57:49| Pinger socket opened on FD 14
-2025/06/04 12:57:49| Configuring Parent 172.24.0.3/3100/0
-2025/06/04 12:57:49| Squid plugin modules loaded: 0
-2025/06/04 12:57:49| Adaptation support is off.
-2025/06/04 12:57:49| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
-2025/06/04 12:57:49| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
-2025/06/04 12:57:49| pinger: Initialising ICMP pinger ...
-2025/06/04 12:57:49| pinger: ICMP socket opened.
-2025/06/04 12:57:49| pinger: ICMPv6 socket opened
-2025/06/04 12:57:50| storeLateRelease: released 0 objects
-2025/06/04 13:01:40| Preparing for shutdown after 0 requests
-2025/06/04 13:01:40| Waiting 30 seconds for active connections to finish
-2025/06/04 13:01:40| Closing HTTP(S) port [::]:8888
-2025/06/04 13:01:40| Closing HTTP(S) port [::]:3128
-2025/06/04 13:01:40| Closing Pinger socket on FD 14
-2025/06/04 13:01:45| Pinger exiting.
+2025/06/03 11:21:37| Logfile: closing log stdio:/var/log/squid/access.log
+2025/06/03 11:21:37| Open FD UNSTARTED     0 stdin
+2025/06/03 11:21:37| Open FD UNSTARTED     1 stdout
+2025/06/03 11:21:37| Open FD UNSTARTED     2 stderr
+2025/06/03 11:21:37| Squid Cache (Version 5.9): Exiting normally.
+2025/06/03 11:21:37| Removing PID file (/run/squid.pid)
+2025/06/03 11:25:31| Current Directory is /
+2025/06/03 11:25:32| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 11:25:32| Service Name: squid
+2025/06/03 11:25:32| Process ID 1
+2025/06/03 11:25:32| Process Roles: master worker
+2025/06/03 11:25:32| With 1048576 file descriptors available
+2025/06/03 11:25:32| Initializing IP Cache...
+2025/06/03 11:25:32| DNS Socket created at [::], FD 8
+2025/06/03 11:25:32| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 11:25:32| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 11:25:32| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 11:25:32| Logfile: opening log /var/log/squid/access.log
+2025/06/03 11:25:32| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 11:25:32| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 11:25:32| Store logging disabled
+2025/06/03 11:25:32| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 11:25:32| Target number of buckets: 1008
+2025/06/03 11:25:32| Using 8192 Store buckets
+2025/06/03 11:25:32| Max Mem  size: 262144 KB
+2025/06/03 11:25:32| Max Swap size: 0 KB
+2025/06/03 11:25:32| Using Least Load store dir selection
+2025/06/03 11:25:32| Current Directory is /
+2025/06/03 11:25:32| Finished loading MIME types and icons.
+2025/06/03 11:25:32| HTCP Disabled.
+2025/06/03 11:25:32| Pinger socket opened on FD 14
+2025/06/03 11:25:32| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 11:25:32| Squid plugin modules loaded: 0
+2025/06/03 11:25:32| Adaptation support is off.
+2025/06/03 11:25:32| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 11:25:32| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 11:25:32| pinger: Initialising ICMP pinger ...
+2025/06/03 11:25:32| pinger: ICMP socket opened.
+2025/06/03 11:25:32| pinger: ICMPv6 socket opened
+2025/06/03 11:25:33| storeLateRelease: released 0 objects
+2025/06/03 11:29:15| Current Directory is /
+2025/06/03 11:29:15| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 11:29:15| Service Name: squid
+2025/06/03 11:29:15| Process ID 1
+2025/06/03 11:29:15| Process Roles: master worker
+2025/06/03 11:29:15| With 1048576 file descriptors available
+2025/06/03 11:29:15| Initializing IP Cache...
+2025/06/03 11:29:15| DNS Socket created at [::], FD 8
+2025/06/03 11:29:15| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 11:29:15| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 11:29:15| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 11:29:15| Logfile: opening log /var/log/squid/access.log
+2025/06/03 11:29:15| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 11:29:15| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 11:29:15| Store logging disabled
+2025/06/03 11:29:15| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 11:29:15| Target number of buckets: 1008
+2025/06/03 11:29:15| Using 8192 Store buckets
+2025/06/03 11:29:15| Max Mem  size: 262144 KB
+2025/06/03 11:29:15| Max Swap size: 0 KB
+2025/06/03 11:29:15| Using Least Load store dir selection
+2025/06/03 11:29:15| Current Directory is /
+2025/06/03 11:29:15| Finished loading MIME types and icons.
+2025/06/03 11:29:15| HTCP Disabled.
+2025/06/03 11:29:15| Pinger socket opened on FD 14
+2025/06/03 11:29:15| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 11:29:15| Squid plugin modules loaded: 0
+2025/06/03 11:29:15| Adaptation support is off.
+2025/06/03 11:29:15| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 11:29:15| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 11:29:15| pinger: Initialising ICMP pinger ...
+2025/06/03 11:29:15| pinger: ICMP socket opened.
+2025/06/03 11:29:15| pinger: ICMPv6 socket opened
+2025/06/03 11:29:16| storeLateRelease: released 0 objects
+2025/06/03 11:31:05| Preparing for shutdown after 0 requests
+2025/06/03 11:31:05| Waiting 30 seconds for active connections to finish
+2025/06/03 11:31:05| Closing HTTP(S) port [::]:8888
+2025/06/03 11:31:05| Closing HTTP(S) port [::]:3128
+2025/06/03 11:31:05| Closing Pinger socket on FD 14
+2025/06/03 11:31:11| Pinger exiting.
+2025/06/03 11:45:25| Current Directory is /
+2025/06/03 11:45:26| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 11:45:26| Service Name: squid
+2025/06/03 11:45:26| Process ID 1
+2025/06/03 11:45:26| Process Roles: master worker
+2025/06/03 11:45:26| With 1048576 file descriptors available
+2025/06/03 11:45:26| Initializing IP Cache...
+2025/06/03 11:45:26| DNS Socket created at [::], FD 8
+2025/06/03 11:45:26| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 11:45:26| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 11:45:26| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 11:45:26| Logfile: opening log /var/log/squid/access.log
+2025/06/03 11:45:26| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 11:45:26| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 11:45:26| Store logging disabled
+2025/06/03 11:45:26| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 11:45:26| Target number of buckets: 1008
+2025/06/03 11:45:26| Using 8192 Store buckets
+2025/06/03 11:45:26| Max Mem  size: 262144 KB
+2025/06/03 11:45:26| Max Swap size: 0 KB
+2025/06/03 11:45:26| Using Least Load store dir selection
+2025/06/03 11:45:26| Current Directory is /
+2025/06/03 11:45:26| Finished loading MIME types and icons.
+2025/06/03 11:45:26| HTCP Disabled.
+2025/06/03 11:45:26| Pinger socket opened on FD 14
+2025/06/03 11:45:26| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 11:45:26| Squid plugin modules loaded: 0
+2025/06/03 11:45:26| Adaptation support is off.
+2025/06/03 11:45:26| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 11:45:26| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 11:45:26| pinger: Initialising ICMP pinger ...
+2025/06/03 11:45:26| pinger: ICMP socket opened.
+2025/06/03 11:45:26| pinger: ICMPv6 socket opened
+2025/06/03 11:45:27| storeLateRelease: released 0 objects
+2025/06/03 11:47:12| Preparing for shutdown after 0 requests
+2025/06/03 11:47:12| Waiting 30 seconds for active connections to finish
+2025/06/03 11:47:12| Closing HTTP(S) port [::]:8888
+2025/06/03 11:47:12| Closing HTTP(S) port [::]:3128
+2025/06/03 11:47:12| Closing Pinger socket on FD 14
+2025/06/03 11:52:56| Current Directory is /
+2025/06/03 11:52:56| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 11:52:56| Service Name: squid
+2025/06/03 11:52:56| Process ID 1
+2025/06/03 11:52:56| Process Roles: master worker
+2025/06/03 11:52:56| With 1048576 file descriptors available
+2025/06/03 11:52:56| Initializing IP Cache...
+2025/06/03 11:52:56| DNS Socket created at [::], FD 8
+2025/06/03 11:52:56| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 11:52:56| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 11:52:56| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 11:52:56| Logfile: opening log /var/log/squid/access.log
+2025/06/03 11:52:56| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 11:52:56| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 11:52:56| Store logging disabled
+2025/06/03 11:52:56| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 11:52:56| Target number of buckets: 1008
+2025/06/03 11:52:56| Using 8192 Store buckets
+2025/06/03 11:52:56| Max Mem  size: 262144 KB
+2025/06/03 11:52:56| Max Swap size: 0 KB
+2025/06/03 11:52:56| Using Least Load store dir selection
+2025/06/03 11:52:56| Current Directory is /
+2025/06/03 11:52:56| Finished loading MIME types and icons.
+2025/06/03 11:52:56| HTCP Disabled.
+2025/06/03 11:52:56| Pinger socket opened on FD 14
+2025/06/03 11:52:56| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 11:52:56| Squid plugin modules loaded: 0
+2025/06/03 11:52:56| Adaptation support is off.
+2025/06/03 11:52:56| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 11:52:56| pinger: Initialising ICMP pinger ...
+2025/06/03 11:52:56| pinger: ICMP socket opened.
+2025/06/03 11:52:56| pinger: ICMPv6 socket opened
+2025/06/03 11:52:56| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 11:52:57| storeLateRelease: released 0 objects
+2025/06/03 11:54:14| Preparing for shutdown after 0 requests
+2025/06/03 11:54:14| Waiting 30 seconds for active connections to finish
+2025/06/03 11:54:14| Closing HTTP(S) port [::]:8888
+2025/06/03 11:54:14| Closing HTTP(S) port [::]:3128
+2025/06/03 11:54:14| Closing Pinger socket on FD 14
+2025/06/03 13:12:34| Current Directory is /
+2025/06/03 13:12:34| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 13:12:34| Service Name: squid
+2025/06/03 13:12:34| Process ID 1
+2025/06/03 13:12:34| Process Roles: master worker
+2025/06/03 13:12:34| With 1048576 file descriptors available
+2025/06/03 13:12:34| Initializing IP Cache...
+2025/06/03 13:12:34| DNS Socket created at [::], FD 8
+2025/06/03 13:12:34| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 13:12:34| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 13:12:34| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 13:12:34| Logfile: opening log /var/log/squid/access.log
+2025/06/03 13:12:34| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 13:12:34| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 13:12:34| Store logging disabled
+2025/06/03 13:12:34| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 13:12:34| Target number of buckets: 1008
+2025/06/03 13:12:34| Using 8192 Store buckets
+2025/06/03 13:12:34| Max Mem  size: 262144 KB
+2025/06/03 13:12:34| Max Swap size: 0 KB
+2025/06/03 13:12:34| Using Least Load store dir selection
+2025/06/03 13:12:34| Current Directory is /
+2025/06/03 13:12:34| Finished loading MIME types and icons.
+2025/06/03 13:12:34| HTCP Disabled.
+2025/06/03 13:12:34| Pinger socket opened on FD 14
+2025/06/03 13:12:34| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 13:12:34| Squid plugin modules loaded: 0
+2025/06/03 13:12:34| Adaptation support is off.
+2025/06/03 13:12:34| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 13:12:34| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 13:12:34| pinger: Initialising ICMP pinger ...
+2025/06/03 13:12:34| pinger: ICMP socket opened.
+2025/06/03 13:12:34| pinger: ICMPv6 socket opened
+2025/06/03 13:12:35| storeLateRelease: released 0 objects
+2025/06/03 13:13:51| Preparing for shutdown after 0 requests
+2025/06/03 13:13:51| Waiting 30 seconds for active connections to finish
+2025/06/03 13:13:51| Closing HTTP(S) port [::]:8888
+2025/06/03 13:13:51| Closing HTTP(S) port [::]:3128
+2025/06/03 13:13:51| Closing Pinger socket on FD 14
+2025/06/03 13:16:59| Current Directory is /
+2025/06/03 13:16:59| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 13:16:59| Service Name: squid
+2025/06/03 13:16:59| Process ID 1
+2025/06/03 13:16:59| Process Roles: master worker
+2025/06/03 13:16:59| With 1048576 file descriptors available
+2025/06/03 13:16:59| Initializing IP Cache...
+2025/06/03 13:16:59| DNS Socket created at [::], FD 8
+2025/06/03 13:16:59| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 13:16:59| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 13:16:59| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 13:16:59| Logfile: opening log /var/log/squid/access.log
+2025/06/03 13:16:59| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 13:16:59| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 13:16:59| Store logging disabled
+2025/06/03 13:16:59| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 13:16:59| Target number of buckets: 1008
+2025/06/03 13:16:59| Using 8192 Store buckets
+2025/06/03 13:16:59| Max Mem  size: 262144 KB
+2025/06/03 13:16:59| Max Swap size: 0 KB
+2025/06/03 13:16:59| Using Least Load store dir selection
+2025/06/03 13:16:59| Current Directory is /
+2025/06/03 13:16:59| Finished loading MIME types and icons.
+2025/06/03 13:16:59| HTCP Disabled.
+2025/06/03 13:16:59| Pinger socket opened on FD 14
+2025/06/03 13:16:59| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 13:16:59| Squid plugin modules loaded: 0
+2025/06/03 13:16:59| Adaptation support is off.
+2025/06/03 13:16:59| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 13:16:59| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 13:16:59| pinger: Initialising ICMP pinger ...
+2025/06/03 13:16:59| pinger: ICMP socket opened.
+2025/06/03 13:16:59| pinger: ICMPv6 socket opened
+2025/06/03 13:17:00| storeLateRelease: released 0 objects
+2025/06/03 13:18:03| temporary disabling (Not Found) digest from 172.24.0.3
+2025/06/03 13:23:38| temporary disabling (Not Found) digest from 172.24.0.3
+2025/06/03 13:25:26| Preparing for shutdown after 1 requests
+2025/06/03 13:25:26| Waiting 30 seconds for active connections to finish
+2025/06/03 13:25:26| Closing HTTP(S) port [::]:8888
+2025/06/03 13:25:26| Closing HTTP(S) port [::]:3128
+2025/06/03 13:25:26| Closing Pinger socket on FD 14
+2025/06/03 13:25:28| Pinger exiting.
+2025/06/03 13:27:24| Current Directory is /
+2025/06/03 13:27:25| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 13:27:25| Service Name: squid
+2025/06/03 13:27:25| Process ID 1
+2025/06/03 13:27:25| Process Roles: master worker
+2025/06/03 13:27:25| With 1048576 file descriptors available
+2025/06/03 13:27:25| Initializing IP Cache...
+2025/06/03 13:27:25| DNS Socket created at [::], FD 8
+2025/06/03 13:27:25| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 13:27:25| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 13:27:25| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 13:27:25| Logfile: opening log /var/log/squid/access.log
+2025/06/03 13:27:25| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 13:27:25| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 13:27:25| Store logging disabled
+2025/06/03 13:27:25| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 13:27:25| Target number of buckets: 1008
+2025/06/03 13:27:25| Using 8192 Store buckets
+2025/06/03 13:27:25| Max Mem  size: 262144 KB
+2025/06/03 13:27:25| Max Swap size: 0 KB
+2025/06/03 13:27:25| Using Least Load store dir selection
+2025/06/03 13:27:25| Current Directory is /
+2025/06/03 13:27:25| Finished loading MIME types and icons.
+2025/06/03 13:27:25| HTCP Disabled.
+2025/06/03 13:27:25| Pinger socket opened on FD 14
+2025/06/03 13:27:25| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 13:27:25| Squid plugin modules loaded: 0
+2025/06/03 13:27:25| Adaptation support is off.
+2025/06/03 13:27:25| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 13:27:25| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 13:27:25| pinger: Initialising ICMP pinger ...
+2025/06/03 13:27:25| pinger: ICMP socket opened.
+2025/06/03 13:27:25| pinger: ICMPv6 socket opened
+2025/06/03 13:27:26| storeLateRelease: released 0 objects
+2025/06/03 13:31:01| temporary disabling (Not Found) digest from 172.24.0.3
+2025/06/03 13:52:46| Current Directory is /
+2025/06/03 13:52:46| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 13:52:46| Service Name: squid
+2025/06/03 13:52:46| Process ID 1
+2025/06/03 13:52:46| Process Roles: master worker
+2025/06/03 13:52:46| With 1048576 file descriptors available
+2025/06/03 13:52:46| Initializing IP Cache...
+2025/06/03 13:52:46| DNS Socket created at [::], FD 8
+2025/06/03 13:52:46| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 13:52:46| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 13:52:46| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 13:52:46| Logfile: opening log /var/log/squid/access.log
+2025/06/03 13:52:46| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 13:52:46| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 13:52:46| Store logging disabled
+2025/06/03 13:52:46| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 13:52:46| Target number of buckets: 1008
+2025/06/03 13:52:46| Using 8192 Store buckets
+2025/06/03 13:52:46| Max Mem  size: 262144 KB
+2025/06/03 13:52:46| Max Swap size: 0 KB
+2025/06/03 13:52:46| Using Least Load store dir selection
+2025/06/03 13:52:46| Current Directory is /
+2025/06/03 13:52:47| Finished loading MIME types and icons.
+2025/06/03 13:52:47| HTCP Disabled.
+2025/06/03 13:52:47| Pinger socket opened on FD 14
+2025/06/03 13:52:47| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 13:52:47| Squid plugin modules loaded: 0
+2025/06/03 13:52:47| Adaptation support is off.
+2025/06/03 13:52:47| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 13:52:47| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 13:52:47| pinger: Initialising ICMP pinger ...
+2025/06/03 13:52:47| pinger: ICMP socket opened.
+2025/06/03 13:52:47| pinger: ICMPv6 socket opened
+2025/06/03 13:52:47| storeLateRelease: released 0 objects
+2025/06/03 13:56:38| Preparing for shutdown after 1 requests
+2025/06/03 13:56:38| Waiting 30 seconds for active connections to finish
+2025/06/03 13:56:38| Closing HTTP(S) port [::]:8888
+2025/06/03 13:56:38| Closing HTTP(S) port [::]:3128
+2025/06/03 13:56:38| Closing Pinger socket on FD 14
+2025/06/03 13:57:20| Current Directory is /
+2025/06/03 13:57:20| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 13:57:20| Service Name: squid
+2025/06/03 13:57:20| Process ID 1
+2025/06/03 13:57:20| Process Roles: master worker
+2025/06/03 13:57:20| With 1048576 file descriptors available
+2025/06/03 13:57:20| Initializing IP Cache...
+2025/06/03 13:57:20| DNS Socket created at [::], FD 8
+2025/06/03 13:57:20| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 13:57:20| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 13:57:20| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 13:57:20| Logfile: opening log /var/log/squid/access.log
+2025/06/03 13:57:20| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 13:57:20| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 13:57:20| Store logging disabled
+2025/06/03 13:57:21| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 13:57:21| Target number of buckets: 1008
+2025/06/03 13:57:21| Using 8192 Store buckets
+2025/06/03 13:57:21| Max Mem  size: 262144 KB
+2025/06/03 13:57:21| Max Swap size: 0 KB
+2025/06/03 13:57:21| Using Least Load store dir selection
+2025/06/03 13:57:21| Current Directory is /
+2025/06/03 13:57:21| Finished loading MIME types and icons.
+2025/06/03 13:57:21| HTCP Disabled.
+2025/06/03 13:57:21| Pinger socket opened on FD 14
+2025/06/03 13:57:21| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 13:57:21| Squid plugin modules loaded: 0
+2025/06/03 13:57:21| Adaptation support is off.
+2025/06/03 13:57:21| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 13:57:21| pinger: Initialising ICMP pinger ...
+2025/06/03 13:57:21| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 13:57:21| pinger: ICMP socket opened.
+2025/06/03 13:57:21| pinger: ICMPv6 socket opened
+2025/06/03 13:57:22| storeLateRelease: released 0 objects
+2025/06/03 13:59:04| Preparing for shutdown after 1 requests
+2025/06/03 13:59:04| Waiting 30 seconds for active connections to finish
+2025/06/03 13:59:04| Closing HTTP(S) port [::]:8888
+2025/06/03 13:59:04| Closing HTTP(S) port [::]:3128
+2025/06/03 13:59:04| Closing Pinger socket on FD 14
+2025/06/03 14:03:21| Current Directory is /
+2025/06/03 14:03:21| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 14:03:21| Service Name: squid
+2025/06/03 14:03:21| Process ID 1
+2025/06/03 14:03:21| Process Roles: master worker
+2025/06/03 14:03:21| With 1048576 file descriptors available
+2025/06/03 14:03:21| Initializing IP Cache...
+2025/06/03 14:03:21| DNS Socket created at [::], FD 8
+2025/06/03 14:03:21| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 14:03:21| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 14:03:21| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 14:03:21| Logfile: opening log /var/log/squid/access.log
+2025/06/03 14:03:21| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 14:03:21| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 14:03:21| Store logging disabled
+2025/06/03 14:03:21| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 14:03:21| Target number of buckets: 1008
+2025/06/03 14:03:21| Using 8192 Store buckets
+2025/06/03 14:03:21| Max Mem  size: 262144 KB
+2025/06/03 14:03:21| Max Swap size: 0 KB
+2025/06/03 14:03:21| Using Least Load store dir selection
+2025/06/03 14:03:21| Current Directory is /
+2025/06/03 14:03:21| Finished loading MIME types and icons.
+2025/06/03 14:03:21| HTCP Disabled.
+2025/06/03 14:03:21| Pinger socket opened on FD 14
+2025/06/03 14:03:21| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 14:03:21| Squid plugin modules loaded: 0
+2025/06/03 14:03:21| Adaptation support is off.
+2025/06/03 14:03:21| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 14:03:21| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 14:03:21| pinger: Initialising ICMP pinger ...
+2025/06/03 14:03:21| pinger: ICMP socket opened.
+2025/06/03 14:03:21| pinger: ICMPv6 socket opened
+2025/06/03 14:03:22| storeLateRelease: released 0 objects
+2025/06/03 14:09:26| Preparing for shutdown after 2 requests
+2025/06/03 14:09:26| Waiting 30 seconds for active connections to finish
+2025/06/03 14:09:26| Closing HTTP(S) port [::]:8888
+2025/06/03 14:09:26| Closing HTTP(S) port [::]:3128
+2025/06/03 14:09:26| Closing Pinger socket on FD 14
+2025/06/03 14:10:47| Current Directory is /
+2025/06/03 14:10:47| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 14:10:47| Service Name: squid
+2025/06/03 14:10:47| Process ID 1
+2025/06/03 14:10:47| Process Roles: master worker
+2025/06/03 14:10:47| With 1048576 file descriptors available
+2025/06/03 14:10:47| Initializing IP Cache...
+2025/06/03 14:10:47| DNS Socket created at [::], FD 8
+2025/06/03 14:10:47| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 14:10:47| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 14:10:47| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 14:10:47| Logfile: opening log /var/log/squid/access.log
+2025/06/03 14:10:47| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 14:10:47| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 14:10:47| Store logging disabled
+2025/06/03 14:10:47| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 14:10:47| Target number of buckets: 1008
+2025/06/03 14:10:47| Using 8192 Store buckets
+2025/06/03 14:10:47| Max Mem  size: 262144 KB
+2025/06/03 14:10:47| Max Swap size: 0 KB
+2025/06/03 14:10:47| Using Least Load store dir selection
+2025/06/03 14:10:47| Current Directory is /
+2025/06/03 14:10:47| Finished loading MIME types and icons.
+2025/06/03 14:10:47| HTCP Disabled.
+2025/06/03 14:10:47| Pinger socket opened on FD 14
+2025/06/03 14:10:47| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 14:10:47| Squid plugin modules loaded: 0
+2025/06/03 14:10:47| Adaptation support is off.
+2025/06/03 14:10:47| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 14:10:47| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 14:10:47| pinger: Initialising ICMP pinger ...
+2025/06/03 14:10:47| pinger: ICMP socket opened.
+2025/06/03 14:10:47| pinger: ICMPv6 socket opened
+2025/06/03 14:10:48| storeLateRelease: released 0 objects
+2025/06/03 14:12:12| Preparing for shutdown after 1 requests
+2025/06/03 14:12:12| Waiting 30 seconds for active connections to finish
+2025/06/03 14:12:12| Closing HTTP(S) port [::]:8888
+2025/06/03 14:12:12| Closing HTTP(S) port [::]:3128
+2025/06/03 14:12:12| Closing Pinger socket on FD 14
+2025/06/03 14:14:21| Current Directory is /
+2025/06/03 14:14:21| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 14:14:21| Service Name: squid
+2025/06/03 14:14:21| Process ID 1
+2025/06/03 14:14:21| Process Roles: master worker
+2025/06/03 14:14:21| With 1048576 file descriptors available
+2025/06/03 14:14:21| Initializing IP Cache...
+2025/06/03 14:14:21| DNS Socket created at [::], FD 8
+2025/06/03 14:14:21| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 14:14:21| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 14:14:21| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 14:14:21| Logfile: opening log /var/log/squid/access.log
+2025/06/03 14:14:21| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 14:14:21| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 14:14:21| Store logging disabled
+2025/06/03 14:14:21| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 14:14:21| Target number of buckets: 1008
+2025/06/03 14:14:21| Using 8192 Store buckets
+2025/06/03 14:14:21| Max Mem  size: 262144 KB
+2025/06/03 14:14:21| Max Swap size: 0 KB
+2025/06/03 14:14:21| Using Least Load store dir selection
+2025/06/03 14:14:21| Current Directory is /
+2025/06/03 14:14:21| Finished loading MIME types and icons.
+2025/06/03 14:14:21| HTCP Disabled.
+2025/06/03 14:14:21| Pinger socket opened on FD 14
+2025/06/03 14:14:21| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 14:14:21| Squid plugin modules loaded: 0
+2025/06/03 14:14:21| Adaptation support is off.
+2025/06/03 14:14:21| pinger: Initialising ICMP pinger ...
+2025/06/03 14:14:21| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 14:14:21| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 14:14:21| pinger: ICMP socket opened.
+2025/06/03 14:14:21| pinger: ICMPv6 socket opened
+2025/06/03 14:14:22| storeLateRelease: released 0 objects
+2025/06/03 14:16:48| Preparing for shutdown after 2 requests
+2025/06/03 14:16:48| Waiting 30 seconds for active connections to finish
+2025/06/03 14:16:48| Closing HTTP(S) port [::]:8888
+2025/06/03 14:16:48| Closing HTTP(S) port [::]:3128
+2025/06/03 14:16:48| Closing Pinger socket on FD 14
+2025/06/03 14:16:48| Pinger exiting.
+2025/06/03 14:27:47| Current Directory is /
+2025/06/03 14:27:47| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 14:27:47| Service Name: squid
+2025/06/03 14:27:47| Process ID 1
+2025/06/03 14:27:47| Process Roles: master worker
+2025/06/03 14:27:47| With 1048576 file descriptors available
+2025/06/03 14:27:47| Initializing IP Cache...
+2025/06/03 14:27:47| DNS Socket created at [::], FD 8
+2025/06/03 14:27:47| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 14:27:47| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 14:27:47| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 14:27:47| Logfile: opening log /var/log/squid/access.log
+2025/06/03 14:27:47| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 14:27:47| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 14:27:47| Store logging disabled
+2025/06/03 14:27:47| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 14:27:47| Target number of buckets: 1008
+2025/06/03 14:27:47| Using 8192 Store buckets
+2025/06/03 14:27:47| Max Mem  size: 262144 KB
+2025/06/03 14:27:47| Max Swap size: 0 KB
+2025/06/03 14:27:48| Using Least Load store dir selection
+2025/06/03 14:27:48| Current Directory is /
+2025/06/03 14:27:48| Finished loading MIME types and icons.
+2025/06/03 14:27:48| HTCP Disabled.
+2025/06/03 14:27:48| pinger: Initialising ICMP pinger ...
+2025/06/03 14:27:48| pinger: ICMP socket opened.
+2025/06/03 14:27:48| Pinger socket opened on FD 14
+2025/06/03 14:27:48| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 14:27:48| pinger: ICMPv6 socket opened
+2025/06/03 14:27:48| Squid plugin modules loaded: 0
+2025/06/03 14:27:48| Adaptation support is off.
+2025/06/03 14:27:48| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 14:27:48| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 14:27:48| storeLateRelease: released 0 objects
+2025/06/03 14:30:15| Preparing for shutdown after 7 requests
+2025/06/03 14:30:15| Waiting 30 seconds for active connections to finish
+2025/06/03 14:30:15| Closing HTTP(S) port [::]:8888
+2025/06/03 14:30:15| Closing HTTP(S) port [::]:3128
+2025/06/03 14:30:15| Closing Pinger socket on FD 14
+2025/06/03 14:30:22| Pinger exiting.
+2025/06/03 14:36:41| Current Directory is /
+2025/06/03 14:36:41| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 14:36:41| Service Name: squid
+2025/06/03 14:36:41| Process ID 1
+2025/06/03 14:36:41| Process Roles: master worker
+2025/06/03 14:36:41| With 1048576 file descriptors available
+2025/06/03 14:36:41| Initializing IP Cache...
+2025/06/03 14:36:41| DNS Socket created at [::], FD 8
+2025/06/03 14:36:41| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 14:36:41| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 14:36:41| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 14:36:41| Logfile: opening log /var/log/squid/access.log
+2025/06/03 14:36:41| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 14:36:42| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 14:36:42| Store logging disabled
+2025/06/03 14:36:42| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 14:36:42| Target number of buckets: 1008
+2025/06/03 14:36:42| Using 8192 Store buckets
+2025/06/03 14:36:42| Max Mem  size: 262144 KB
+2025/06/03 14:36:42| Max Swap size: 0 KB
+2025/06/03 14:36:42| Using Least Load store dir selection
+2025/06/03 14:36:42| Current Directory is /
+2025/06/03 14:36:42| Finished loading MIME types and icons.
+2025/06/03 14:36:42| HTCP Disabled.
+2025/06/03 14:36:42| Pinger socket opened on FD 14
+2025/06/03 14:36:42| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 14:36:42| Squid plugin modules loaded: 0
+2025/06/03 14:36:42| Adaptation support is off.
+2025/06/03 14:36:42| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 14:36:42| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 14:36:42| pinger: Initialising ICMP pinger ...
+2025/06/03 14:36:42| pinger: ICMP socket opened.
+2025/06/03 14:36:42| pinger: ICMPv6 socket opened
+2025/06/03 14:36:43| storeLateRelease: released 0 objects
+2025/06/03 14:47:37| Preparing for shutdown after 9 requests
+2025/06/03 14:47:37| Waiting 30 seconds for active connections to finish
+2025/06/03 14:47:37| Closing HTTP(S) port [::]:8888
+2025/06/03 14:47:37| Closing HTTP(S) port [::]:3128
+2025/06/03 14:47:37| Closing Pinger socket on FD 14
+2025/06/03 14:47:42| Pinger exiting.
+2025/06/03 14:51:09| Current Directory is /
+2025/06/03 14:51:09| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 14:51:09| Service Name: squid
+2025/06/03 14:51:09| Process ID 1
+2025/06/03 14:51:09| Process Roles: master worker
+2025/06/03 14:51:09| With 1048576 file descriptors available
+2025/06/03 14:51:09| Initializing IP Cache...
+2025/06/03 14:51:09| DNS Socket created at [::], FD 8
+2025/06/03 14:51:09| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 14:51:09| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 14:51:09| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 14:51:09| Logfile: opening log /var/log/squid/access.log
+2025/06/03 14:51:09| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 14:51:09| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 14:51:09| Store logging disabled
+2025/06/03 14:51:09| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 14:51:09| Target number of buckets: 1008
+2025/06/03 14:51:09| Using 8192 Store buckets
+2025/06/03 14:51:09| Max Mem  size: 262144 KB
+2025/06/03 14:51:09| Max Swap size: 0 KB
+2025/06/03 14:51:09| Using Least Load store dir selection
+2025/06/03 14:51:09| Current Directory is /
+2025/06/03 14:51:09| Finished loading MIME types and icons.
+2025/06/03 14:51:09| HTCP Disabled.
+2025/06/03 14:51:09| Pinger socket opened on FD 14
+2025/06/03 14:51:09| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 14:51:09| Squid plugin modules loaded: 0
+2025/06/03 14:51:09| Adaptation support is off.
+2025/06/03 14:51:09| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 14:51:09| pinger: Initialising ICMP pinger ...
+2025/06/03 14:51:09| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 14:51:09| pinger: ICMP socket opened.
+2025/06/03 14:51:09| pinger: ICMPv6 socket opened
+2025/06/03 14:51:10| storeLateRelease: released 0 objects
+2025/06/03 14:57:41| Preparing for shutdown after 4 requests
+2025/06/03 14:57:41| Waiting 30 seconds for active connections to finish
+2025/06/03 14:57:41| Closing HTTP(S) port [::]:8888
+2025/06/03 14:57:41| Closing HTTP(S) port [::]:3128
+2025/06/03 14:57:41| Closing Pinger socket on FD 14
+2025/06/03 14:57:50| Pinger exiting.
+2025/06/03 15:03:51| Current Directory is /
+2025/06/03 15:03:51| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 15:03:51| Service Name: squid
+2025/06/03 15:03:51| Process ID 1
+2025/06/03 15:03:51| Process Roles: master worker
+2025/06/03 15:03:51| With 1048576 file descriptors available
+2025/06/03 15:03:51| Initializing IP Cache...
+2025/06/03 15:03:51| DNS Socket created at [::], FD 8
+2025/06/03 15:03:51| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 15:03:51| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 15:03:51| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 15:03:51| Logfile: opening log /var/log/squid/access.log
+2025/06/03 15:03:51| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 15:03:51| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 15:03:51| Store logging disabled
+2025/06/03 15:03:51| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 15:03:51| Target number of buckets: 1008
+2025/06/03 15:03:51| Using 8192 Store buckets
+2025/06/03 15:03:51| Max Mem  size: 262144 KB
+2025/06/03 15:03:51| Max Swap size: 0 KB
+2025/06/03 15:03:51| Using Least Load store dir selection
+2025/06/03 15:03:51| Current Directory is /
+2025/06/03 15:03:51| Finished loading MIME types and icons.
+2025/06/03 15:03:51| HTCP Disabled.
+2025/06/03 15:03:51| Pinger socket opened on FD 14
+2025/06/03 15:03:51| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 15:03:51| Squid plugin modules loaded: 0
+2025/06/03 15:03:51| Adaptation support is off.
+2025/06/03 15:03:51| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 15:03:51| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 15:03:51| pinger: Initialising ICMP pinger ...
+2025/06/03 15:03:51| pinger: ICMP socket opened.
+2025/06/03 15:03:51| pinger: ICMPv6 socket opened
+2025/06/03 15:03:52| storeLateRelease: released 0 objects
+2025/06/03 15:12:02| Preparing for shutdown after 2 requests
+2025/06/03 15:12:02| Waiting 30 seconds for active connections to finish
+2025/06/03 15:12:02| Closing HTTP(S) port [::]:8888
+2025/06/03 15:12:02| Closing HTTP(S) port [::]:3128
+2025/06/03 15:12:02| Closing Pinger socket on FD 14
+2025/06/03 15:12:06| Preparing for shutdown after 2 requests
+2025/06/03 15:12:06| Waiting 30 seconds for active connections to finish
+2025/06/03 15:12:06| Preparing for shutdown after 2 requests
+2025/06/03 15:12:06| Waiting 30 seconds for active connections to finish
+2025/06/03 15:12:06| Preparing for shutdown after 2 requests
+2025/06/03 15:12:06| Waiting 30 seconds for active connections to finish
+2025/06/03 15:12:06| Preparing for shutdown after 2 requests
+2025/06/03 15:12:06| Waiting 30 seconds for active connections to finish
+2025/06/03 15:12:06| Preparing for shutdown after 2 requests
+2025/06/03 15:12:06| Waiting 30 seconds for active connections to finish
+2025/06/03 15:12:06| Preparing for shutdown after 2 requests
+2025/06/03 15:12:06| Waiting 30 seconds for active connections to finish
+2025/06/03 15:12:06| Preparing for shutdown after 2 requests
+2025/06/03 15:12:06| Waiting 30 seconds for active connections to finish
+2025/06/03 15:12:07| Preparing for shutdown after 2 requests
+2025/06/03 15:12:07| Waiting 30 seconds for active connections to finish
+2025/06/03 15:12:07| Shutdown: NTLM authentication.
+2025/06/03 15:12:07| Shutdown: Negotiate authentication.
+2025/06/03 15:12:07| Shutdown: Digest authentication.
+2025/06/03 15:12:07| Shutdown: Basic authentication.
+2025/06/03 15:12:07| Preparing for shutdown after 2 requests
+2025/06/03 15:12:07| Waiting 30 seconds for active connections to finish
+2025/06/03 15:12:07| Preparing for shutdown after 2 requests
+2025/06/03 15:12:07| Waiting 30 seconds for active connections to finish
+2025/06/03 15:12:07| Shutting down...
+2025/06/03 15:12:07| storeDirWriteCleanLogs: Starting...
+2025/06/03 15:12:07|   Finished.  Wrote 0 entries.
+2025/06/03 15:12:07|   Took 0.00 seconds (  0.00 entries/sec).
+CPU Usage: 0.601 seconds = 0.212 user + 0.389 sys
+Maximum Resident Size: 697568 KB
+Page faults with physical i/o: 11
+2025/06/03 15:12:07| Logfile: closing log stdio:/var/log/squid/access.log
+2025/06/03 15:12:07| Open FD UNSTARTED     0 stdin
+2025/06/03 15:12:07| Open FD UNSTARTED     1 stdout
+2025/06/03 15:12:07| Open FD UNSTARTED     2 stderr
+2025/06/03 15:12:08| Squid Cache (Version 5.9): Exiting normally.
+2025/06/03 15:12:08| Removing PID file (/run/squid.pid)
+2025/06/03 15:19:02| Current Directory is /
+2025/06/03 15:19:02| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 15:19:02| Service Name: squid
+2025/06/03 15:19:02| Process ID 1
+2025/06/03 15:19:02| Process Roles: master worker
+2025/06/03 15:19:02| With 1048576 file descriptors available
+2025/06/03 15:19:02| Initializing IP Cache...
+2025/06/03 15:19:02| DNS Socket created at [::], FD 8
+2025/06/03 15:19:02| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 15:19:02| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 15:19:02| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 15:19:02| Logfile: opening log /var/log/squid/access.log
+2025/06/03 15:19:02| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 15:19:02| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 15:19:02| Store logging disabled
+2025/06/03 15:19:02| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 15:19:02| Target number of buckets: 1008
+2025/06/03 15:19:02| Using 8192 Store buckets
+2025/06/03 15:19:02| Max Mem  size: 262144 KB
+2025/06/03 15:19:02| Max Swap size: 0 KB
+2025/06/03 15:19:02| Using Least Load store dir selection
+2025/06/03 15:19:02| Current Directory is /
+2025/06/03 15:19:02| Finished loading MIME types and icons.
+2025/06/03 15:19:02| HTCP Disabled.
+2025/06/03 15:19:02| Pinger socket opened on FD 14
+2025/06/03 15:19:02| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 15:19:02| Squid plugin modules loaded: 0
+2025/06/03 15:19:02| Adaptation support is off.
+2025/06/03 15:19:02| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 15:19:02| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 15:19:02| pinger: Initialising ICMP pinger ...
+2025/06/03 15:19:02| pinger: ICMP socket opened.
+2025/06/03 15:19:02| pinger: ICMPv6 socket opened
+2025/06/03 15:19:03| storeLateRelease: released 0 objects
+2025/06/03 15:25:19| Preparing for shutdown after 1 requests
+2025/06/03 15:25:19| Waiting 30 seconds for active connections to finish
+2025/06/03 15:25:19| Closing HTTP(S) port [::]:8888
+2025/06/03 15:25:19| Closing HTTP(S) port [::]:3128
+2025/06/03 15:25:19| Closing Pinger socket on FD 14
+2025/06/03 15:26:58| Current Directory is /
+2025/06/03 15:26:59| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 15:26:59| Service Name: squid
+2025/06/03 15:26:59| Process ID 1
+2025/06/03 15:26:59| Process Roles: master worker
+2025/06/03 15:26:59| With 1048576 file descriptors available
+2025/06/03 15:26:59| Initializing IP Cache...
+2025/06/03 15:26:59| DNS Socket created at [::], FD 8
+2025/06/03 15:26:59| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 15:26:59| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 15:26:59| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 15:26:59| Logfile: opening log /var/log/squid/access.log
+2025/06/03 15:26:59| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 15:26:59| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 15:26:59| Store logging disabled
+2025/06/03 15:26:59| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 15:26:59| Target number of buckets: 1008
+2025/06/03 15:26:59| Using 8192 Store buckets
+2025/06/03 15:26:59| Max Mem  size: 262144 KB
+2025/06/03 15:26:59| Max Swap size: 0 KB
+2025/06/03 15:26:59| Using Least Load store dir selection
+2025/06/03 15:26:59| Current Directory is /
+2025/06/03 15:26:59| Finished loading MIME types and icons.
+2025/06/03 15:26:59| HTCP Disabled.
+2025/06/03 15:26:59| Pinger socket opened on FD 14
+2025/06/03 15:26:59| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 15:26:59| Squid plugin modules loaded: 0
+2025/06/03 15:26:59| Adaptation support is off.
+2025/06/03 15:26:59| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 15:26:59| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 15:26:59| pinger: Initialising ICMP pinger ...
+2025/06/03 15:26:59| pinger: ICMP socket opened.
+2025/06/03 15:26:59| pinger: ICMPv6 socket opened
+2025/06/03 15:27:00| storeLateRelease: released 0 objects
+2025/06/03 15:30:22| Preparing for shutdown after 1 requests
+2025/06/03 15:30:22| Waiting 30 seconds for active connections to finish
+2025/06/03 15:30:22| Closing HTTP(S) port [::]:8888
+2025/06/03 15:30:22| Closing HTTP(S) port [::]:3128
+2025/06/03 15:30:22| Closing Pinger socket on FD 14
+2025/06/03 15:30:27| Pinger exiting.
+2025/06/03 15:48:35| Current Directory is /
+2025/06/03 15:48:35| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 15:48:35| Service Name: squid
+2025/06/03 15:48:35| Process ID 1
+2025/06/03 15:48:35| Process Roles: master worker
+2025/06/03 15:48:35| With 1048576 file descriptors available
+2025/06/03 15:48:35| Initializing IP Cache...
+2025/06/03 15:48:35| DNS Socket created at [::], FD 8
+2025/06/03 15:48:35| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 15:48:36| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 15:48:36| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 15:48:36| Logfile: opening log /var/log/squid/access.log
+2025/06/03 15:48:36| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 15:48:36| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 15:48:36| Store logging disabled
+2025/06/03 15:48:36| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 15:48:36| Target number of buckets: 1008
+2025/06/03 15:48:36| Using 8192 Store buckets
+2025/06/03 15:48:36| Max Mem  size: 262144 KB
+2025/06/03 15:48:36| Max Swap size: 0 KB
+2025/06/03 15:48:36| Using Least Load store dir selection
+2025/06/03 15:48:36| Current Directory is /
+2025/06/03 15:48:36| Finished loading MIME types and icons.
+2025/06/03 15:48:36| HTCP Disabled.
+2025/06/03 15:48:36| Pinger socket opened on FD 14
+2025/06/03 15:48:36| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 15:48:36| Squid plugin modules loaded: 0
+2025/06/03 15:48:36| Adaptation support is off.
+2025/06/03 15:48:36| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 15:48:36| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 15:48:36| pinger: Initialising ICMP pinger ...
+2025/06/03 15:48:36| pinger: ICMP socket opened.
+2025/06/03 15:48:36| pinger: ICMPv6 socket opened
+2025/06/03 15:48:37| storeLateRelease: released 0 objects
+2025/06/03 15:58:26| Preparing for shutdown after 0 requests
+2025/06/03 15:58:26| Waiting 30 seconds for active connections to finish
+2025/06/03 15:58:26| Closing HTTP(S) port [::]:8888
+2025/06/03 15:58:26| Closing HTTP(S) port [::]:3128
+2025/06/03 15:58:26| Closing Pinger socket on FD 14
+2025/06/03 15:58:28| Pinger exiting.
+2025/06/03 16:00:03| Current Directory is /
+2025/06/03 16:00:04| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 16:00:04| Service Name: squid
+2025/06/03 16:00:04| Process ID 1
+2025/06/03 16:00:04| Process Roles: master worker
+2025/06/03 16:00:04| With 1048576 file descriptors available
+2025/06/03 16:00:04| Initializing IP Cache...
+2025/06/03 16:00:04| DNS Socket created at [::], FD 8
+2025/06/03 16:00:04| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 16:00:04| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 16:00:04| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 16:00:04| Logfile: opening log /var/log/squid/access.log
+2025/06/03 16:00:04| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 16:00:04| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 16:00:04| Store logging disabled
+2025/06/03 16:00:04| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 16:00:04| Target number of buckets: 1008
+2025/06/03 16:00:04| Using 8192 Store buckets
+2025/06/03 16:00:04| Max Mem  size: 262144 KB
+2025/06/03 16:00:04| Max Swap size: 0 KB
+2025/06/03 16:00:04| Using Least Load store dir selection
+2025/06/03 16:00:04| Current Directory is /
+2025/06/03 16:00:04| Finished loading MIME types and icons.
+2025/06/03 16:00:04| HTCP Disabled.
+2025/06/03 16:00:04| Pinger socket opened on FD 14
+2025/06/03 16:00:04| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 16:00:04| Squid plugin modules loaded: 0
+2025/06/03 16:00:04| Adaptation support is off.
+2025/06/03 16:00:04| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 16:00:04| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 16:00:04| pinger: Initialising ICMP pinger ...
+2025/06/03 16:00:04| pinger: ICMP socket opened.
+2025/06/03 16:00:04| pinger: ICMPv6 socket opened
+2025/06/03 16:00:05| storeLateRelease: released 0 objects
+2025/06/03 16:06:00| Preparing for shutdown after 0 requests
+2025/06/03 16:06:00| Waiting 30 seconds for active connections to finish
+2025/06/03 16:06:00| Closing HTTP(S) port [::]:8888
+2025/06/03 16:06:00| Closing HTTP(S) port [::]:3128
+2025/06/03 16:06:00| Closing Pinger socket on FD 14
+2025/06/03 16:08:25| Current Directory is /
+2025/06/03 16:08:25| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 16:08:25| Service Name: squid
+2025/06/03 16:08:25| Process ID 1
+2025/06/03 16:08:26| Process Roles: master worker
+2025/06/03 16:08:26| With 1048576 file descriptors available
+2025/06/03 16:08:26| Initializing IP Cache...
+2025/06/03 16:08:26| DNS Socket created at [::], FD 8
+2025/06/03 16:08:26| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 16:08:26| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 16:08:26| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 16:08:26| Logfile: opening log /var/log/squid/access.log
+2025/06/03 16:08:26| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 16:08:26| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 16:08:26| Store logging disabled
+2025/06/03 16:08:26| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 16:08:26| Target number of buckets: 1008
+2025/06/03 16:08:26| Using 8192 Store buckets
+2025/06/03 16:08:26| Max Mem  size: 262144 KB
+2025/06/03 16:08:26| Max Swap size: 0 KB
+2025/06/03 16:08:26| Using Least Load store dir selection
+2025/06/03 16:08:26| Current Directory is /
+2025/06/03 16:08:26| Finished loading MIME types and icons.
+2025/06/03 16:08:26| HTCP Disabled.
+2025/06/03 16:08:26| Pinger socket opened on FD 14
+2025/06/03 16:08:26| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 16:08:26| Squid plugin modules loaded: 0
+2025/06/03 16:08:26| pinger: Initialising ICMP pinger ...
+2025/06/03 16:08:26| Adaptation support is off.
+2025/06/03 16:08:26| pinger: ICMP socket opened.
+2025/06/03 16:08:26| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 16:08:26| pinger: ICMPv6 socket opened
+2025/06/03 16:08:26| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 16:08:27| storeLateRelease: released 0 objects
+2025/06/03 16:16:45| Preparing for shutdown after 0 requests
+2025/06/03 16:16:45| Waiting 30 seconds for active connections to finish
+2025/06/03 16:16:45| Closing HTTP(S) port [::]:8888
+2025/06/03 16:16:45| Closing HTTP(S) port [::]:3128
+2025/06/03 16:16:45| Closing Pinger socket on FD 14
+2025/06/03 16:20:05| Current Directory is /
+2025/06/03 16:20:05| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 16:20:05| Service Name: squid
+2025/06/03 16:20:05| Process ID 1
+2025/06/03 16:20:05| Process Roles: master worker
+2025/06/03 16:20:05| With 1048576 file descriptors available
+2025/06/03 16:20:05| Initializing IP Cache...
+2025/06/03 16:20:05| DNS Socket created at [::], FD 8
+2025/06/03 16:20:05| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 16:20:05| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 16:20:05| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 16:20:06| Logfile: opening log /var/log/squid/access.log
+2025/06/03 16:20:06| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 16:20:06| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 16:20:06| Store logging disabled
+2025/06/03 16:20:06| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 16:20:06| Target number of buckets: 1008
+2025/06/03 16:20:06| Using 8192 Store buckets
+2025/06/03 16:20:06| Max Mem  size: 262144 KB
+2025/06/03 16:20:06| Max Swap size: 0 KB
+2025/06/03 16:20:06| Using Least Load store dir selection
+2025/06/03 16:20:06| Current Directory is /
+2025/06/03 16:20:06| Finished loading MIME types and icons.
+2025/06/03 16:20:06| HTCP Disabled.
+2025/06/03 16:20:06| Pinger socket opened on FD 14
+2025/06/03 16:20:06| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 16:20:06| Squid plugin modules loaded: 0
+2025/06/03 16:20:06| Adaptation support is off.
+2025/06/03 16:20:06| pinger: Initialising ICMP pinger ...
+2025/06/03 16:20:06| pinger: ICMP socket opened.
+2025/06/03 16:20:06| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 16:20:06| pinger: ICMPv6 socket opened
+2025/06/03 16:20:06| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 16:20:07| storeLateRelease: released 0 objects
+2025/06/03 16:22:35| Preparing for shutdown after 0 requests
+2025/06/03 16:22:35| Waiting 30 seconds for active connections to finish
+2025/06/03 16:22:35| Closing HTTP(S) port [::]:8888
+2025/06/03 16:22:35| Closing HTTP(S) port [::]:3128
+2025/06/03 16:22:35| Closing Pinger socket on FD 14
+2025/06/03 16:22:38| Pinger exiting.
+2025/06/03 16:34:08| Current Directory is /
+2025/06/03 16:34:09| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 16:34:09| Service Name: squid
+2025/06/03 16:34:09| Process ID 1
+2025/06/03 16:34:09| Process Roles: master worker
+2025/06/03 16:34:09| With 1048576 file descriptors available
+2025/06/03 16:34:09| Initializing IP Cache...
+2025/06/03 16:34:09| DNS Socket created at [::], FD 8
+2025/06/03 16:34:09| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 16:34:09| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 16:34:09| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 16:34:09| Logfile: opening log /var/log/squid/access.log
+2025/06/03 16:34:09| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 16:34:09| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 16:34:09| Store logging disabled
+2025/06/03 16:34:09| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 16:34:09| Target number of buckets: 1008
+2025/06/03 16:34:09| Using 8192 Store buckets
+2025/06/03 16:34:09| Max Mem  size: 262144 KB
+2025/06/03 16:34:09| Max Swap size: 0 KB
+2025/06/03 16:34:09| Using Least Load store dir selection
+2025/06/03 16:34:09| Current Directory is /
+2025/06/03 16:34:09| Finished loading MIME types and icons.
+2025/06/03 16:34:09| HTCP Disabled.
+2025/06/03 16:34:09| Pinger socket opened on FD 14
+2025/06/03 16:34:09| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 16:34:09| Squid plugin modules loaded: 0
+2025/06/03 16:34:09| Adaptation support is off.
+2025/06/03 16:34:09| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 16:34:09| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 16:34:09| pinger: Initialising ICMP pinger ...
+2025/06/03 16:34:09| pinger: ICMP socket opened.
+2025/06/03 16:34:09| pinger: ICMPv6 socket opened
+2025/06/03 16:34:10| storeLateRelease: released 0 objects
+2025/06/03 16:37:52| Preparing for shutdown after 0 requests
+2025/06/03 16:37:52| Waiting 30 seconds for active connections to finish
+2025/06/03 16:37:52| Closing HTTP(S) port [::]:8888
+2025/06/03 16:37:52| Closing HTTP(S) port [::]:3128
+2025/06/03 16:37:52| Closing Pinger socket on FD 14
+2025/06/03 16:38:01| Pinger exiting.
+2025/06/03 16:39:34| Current Directory is /
+2025/06/03 16:39:34| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 16:39:34| Service Name: squid
+2025/06/03 16:39:34| Process ID 1
+2025/06/03 16:39:34| Process Roles: master worker
+2025/06/03 16:39:34| With 1048576 file descriptors available
+2025/06/03 16:39:34| Initializing IP Cache...
+2025/06/03 16:39:34| DNS Socket created at [::], FD 8
+2025/06/03 16:39:34| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 16:39:34| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 16:39:34| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 16:39:34| Logfile: opening log /var/log/squid/access.log
+2025/06/03 16:39:34| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 16:39:34| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 16:39:34| Store logging disabled
+2025/06/03 16:39:34| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 16:39:34| Target number of buckets: 1008
+2025/06/03 16:39:34| Using 8192 Store buckets
+2025/06/03 16:39:34| Max Mem  size: 262144 KB
+2025/06/03 16:39:34| Max Swap size: 0 KB
+2025/06/03 16:39:34| Using Least Load store dir selection
+2025/06/03 16:39:34| Current Directory is /
+2025/06/03 16:39:34| Finished loading MIME types and icons.
+2025/06/03 16:39:34| HTCP Disabled.
+2025/06/03 16:39:34| Pinger socket opened on FD 14
+2025/06/03 16:39:34| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 16:39:34| Squid plugin modules loaded: 0
+2025/06/03 16:39:34| Adaptation support is off.
+2025/06/03 16:39:34| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 16:39:34| pinger: Initialising ICMP pinger ...
+2025/06/03 16:39:34| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 16:39:34| pinger: ICMP socket opened.
+2025/06/03 16:39:34| pinger: ICMPv6 socket opened
+2025/06/03 16:39:35| storeLateRelease: released 0 objects
+2025/06/03 16:42:55| Preparing for shutdown after 0 requests
+2025/06/03 16:42:55| Waiting 30 seconds for active connections to finish
+2025/06/03 16:42:55| Closing HTTP(S) port [::]:8888
+2025/06/03 16:42:55| Closing HTTP(S) port [::]:3128
+2025/06/03 16:42:55| Closing Pinger socket on FD 14
+2025/06/03 16:44:43| Current Directory is /
+2025/06/03 16:44:44| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/03 16:44:44| Service Name: squid
+2025/06/03 16:44:44| Process ID 1
+2025/06/03 16:44:44| Process Roles: master worker
+2025/06/03 16:44:44| With 1048576 file descriptors available
+2025/06/03 16:44:44| Initializing IP Cache...
+2025/06/03 16:44:44| DNS Socket created at [::], FD 8
+2025/06/03 16:44:44| DNS Socket created at 0.0.0.0, FD 9
+2025/06/03 16:44:44| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/03 16:44:44| Adding ndots 1 from /etc/resolv.conf
+2025/06/03 16:44:44| Logfile: opening log /var/log/squid/access.log
+2025/06/03 16:44:44| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/03 16:44:44| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/03 16:44:44| Store logging disabled
+2025/06/03 16:44:44| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/03 16:44:44| Target number of buckets: 1008
+2025/06/03 16:44:44| Using 8192 Store buckets
+2025/06/03 16:44:44| Max Mem  size: 262144 KB
+2025/06/03 16:44:44| Max Swap size: 0 KB
+2025/06/03 16:44:44| Using Least Load store dir selection
+2025/06/03 16:44:44| Current Directory is /
+2025/06/03 16:44:44| Finished loading MIME types and icons.
+2025/06/03 16:44:44| HTCP Disabled.
+2025/06/03 16:44:44| Pinger socket opened on FD 14
+2025/06/03 16:44:44| Configuring Parent 172.24.0.3/3100/0
+2025/06/03 16:44:44| Squid plugin modules loaded: 0
+2025/06/03 16:44:44| Adaptation support is off.
+2025/06/03 16:44:44| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/03 16:44:44| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/03 16:44:44| pinger: Initialising ICMP pinger ...
+2025/06/03 16:44:44| pinger: ICMP socket opened.
+2025/06/03 16:44:44| pinger: ICMPv6 socket opened
+2025/06/03 16:44:45| storeLateRelease: released 0 objects
+2025/06/03 16:52:47| Preparing for shutdown after 0 requests
+2025/06/03 16:52:47| Waiting 30 seconds for active connections to finish
+2025/06/03 16:52:47| Closing HTTP(S) port [::]:8888
+2025/06/03 16:52:47| Closing HTTP(S) port [::]:3128
+2025/06/03 16:52:47| Closing Pinger socket on FD 14
+2025/06/03 16:52:56| Pinger exiting.
+2025/06/04 14:55:27| Current Directory is /
+2025/06/04 14:55:28| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/04 14:55:28| Service Name: squid
+2025/06/04 14:55:28| Process ID 1
+2025/06/04 14:55:28| Process Roles: master worker
+2025/06/04 14:55:28| With 1048576 file descriptors available
+2025/06/04 14:55:28| Initializing IP Cache...
+2025/06/04 14:55:28| DNS Socket created at [::], FD 8
+2025/06/04 14:55:28| DNS Socket created at 0.0.0.0, FD 9
+2025/06/04 14:55:28| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/04 14:55:28| Adding ndots 1 from /etc/resolv.conf
+2025/06/04 14:55:28| Logfile: opening log /var/log/squid/access.log
+2025/06/04 14:55:28| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/04 14:55:28| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/04 14:55:28| Store logging disabled
+2025/06/04 14:55:28| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/04 14:55:28| Target number of buckets: 1008
+2025/06/04 14:55:28| Using 8192 Store buckets
+2025/06/04 14:55:28| Max Mem  size: 262144 KB
+2025/06/04 14:55:28| Max Swap size: 0 KB
+2025/06/04 14:55:28| Using Least Load store dir selection
+2025/06/04 14:55:28| Current Directory is /
+2025/06/04 14:55:28| Finished loading MIME types and icons.
+2025/06/04 14:55:28| HTCP Disabled.
+2025/06/04 14:55:28| Pinger socket opened on FD 14
+2025/06/04 14:55:28| Configuring Parent 172.24.0.3/3100/0
+2025/06/04 14:55:28| Squid plugin modules loaded: 0
+2025/06/04 14:55:28| Adaptation support is off.
+2025/06/04 14:55:28| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/04 14:55:28| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/04 14:55:28| pinger: Initialising ICMP pinger ...
+2025/06/04 14:55:28| pinger: ICMP socket opened.
+2025/06/04 14:55:28| pinger: ICMPv6 socket opened
+2025/06/04 14:55:29| storeLateRelease: released 0 objects
+2025/06/04 14:57:13| Preparing for shutdown after 0 requests
+2025/06/04 14:57:13| Waiting 30 seconds for active connections to finish
+2025/06/04 14:57:13| Closing HTTP(S) port [::]:8888
+2025/06/04 14:57:13| Closing HTTP(S) port [::]:3128
+2025/06/04 14:57:13| Closing Pinger socket on FD 14
+2025/06/04 14:58:01| Current Directory is /
+2025/06/04 14:58:01| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/04 14:58:01| Service Name: squid
+2025/06/04 14:58:01| Process ID 1
+2025/06/04 14:58:01| Process Roles: master worker
+2025/06/04 14:58:01| With 1048576 file descriptors available
+2025/06/04 14:58:01| Initializing IP Cache...
+2025/06/04 14:58:01| DNS Socket created at [::], FD 8
+2025/06/04 14:58:01| DNS Socket created at 0.0.0.0, FD 9
+2025/06/04 14:58:01| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/04 14:58:01| Adding ndots 1 from /etc/resolv.conf
+2025/06/04 14:58:01| Logfile: opening log /var/log/squid/access.log
+2025/06/04 14:58:01| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/04 14:58:01| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/04 14:58:01| Store logging disabled
+2025/06/04 14:58:01| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/04 14:58:01| Target number of buckets: 1008
+2025/06/04 14:58:02| Using 8192 Store buckets
+2025/06/04 14:58:02| Max Mem  size: 262144 KB
+2025/06/04 14:58:02| Max Swap size: 0 KB
+2025/06/04 14:58:02| Using Least Load store dir selection
+2025/06/04 14:58:02| Current Directory is /
+2025/06/04 14:58:02| Finished loading MIME types and icons.
+2025/06/04 14:58:02| HTCP Disabled.
+2025/06/04 14:58:02| Pinger socket opened on FD 14
+2025/06/04 14:58:02| Configuring Parent 172.24.0.3/3100/0
+2025/06/04 14:58:02| Squid plugin modules loaded: 0
+2025/06/04 14:58:02| Adaptation support is off.
+2025/06/04 14:58:02| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/04 14:58:02| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/04 14:58:02| pinger: Initialising ICMP pinger ...
+2025/06/04 14:58:02| pinger: ICMP socket opened.
+2025/06/04 14:58:02| pinger: ICMPv6 socket opened
+2025/06/04 14:58:02| storeLateRelease: released 0 objects
+2025/06/04 15:00:57| Preparing for shutdown after 0 requests
+2025/06/04 15:00:57| Waiting 30 seconds for active connections to finish
+2025/06/04 15:00:57| Closing HTTP(S) port [::]:8888
+2025/06/04 15:00:57| Closing HTTP(S) port [::]:3128
+2025/06/04 15:00:57| Closing Pinger socket on FD 14
+2025/06/04 15:00:58| Pinger exiting.
+2025/06/04 15:02:14| Current Directory is /
+2025/06/04 15:02:14| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/04 15:02:14| Service Name: squid
+2025/06/04 15:02:14| Process ID 1
+2025/06/04 15:02:14| Process Roles: master worker
+2025/06/04 15:02:14| With 1048576 file descriptors available
+2025/06/04 15:02:14| Initializing IP Cache...
+2025/06/04 15:02:14| DNS Socket created at [::], FD 8
+2025/06/04 15:02:14| DNS Socket created at 0.0.0.0, FD 9
+2025/06/04 15:02:14| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/04 15:02:14| Adding ndots 1 from /etc/resolv.conf
+2025/06/04 15:02:14| Logfile: opening log /var/log/squid/access.log
+2025/06/04 15:02:14| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/04 15:02:14| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/04 15:02:14| Store logging disabled
+2025/06/04 15:02:14| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/04 15:02:14| Target number of buckets: 1008
+2025/06/04 15:02:14| Using 8192 Store buckets
+2025/06/04 15:02:14| Max Mem  size: 262144 KB
+2025/06/04 15:02:14| Max Swap size: 0 KB
+2025/06/04 15:02:14| Using Least Load store dir selection
+2025/06/04 15:02:14| Current Directory is /
+2025/06/04 15:02:14| Finished loading MIME types and icons.
+2025/06/04 15:02:14| HTCP Disabled.
+2025/06/04 15:02:14| Pinger socket opened on FD 14
+2025/06/04 15:02:14| Configuring Parent 172.24.0.3/3100/0
+2025/06/04 15:02:14| Squid plugin modules loaded: 0
+2025/06/04 15:02:14| Adaptation support is off.
+2025/06/04 15:02:14| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/04 15:02:14| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/04 15:02:14| pinger: Initialising ICMP pinger ...
+2025/06/04 15:02:14| pinger: ICMP socket opened.
+2025/06/04 15:02:14| pinger: ICMPv6 socket opened
+2025/06/04 15:02:15| storeLateRelease: released 0 objects
+2025/06/04 15:04:50| Preparing for shutdown after 0 requests
+2025/06/04 15:04:50| Waiting 30 seconds for active connections to finish
+2025/06/04 15:04:50| Closing HTTP(S) port [::]:8888
+2025/06/04 15:04:50| Closing HTTP(S) port [::]:3128
+2025/06/04 15:04:50| Closing Pinger socket on FD 14
+2025/06/04 15:04:51| Pinger exiting.
+2025/06/04 15:06:21| Current Directory is /
+2025/06/04 15:06:21| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/04 15:06:21| Service Name: squid
+2025/06/04 15:06:21| Process ID 1
+2025/06/04 15:06:21| Process Roles: master worker
+2025/06/04 15:06:21| With 1048576 file descriptors available
+2025/06/04 15:06:21| Initializing IP Cache...
+2025/06/04 15:06:21| DNS Socket created at [::], FD 8
+2025/06/04 15:06:21| DNS Socket created at 0.0.0.0, FD 9
+2025/06/04 15:06:21| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/04 15:06:21| Adding ndots 1 from /etc/resolv.conf
+2025/06/04 15:06:21| Logfile: opening log /var/log/squid/access.log
+2025/06/04 15:06:21| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/04 15:06:21| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/04 15:06:21| Store logging disabled
+2025/06/04 15:06:21| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/04 15:06:21| Target number of buckets: 1008
+2025/06/04 15:06:21| Using 8192 Store buckets
+2025/06/04 15:06:21| Max Mem  size: 262144 KB
+2025/06/04 15:06:21| Max Swap size: 0 KB
+2025/06/04 15:06:21| Using Least Load store dir selection
+2025/06/04 15:06:21| Current Directory is /
+2025/06/04 15:06:21| Finished loading MIME types and icons.
+2025/06/04 15:06:21| HTCP Disabled.
+2025/06/04 15:06:22| Pinger socket opened on FD 14
+2025/06/04 15:06:22| Configuring Parent 172.24.0.3/3100/0
+2025/06/04 15:06:22| pinger: Initialising ICMP pinger ...
+2025/06/04 15:06:22| pinger: ICMP socket opened.
+2025/06/04 15:06:22| pinger: ICMPv6 socket opened
+2025/06/04 15:06:22| Squid plugin modules loaded: 0
+2025/06/04 15:06:22| Adaptation support is off.
+2025/06/04 15:06:22| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/04 15:06:22| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/04 15:06:22| storeLateRelease: released 0 objects
+2025/06/04 15:12:51| Preparing for shutdown after 0 requests
+2025/06/04 15:12:51| Waiting 30 seconds for active connections to finish
+2025/06/04 15:12:51| Closing HTTP(S) port [::]:8888
+2025/06/04 15:12:51| Closing HTTP(S) port [::]:3128
+2025/06/04 15:12:51| Closing Pinger socket on FD 14
+2025/06/04 15:12:59| Pinger exiting.
+2025/06/04 15:17:56| Current Directory is /
+2025/06/04 15:17:57| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/04 15:17:57| Service Name: squid
+2025/06/04 15:17:57| Process ID 1
+2025/06/04 15:17:57| Process Roles: master worker
+2025/06/04 15:17:57| With 1048576 file descriptors available
+2025/06/04 15:17:57| Initializing IP Cache...
+2025/06/04 15:17:57| DNS Socket created at [::], FD 8
+2025/06/04 15:17:57| DNS Socket created at 0.0.0.0, FD 9
+2025/06/04 15:17:57| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/04 15:17:57| Adding ndots 1 from /etc/resolv.conf
+2025/06/04 15:17:57| Logfile: opening log /var/log/squid/access.log
+2025/06/04 15:17:57| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/04 15:17:57| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/04 15:17:57| Store logging disabled
+2025/06/04 15:17:57| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/04 15:17:57| Target number of buckets: 1008
+2025/06/04 15:17:57| Using 8192 Store buckets
+2025/06/04 15:17:57| Max Mem  size: 262144 KB
+2025/06/04 15:17:57| Max Swap size: 0 KB
+2025/06/04 15:17:57| Using Least Load store dir selection
+2025/06/04 15:17:57| Current Directory is /
+2025/06/04 15:17:57| Finished loading MIME types and icons.
+2025/06/04 15:17:57| HTCP Disabled.
+2025/06/04 15:17:57| Pinger socket opened on FD 14
+2025/06/04 15:17:57| Configuring Parent 172.24.0.3/3100/0
+2025/06/04 15:17:57| Squid plugin modules loaded: 0
+2025/06/04 15:17:57| Adaptation support is off.
+2025/06/04 15:17:57| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/04 15:17:57| pinger: Initialising ICMP pinger ...
+2025/06/04 15:17:57| pinger: ICMP socket opened.
+2025/06/04 15:17:57| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/04 15:17:57| pinger: ICMPv6 socket opened
+2025/06/04 15:17:58| storeLateRelease: released 0 objects
+2025/06/04 15:20:29| Preparing for shutdown after 0 requests
+2025/06/04 15:20:29| Waiting 30 seconds for active connections to finish
+2025/06/04 15:20:29| Closing HTTP(S) port [::]:8888
+2025/06/04 15:20:29| Closing HTTP(S) port [::]:3128
+2025/06/04 15:20:29| Closing Pinger socket on FD 14
+2025/06/04 15:20:34| Pinger exiting.
+2025/06/04 15:23:34| Current Directory is /
+2025/06/04 15:23:34| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/04 15:23:34| Service Name: squid
+2025/06/04 15:23:34| Process ID 1
+2025/06/04 15:23:34| Process Roles: master worker
+2025/06/04 15:23:34| With 1048576 file descriptors available
+2025/06/04 15:23:34| Initializing IP Cache...
+2025/06/04 15:23:34| DNS Socket created at [::], FD 8
+2025/06/04 15:23:34| DNS Socket created at 0.0.0.0, FD 9
+2025/06/04 15:23:34| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/04 15:23:34| Adding ndots 1 from /etc/resolv.conf
+2025/06/04 15:23:34| Logfile: opening log /var/log/squid/access.log
+2025/06/04 15:23:34| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/04 15:23:34| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/04 15:23:34| Store logging disabled
+2025/06/04 15:23:34| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/04 15:23:34| Target number of buckets: 1008
+2025/06/04 15:23:34| Using 8192 Store buckets
+2025/06/04 15:23:34| Max Mem  size: 262144 KB
+2025/06/04 15:23:34| Max Swap size: 0 KB
+2025/06/04 15:23:34| Using Least Load store dir selection
+2025/06/04 15:23:34| Current Directory is /
+2025/06/04 15:23:34| Finished loading MIME types and icons.
+2025/06/04 15:23:34| HTCP Disabled.
+2025/06/04 15:23:34| Pinger socket opened on FD 14
+2025/06/04 15:23:34| Configuring Parent 172.24.0.3/3100/0
+2025/06/04 15:23:34| Squid plugin modules loaded: 0
+2025/06/04 15:23:34| Adaptation support is off.
+2025/06/04 15:23:34| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/04 15:23:34| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/04 15:23:34| pinger: Initialising ICMP pinger ...
+2025/06/04 15:23:34| pinger: ICMP socket opened.
+2025/06/04 15:23:34| pinger: ICMPv6 socket opened
+2025/06/04 15:23:35| storeLateRelease: released 0 objects
+2025/06/04 15:29:09| Preparing for shutdown after 0 requests
+2025/06/04 15:29:10| Waiting 30 seconds for active connections to finish
+2025/06/04 15:29:10| Closing HTTP(S) port [::]:8888
+2025/06/04 15:29:10| Closing HTTP(S) port [::]:3128
+2025/06/04 15:29:10| Closing Pinger socket on FD 14
+2025/06/04 15:29:11| Pinger exiting.
+2025/06/04 15:34:23| Current Directory is /
+2025/06/04 15:34:24| Starting Squid Cache version 5.9 for x86_64-pc-linux-gnu...
+2025/06/04 15:34:24| Service Name: squid
+2025/06/04 15:34:24| Process ID 1
+2025/06/04 15:34:24| Process Roles: master worker
+2025/06/04 15:34:24| With 1048576 file descriptors available
+2025/06/04 15:34:24| Initializing IP Cache...
+2025/06/04 15:34:24| DNS Socket created at [::], FD 8
+2025/06/04 15:34:24| DNS Socket created at 0.0.0.0, FD 9
+2025/06/04 15:34:24| Adding nameserver 127.0.0.11 from /etc/resolv.conf
+2025/06/04 15:34:24| Adding ndots 1 from /etc/resolv.conf
+2025/06/04 15:34:24| Logfile: opening log /var/log/squid/access.log
+2025/06/04 15:34:24| WARNING: log name now starts with a module name. Use 'stdio:/var/log/squid/access.log'
+2025/06/04 15:34:24| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2025/06/04 15:34:24| Store logging disabled
+2025/06/04 15:34:24| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2025/06/04 15:34:24| Target number of buckets: 1008
+2025/06/04 15:34:24| Using 8192 Store buckets
+2025/06/04 15:34:24| Max Mem  size: 262144 KB
+2025/06/04 15:34:24| Max Swap size: 0 KB
+2025/06/04 15:34:24| Using Least Load store dir selection
+2025/06/04 15:34:24| Current Directory is /
+2025/06/04 15:34:24| Finished loading MIME types and icons.
+2025/06/04 15:34:24| HTCP Disabled.
+2025/06/04 15:34:24| pinger: Initialising ICMP pinger ...
+2025/06/04 15:34:24| Pinger socket opened on FD 14
+2025/06/04 15:34:24| pinger: ICMP socket opened.
+2025/06/04 15:34:24| pinger: ICMPv6 socket opened
+2025/06/04 15:34:24| Configuring Parent 172.24.0.3/3100/0
+2025/06/04 15:34:24| Squid plugin modules loaded: 0
+2025/06/04 15:34:24| Adaptation support is off.
+2025/06/04 15:34:24| Accepting HTTP Socket connections at conn3 local=[::]:8888 remote=[::] FD 11 flags=9
+2025/06/04 15:34:24| Accepting NAT intercepted HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 12 flags=41
+2025/06/04 15:34:25| storeLateRelease: released 0 objects
+2025/06/04 15:36:26| Preparing for shutdown after 0 requests
+2025/06/04 15:36:26| Waiting 30 seconds for active connections to finish
+2025/06/04 15:36:26| Closing HTTP(S) port [::]:8888
+2025/06/04 15:36:26| Closing HTTP(S) port [::]:3128
+2025/06/04 15:36:26| Closing Pinger socket on FD 14

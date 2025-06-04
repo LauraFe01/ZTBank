@@ -32,6 +32,13 @@ OPERATION_THRESHOLDS = {
 
 app = Flask(__name__)
 
+def extract_src_ip(result):
+    raw = result.get('_raw', '')
+    match = re.search(r'->\s+(\d{1,3}(?:\.\d{1,3}){3})', raw)
+    if match:
+        return match.group(1)
+    return None
+
 @app.route('/update_trust', methods=['POST'])
 def update_trust():
     data = request.get_json()
@@ -69,7 +76,7 @@ def update_trust():
         updated_ips = []
 
         for entry in results:
-            ip = entry.get("src_ip") 
+            ip = entry.get("src_ip") or extract_src_ip(entry)
             if ip:
                 adjust_trust(ip, -25, "More than 10 attacks detected in the last 30 days")
                 updated_ips.append(ip)
