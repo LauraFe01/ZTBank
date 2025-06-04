@@ -1,0 +1,122 @@
+<dashboard version="1.1" theme="dark">
+  <label>🔥 SNORT ATTACK DASHBOARD 🔥</label>
+  <description>⚡ REAL-TIME NETWORK SECURITY MONITORING | THREAT INTELLIGENCE ANALYTICS ⚡</description>
+
+  <!-- Trend temporale -->
+  <row>
+    <panel>
+      <title>💥 ATTACCHI SNORT NEL TEMPO - LIVE MONITORING 💥</title>
+      <chart>
+        <search>
+          <query>
+            index=main sourcetype=snort_alert
+            | rex field=_raw "(?&lt;src_ip&gt;\d{1,3}(?:\.\d{1,3}){3}):\d+\s+-&gt;"
+            | timechart span=1h count by src_ip limit=10
+          </query>
+          <earliest>-7d@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">area</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.showDataLabels">all</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.axisTitleX.text">⏰ TIMELINE</option>
+        <option name="charting.axisTitleY.text">🚨 ATTACK VOLUME</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.backgroundColor">#0a0a0a</option>
+        <option name="charting.foregroundColor">#ffffff</option>
+        <option name="charting.fontColor">#ffffff</option>
+        <option name="charting.seriesColors">[#ff0844,#ff6b35,#f7931e,#ffdc00,#7bc043,#1fb6ff,#845ec2,#d65db1,#ff6f91,#ffc75f]</option>
+        <option name="charting.gridLinesX.showMajorLines">0</option>
+        <option name="charting.gridLinesY.showMajorLines">1</option>
+        <option name="charting.gridLinesY.color">#333333</option>
+        <option name="charting.chart.nullValueMode">connect</option>
+        <option name="charting.chart.showMarkers">1</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.color">#ffffff</option>
+        <option name="charting.axisLabelsY.majorLabelStyle.color">#ffffff</option>
+        <option name="charting.axisTitleX.textStyle.color">#ff6b35</option>
+        <option name="charting.axisTitleY.textStyle.color">#ff6b35</option>
+        <option name="charting.axisTitleX.textStyle.fontSize">14px</option>
+        <option name="charting.axisTitleY.textStyle.fontSize">14px</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.chart.overlayFields">count</option>
+      </chart>
+    </panel>
+  </row>
+
+  <!-- Top IP sorgenti e Top Signature -->
+  <row>
+    <panel>
+      <title>🎯 TOP HOSTILE IP ADDRESSES 🎯</title>
+      <chart>
+        <search>
+          <query>
+            index=main sourcetype=snort_alert earliest=-48h
+            | rex field=_raw "(?&lt;src_ip&gt;\d{1,3}(?:\.\d{1,3}){3}):\d+\s+-&gt;"
+            | top src_ip limit=10
+          </query>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.showDataLabels">all</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.axisTitleX.text">🌐 IP ADDRESS</option>
+        <option name="charting.axisTitleY.text">🔥 THREAT COUNT</option>
+        <option name="charting.backgroundColor">#0d1421</option>
+        <option name="charting.foregroundColor">#ffffff</option>
+        <option name="charting.fontColor">#ffffff</option>
+        <option name="charting.seriesColors">[#ff0844,#ff2d55,#ff3b30,#ff6b35,#ff9500,#ffcc02,#32d74b,#007aff,#5856d6,#af52de]</option>
+        <option name="charting.chart.columnSpacing">12</option>
+        <option name="charting.gridLinesX.showMajorLines">0</option>
+        <option name="charting.gridLinesY.showMajorLines">1</option>
+        <option name="charting.gridLinesY.color">#1e293b</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.color">#ffffff</option>
+        <option name="charting.axisLabelsY.majorLabelStyle.color">#ffffff</option>
+        <option name="charting.axisTitleX.textStyle.color">#ff6b35</option>
+        <option name="charting.axisTitleY.textStyle.color">#ff6b35</option>
+        <option name="charting.axisTitleX.textStyle.fontSize">14px</option>
+        <option name="charting.axisTitleY.textStyle.fontSize">14px</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.fontSize">12px</option>
+        <option name="charting.axisLabelsY.majorLabelStyle.fontSize">12px</option>
+        <option name="charting.chart.showPercent">0</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0</option>
+      </chart>
+    </panel>
+
+    <panel>
+      <title>⚔️ TOP ATTACK SIGNATURES ⚔️</title>
+      <chart>
+        <search>
+          <query>
+            index=main sourcetype=snort_alert earliest=-7d
+            | rex field=_raw "\[\d+:\d+:\d+\]\s+(?&lt;signature&gt;.+?)\s+\[\*\*\]"
+            | top signature limit=10
+          </query>
+        </search>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.showDataLabels">all</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.axisTitleX.text">💀 ATTACK FREQUENCY</option>
+        <option name="charting.axisTitleY.text">🛡️ SIGNATURE TYPE</option>
+        <option name="charting.backgroundColor">#1a202c</option>
+        <option name="charting.foregroundColor">#ffffff</option>
+        <option name="charting.fontColor">#ffffff</option>
+        <option name="charting.seriesColors">[#ff0844,#ff2d55,#ff6b35,#ff9500,#ffcc02,#32d74b,#007aff,#5856d6,#af52de,#ff2d92]</option>
+        <option name="charting.gridLinesX.showMajorLines">1</option>
+        <option name="charting.gridLinesY.showMajorLines">0</option>
+        <option name="charting.gridLinesX.color">#2d3748</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.color">#ffffff</option>
+        <option name="charting.axisLabelsY.majorLabelStyle.color">#ffffff</option>
+        <option name="charting.axisTitleX.textStyle.color">#ff6b35</option>
+        <option name="charting.axisTitleY.textStyle.color">#ff6b35</option>
+        <option name="charting.axisTitleX.textStyle.fontSize">14px</option>
+        <option name="charting.axisTitleY.textStyle.fontSize">14px</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.fontSize">12px</option>
+        <option name="charting.axisLabelsY.majorLabelStyle.fontSize">11px</option>
+        <option name="charting.chart.showPercent">0</option>
+      </chart>
+    </panel>
+  </row>
+
+</dashboard>
