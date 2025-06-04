@@ -6,36 +6,16 @@ import os
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 from splunk_methods import splunk_search
-from utils import block_ip, check_blacklist_file
+from utils import block_ip, check_blacklist_file, load_trust_db, save_trust_db, reset_trust, adjust_trust
+from policies import evaluate_external_net_activity, evaluate_internal_net_activity, evaluate_ip_country
 from encrypt_existing import encrypt_trust_file
 import logging
 import re
-import ipaddress
-import geoip2.database
-import time
 
 logging.basicConfig(level=logging.INFO)
 
 # Carica la chiave dal file .env
 load_dotenv()
-KEY = os.getenv("TRUST_KEY")
-if not KEY:
-    raise RuntimeError("TRUST_KEY non impostata nell'ambiente")
-
-BLACKLIST_THRESHOLD = 0
-fernet = Fernet(KEY.encode())
-app = Flask(__name__)
-
-TRUST_FILE = "trust_db.json"
-trust_db = {}
-DEFAULT_TRUST = 100
-
-# Carica il database GeoLite (devi scaricarlo prima)
-GEOIP_DB_PATH = 'GeoLite2-Country.mmdb'
-geo_reader = geoip2.database.Reader(GEOIP_DB_PATH)
-
-fernet = Fernet(KEY.encode())
-app = Flask(__name__)
 
 ROLE_BASE_TRUST = {
     "Direttore": 85,
@@ -50,141 +30,7 @@ OPERATION_THRESHOLDS = {
     "Documenti Operativi": {"read": 60, "write": 70}
 }
 
-# --- Persistenza ---
-
-def load_trust_db():
-    global trust_db
-    if os.path.exists(TRUST_FILE):
-        try:
-            with open(TRUST_FILE, "rb") as f:
-                encrypted = f.read()
-            raw = fernet.decrypt(encrypted)
-            trust_db.update(json.loads(raw))
-            logging.info("[PDP] trust_db caricato da file cifrato.")
-            logging.info("Trust DB (decifrato):\n%s", json.dumps(trust_db, indent=2))
-        except Exception as e:
-            logging.info(f"[PDP] ⚠️ Errore nella decifratura del trust_db: {e}")
-    else:
-        logging.info("[PDP] ⚠️ Nessun trust_db.json trovato, uso database vuoto.")
-
-
-def save_trust_db():
-    try:
-        raw = json.dumps(trust_db).encode()
-        encrypted = fernet.encrypt(raw)
-        with open(TRUST_FILE, "wb") as f:
-            f.write(encrypted)
-        logging.info("[PDP] trust_db salvato su file cifrato.")
-    except Exception as e:
-        logging.info(f"[PDP] ⚠️ Errore nella cifratura del trust_db: {e}")
-
-def reset_trust():
-    global trust_db
-    for ip in trust_db:
-        trust_db[ip]["score"] = 100
-        trust_db[ip]["last_reason"] = "Reset globale"
-        trust_db[ip]["last_seen"] = datetime.now().isoformat()
-    save_trust_db()
-    logging.info("[PDP] Tutti i punteggi di fiducia sono stati resettati a 100.")
-
-# --- Logica trust ---
-
-def adjust_trust(ip, change, reason):
-    logging.info(f"[PDP] Dentro ADJUST: {ip}, {change}, {reason}")
-    global trust_db
-    load_trust_db()
-    
-    now = datetime.now(timezone.utc).isoformat()
-    trust = trust_db.get(ip)
-
-    # Se non esiste ancora, inizializzalo
-    if trust is None:
-        trust = {
-            "score": 100,  # oppure altro valore iniziale
-            "last_seen": now,
-            "last_reason": "Initial trust level"
-        }
-        trust_db[ip] = trust
-        logging.info(f"[PDP] Trust inizializzata per {ip} a {trust['score']}")
-
-    trust["score"] = max(0, min(100, trust["score"] + change))
-    trust["last_seen"] = now
-    trust["last_reason"] = reason
-    trust_db[ip] = trust
-
-    logging.info(f"[PDP] 🎉 Trust per {ip} aggiornata a {trust['score']} ({reason})")
-
-    if trust["score"] <= BLACKLIST_THRESHOLD:
-        logging.warning(f"[PDP] IP {ip} ha fiducia bassa ({trust['score']}) → blacklist")
-        block_ip(ip)
-    save_trust_db()
-
-def evaluate_strange_activity(ip, timestamp):
-    dt = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
-    hour = dt.hour
-    logging.info(f"🕒 Orario accesso: {hour}")
-
-    # Geolocalizzazione IP
-    try:
-        response = geo_reader.country(ip)
-        country = response.country.name
-        logging.info(f"🌍 Accesso da: {country}")
-        if country != "Italy":
-            adjust_trust(ip, -40, f"Connessione da paese esterno: {country}")
-    except Exception as e:
-        logging.warning(f"❗ Impossibile geolocalizzare IP {ip}: {e}")
-
-    # Rilevamento rete interna
-    if ipaddress.IPv4Address(ip) not in ipaddress.IPv4Network("172.20.0.0/24"):
-        adjust_trust(ip, -5, "Rete esterna rilevata")
-
-    # Rilevamento orario notturno DA TOGLIERE VIENE BLOCCATO DA SQUID
-    if hour < 7 or hour >= 20:
-        adjust_trust(ip, -10, "Accesso notturno rilevato")
-
-""" @app.route('/update_trust', methods=['POST'])
-def update_trust():
-    data = request.get_json()
-    logging.info("✅ Payload ricevuto da Splunk:")
-    logging.info(f"[PDP] payload : {data} ")
-
-    raw = data.get("result", {}).get("_raw", "")
-    trust_type = data.get("search_name", "")
-    
-    # Regex: IP address (3rd field del log squid)
-    match = re.search(r"\d+\.\d+\.\d+\.\d+", raw)
-
-    logging.info(f"[PDP] indirizzo IP : {match} ")
-    
-    if match:
-        ip = match.group()
-        logging.info(f"✅ IP sorgente estratto: {ip}")
-
-        if trust_type == "blacklist":
-            ips = data.get("ips", "").split()
-            for ip in ips:
-                adjust_trust(ip, -30, "Blacklist match")
-
-        elif trust_type == "attack":
-            count = int(data.get("count", 0))
-            if count > 10:
-                adjust_trust(ip, -30, f"{count} attacks detected")
-
-        elif trust_type == "anomaly":
-            count = int(data.get("count", 0))
-            if count > 30:
-                adjust_trust(ip, -20, f"{count} anomalous accesses")
-        
-        elif trust_type == "External-Net-Detection":
-            logging.info(f"Individuata una external request")
-            adjust_trust(ip, -20, f"External net access")
-    
-    else:
-        print("❌ Nessun IP trovato nel campo _raw.")
-
-
-    # Risposta al chiamante (Splunk)
-    return jsonify({"status": "received"}), 200 """
+app = Flask(__name__)
 
 @app.route('/update_trust', methods=['POST'])
 def update_trust():
@@ -249,21 +95,10 @@ def update_trust():
 
     return jsonify({"status": "received"}), 200
 
-
-# toglie 10 punti di fiducia nel caso di richieste proveniente da reti esterne
-def evaluate_external_net_activity(ip):
-    if ipaddress.IPv4Address(ip) not in ipaddress.IPv4Network("172.20.0.0/24"):
-        adjust_trust(ip, -20, "External net detected")
-
-# aggiunge 10 punti di fiducia nel caso di richieste provenienti da reti interne
-def evaluate_internal_net_activity(ip):
-    if ipaddress.IPv4Address(ip) in ipaddress.IPv4Network("172.20.0.0/16"):
-        adjust_trust(ip, +10, "Internal net access")
-
 # attraverso questa rotta il PDP riceve i dati dal PEP e valuta la fiducia e se l'accesso è consentito o meno
 @app.route("/decide", methods=["POST"])
 def decide():
-    load_trust_db()  # ✅ Assicurati che trust_db sia aggiornato
+    trust_db=load_trust_db()  # ✅ Assicurati che trust_db sia aggiornato
 
     data = request.json
     client_ip = data.get("client_ip")
@@ -279,7 +114,7 @@ def decide():
 
     # 🧾 Inizializza se non esiste ancora
     if client_ip not in trust_db:
-        base = ROLE_BASE_TRUST.get(role, DEFAULT_TRUST)
+        base = ROLE_BASE_TRUST.get(role, 100)
         trust_db[client_ip] = {
             "score": base,
             "last_seen": datetime.now().isoformat(),
@@ -289,6 +124,7 @@ def decide():
 
     evaluate_external_net_activity(client_ip)
     evaluate_internal_net_activity(client_ip)
+    evaluate_ip_country(client_ip)
 
     score = trust_db[client_ip]["score"]
     min_required = OPERATION_THRESHOLDS.get(document_type, {}).get(operation)
@@ -309,6 +145,7 @@ def decide():
 
 @app.route("/reward_check", methods=["POST"])
 def reward_check():
+    trust_db = load_trust_db()
     now = datetime.datetime.now()
     for ip, data in trust_db.items():
         last_seen = datetime.datetime.fromisoformat(data["last_seen"])
@@ -320,6 +157,7 @@ def reward_check():
 
 @app.route("/dump", methods=["GET"])
 def dump():
+    trust_db = load_trust_db()
     return jsonify(trust_db)
 
 @app.route("/block_ip", methods=["POST"])
@@ -352,7 +190,9 @@ def snort_alert():
 
 
 if __name__ == "__main__":
-    #reset_trust()
-    #encrypt_trust_file()
-    load_trust_db()
+    trust_db = load_trust_db()
+    trust_db = reset_trust(trust_db)
+    logging.info(f"DB iniziale: {trust_db}")
+    save_trust_db(trust_db)
+
     app.run(host="0.0.0.0", port=5050)
