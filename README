@@ -112,6 +112,18 @@ Prova richiesta ottenimento dati dal db:
 # docker exec -it client_internal bash
 # curl http://172.24.0.3:3100/get_data
 
+Rotta per fare login:
+# curl -X POST http://172.24.0.3:3100/login \
+#  -H "Content-Type: application/json" \
+#  -c cookies.txt \
+#  -d '{"username": "giovanni.rossi", "password": "pass_direttore"}'
+Rotta per leggere un documento
+# curl -X POST http://172.24.0.3:3100/request   -H "Content-Type: application/json"   -b cookies.txt   -d '{"operation": "read", "document_type": "Dati Transazionali", "doc_id":1}
+Rotta per inserire un documento
+# curl -X POST http://172.24.0.3:3100/request   -H "Content-Type: application/json"   -b cookies.txt   -d '{"operation": "write", "document_type": "Dati Transazionali", "nome_file":"rova", "contenuto": "prova2", "sensibilita":"sensibile"}'
+Rotta per eliminare un documento
+# curl -X POST http://172.24.0.3:3100/request   -H "Content-Type: application/json"   -b cookies.txt   -d '{"operation": "delete", "document_type": "Dati  Transazionali", "doc_id":1}
+
 Prova per vedere che SSL è attivo:
 # docker exec -it db bash
 # psql "sslmode=require host=localhost dbname=bankDB user=user password=cyber_pwd"

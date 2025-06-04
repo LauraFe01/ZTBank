@@ -86,6 +86,8 @@ services:
         ipv4_address: 172.24.0.3
       zt-core:
         ipv4_address: 172.25.0.2
+    volumes:
+      - ./pep/users_db.json:/app/users_db.json
     depends_on:
       - pdp
   
