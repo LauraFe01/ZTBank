@@ -145,6 +145,7 @@ services:
       - ./logs/squid:/var/log/squid
       - ./logs/snort:/var/log/snort
       - ./splunk-apps/log_inputs:/opt/splunk/etc/apps/log_inputs
+      - ./splunk-apps/dashboard:/opt/splunk/etc/apps/dashboard
       - ./splunk-apps/lookups:/opt/splunk/etc/apps/search/lookups
       - splunk_etc:/opt/splunk/etc
       - splunk_var:/opt/splunk/var

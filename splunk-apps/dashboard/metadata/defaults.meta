@@ -1,0 +1,3 @@
+[views/snort_alert_dashboard]
+access = read : [ * ], write : [ admin ]
+export = system
