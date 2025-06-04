@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import requests
-from datetime import datetime
+from datetime import datetime, timezone
 import json
 import os
 from cryptography.fernet import Fernet
@@ -33,6 +33,9 @@ DEFAULT_TRUST = 100
 # Carica il database GeoLite (devi scaricarlo prima)
 GEOIP_DB_PATH = 'GeoLite2-Country.mmdb'
 geo_reader = geoip2.database.Reader(GEOIP_DB_PATH)
+
+fernet = Fernet(KEY.encode())
+app = Flask(__name__)
 
 ROLE_BASE_TRUST = {
     "Direttore": 85,
@@ -84,22 +87,11 @@ def reset_trust():
     save_trust_db()
     logging.info("[PDP] Tutti i punteggi di fiducia sono stati resettati a 100.")
 
-
-def reset_trust():
-    global trust_db
-    for ip in trust_db:
-        trust_db[ip]["score"] = 100
-        trust_db[ip]["last_reason"] = "Reset globale"
-        trust_db[ip]["last_seen"] = datetime.now().isoformat()
-    save_trust_db()
-    logging.info("[PDP] Tutti i punteggi di fiducia sono stati resettati a 100.")
-
 # --- Logica trust ---
 
 def adjust_trust(ip, change, reason):
     logging.info(f"[PDP] Dentro ADJUST: {ip}, {change}, {reason}")
     global trust_db
-    now = datetime.now().isoformat()
     load_trust_db()
     
     now = datetime.now(timezone.utc).isoformat()
@@ -120,7 +112,7 @@ def adjust_trust(ip, change, reason):
     trust["last_reason"] = reason
     trust_db[ip] = trust
 
-    logging.info(f"[PDP] Trust per {ip} aggiornata a {trust['score']} ({reason})")
+    logging.info(f"[PDP] 🎉 Trust per {ip} aggiornata a {trust['score']} ({reason})")
 
     if trust["score"] <= BLACKLIST_THRESHOLD:
         logging.warning(f"[PDP] IP {ip} ha fiducia bassa ({trust['score']}) → blacklist")
@@ -149,63 +141,6 @@ def evaluate_strange_activity(ip, timestamp):
     # Rilevamento orario notturno DA TOGLIERE VIENE BLOCCATO DA SQUID
     if hour < 7 or hour >= 20:
         adjust_trust(ip, -10, "Accesso notturno rilevato")
-
-
-@app.route("/decide", methods=["POST"])
-def decide():
-    data = request.json
-    client_ip = data.get("client_ip")
-    timestamp = data.get("timestamp")
-    role = data.get("role")
-    operation = data.get("operation")
-    document_type = data.get("document_type")
-
-    logging.info(f"[PDP] Valuto {operation.upper()} su {document_type} da {role}")
-
-    # Inizializza se non esiste
-    if client_ip not in trust_db:
-        base = ROLE_BASE_TRUST.get(role, DEFAULT_TRUST)
-        trust_db[client_ip] = {
-            "score": base,
-            "last_seen": datetime.now().isoformat(),
-            "last_reason": "Ruolo iniziale: " + role
-        }
-        save_trust_db()
-
-    evaluate_strange_activity(client_ip, timestamp)
-
-    score = trust_db[client_ip]["score"]
-    min_required = OPERATION_THRESHOLDS.get(document_type, {}).get(operation)
-
-    if min_required is None:
-        return jsonify({"error": "Operazione o tipo documento non validi"}), 400
-
-    decision = "allow" if score >= min_required else "deny"
-
-    logging.info(f"[PDP] Trust: {score} / Soglia richiesta: {min_required} → Decisione: {decision}")
-
-    return jsonify({
-        "decision": decision,
-        "trust": score,
-        "required": min_required
-    }), 200
-
-@app.route("/reward_check", methods=["POST"])
-def reward_check():
-    now = datetime.datetime.now()
-    for ip, data in trust_db.items():
-        last_seen = datetime.datetime.fromisoformat(data["last_seen"])
-        delta = now - last_seen
-        if delta.days >= 60:
-            adjust_trust(ip, +5, "No incidents in 60+ days")
-    return jsonify({"status": "rewards applied"}), 200
-
-@app.route("/dump", methods=["GET"])
-def dump():
-    return jsonify(trust_db)
-
-
-
 
 """ @app.route('/update_trust', methods=['POST'])
 def update_trust():
@@ -251,6 +186,159 @@ def update_trust():
     # Risposta al chiamante (Splunk)
     return jsonify({"status": "received"}), 200 """
 
+@app.route('/update_trust', methods=['POST'])
+def update_trust():
+    data = request.get_json()
+    logging.info("Payload ricevuto da Splunk")
+    #logging.info(json.dumps(data, indent=2))  # Stampa il payload ben formattato
+
+    trust_type = data.get("search_name", "")
+
+    # Policy: TrustReputation-Increase
+    if trust_type == "TrustReputation-Increase":
+        result = data.get("result", {})
+        logging.info(result) # stampa le informazioni di interesse contenute nel payload (ip)
+
+        # Normalizza in lista, anche se è un solo elemento
+        results = [result] if isinstance(result, dict) else result
+
+        updated_ips = []
+
+        for entry in results:
+            ip = entry.get("src_ip") 
+            if ip:
+                adjust_trust(ip, +1, "Consistent benign behavior")
+                updated_ips.append(ip)
+
+        if not updated_ips:
+            logging.warning("⚠️ Nessun IP valido trovato nel payload")
+    elif trust_type == "Snort-Attack-Detection-30Days":
+        result = data.get("result", {})
+        logging.info(result)
+
+        results = [result] if isinstance(result, dict) else result
+
+        updated_ips = []
+
+        for entry in results:
+            ip = entry.get("src_ip") 
+            if ip:
+                adjust_trust(ip, -25, "More than 10 attacks detected in the last 30 days")
+                updated_ips.append(ip)
+
+        if not updated_ips:
+            logging.warning("⚠️ Nessun IP valido trovato nel payload")
+    elif trust_type == "Non-Working-Hours-Detection-More-Than-10-IPs":
+        result = data.get("result", {})
+        logging.info(result)
+
+        results = [result] if isinstance(result, dict) else result
+
+        updated_ips = []
+
+        for entry in results:
+            ip = entry.get("src_ip") 
+            if ip:
+                adjust_trust(ip, -15, "More than 30 anomalous accesses detected outside working hours")
+                updated_ips.append(ip)
+
+        if not updated_ips:
+            logging.warning("⚠️ Nessun IP valido trovato nel payload")
+
+    elif trust_type == "TrustReputation-Decrease":
+        result = data.get("result", {})
+        logging.info(result)
+
+        results = [result] if isinstance(result, dict) else result
+
+        updated_ips = []
+
+        for entry in results:
+            ip = entry.get("src_ip") 
+            if ip:
+                logging.warning("IP-DOS: {ip}, fiducia diminuita")
+                adjust_trust(ip, -40, "HTTP POST DoS Detected")
+                updated_ips.append(ip)
+
+        if not updated_ips:
+            logging.warning("⚠️ Nessun IP valido trovato nel payload")
+    else:
+        logging.warning(f"⚠️ search_name non riconosciuto: {trust_type}")
+
+    return jsonify({"status": "received"}), 200
+
+
+# toglie 10 punti di fiducia nel caso di richieste proveniente da reti esterne
+def evaluate_external_net_activity(ip):
+    if ipaddress.IPv4Address(ip) not in ipaddress.IPv4Network("172.20.0.0/24"):
+        adjust_trust(ip, -20, "External net detected")
+
+# aggiunge 10 punti di fiducia nel caso di richieste provenienti da reti interne
+def evaluate_internal_net_activity(ip):
+    if ipaddress.IPv4Address(ip) in ipaddress.IPv4Network("172.20.0.0/16"):
+        adjust_trust(ip, +10, "Internal net access")
+
+# attraverso questa rotta il PDP riceve i dati dal PEP e valuta la fiducia e se l'accesso è consentito o meno
+@app.route("/decide", methods=["POST"])
+def decide():
+    load_trust_db()  # ✅ Assicurati che trust_db sia aggiornato
+
+    data = request.json
+    client_ip = data.get("client_ip")
+    role = data.get("role")
+    operation = data.get("operation")
+    document_type = data.get("document_type")
+
+    logging.info(f"[PDP] Valuto {operation.upper()} su {document_type} da {role}")
+
+    if check_blacklist_file(client_ip):
+        logging.info("[PDP] IP %s presente in blacklist", client_ip)
+        adjust_trust(client_ip, -30, "IP in static blacklist (file)")
+
+    # 🧾 Inizializza se non esiste ancora
+    if client_ip not in trust_db:
+        base = ROLE_BASE_TRUST.get(role, DEFAULT_TRUST)
+        trust_db[client_ip] = {
+            "score": base,
+            "last_seen": datetime.now().isoformat(),
+            "last_reason": "Ruolo iniziale: " + role
+        }
+        save_trust_db()
+
+    evaluate_external_net_activity(client_ip)
+    evaluate_internal_net_activity(client_ip)
+
+    score = trust_db[client_ip]["score"]
+    min_required = OPERATION_THRESHOLDS.get(document_type, {}).get(operation)
+
+    if min_required is None:
+        return jsonify({"error": "Operazione o tipo documento non validi"}), 400
+
+    decision = "allow" if score >= min_required else "deny"
+
+    logging.info(f"[PDP] Trust: {score} / Soglia richiesta: {min_required} → Decisione: {decision}")
+
+    return jsonify({
+        "decision": decision,
+        "trust": score,
+        "required": min_required
+    }), 200
+
+
+@app.route("/reward_check", methods=["POST"])
+def reward_check():
+    now = datetime.datetime.now()
+    for ip, data in trust_db.items():
+        last_seen = datetime.datetime.fromisoformat(data["last_seen"])
+        delta = now - last_seen
+        if delta.days >= 60:
+            adjust_trust(ip, +5, "No incidents in 60+ days")
+    
+    return jsonify({"status": "rewards applied"}), 200
+
+@app.route("/dump", methods=["GET"])
+def dump():
+    return jsonify(trust_db)
 
 @app.route("/block_ip", methods=["POST"])
 def snort_alert():
