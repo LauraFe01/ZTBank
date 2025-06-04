@@ -1,5 +1,6 @@
 import os
-from flask import Flask, request, jsonify
+from user_auth import load_user_db, authenticate_user
+from flask import Flask, request, jsonify, session
 import requests
 import psycopg2
 import logging
@@ -7,18 +8,47 @@ import pytz
 from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = os.getenv("PEP_SECRET_KEY")
 PDP_URL = "http://pdp:5050/decide"
 logging.basicConfig(level=logging.INFO)
 
 rome = pytz.timezone("Europe/Rome")
 
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
+
+    user_db = load_user_db()
+    success, role_or_msg = authenticate_user(username, password, user_db)
+
+    if not success:
+        return jsonify({"status": "error", "message": role_or_msg}), 401
+
+    session.permanent = True
+    session["username"] = username
+    session["role"] = role_or_msg
+
+    return jsonify({"status": "ok", "message": "Login riuscito"}), 200
+
+@app.route("/logout", methods=["POST"])
+def logout():
+    session.clear()
+    return jsonify({"status": "ok", "message": "Logout effettuato"}), 200
+
 @app.route("/request", methods=["POST"])
 def handle_request():
+    if "username" not in session or "role" not in session:
+        return jsonify({"error": "Utente non autenticato"}), 401
+
+    role = session["role"]
+    username = session["username"]
+
     data = request.get_json()
 
     timestamp = datetime.now(rome).strftime("%Y-%m-%d %H:%M:%S")
 
-    role = data.get("role", "")
     operation = data.get("operation", "")
     document_type = data.get("document_type", "")
 
@@ -34,6 +64,7 @@ def handle_request():
         response = requests.post(PDP_URL, json={
             "timestamp": timestamp,
             "client_ip": client_ip,
+            "username": username,
             "role": role,
             "operation": operation,
             "document_type": document_type

@@ -6,7 +6,7 @@ import os
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 from splunk_methods import splunk_search
-from utils import block_ip, check_blacklist_file, load_trust_db, save_trust_db, reset_trust, adjust_trust
+from utils import block_ip, check_blacklist_file, load_trust_db, save_trust_db, reset_trust, adjust_trust, penalize_all_on_ip
 from policies import evaluate_external_net_activity, evaluate_internal_net_activity, evaluate_ip_country
 from encrypt_existing import encrypt_trust_file
 import logging
@@ -53,7 +53,7 @@ def update_trust():
         for entry in results:
             ip = entry.get("src_ip") 
             if ip:
-                adjust_trust(ip, +1, "Consistent benign behavior")
+                penalize_all_on_ip(ip, +1, "Consistent benign behavior")
                 updated_ips.append(ip)
 
         if not updated_ips:
@@ -69,7 +69,7 @@ def update_trust():
         for entry in results:
             ip = entry.get("src_ip") 
             if ip:
-                adjust_trust(ip, -25, "More than 10 attacks detected in the last 30 days")
+                penalize_all_on_ip(ip, -25, "More than 10 attacks detected in the last 30 days")
                 updated_ips.append(ip)
 
         if not updated_ips:
@@ -85,7 +85,7 @@ def update_trust():
         for entry in results:
             ip = entry.get("src_ip") 
             if ip:
-                adjust_trust(ip, -15, "More than 30 anomalous accesses detected outside working hours")
+                penalize_all_on_ip(ip, -15, "More than 30 anomalous accesses detected outside working hours")
                 updated_ips.append(ip)
 
         if not updated_ips:
@@ -103,7 +103,7 @@ def update_trust():
             ip = entry.get("src_ip") 
             if ip:
                 logging.warning("IP-DOS: {ip}, fiducia diminuita")
-                adjust_trust(ip, -40, "HTTP POST DoS Detected")
+                penalize_all_on_ip(ip, -40, "HTTP POST DoS Detected")
                 updated_ips.append(ip)
 
         if not updated_ips:
@@ -122,8 +122,10 @@ def decide():
     client_ip = data.get("client_ip")
     role = data.get("role")
     operation = data.get("operation")
+    username = data.get("username")
     document_type = data.get("document_type")
 
+    trust_key = f"{username}|{client_ip}"
     logging.info(f"[PDP] Valuto {operation.upper()} su {document_type} da {role}")
 
     if check_blacklist_file(client_ip):
@@ -131,20 +133,21 @@ def decide():
         adjust_trust(client_ip, -30, "IP in static blacklist (file)")
 
     # 🧾 Inizializza se non esiste ancora
-    if client_ip not in trust_db:
+    if trust_key not in trust_db:
         base = ROLE_BASE_TRUST.get(role, 100)
-        trust_db[client_ip] = {
+        trust_db[trust_key] = {
             "score": base,
             "last_seen": datetime.now().isoformat(),
             "last_reason": "Ruolo iniziale: " + role
         }
-        save_trust_db()
+        logging.info(f"Trust db aggiornato con aggiunta di un utente {trust_db}")
+        save_trust_db(trust_db)
 
-    evaluate_external_net_activity(client_ip)
-    evaluate_internal_net_activity(client_ip)
-    evaluate_ip_country(client_ip)
+    evaluate_external_net_activity(trust_key)
+    evaluate_internal_net_activity(trust_key)
+    evaluate_ip_country(trust_key)
 
-    score = trust_db[client_ip]["score"]
+    score = trust_db[trust_key]["score"]
     min_required = OPERATION_THRESHOLDS.get(document_type, {}).get(operation)
 
     if min_required is None:
@@ -209,7 +212,7 @@ def snort_alert():
 
 if __name__ == "__main__":
     trust_db = load_trust_db()
-    trust_db = reset_trust(trust_db)
+    trust_db = {}
     logging.info(f"DB iniziale: {trust_db}")
     save_trust_db(trust_db)
 
