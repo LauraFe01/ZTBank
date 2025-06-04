@@ -5,10 +5,6 @@ import psycopg2
 import logging
 import pytz
 from datetime import datetime
-from dotenv import load_dotenv
-
-# Carica le variabili dal file .env
-load_dotenv()
 
 app = Flask(__name__)
 PDP_URL = "http://pdp:5050/decide"

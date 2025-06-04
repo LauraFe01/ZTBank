@@ -244,6 +244,24 @@ def update_trust():
 
         if not updated_ips:
             logging.warning("⚠️ Nessun IP valido trovato nel payload")
+
+    elif trust_type == "TrustReputation-Decrease":
+        result = data.get("result", {})
+        logging.info(result)
+
+        results = [result] if isinstance(result, dict) else result
+
+        updated_ips = []
+
+        for entry in results:
+            ip = entry.get("src_ip") 
+            if ip:
+                logging.warning("IP-DOS: {ip}, fiducia diminuita")
+                adjust_trust(ip, -40, "HTTP POST DoS Detected")
+                updated_ips.append(ip)
+
+        if not updated_ips:
+            logging.warning("⚠️ Nessun IP valido trovato nel payload")
     else:
         logging.warning(f"⚠️ search_name non riconosciuto: {trust_type}")
 
