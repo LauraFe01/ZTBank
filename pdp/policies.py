@@ -33,3 +33,13 @@ def evaluate_ip_country(trust_key):
             adjust_trust(trust_key, -40, f"Connessione da paese esterno: {country}")
     except Exception as e:
         logging.warning(f"❗ Impossibile geolocalizzare IP {ip}: {e}")
+
+
+def evaluate_operation(role, operation):
+    if role == "Direttore":
+        return True
+    if role == "Consulente" or role == "Cassiere":
+        if operation == "write":
+            return True
+        elif operation == "delete":
+            return False

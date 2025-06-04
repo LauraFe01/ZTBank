@@ -5,6 +5,7 @@ COPY pep.py .
 COPY user_auth.py .
 COPY users_db.json .
 COPY create_users.py .
+COPY . .
 
 # Installa le dipendenze necessarie
 RUN apt-get update && \

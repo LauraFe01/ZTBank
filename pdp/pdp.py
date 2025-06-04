@@ -7,7 +7,7 @@ from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 from splunk_methods import splunk_search
 from utils import block_ip, check_blacklist_file, load_trust_db, save_trust_db, reset_trust, adjust_trust, penalize_all_on_ip
-from policies import evaluate_external_net_activity, evaluate_internal_net_activity, evaluate_ip_country
+from policies import evaluate_external_net_activity, evaluate_internal_net_activity, evaluate_ip_country, evaluate_operation
 from encrypt_existing import encrypt_trust_file
 import logging
 import re
@@ -25,9 +25,9 @@ ROLE_BASE_TRUST = {
 }
 
 OPERATION_THRESHOLDS = {
-    "Dati Personali": {"read": 60, "write": 80},
-    "Dati Transazionali": {"read": 65, "write": 75},
-    "Documenti Operativi": {"read": 60, "write": 70}
+    "Dati Personali": {"read": 60, "write": 80, "delete": 80},
+    "Dati Transazionali": {"read": 65, "write": 75, "delete": 80},
+    "Documenti Operativi": {"read": 60, "write": 70, "delete": 80}
 }
 
 app = Flask(__name__)
@@ -124,6 +124,7 @@ def decide():
     operation = data.get("operation")
     username = data.get("username")
     document_type = data.get("document_type")
+    check = True
 
     trust_key = f"{username}|{client_ip}"
     logging.info(f"[PDP] Valuto {operation.upper()} su {document_type} da {role}")
@@ -146,23 +147,33 @@ def decide():
     evaluate_external_net_activity(trust_key)
     evaluate_internal_net_activity(trust_key)
     evaluate_ip_country(trust_key)
+    if operation != "read":
+        check = evaluate_operation(role, operation)
+        logging.info(f"CHECK {check}")
 
     score = trust_db[trust_key]["score"]
     min_required = OPERATION_THRESHOLDS.get(document_type, {}).get(operation)
+    logging.info(f"TRUST SCORE {score}")
 
     if min_required is None:
         return jsonify({"error": "Operazione o tipo documento non validi"}), 400
-
-    decision = "allow" if score >= min_required else "deny"
-
-    logging.info(f"[PDP] Trust: {score} / Soglia richiesta: {min_required} → Decisione: {decision}")
-
-    return jsonify({
-        "decision": decision,
+    logging.info(f"[PDP] Trust: {score} / Soglia richiesta: {min_required}")
+    if score >= min_required and check:
+        logging.info("qui")
+        return jsonify({
+        "decision": "allow",
         "trust": score,
-        "required": min_required
-    }), 200
+        "required": min_required,
+        "operation_allowed": check
+        }), 200
 
+    else:
+        return jsonify({
+        "decision": "deny",
+        "trust": score,
+        "required": min_required,
+        "operation_allowed": check
+    }), 200
 
 @app.route("/reward_check", methods=["POST"])
 def reward_check():
