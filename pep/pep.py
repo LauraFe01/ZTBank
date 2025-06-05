@@ -95,7 +95,6 @@ def handle_request():
         decision = pdp_response.get("decision", "deny")
         trust = pdp_response.get("trust", "unknown")
         required = pdp_response.get("required", "unknown")
-        check = pdp_response.get("operation_allowed")
 
     except Exception as e:
         logging.info(f"[PEP] Errore nella comunicazione con PDP: {e}")

@@ -6,6 +6,7 @@ import json
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 
+
 load_dotenv()
 KEY = os.getenv("TRUST_KEY")
 if not KEY:
@@ -15,6 +16,7 @@ fernet = Fernet(KEY.encode())
 TRUST_FILE = "trust_db.json"
 BLACKLIST_THRESHOLD = 0
 BLACKLIST_FILE = "/app/data/blacklist/blacklist.txt"
+
 
 def block_ip(ip):
     try:
@@ -78,27 +80,6 @@ def reset_trust(trust_db):
     return trust_db
 
 
-def penalize_all_on_ip(ip, delta, reason):
-
-    trust_db = load_trust_db()
-    updated = 0
-
-    for trust_key in trust_db:
-        if trust_key.endswith(f"|{ip}"):
-            trust = trust_db[trust_key]
-            trust["score"] = max(0, trust["score"] + delta)
-            trust["last_seen"] = datetime.now().isoformat()
-            trust["last_reason"] = reason
-            updated += 1
-            logging.info(f"[PDP] 🔻 Penalizzato {trust_key} → {trust['score']}")
-
-    if updated > 0:
-        save_trust_db(trust_db)
-        logging.info(f"[PDP] Penalizzati {updated} utenti su IP {ip}")
-    else:
-        logging.info(f"[PDP] Nessun utente trovato per IP {ip}")
-
-
 def adjust_trust(trust_key, change, reason):
     logging.info(f"[PDP] Dentro ADJUST: {trust_key}, {change}, {reason}")
     trust_db = load_trust_db()
@@ -125,3 +106,11 @@ def adjust_trust(trust_key, change, reason):
         block_ip(ip)
 
     return trust_db
+
+def get_network_trust(ip):
+    """
+    Restituisce il punteggio di fiducia associato a un IP o rete specifica.
+    """
+    trust_db = load_trust_db()
+    return trust_db.get(ip)
+

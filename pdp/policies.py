@@ -12,10 +12,10 @@ GEOIP_DB_PATH = 'GeoLite2-Country.mmdb'
 geo_reader = geoip2.database.Reader(GEOIP_DB_PATH)
 
 
-# toglie 10 punti di fiducia nel caso di richieste proveniente da reti esterne
+# toglie 20 punti di fiducia nel caso di richieste proveniente da reti esterne
 def evaluate_external_net_activity(trust_key):
     ip = trust_key.split("|")[1]
-    if ipaddress.IPv4Address(ip) not in ipaddress.IPv4Network("172.20.0.0/24"):
+    if ipaddress.IPv4Address(ip) not in ipaddress.IPv4Network("172.21.0.0/16"):
         adjust_trust(trust_key, -20, "External net detected")
 
 
@@ -24,6 +24,13 @@ def evaluate_internal_net_activity(trust_key):
     ip = trust_key.split("|")[1]
     if ipaddress.IPv4Address(ip) in ipaddress.IPv4Network("172.20.0.0/16"):
         adjust_trust(trust_key, +10, "Internal net access")
+
+
+# toglie 20 punti di fiducia nel caso di richieste provenienti da reti wifi
+def evaluate_wifi_net_activity(trust_key):
+    ip = trust_key.split("|")[1]
+    if ipaddress.IPv4Address(ip) in ipaddress.IPv4Network("172.22.0.0/16"):
+        adjust_trust(trust_key, -20, "Internal net access")
 
 
 # aggiunge 10 punti di fiducia nel caso di richieste provenienti dall'estero
@@ -39,7 +46,7 @@ def evaluate_ip_country(trust_key):
     except Exception as e:
         logging.warning(f"❗ Impossibile geolocalizzare IP {ip}: {e}")
 
-
+# NB dobbiamo pensare a cosa può fare il ruolo cliente!!!
 def evaluate_operation(role, operation):
     if role == "Direttore":
         return True
