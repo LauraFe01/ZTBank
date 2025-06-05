@@ -151,7 +151,7 @@ Verifying Preprocessor Configurations!
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth2".
 Reload thread starting...
-Reload thread started, thread 0x7fb5a7401640 (55)
+Reload thread started, thread 0x7f3683d62640 (41)
 Decoding Ethernet
 
         --== Initialization Complete ==--
@@ -165,86 +165,4 @@ Decoding Ethernet
            Using PCRE version: 8.39 2016-06-14
            Using ZLIB version: 1.2.11
 
-Commencing packet processing (pid=26)
-06/04-21:11:40.869591 172.24.0.2:39828 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1699 IpLen:20 DgmLen:60 DF
-******S* Seq: 0x5C01F28E  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
-TCP Options (5) => MSS: 1460 SackOK TS: 1494898850 0 NOP WS: 7 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.869694 172.24.0.3:3100 -> 172.24.0.2:39828
-TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:60 DF
-***A**S* Seq: 0x6E4515E6  Ack: 0x5C01F28F  Win: 0xFE88  TcpLen: 40
-TCP Options (5) => MSS: 1460 SackOK TS: 2461437136 1494898850 
-TCP Options => NOP WS: 7 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.869709 172.24.0.2:39828 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1700 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x5C01F28F  Ack: 0x6E4515E7  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1494898850 2461437136 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.871587 172.24.0.2:39828 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1701 IpLen:20 DgmLen:232 DF
-***AP*** Seq: 0x5C01F28F  Ack: 0x6E4515E7  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1494898852 2461437136 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.871624 172.24.0.3:3100 -> 172.24.0.2:39828
-TCP TTL:64 TOS:0x0 ID:48993 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x6E4515E7  Ack: 0x5C01F343  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2461437138 1494898852 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.871792 172.24.0.2 -> 172.24.0.3
-ICMP TTL:64 TOS:0x0 ID:12309 IpLen:20 DgmLen:55 DF
-Type:8  Code:0  ID:13312   Seq:512  ECHO
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.872435 172.24.0.3 -> 172.24.0.2
-ICMP TTL:64 TOS:0x0 ID:18053 IpLen:20 DgmLen:55
-Type:0  Code:0  ID:13312  Seq:512  ECHO REPLY
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.894601 172.24.0.3:3100 -> 172.24.0.2:39828
-TCP TTL:64 TOS:0x0 ID:48994 IpLen:20 DgmLen:234 DF
-***AP*** Seq: 0x6E4515E7  Ack: 0x5C01F343  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2461437161 1494898852 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.894617 172.24.0.2:39828 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1702 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x5C01F343  Ack: 0x6E45169D  Win: 0x1F5  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1494898875 2461437161 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.895086 172.24.0.3:3100 -> 172.24.0.2:39828
-TCP TTL:64 TOS:0x0 ID:48995 IpLen:20 DgmLen:259 DF
-***AP*** Seq: 0x6E45169D  Ack: 0x5C01F343  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2461437162 1494898875 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.895100 172.24.0.2:39828 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1703 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x5C01F343  Ack: 0x6E45176C  Win: 0x1F5  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1494898876 2461437162 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.897191 172.24.0.2:39828 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1704 IpLen:20 DgmLen:52 DF
-***A***F Seq: 0x5C01F343  Ack: 0x6E45176C  Win: 0x1F5  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1494898878 2461437162 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.897506 172.24.0.3:3100 -> 172.24.0.2:39828
-TCP TTL:64 TOS:0x0 ID:48996 IpLen:20 DgmLen:52 DF
-***A***F Seq: 0x6E45176C  Ack: 0x5C01F344  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2461437164 1494898878 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/04-21:11:40.897522 172.24.0.2:39828 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1705 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x5C01F344  Ack: 0x6E45176D  Win: 0x1F5  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1494898878 2461437164 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+Commencing packet processing (pid=25)

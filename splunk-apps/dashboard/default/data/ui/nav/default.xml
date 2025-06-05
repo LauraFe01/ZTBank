@@ -1,0 +1,4 @@
+<nav>
+  <view name="snort_attack_dashboard" default="true">Snort Attack Dashboard</view>
+  <view name="squid_traffic_dashboard">Squid Access Dashboard</view>
+</nav>

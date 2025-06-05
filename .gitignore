@@ -1,2 +1,3 @@
 .env
 logs/squid/cache.log
+logs/snort/snort.log*

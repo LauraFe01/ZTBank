@@ -1,0 +1,330 @@
+<dashboard version="1.1" theme="light">
+  <label>🌐 SQUID TRAFFIC MONITORING DASHBOARD</label>
+  
+  <!-- Stili CSS personalizzati per un design moderno e colorato -->
+  <row>
+    <html>
+      <div class="dashboard-header">
+        <h1>📊 Real-time Proxy Access Monitoring and Web Traffic Analysis</h1>
+      </div>
+      <style>
+        /* Sfondo generale chiaro con gradiente */
+        .dashboard-body {
+          background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%) !important;
+          min-height: 100vh;
+        }
+
+        /* Pannelli con ombra e bordi colorati */
+        .dashboard-panel {
+          background: #ffffff !important;
+          border-radius: 15px !important;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+          border: 2px solid transparent !important;
+          margin: 15px !important;
+          overflow: hidden !important;
+          transition: all 0.3s ease !important;
+          animation: fadeIn 0.6s ease-out !important;
+        }
+
+        .dashboard-panel:hover {
+          transform: translateY(-5px) !important;
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* Titoli dei pannelli con gradienti colorati */
+        .panel-head {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+          color: #ffffff !important;
+          font-weight: 700 !important;
+          font-size: 18px !important;
+          padding: 20px !important;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2) !important;
+          letter-spacing: 0.5px !important;
+        }
+
+        /* Alternanza colori per i titoli */
+        .dashboard-panel:nth-child(2) .panel-head {
+          background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+        }
+
+        .dashboard-panel:nth-child(3) .panel-head {
+          background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+        }
+
+        /* Grafici con colori vivaci */
+        .highcharts-series-0 .highcharts-point {
+          fill: #667eea !important;
+        }
+
+        .highcharts-series-0 .highcharts-graph {
+          stroke: #667eea !important;
+          stroke-width: 3px !important;
+        }
+
+        /* Testi leggibili con alto contrasto */
+        .highcharts-axis-labels text {
+          fill: #2d3748 !important;
+          font-weight: 600 !important;
+          font-size: 12px !important;
+        }
+
+        .highcharts-title {
+          fill: #1a202c !important;
+          font-weight: 700 !important;
+          font-size: 20px !important;
+        }
+
+        /* Label principali */
+        .dashboard-header h1 {
+          color: #1a202c !important;
+          font-size: 32px !important;
+          font-weight: 800 !important;
+          text-align: center !important;
+          margin: 30px 0 10px 0 !important;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .dashboard-header h2 {
+          color: #4a5568 !important;
+          font-size: 18px !important;
+          text-align: center !important;
+          margin-bottom: 30px !important;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .highcharts-color-0 {
+          fill: #667eea !important;
+          stroke: #667eea !important;
+        }
+
+        .highcharts-color-1 {
+          fill: #f093fb !important;
+          stroke: #f093fb !important;
+        }
+
+        .highcharts-color-2 {
+          fill: #4facfe !important;
+          stroke: #4facfe !important;
+        }
+
+        .highcharts-grid-line {
+          stroke: #e2e8f0 !important;
+          stroke-dasharray: 2,2 !important;
+        }
+
+        .highcharts-tooltip {
+          background: rgba(26, 32, 44, 0.95) !important;
+          border: none !important;
+          border-radius: 8px !important;
+          color: #ffffff !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .highcharts-legend-item text {
+          fill: #4a5568 !important;
+          font-weight: 600 !important;
+        }
+      </style>
+    </html>
+  </row>
+
+  <!-- Trend temporale delle richieste -->
+  <row>
+    <panel>
+      <title>📈 TREND TEMPORALE RICHIESTE</title>
+      <chart>
+        <search>
+          <query>
+            index=main sourcetype=squid
+            | timechart span=1h count as richieste
+          </query>
+          <earliest>-30d@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">area</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.axisTitleX.text">Tempo</option>
+        <option name="charting.axisTitleY.text">Numero di Richieste</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">-45</option>
+        <option name="charting.legend.placement">bottom</option>
+        <option name="charting.fieldColors">{"richieste": "#667eea"}</option>
+        <option name="charting.fillOpacity">0.7</option>
+        <option name="charting.lineWidth">3</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="height">350</option>
+      </chart>
+    </panel>
+  </row>
+
+  <!-- Top URL richiesti e IP client più attivi -->
+  <row>
+    <panel>
+      <title>🌍 TOP 10 URL PIÙ RICHIESTI</title>
+      <chart>
+        <search>
+          <query>
+            index=main sourcetype=squid
+            | rex field=_raw "^\S+\s+\S+\s+\S+\s+\S+/\S+\s+\S+\s+(?&lt;method&gt;\S+)\s+(?&lt;url&gt;\S+)"
+            | stats count as richieste by url
+            | eventstats sum(richieste) as total
+            | eval percentuale=round((richieste/total)*100,2)
+            | sort -richieste
+            | head 10
+            | fields url richieste percentuale
+          </query>
+          <earliest>-7d@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.axisTitleX.text">URL</option>
+        <option name="charting.axisTitleY.text">Numero Richieste</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">-45</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="charting.fieldColors">{"richieste": "#f093fb"}</option>
+        <option name="charting.chart.showDataLabels">all</option>
+        <option name="charting.drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="height">400</option>
+        <option name="charting.chart.barSpacing">5</option>
+        <option name="charting.chart.overlayFields">percentuale</option>
+      </chart>
+    </panel>
+    
+    <panel>
+      <title>👥 TOP 10 IP CLIENT PIÙ ATTIVI</title>
+      <table>
+        <search>
+          <query>
+            index=main sourcetype=squid earliest=-30d
+            | rex field=_raw "^\S+\s+\S+\s+(?&lt;src_ip&gt;\S+)\s+\S+/\S+\s+\S+\s+\S+\s+(?&lt;url&gt;\S+)"
+            | stats count as Richieste by src_ip
+            | eventstats sum(Richieste) as total
+            | eval Percentuale=round((Richieste/total)*100,2)."%"
+            | sort -Richieste
+            | head 10
+            | rename src_ip as "IP Client"
+            | table "IP Client" Richieste Percentuale
+          </query>
+          <earliest>-30d@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <format type="color" field="Richieste">
+          <colorPalette type="minMidMax" maxColor="#4FACFE" minColor="#E8F5FF"></colorPalette>
+        </format>
+        <format type="number" field="Richieste">
+          <option name="precision">0</option>
+          <option name="thousandSeparated">true</option>
+        </format>
+      </table>
+    </panel>
+  </row>
+
+  <!-- Statistiche aggiuntive -->
+  <row>
+    <panel>
+      <title>📊 STATISTICHE RIASSUNTIVE</title>
+      <single>
+        <search>
+          <query>
+            index=main sourcetype=squid earliest=-30d
+            | stats count as total_requests
+            | eval total_requests=tostring(total_requests, "commas")
+          </query>
+          <earliest>-30d@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="colorBy">value</option>
+        <option name="colorMode">block</option>
+        <option name="rangeColors">["0x4facfe","0x667eea"]</option>
+        <option name="rangeValues">[0]</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="height">150</option>
+        <option name="underLabel">Richieste Totali (24h)</option>
+        <option name="fontSize">60</option>
+      </single>
+    </panel>
+
+    <panel>
+      <title>🔗 URL UNICI (24h)</title>
+      <single>
+        <search>
+          <query>
+            index=main sourcetype=squid earliest=-30d
+            | rex field=_raw "^\S+\s+\S+\s+\S+\s+\S+/\S+\s+\S+\s+(?&lt;method&gt;\S+)\s+(?&lt;url&gt;\S+)"
+            | stats dc(url) as unique_urls
+            | eval unique_urls=tostring(unique_urls, "commas")
+          </query>
+          <earliest>-30d@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="colorBy">value</option>
+        <option name="colorMode">block</option>
+        <option name="rangeColors">["0xf093fb","0x764ba2"]</option>
+        <option name="rangeValues">[0]</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="height">150</option>
+        <option name="underLabel">URL Unici (24h)</option>
+        <option name="fontSize">60</option>
+      </single>
+    </panel>
+  </row>
+
+  <row>
+    <panel>
+      <title>🔄 METODI HTTP PIÙ UTILIZZATI</title>
+      <chart>
+        <search>
+          <query>
+            index=main sourcetype=squid
+            | rex field=_raw "^\S+\s+\S+\s+\S+\s+\S+/\S+\s+\S+\s+(?&lt;method&gt;\S+)\s+(?&lt;url&gt;\S+)"
+            | stats count by method
+            | eventstats sum(count) as total
+            | eval percent=round((count/total)*100,2)
+            | sort -count
+          </query>
+          <earliest>-30d@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.seriesColors">[0x667EEA,0xF093FB,0x4FACFE,0xFA8072,0x90EE90]</option>
+        <option name="charting.chart.showPercent">true</option>
+        <option name="charting.drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="height">300</option>
+      </chart>
+    </panel>
+  </row>
+</dashboard>
