@@ -93,7 +93,8 @@ def update_trust():
             ip = entry.get("src_ip") 
             if ip:
                 logging.warning("IP-PORT-SCANNING: {ip}, fiducia diminuita")
-                penalize_all_on_ip(ip, -101, "Port scanning Detected")
+                block_ip(ip)
+                #penalize_all_on_ip(ip, -101, "Port scanning Detected")
                 updated_ips.append(ip)
 
         if not updated_ips:
