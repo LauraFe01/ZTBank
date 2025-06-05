@@ -78,17 +78,28 @@ def update_trust():
                 adjust_trust(ip, -40, "HTTP POST DoS Detected")
                 updated_entries.append(ip)
 
-            # Policy: PortScanning-HighRate-Detection
-            elif trust_type == "PortScanning-HighRate-Detection":
-                logging.info("Policy: PortScanning-HighRate-Detection")
-                block_ip(ip)
-                updated_entries.append(ip)
-            
-            else:
-                logging.warning(f"⚠️ search_name non riconosciuto: {trust_type}")
+        if not updated_ips:
+            logging.warning("⚠️ Nessun IP valido trovato nel payload")
+        # Policy: PortScanning-HighRate-Detection
+    elif trust_type == "PortScanning-HighRate-Detection":
+        result = data.get("result", {})
+        logging.info(result)
 
-    if not updated_entries:
-        logging.warning("⚠️ Nessuna voce valida trovata nel payload")
+        results = [result] if isinstance(result, dict) else result
+
+        updated_ips = []
+
+        for entry in results:
+            ip = entry.get("src_ip") 
+            if ip:
+                logging.warning("IP-PORT-SCANNING: {ip}, fiducia diminuita")
+                penalize_all_on_ip(ip, -101, "Port scanning Detected")
+                updated_ips.append(ip)
+
+        if not updated_ips:
+            logging.warning("⚠️ Nessun IP valido trovato nel payload")
+    else:
+        logging.warning(f"⚠️ search_name non riconosciuto: {trust_type}")
 
     return jsonify({"status": "received"}), 200
 
