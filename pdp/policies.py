@@ -3,11 +3,14 @@ import ipaddress
 import geoip2.database
 from utils import adjust_trust
 
+
 logging.basicConfig(level=logging.INFO)
+
 
 # Carica il database GeoLite (devi scaricarlo prima)
 GEOIP_DB_PATH = 'GeoLite2-Country.mmdb'
 geo_reader = geoip2.database.Reader(GEOIP_DB_PATH)
+
 
 # toglie 10 punti di fiducia nel caso di richieste proveniente da reti esterne
 def evaluate_external_net_activity(trust_key):
@@ -15,11 +18,13 @@ def evaluate_external_net_activity(trust_key):
     if ipaddress.IPv4Address(ip) not in ipaddress.IPv4Network("172.20.0.0/24"):
         adjust_trust(trust_key, -20, "External net detected")
 
+
 # aggiunge 10 punti di fiducia nel caso di richieste provenienti da reti interne
 def evaluate_internal_net_activity(trust_key):
     ip = trust_key.split("|")[1]
     if ipaddress.IPv4Address(ip) in ipaddress.IPv4Network("172.20.0.0/16"):
         adjust_trust(trust_key, +10, "Internal net access")
+
 
 # aggiunge 10 punti di fiducia nel caso di richieste provenienti dall'estero
 def evaluate_ip_country(trust_key):

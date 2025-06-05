@@ -1,3 +1,7 @@
 [savedsearches/TrustReputation-Increase]
 version = 9.4.2
 modtime = 1748983990.297895000
+
+[savedsearches/PortScanning-HighRate-Detection]
+version = 9.4.2
+modtime = 1749134311.095633000

@@ -24,6 +24,7 @@ def block_ip(ip):
     except Exception as e:
         logging.error(f"[PDP] Errore scrittura blacklist: {e}")
 
+
 def check_blacklist_file(ip):
     logging.info(f"[PDP] Controllo blacklist per l'IP: {ip}")
     blacklist_path = "data/blacklist/blacklist.txt"
@@ -65,7 +66,7 @@ def save_trust_db(trust_db):
 
 
 def reset_trust(trust_db):
-    for ip in list(trust_db.keys()):  # 🔁 Crea copia delle chiavi per evitare errori
+    for ip in list(trust_db.keys()):  # Crea copia delle chiavi per evitare errori
         if ip == "172.24.0.2" or ip == "172.21.0.1":
             del trust_db[ip]  # ❌ IP indesiderati: li elimini
         else:
@@ -76,7 +77,9 @@ def reset_trust(trust_db):
     logging.info("[PDP] Reset completato. IP esclusi: 172.24.0.2, 172.21.0.1")
     return trust_db
 
+
 def penalize_all_on_ip(ip, delta, reason):
+
     trust_db = load_trust_db()
     updated = 0
 
@@ -94,6 +97,7 @@ def penalize_all_on_ip(ip, delta, reason):
         logging.info(f"[PDP] Penalizzati {updated} utenti su IP {ip}")
     else:
         logging.info(f"[PDP] Nessun utente trovato per IP {ip}")
+
 
 def adjust_trust(trust_key, change, reason):
     logging.info(f"[PDP] Dentro ADJUST: {trust_key}, {change}, {reason}")

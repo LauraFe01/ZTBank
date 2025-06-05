@@ -1,3 +1,5 @@
+# Automazione della creazione degli utenti
+
 from user_auth import load_user_db, create_user
 import logging
 
@@ -13,6 +15,7 @@ utenti = {
 
 db = load_user_db()
 
+# creazione utenti
 for key, (username, password, role) in utenti.items():
     ok, msg = create_user(username, password, role, db)
     logging.info(f"[{role}] {'✅' if ok else '❌'} {msg}")

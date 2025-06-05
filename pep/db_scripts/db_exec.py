@@ -1,9 +1,22 @@
 from db_scripts.db_DAO import FileDocumentoDAO
 import logging
 
+
 logging.basicConfig(level=logging.INFO)
 
+
 def execute_single_operation(operation, doc_id, role):
+    """
+    Esegue un'operazione di lettura o cancellazione su un documento nel database.
+
+    Args:
+        operation (str): Tipo di operazione ('read' o 'delete').
+        doc_id (int): ID del documento su cui eseguire l'operazione.
+        role (str): Ruolo dell'utente che richiede l'operazione.
+
+    Returns:
+        dict o bool: Documento trovato (per 'read'), True/False (per 'delete'), None in caso di errore.
+    """
     db_dao = FileDocumentoDAO()
 
     try:
@@ -34,6 +47,17 @@ def execute_single_operation(operation, doc_id, role):
 
 
 def execute_write_operation(nome_file, contenuto, sensibilita):
+    """
+    Inserisce un nuovo documento nel database.
+
+    Args:
+        nome_file (str): Nome del file da inserire.
+        contenuto (str): Contenuto del file.
+        sensibilita (str): Livello di sensibilità del documento.
+
+    Returns:
+        int o bool: ID del documento inserito, False in caso di errore.
+    """
     db_dao = FileDocumentoDAO()
     try:
         logging.info(f"[DB_EXEC] Inserimento file: {nome_file}")

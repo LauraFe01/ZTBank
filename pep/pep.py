@@ -8,48 +8,61 @@ import pytz
 from datetime import datetime
 from db_scripts.db_exec import execute_single_operation, execute_write_operation
 
-app = Flask(__name__)
-app.secret_key = os.getenv("PEP_SECRET_KEY")
-PDP_URL = "http://pdp:5050/decide"
-logging.basicConfig(level=logging.INFO)
 
-rome = pytz.timezone("Europe/Rome")
 
+app = Flask(__name__) # # Inizializzazione dell'app Flask
+app.secret_key = os.getenv("PEP_SECRET_KEY") # Chiave segreta per gestire le sessioni utente
+PDP_URL = "http://pdp:5050/decide" # Endpoint del PDP (Policy Decision Point)
+logging.basicConfig(level=logging.INFO) # Configurazione logging
+rome = pytz.timezone("Europe/Rome") # Timezone locale
+
+
+
+# Endpoint per il login
 @app.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
     username = data.get("username")
     password = data.get("password")
-
-    user_db = load_user_db()
+    
+    # autentichiamo l'utente e se l'operazione non va a buon fine inviamo un messaggio di errore
+    user_db = load_user_db() 
     success, role_or_msg = authenticate_user(username, password, user_db)
-
     if not success:
         return jsonify({"status": "error", "message": role_or_msg}), 401
-
-    session.permanent = True
+    
+    # se l'autenticazione va a buon fine, avviamo la sessione per l'utente
+    session.permanent = True # Sessione persistente
     session["username"] = username
     session["role"] = role_or_msg
-
     return jsonify({"status": "ok", "message": "Login riuscito"}), 200
 
+
+
+# Endpoint per il logout
 @app.route("/logout", methods=["POST"])
 def logout():
     session.clear()
     return jsonify({"status": "ok", "message": "Logout effettuato"}), 200
 
+
+
+# rotta di ricezione delle richieste
 @app.route("/request", methods=["POST"])
 def handle_request():
+
+    # Verifica autenticazione (solo gli autenticati possono fare richieste)
     if "username" not in session or "role" not in session:
         return jsonify({"error": "Utente non autenticato"}), 401
 
     role = session["role"]
     username = session["username"]
-
+    
+    # recuperiamo i dati della richiesta
     data = request.get_json()
-
     timestamp = datetime.now(rome).strftime("%Y-%m-%d %H:%M:%S")
-
+    
+    # estrazione dei parametri della richiesta (la sensibilità la mettiamo nella richiesta?????)
     operation = data.get("operation", "")
     document_type = data.get("document_type", "")
     nome_file = data.get("nome_file", "")
@@ -58,13 +71,15 @@ def handle_request():
     doc_id = data.get("doc_id", "")
 
     logging.info(f"[PEP] Richiesta ricevuta da  Ruolo: {role}, Op: {operation}, Documento: {document_type}")
+
+    # Ottieniamo IP del client
     if request.headers.getlist("X-Forwarded-For"):
         client_ip = request.headers.getlist("X-Forwarded-For")[0]
     else:
         client_ip = request.remote_addr
     logging.info(f"client_ip: {client_ip}")
 
-    # Inoltra tutto al PDP
+    # Inoltriamo tutto al PDP
     try:
         response = requests.post(PDP_URL, json={
             "timestamp": timestamp,
@@ -89,7 +104,8 @@ def handle_request():
         required = "unknown"
 
     logging.info(f"[PEP] Decisione PDP: {decision} (Trust: {trust}, Soglia: {required})")
-
+    
+    # Se l'accesso è consentito, esegui l'operazione
     if decision == "allow":
         logging.info("[PEP] Accesso CONCESSO.")
         try:
@@ -102,7 +118,7 @@ def handle_request():
                 result = execute_single_operation(operation, doc_id, role)
                 if result is None:
                     return jsonify({
-                        "result": "Documento non disponibile per la consultazione",
+                        "result": "Documento non disponibile per l'operazione richiesta",
                     }), 200
 
             return jsonify({
@@ -114,6 +130,7 @@ def handle_request():
             logging.error(f"[PEP] Errore durante esecuzione operazione: {e}")
             return jsonify({"error": "Errore interno"}), 500
     else:
+        # Accesso negato 
         logging.info("[PEP] Accesso NEGATO.")
         return jsonify({
             "result": "access denied",
@@ -121,6 +138,7 @@ def handle_request():
             "required": required
 
         }), 403
+
 
 
 if __name__ == "__main__":
