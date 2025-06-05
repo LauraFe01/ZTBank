@@ -1,3 +1,7 @@
 [views/snort_alert_dashboard]
 access = read : [ * ], write : [ admin ]
 export = system
+
+[views/squid_traffic_dashboard]
+access = read : [ * ], write : [ admin ]
+export = system
