@@ -1,22 +1,23 @@
 from flask import Flask, request, jsonify
 import requests
-from datetime import datetime, timezone
-import json
 import os
-from cryptography.fernet import Fernet
+import json
 from dotenv import load_dotenv
-from splunk_methods import splunk_search
-from utils import block_ip, check_blacklist_file, load_trust_db, save_trust_db, reset_trust, adjust_trust, penalize_all_on_ip
-from policies import evaluate_external_net_activity, evaluate_internal_net_activity, evaluate_ip_country, evaluate_operation
+from utils import block_ip, check_blacklist_file, load_trust_db, save_trust_db, adjust_trust, get_network_trust
+from policies import evaluate_external_net_activity, evaluate_internal_net_activity, evaluate_ip_country, evaluate_operation, evaluate_wifi_net_activity
 from encrypt_existing import encrypt_trust_file
 import logging
 import re
 
+
 logging.basicConfig(level=logging.INFO)
+
 
 # Carica la chiave dal file .env
 load_dotenv()
 
+
+# Dizionario di punteggi base di fiducia assegnati in base al ruolo dell'utente
 ROLE_BASE_TRUST = {
     "Direttore": 85,
     "Cassiere": 70,
@@ -24,222 +25,179 @@ ROLE_BASE_TRUST = {
     "Cliente": 60
 }
 
+
+# Soglie minime di fiducia richieste per operazioni su diversi tipi di documenti
 OPERATION_THRESHOLDS = {
     "Dati Personali": {"read": 60, "write": 80, "delete": 80},
     "Dati Transazionali": {"read": 65, "write": 75, "delete": 80},
     "Documenti Operativi": {"read": 60, "write": 70, "delete": 80}
 }
 
+
 app = Flask(__name__)
 
-""" def extract_src_ip(result):
-    raw = result.get('_raw', '')
-    match = re.search(r'->\s+(\d{1,3}(?:\.\d{1,3}){3})', raw)
-    if match:
-        return match.group(1)
-    return None """
-
-IP_RE = re.compile(r'(?<!\d)(\d{1,3}(?:\.\d{1,3}){3})(?::\d+)?\s*->')
-
+# se la ss è fatta bene in savedsearches.conf questa non serve! Vedi Policy: TrustReputation-Increase
 def extract_src_ip(entry):
     raw = entry.get("_raw", "")
     match = IP_RE.search(raw)
     return match.group(1) if match else None
 
+
 @app.route('/update_trust', methods=['POST'])
 def update_trust():
+    """
+    Endpoint per aggiornare il punteggio di fiducia o bloccare un ip in base ai dati ricevuti da Splunk.
+    """
     data = request.get_json()
     logging.info("Payload ricevuto da Splunk")
-    logging.info(json.dumps(data, indent=2))  # Stampa il payload ben formattato
-
-    trust_type = data.get("search_name", "")
-
-    # Policy: TrustReputation-Increase
-    if trust_type == "TrustReputation-Increase":
-        result = data.get("result", {})
-        logging.info(result) # stampa le informazioni di interesse contenute nel payload (ip)
-
-        # Normalizza in lista, anche se è un solo elemento
-        results = [result] if isinstance(result, dict) else result
-
-        updated_ips = []
-
-        for entry in results:
-            ip = entry.get("src_ip")
-            if ip:
-                penalize_all_on_ip(ip, +1, "Consistent benign behavior")
-                updated_ips.append(ip)
-
-        if not updated_ips:
-            logging.warning("⚠️ Nessun IP valido trovato nel payload")
-
-    # Policy: Snort-Attack-Detection-30Days
-    elif trust_type.strip() == "Snort-Attack-Detection-30Days":
-        result = data.get("result", {})
-        logging.info(f"RESULT - SPLUNK: {result}")
-
-        results = [result] if isinstance(result, dict) else result
-
-        updated_ips = []
-
-        for entry in results:
-            ip = extract_src_ip(entry)
-            if ip:
-                block_ip(ip)  # Blocca l'IP
-
-    # Policy: Non-Working-Hours-Detection-More-Than-10-IPs
-    elif trust_type == "Non-Working-Hours-Detection-More-Than-10-IPs":
-        result = data.get("result", {})
-        logging.info(f"RESULT - SQUID: {result}")
-
-        results = [result] if isinstance(result, dict) else result
-
-        updated_ips = []
-
-        for entry in results:
-            ip = extract_src_ip(entry)
-            if ip:
-                penalize_all_on_ip(ip, -15, "More than 30 anomalous accesses detected outside working hours")
-                updated_ips.append(ip)
-
-        if not updated_ips:
-            logging.warning("⚠️ Nessun IP valido trovato nel payload")
+    # logging.info(json.dumps(data, indent=2))  # Stampa il payload ben formattato
     
-    # Policy: TrustReputation-Decrease
-    elif trust_type == "TrustReputation-Decrease":
-        result = data.get("result", {})
-        logging.info(result)
+    trust_type = data.get("search_name", "")
+    result = data.get("result", {})
+    logging.info("Ip contenuto nel payload:")
+    logging.info(result)
+    results = [result] if isinstance(result, dict) else result
+    
+    updated_entries = []
+    
+    for entry in results:
+        ip = entry.get("src_ip") or extract_src_ip(entry)
+        if ip:
 
-        results = [result] if isinstance(result, dict) else result
+            # Policy: TrustReputation-Increase
+            if trust_type == "TrustReputation-Increase":
+                logging.info("Policy: TrustReputation-Increase")
+                adjust_trust(ip, +1, "Consistent benign behavior")
+                updated_entries.append(ip)
 
-        updated_ips = []
+            # Policy: Snort-Attack-Detection-30Days
+            elif trust_type.strip() == "Snort-Attack-Detection-30Days":
+                logging.info("Policy: Snort-Attack-Detection-30Days")
+                block_ip(ip)  # Blocca l'IP
+                updated_entries.append(ip)
+            
+            # Policy: Non-Working-Hours-Detection-More-Than-10-IPs
+            elif trust_type == "Non-Working-Hours-Detection-More-Than-10-IPs":
+                logging.info("Policy: Non-Working-Hours-Detection-More-Than-10-IPs")
+                adjust_trust(ip, -15, "More than 30 anomalous accesses detected outside working hours")
+                updated_entries.append(ip)
 
-        for entry in results:
-            ip = entry.get("src_ip") 
-            if ip:
-                logging.warning("IP-DOS: {ip}, fiducia diminuita")
-                penalize_all_on_ip(ip, -40, "HTTP POST DoS Detected")
-                updated_ips.append(ip)
+            # Policy: TrustReputation-Decrease
+            elif trust_type == "TrustReputation-Decrease":
+                logging.info("Policy: TrustReputation-Decrease")
+                adjust_trust(ip, -40, "HTTP POST DoS Detected")
+                updated_entries.append(ip)
 
-        if not updated_ips:
-            logging.warning("⚠️ Nessun IP valido trovato nel payload")
-    else:
-        logging.warning(f"⚠️ search_name non riconosciuto: {trust_type}")
+            # Policy: PortScanning-HighRate-Detection
+            elif trust_type == "PortScanning-HighRate-Detection":
+                logging.info("Policy: PortScanning-HighRate-Detection")
+                block_ip(ip)
+                updated_entries.append(ip)
+            
+            else:
+                logging.warning(f"⚠️ search_name non riconosciuto: {trust_type}")
+
+    if not updated_entries:
+        logging.warning("⚠️ Nessuna voce valida trovata nel payload")
 
     return jsonify({"status": "received"}), 200
 
-# attraverso questa rotta il PDP riceve i dati dal PEP e valuta la fiducia e se l'accesso è consentito o meno
+
 @app.route("/decide", methods=["POST"])
 def decide():
-    trust_db=load_trust_db()  # ✅ Assicurati che trust_db sia aggiornato
+    logging.info("Ricezione dei dati da parte del PEP")
 
     data = request.json
+
     client_ip = data.get("client_ip")
+    logging.info(f"Client IP: {client_ip}")
+
     role = data.get("role")
+    logging.info(f"Ruolo: {role}")
+
     operation = data.get("operation")
-    username = data.get("username")
+    logging.info(f"Operazione: {operation}")
+
     document_type = data.get("document_type")
-    check = True
+    logging.info(f"Tipo di Documento: {document_type}")
 
-    trust_key = f"{username}|{client_ip}"
-    logging.info(f"[PDP] Valuto {operation.upper()} su {document_type} da {role}")
-
+    # Verifica se l'IP è in blacklist
+    logging.info("Verifico se l'IP è in blacklist")
     if check_blacklist_file(client_ip):
-        logging.info("[PDP] IP %s presente in blacklist", client_ip)
-        adjust_trust(client_ip, -30, "IP in static blacklist (file)")
-
-    # 🧾 Inizializza se non esiste ancora
-    if trust_key not in trust_db:
-        base = ROLE_BASE_TRUST.get(role, 100)
-        trust_db[trust_key] = {
-            "score": base,
-            "last_seen": datetime.now().isoformat(),
-            "last_reason": "Ruolo iniziale: " + role
-        }
-        logging.info(f"Trust db aggiornato con aggiunta di un utente {trust_db}")
-        save_trust_db(trust_db)
-
-    evaluate_external_net_activity(trust_key)
-    evaluate_internal_net_activity(trust_key)
-    evaluate_ip_country(trust_key)
-    if operation != "read":
-        check = evaluate_operation(role, operation)
-        logging.info(f"CHECK {check}")
-
-    score = trust_db[trust_key]["score"]
-    min_required = OPERATION_THRESHOLDS.get(document_type, {}).get(operation)
-    logging.info(f"TRUST SCORE {score}")
-
-    if min_required is None:
-        return jsonify({"error": "Operazione o tipo documento non validi"}), 400
-    logging.info(f"[PDP] Trust: {score} / Soglia richiesta: {min_required}")
-    if score >= min_required and check:
-        logging.info("qui")
+        logging.info(f"[PDP] IP {client_ip} presente in blacklist")
         return jsonify({
-        "decision": "allow",
-        "trust": score,
-        "required": min_required,
-        "operation_allowed": check
+            "decision": "deny",
+            "trust": "blacklisted",
+            "required": "N/A",
+            "operation_allowed": False
+        }), 200
+    else: logging.info(f"[PDP] IP {client_ip} non presente in blacklist")
+
+    # Valutazioni aggiuntive
+    logging.info("Esecuzione di valutazioni aggiuntive per la rete di provenienza della richiesta")
+    evaluate_external_net_activity(client_ip)
+    evaluate_internal_net_activity(client_ip)
+    evaluate_wifi_net_activity(client_ip)
+
+    # Ottieni il punteggio di fiducia della rete
+    logging.info("Ottengo fiducia della rete:")
+    network_trust = get_network_trust(client_ip).get("score", 50)
+    logging.info(f"Fiducia relativa a {client_ip}: {network_trust}")
+
+    # Ottieni il punteggio di fiducia basato sul ruolo
+    logging.info("Ottengo fiducia del ruolo:")
+    role_trust = ROLE_BASE_TRUST.get(role, 50)  # Valore di default se ruolo non riconosciuto
+    logging.info(f"Fiducia del ruolo {role}: {role_trust}")
+
+    # Calcola il punteggio combinato
+    combined_trust = (network_trust + role_trust) / 2
+    logging.info(f"Punteggio combinato: {combined_trust}")
+
+    # Se il punteggio della rete è inferiore alla soglia, aggiungi l'IP alla blacklist
+    if network_trust <= 0:
+        block_ip(client_ip)
+        logging.info(f"[PDP] IP {client_ip} aggiunto alla blacklist per basso punteggio di rete")
+        return jsonify({
+            "decision": "deny",
+            "trust": combined_trust,
+            "required": "N/A",
+            "operation_allowed": False
         }), 200
 
-    else:
+    # Ottieni la soglia richiesta per l'operazione e il tipo di documento
+    min_required = OPERATION_THRESHOLDS.get(document_type, {}).get(operation)
+    if min_required is None:
+        return jsonify({"error": "Operazione o tipo documento non validi"}), 400
+    logging.info(f"La soglia di fiducia richiesta per l'operazione {operation } per un documento di tipo {document_type} è {min_required}")
+
+    # Verifica se l'operazione è consentita per il ruolo
+    logging.info("Verifico se l'operazione è consentita per il ruolo")
+    operation_allowed = evaluate_operation(role, operation)
+    logging.info(f"Operation allowed: {operation_allowed}")
+
+    # Decisione finale
+    logging.info("Decisione finale:")
+    if combined_trust >= min_required and operation_allowed:
+        logging.info(f"Decisione finale: operation allowed")
         return jsonify({
-        "decision": "deny",
-        "trust": score,
-        "required": min_required,
-        "operation_allowed": check
-    }), 200
+            "decision": "allow",
+            "trust": combined_trust,
+            "required": min_required,
+            "operation_allowed": operation_allowed
+        }), 200
+    else:
+        logging.info(f"Decisione finale: operation denied")
+        return jsonify({
+            "decision": "deny",
+            "trust": combined_trust,
+            "required": min_required,
+            "operation_allowed": operation_allowed
+        }), 200
 
-@app.route("/reward_check", methods=["POST"])
-def reward_check():
-    trust_db = load_trust_db()
-    now = datetime.datetime.now()
-    for ip, data in trust_db.items():
-        last_seen = datetime.datetime.fromisoformat(data["last_seen"])
-        delta = now - last_seen
-        if delta.days >= 60:
-            adjust_trust(ip, +5, "No incidents in 60+ days")
-    
-    return jsonify({"status": "rewards applied"}), 200
-
-@app.route("/dump", methods=["GET"])
-def dump():
-    trust_db = load_trust_db()
-    return jsonify(trust_db)
-
-@app.route("/block_ip", methods=["POST"])
-def snort_alert():
-    data = request.get_json()
-    logging.info("✅ Payload ricevuto da Splunk:")
-    logging.info(f"[PDP] payload : {data} ")
-
-    raw = data.get("result", {}).get("_raw", "")
-    
-    # Regex: IP address (3rd field del log squid)
-    match = re.search(r"\d+\.\d+\.\d+\.\d+", raw)
-
-    logging.info(f"[PDP] indirizzo IP : {match} ")
-    
-    if match:
-        ip = match.group()
-        logging.info(f"✅ IP sorgente estratto: {ip}")
-        
-    logging.info(f"[PDP] Allarme Snort ricevuto: {data}")
-
-    if not ip:
-        return jsonify({"error": "IP mancante"}), 400
-
-    # Diminuisci il trust di 200 punti
-    logging.info(f"Indirizzo ip che ha fatt DoS: {ip}")
-    adjust_trust(ip, -200, "DoS detect")
-
-    return jsonify({"status": "trust updated", "ip": ip}), 200
-
+   
 
 if __name__ == "__main__":
     trust_db = load_trust_db()
     trust_db = {}
-    logging.info(f"DB iniziale: {trust_db}")
     save_trust_db(trust_db)
-
     app.run(host="0.0.0.0", port=5050)

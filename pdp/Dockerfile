@@ -6,7 +6,6 @@ COPY pdp.py ./
 COPY .env ./
 COPY utils.py ./
 COPY policies.py ./
-COPY splunk_methods.py ./
 COPY encrypt_existing.py ./
 COPY data/GeoLite2-Country.mmdb ./
 COPY data/trust_db.json ./

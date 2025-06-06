@@ -97,19 +97,19 @@ HttpInspect Config:
 Initializing rule chains...
 WARNING: /etc/snort/rules/local.rules(4) threshold (in rule) is deprecated; use detection_filter instead.
 
-4 Snort rules read
-    4 detection rules
+5 Snort rules read
+    5 detection rules
     0 decoder rules
     0 preprocessor rules
-4 Option Chains linked into 3 Chain Headers
+5 Option Chains linked into 4 Chain Headers
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
 +-------------------[Rule Port Counts]---------------------------------------
 |             tcp     udp    icmp      ip
 |     src       0       0       0       0
-|     dst       2       0       0       0
+|     dst       3       0       0       0
 |     any       2       0       0       0
-|      nc       3       0       0       0
+|      nc       4       0       0       0
 |     s+d       0       0       0       0
 +----------------------------------------------------------------------------
 
@@ -151,7 +151,7 @@ Verifying Preprocessor Configurations!
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth0".
 Reload thread starting...
-Reload thread started, thread 0x7fc5c1b75640 (42)
+Reload thread started, thread 0x7fdef1f1b640 (43)
 Decoding Ethernet
 
         --== Initialization Complete ==--

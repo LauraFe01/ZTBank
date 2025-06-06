@@ -4,17 +4,25 @@
 PEP_IP="172.24.0.3"
 PEP_PORT=3100
 
-echo "Simulazione attacco DoS al PEP"
 
+echo "=== Simulazione attacco DoS autenticato al PEP ==="
 
-# 20 richieste POST
+# --- Parte 1: invio delle richieste HTTP POST (DoS simulato) ---
 for i in {1..3}; do
-  curl -s -H "Content-Type: application/json" \
+  echo "[$i] Invio richiesta POST autenticata a /request"
+  curl -s -X POST http://$PEP_IP:$PEP_PORT/request \
+       -H "Content-Type: application/json" \
        -d '{"role":"analyst","operation":"read","document_type":"report"}' \
-       http://$PEP_IP:$PEP_PORT/request > /dev/null &
+       > /dev/null &
 done
 
-# Attende la fine delle richieste per evitare zombie
+# Attende che finiscano i processi in background
 wait
+
+echo "Richieste POST inviate."
+
+# --- Parte 2: port scanning TCP delle porte 3070–3120 ---
+echo "=== Port scanning da 3070 a 3120 verso $PEP_IP ==="
+nmap -Pn -sS -p3070-3120 $PEP_IP > /dev/null
 
 echo "Attacco simulato completato."

@@ -127,3 +127,33 @@ Rotta per eliminare un documento
 Prova per vedere che SSL è attivo:
 # docker exec -it db bash
 # psql "sslmode=require host=localhost dbname=bankDB user=user password=cyber_pwd"
+
+
+curl -X POST http://172.24.0.3:3100/login \
+  -H "Content-Type: application/json" \
+  -c cookies.txt \
+  -d '{"username": "giovanni.rossi", "password": "pass_direttore"}'
+
+# lettura 
+curl -X POST http://172.24.0.3:3100/request \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"operation": "read", "document_type": "Dati Transazionali", "doc_id": 1}'
+
+# scrittura
+curl -X POST http://172.24.0.3:3100/request \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "operation": "write",
+    "document_type": "Dati Transazionali",
+    "nome_file": "fattura_123.pdf",
+    "contenuto": "Contenuto della fattura...",
+    "sensibilita": "sensibile"
+  }'
+
+  # cancellazione
+  curl -X POST http://172.24.0.3:3100/request \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"operation": "delete", "document_type": "Dati Transazionali", "doc_id": 2}'
