@@ -19,6 +19,10 @@ BLACKLIST_FILE = "/app/data/blacklist/blacklist.txt"
 
 
 def block_ip(ip):
+    """
+    Aggiunge un indirizzo IP alla blacklist condivisa.
+    Scrive l'IP nel file di blacklist.
+    """
     try:
         with open(BLACKLIST_FILE, "a") as f:
             f.write(f"{ip}\n")
@@ -28,6 +32,9 @@ def block_ip(ip):
 
 
 def check_blacklist_file(ip):
+    """
+    Controlla se un indirizzo IP è presente nel file di blacklist.
+    """
     logging.info(f"[PDP] Controllo blacklist per l'IP: {ip}")
     blacklist_path = "data/blacklist/blacklist.txt"
     if not os.path.exists(blacklist_path):
@@ -39,6 +46,10 @@ def check_blacklist_file(ip):
 
 
 def load_trust_db():
+    """
+    Carica il database di fiducia da file cifrato.
+    Decifra il contenuto e lo deserializza in un dizionario Python.
+    """
     if os.path.exists(TRUST_FILE):
         try:
             with open(TRUST_FILE, "rb") as f:
@@ -57,6 +68,9 @@ def load_trust_db():
 
 
 def save_trust_db(trust_db):
+    """
+    Salva il database di fiducia cifrandolo su disco.
+    """
     try:
         raw = json.dumps(trust_db).encode()
         encrypted = fernet.encrypt(raw)
@@ -69,6 +83,10 @@ def save_trust_db(trust_db):
 
 
 def adjust_trust(ip, change, reason):
+    """
+    Modifica il punteggio di fiducia associato a un IP, aumentandolo o diminuendolo.
+    Se il nuovo punteggio è sotto la soglia di blacklist, l'IP viene aggiunto alla blacklist.
+    """
     logging.info(f"[PDP] Dentro ADJUST: {ip}, {change}, {reason}")
     trust_db = load_trust_db()
 
