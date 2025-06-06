@@ -1,3 +1,8 @@
 .env
 logs/squid/cache.log
 logs/snort/snort.log*
+splunk-apps/lookups/geo_attr_countries.csv
+splunk-apps/lookups/geo_attr_us_states.csv
+splunk-apps/lookups/geo_countries.kmz
+splunk-apps/lookups/geo_us_states.kmz
+splunk-apps/lookups/README

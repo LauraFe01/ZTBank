@@ -1,15 +1,12 @@
 from flask import Flask, request, jsonify
-import requests
-import os
-import json
 from dotenv import load_dotenv
 from utils import block_ip, check_blacklist_file, load_trust_db, save_trust_db, adjust_trust, get_network_trust
 from policies import evaluate_external_net_activity, evaluate_internal_net_activity, evaluate_ip_country, evaluate_operation, evaluate_wifi_net_activity
 from encrypt_existing import encrypt_trust_file
 import logging
-import re
 
 
+# configurazione logging
 logging.basicConfig(level=logging.INFO)
 
 
@@ -36,12 +33,6 @@ OPERATION_THRESHOLDS = {
 
 app = Flask(__name__)
 
-# se la ss è fatta bene in savedsearches.conf questa non serve! Vedi Policy: TrustReputation-Increase
-def extract_src_ip(entry):
-    raw = entry.get("_raw", "")
-    match = IP_RE.search(raw)
-    return match.group(1) if match else None
-
 
 @app.route('/update_trust', methods=['POST'])
 def update_trust():
@@ -50,7 +41,6 @@ def update_trust():
     """
     data = request.get_json()
     logging.info("Payload ricevuto da Splunk")
-    # logging.info(json.dumps(data, indent=2))  # Stampa il payload ben formattato
     
     trust_type = data.get("search_name", "")
     result = data.get("result", {})
@@ -61,7 +51,7 @@ def update_trust():
     updated_entries = []
     
     for entry in results:
-        ip = entry.get("src_ip") or extract_src_ip(entry)
+        ip = entry.get("src_ip") 
         if ip:
 
             # Policy: TrustReputation-Increase
@@ -105,6 +95,23 @@ def update_trust():
 
 @app.route("/decide", methods=["POST"])
 def decide():
+    """
+    Endpoint chiamato dal PEP (Policy Enforcement Point) per determinare se un'operazione richiesta
+    da un utente debba essere consentita o negata, sulla base di:
+    - indirizzo IP del client e fiducia associata
+    - ruolo dell'utente
+    - tipo di operazione richiesta
+    - tipo di documento su cui si vuole agire
+
+    La funzione esegue le seguenti verifiche:
+    1. Controlla se l'IP è presente nella blacklist → deny immediato se lo è.
+    2. Esegue valutazioni di rete personalizzate in base alla provenienza dell'IP.
+    3. Ottiene il punteggio di fiducia della rete e del ruolo.
+    4. Calcola il punteggio combinato.
+    5. Controlla se l'operazione è compatibile col ruolo e se il punteggio è sufficiente.
+    6. Restituisce una decisione finale (allow / deny) con dettagli.
+    """
+
     logging.info("Ricezione dei dati da parte del PEP")
 
     data = request.json
@@ -138,6 +145,7 @@ def decide():
     evaluate_external_net_activity(client_ip)
     evaluate_internal_net_activity(client_ip)
     evaluate_wifi_net_activity(client_ip)
+    evaluate_ip_country(client_ip)
 
     # Ottieni il punteggio di fiducia della rete
     logging.info("Ottengo fiducia della rete:")
@@ -195,7 +203,6 @@ def decide():
         }), 200
 
    
-
 if __name__ == "__main__":
     trust_db = load_trust_db()
     trust_db = {}

@@ -107,7 +107,6 @@ services:
     env_file:
       - ./pdp/.env
 
-  
   # Risorsa protetta
   db:
     image: postgres:latest
@@ -128,7 +127,6 @@ services:
       - ./db/certs:/certs:ro
       - ./db/init/03_ssl.sh:/docker-entrypoint-initdb.d/03_ssl.sh:ro
       - db_data:/var/lib/postgresql/data
-
 
   splunk:
     image: splunk/splunk:latest
