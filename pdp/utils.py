@@ -67,45 +67,39 @@ def save_trust_db(trust_db):
         logging.warning(f"[PDP] ⚠️ Errore nella cifratura del trust_db: {e}")
 
 
-def reset_trust(trust_db):
-    for ip in list(trust_db.keys()):  # Crea copia delle chiavi per evitare errori
-        if ip == "172.24.0.2" or ip == "172.21.0.1":
-            del trust_db[ip]  # ❌ IP indesiderati: li elimini
-        else:
-            trust = trust_db[ip]
-            trust["score"] = 100
-            trust["last_reason"] = "Reset globale"
-            trust["last_seen"] = datetime.now().isoformat()
-    logging.info("[PDP] Reset completato. IP esclusi: 172.24.0.2, 172.21.0.1")
-    return trust_db
 
-
-def adjust_trust(trust_key, change, reason):
-    logging.info(f"[PDP] Dentro ADJUST: {trust_key}, {change}, {reason}")
+def adjust_trust(ip, change, reason):
+    logging.info(f"[PDP] Dentro ADJUST: {ip}, {change}, {reason}")
     trust_db = load_trust_db()
-    
+
     now = datetime.now(timezone.utc).isoformat()
-    trust = trust_db.get(trust_key, {
-        "score": 100,
-        "last_seen": now,
-        "last_reason": "Initial trust level"
-    })
+    trust = trust_db.get(ip)
 
+    if trust is None:
+        score = max(0, min(100, 100 + change))
+        trust = {
+            "score": score,
+            "last_seen": now,
+            "last_reason": "Initial trust level"
+        }
+        logging.info(f"[PDP] Trust inizializzata per {ip} a {trust['score']}")
+    
+    else:
+        trust["score"] = max(0, min(100, trust["score"] + change))
+        trust["last_seen"] = now
+        trust["last_reason"] = reason
 
-    trust["score"] = max(0, min(100, trust["score"] + change))
-    trust["last_seen"] = now
-    trust["last_reason"] = reason
-    trust_db[trust_key] = trust
+    trust_db[ip] = trust
 
-    logging.info(f"[PDP] 🎉 Trust per {trust_key} aggiornata a {trust['score']} ({reason})")
+    logging.info(f"[PDP] 🎉 Trust per {ip} aggiornata a {trust['score']} ({reason})")
     save_trust_db(trust_db)
 
     if trust["score"] <= BLACKLIST_THRESHOLD:
-        ip = trust_key.split("|")[1]
-        logging.warning(f"[PDP] IP {trust_key} ha fiducia bassa ({trust['score']}) → blacklist")
+        logging.warning(f"[PDP] IP {ip} ha fiducia bassa ({trust['score']}) → blacklist")
         block_ip(ip)
 
     return trust_db
+
 
 def get_network_trust(ip):
     """

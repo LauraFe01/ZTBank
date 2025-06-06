@@ -1,11 +1,9 @@
 from flask import Flask, request, jsonify
 import requests
-from datetime import datetime, timezone
-import json
 import os
-from cryptography.fernet import Fernet
+import json
 from dotenv import load_dotenv
-from utils import block_ip, check_blacklist_file, load_trust_db, save_trust_db, reset_trust, adjust_trust, get_network_trust
+from utils import block_ip, check_blacklist_file, load_trust_db, save_trust_db, adjust_trust, get_network_trust
 from policies import evaluate_external_net_activity, evaluate_internal_net_activity, evaluate_ip_country, evaluate_operation, evaluate_wifi_net_activity
 from encrypt_existing import encrypt_trust_file
 import logging
@@ -52,10 +50,11 @@ def update_trust():
     """
     data = request.get_json()
     logging.info("Payload ricevuto da Splunk")
-    logging.info(json.dumps(data, indent=2))  # Stampa il payload ben formattato
+    # logging.info(json.dumps(data, indent=2))  # Stampa il payload ben formattato
     
     trust_type = data.get("search_name", "")
     result = data.get("result", {})
+    logging.info("Ip contenuto nel payload:")
     logging.info(result)
     results = [result] if isinstance(result, dict) else result
     
@@ -106,19 +105,24 @@ def update_trust():
 
 @app.route("/decide", methods=["POST"])
 def decide():
-    trust_db = load_trust_db()
+    logging.info("Ricezione dei dati da parte del PEP")
 
     data = request.json
-    client_ip = data.get("client_ip")
-    role = data.get("role")
-    operation = data.get("operation")
-    username = data.get("username")
-    document_type = data.get("document_type")
 
-    trust_key = f"{username}|{client_ip}"
-    logging.info(f"[PDP] Valuto {operation.upper()} su {document_type} da {role}")
+    client_ip = data.get("client_ip")
+    logging.info(f"Client IP: {client_ip}")
+
+    role = data.get("role")
+    logging.info(f"Ruolo: {role}")
+
+    operation = data.get("operation")
+    logging.info(f"Operazione: {operation}")
+
+    document_type = data.get("document_type")
+    logging.info(f"Tipo di Documento: {document_type}")
 
     # Verifica se l'IP è in blacklist
+    logging.info("Verifico se l'IP è in blacklist")
     if check_blacklist_file(client_ip):
         logging.info(f"[PDP] IP {client_ip} presente in blacklist")
         return jsonify({
@@ -127,23 +131,27 @@ def decide():
             "required": "N/A",
             "operation_allowed": False
         }), 200
-    
+    else: logging.info(f"[PDP] IP {client_ip} non presente in blacklist")
+
     # Valutazioni aggiuntive
-    evaluate_external_net_activity(trust_key)
-    evaluate_internal_net_activity(trust_key)
-    evaluate_wifi_net_activity(trust_key)
-    evaluate_ip_country(trust_key)
+    logging.info("Esecuzione di valutazioni aggiuntive per la rete di provenienza della richiesta")
+    evaluate_external_net_activity(client_ip)
+    evaluate_internal_net_activity(client_ip)
+    evaluate_wifi_net_activity(client_ip)
 
     # Ottieni il punteggio di fiducia della rete
-    network_trust = get_network_trust(client_ip)
-    if network_trust is None:
-        network_trust = 50  # Valore di default se non specificato
+    logging.info("Ottengo fiducia della rete:")
+    network_trust = get_network_trust(client_ip).get("score", 50)
+    logging.info(f"Fiducia relativa a {client_ip}: {network_trust}")
 
     # Ottieni il punteggio di fiducia basato sul ruolo
+    logging.info("Ottengo fiducia del ruolo:")
     role_trust = ROLE_BASE_TRUST.get(role, 50)  # Valore di default se ruolo non riconosciuto
+    logging.info(f"Fiducia del ruolo {role}: {role_trust}")
 
     # Calcola il punteggio combinato
     combined_trust = (network_trust + role_trust) / 2
+    logging.info(f"Punteggio combinato: {combined_trust}")
 
     # Se il punteggio della rete è inferiore alla soglia, aggiungi l'IP alla blacklist
     if network_trust <= 0:
@@ -160,12 +168,17 @@ def decide():
     min_required = OPERATION_THRESHOLDS.get(document_type, {}).get(operation)
     if min_required is None:
         return jsonify({"error": "Operazione o tipo documento non validi"}), 400
+    logging.info(f"La soglia di fiducia richiesta per l'operazione {operation } per un documento di tipo {document_type} è {min_required}")
 
     # Verifica se l'operazione è consentita per il ruolo
+    logging.info("Verifico se l'operazione è consentita per il ruolo")
     operation_allowed = evaluate_operation(role, operation)
+    logging.info(f"Operation allowed: {operation_allowed}")
 
     # Decisione finale
+    logging.info("Decisione finale:")
     if combined_trust >= min_required and operation_allowed:
+        logging.info(f"Decisione finale: operation allowed")
         return jsonify({
             "decision": "allow",
             "trust": combined_trust,
@@ -173,6 +186,7 @@ def decide():
             "operation_allowed": operation_allowed
         }), 200
     else:
+        logging.info(f"Decisione finale: operation denied")
         return jsonify({
             "decision": "deny",
             "trust": combined_trust,
@@ -180,18 +194,10 @@ def decide():
             "operation_allowed": operation_allowed
         }), 200
 
-
-# A che serve?? A visualizzare il trust db decriptato?????
-@app.route("/dump", methods=["GET"])
-def dump():
-    trust_db = load_trust_db()
-    return jsonify(trust_db)
    
 
 if __name__ == "__main__":
     trust_db = load_trust_db()
     trust_db = {}
-    logging.info(f"DB iniziale: {trust_db}")
     save_trust_db(trust_db)
-
     app.run(host="0.0.0.0", port=5050)

@@ -50,25 +50,42 @@ def logout():
 # rotta di ricezione delle richieste
 @app.route("/request", methods=["POST"])
 def handle_request():
+    logging.info("Richiesta ricevuta all'endpoint /request")
+    logging.info(f"Headers: {request.headers}")
+    logging.info(f"Corpo della richiesta: {request.get_data()}")
+    data = request.get_json()
+    logging.info(f"Dati JSON ricevuti: {data}")
 
     # Verifica autenticazione (solo gli autenticati possono fare richieste)
     if "username" not in session or "role" not in session:
         return jsonify({"error": "Utente non autenticato"}), 401
 
     role = session["role"]
+    logging.info(f"Ruolo dell'utente: {role}")
+
     username = session["username"]
-    
-    # recuperiamo i dati della richiesta
-    data = request.get_json()
+    logging.info(f"Username dell'utente: {username}")
+
     timestamp = datetime.now(rome).strftime("%Y-%m-%d %H:%M:%S")
     
     # estrazione dei parametri della richiesta (la sensibilità la mettiamo nella richiesta?????)
     operation = data.get("operation", "")
+    logging.info(f"Operazione: {operation}")
+
     document_type = data.get("document_type", "")
+    logging.info(f"Tipo di documento: {document_type}")
+
     nome_file = data.get("nome_file", "")
+    logging.info(f"Nome del file: {nome_file}")
+
     contenuto = data.get("contenuto", "")
+    logging.info(f"Contenuto: {nome_file}")
+
     sensibilita = data.get("sensibilita", "")
+    logging.info(f"Sensibilità: {nome_file}")
+
     doc_id = data.get("doc_id", "")
+    logging.info(f"ID del documento: {nome_file}")
 
     logging.info(f"[PEP] Richiesta ricevuta da  Ruolo: {role}, Op: {operation}, Documento: {document_type}")
 
@@ -80,6 +97,7 @@ def handle_request():
     logging.info(f"client_ip: {client_ip}")
 
     # Inoltriamo tutto al PDP
+    logging.info("Invio dati al pdp")
     try:
         response = requests.post(PDP_URL, json={
             "timestamp": timestamp,

@@ -1,19 +1,30 @@
 FROM ubuntu:22.04
 
+# Evita richieste interattive durante installazioni
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Aggiorna e installa gli strumenti di rete
 RUN apt-get update && apt-get install -y \
     curl \
     iputils-ping \
     iproute2 \
-    netcat
-   
+    netcat \
+    hping3 \
+    nmap \
+    snort \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
-# Copia lo script di avvio nel container
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Imposta la working directory
+WORKDIR /app
 
-COPY attack.sh /attack.sh
-RUN chmod +x /attack.sh
+# Copia gli script nel container
+COPY entrypoint.sh /app/entrypoint.sh
+COPY attack.sh /app/attack.sh
 
-# Imposta lo script come entrypoint
-ENTRYPOINT ["/entrypoint.sh"]
+# Rendi gli script eseguibili
+RUN chmod +x /app/entrypoint.sh /app/attack.sh
+
+# Imposta lo script di avvio come entrypoint
+ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["bash"]
