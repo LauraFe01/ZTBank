@@ -3,3 +3,9 @@ alert tcp any any -> any any (msg:"HTTP request detected 2"; flags:S; detection_
 alert tcp any any -> any 3128 (msg:"Accesso a proxy Squid"; sid:1000003; rev:1;)
 alert tcp any any -> 172.24.0.3 3100 (msg:"HTTP POST DoS Detected"; content:"POST /request"; threshold:type both, track by_src, count 3, seconds 3; sid:1000005; rev:1;)
 alert tcp [172.20.0.0/16,172.21.0.0/16,172.22.0.0/16] any -> 172.24.0.0/24 3070:3120 (msg:"Port scanning SYN rilevato su rete 172.24.0.0/24"; flags:S; sid:10000006; rev:4;)
+<<<<<<< Updated upstream
+=======
+alert udp [172.20.0.0/16,172.21.0.0/16,172.22.0.0/16] any -> 172.24.0.0/24 any ( msg:"Shell-code-injection"; content:"|03 E0 F8|%|03 E0 F8|%|03 E0 F8|%|03 E0 F8|%",fast_pattern,nocase;sid:10000007; rev:1;)
+
+                            
+>>>>>>> Stashed changes

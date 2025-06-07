@@ -9,3 +9,7 @@ modtime = 1749134311.095633000
 [savedsearches/Non-Working-Hours-Detection-More-Than-10-IPs]
 version = 9.4.3
 modtime = 1749215701.008135000
+
+[savedsearches/ShellCode-Injection-Detection]
+version = 9.4.2
+modtime = 1749312727.788314000

@@ -97,18 +97,18 @@ HttpInspect Config:
 Initializing rule chains...
 WARNING: /etc/snort/rules/local.rules(4) threshold (in rule) is deprecated; use detection_filter instead.
 
-5 Snort rules read
-    5 detection rules
+6 Snort rules read
+    6 detection rules
     0 decoder rules
     0 preprocessor rules
-5 Option Chains linked into 4 Chain Headers
+6 Option Chains linked into 5 Chain Headers
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
 +-------------------[Rule Port Counts]---------------------------------------
 |             tcp     udp    icmp      ip
 |     src       0       0       0       0
 |     dst       3       0       0       0
-|     any       2       0       0       0
+|     any       2       1       0       0
 |      nc       4       0       0       0
 |     s+d       0       0       0       0
 +----------------------------------------------------------------------------
@@ -138,20 +138,24 @@ Verifying Preprocessor Configurations!
 
 [ Port Based Pattern Matching Memory ]
 +-[AC-BNFA Search Info Summary]------------------------------
-| Instances        : 3
-| Patterns         : 5
-| Pattern Chars    : 51
-| Num States       : 51
-| Num Match States : 5
-| Memory           :   5.56Kbytes
-|   Patterns       :   0.24K
-|   Match Lists    :   0.55K
-|   Transitions    :   3.57K
+| Instances        : 4
+| Patterns         : 6
+| Pattern Chars    : 68
+| Num States       : 68
+| Num Match States : 6
+| Memory           :   7.37Kbytes
+|   Patterns       :   0.30K
+|   Match Lists    :   0.72K
+|   Transitions    :   4.76K
 +-------------------------------------------------
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth3".
 Reload thread starting...
+<<<<<<< Updated upstream
 Reload thread started, thread 0x7fc4b2b36640 (54)
+=======
+Reload thread started, thread 0x7fb1e93eb640 (55)
+>>>>>>> Stashed changes
 Decoding Ethernet
 
         --== Initialization Complete ==--
@@ -165,4 +169,8 @@ Decoding Ethernet
            Using PCRE version: 8.39 2016-06-14
            Using ZLIB version: 1.2.11
 
+<<<<<<< Updated upstream
 Commencing packet processing (pid=29)
+=======
+Commencing packet processing (pid=27)
+>>>>>>> Stashed changes
