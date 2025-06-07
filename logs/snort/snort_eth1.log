@@ -97,18 +97,18 @@ HttpInspect Config:
 Initializing rule chains...
 WARNING: /etc/snort/rules/local.rules(4) threshold (in rule) is deprecated; use detection_filter instead.
 
-5 Snort rules read
-    5 detection rules
+6 Snort rules read
+    6 detection rules
     0 decoder rules
     0 preprocessor rules
-5 Option Chains linked into 4 Chain Headers
+6 Option Chains linked into 5 Chain Headers
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
 +-------------------[Rule Port Counts]---------------------------------------
 |             tcp     udp    icmp      ip
 |     src       0       0       0       0
 |     dst       3       0       0       0
-|     any       2       0       0       0
+|     any       2       1       0       0
 |      nc       4       0       0       0
 |     s+d       0       0       0       0
 +----------------------------------------------------------------------------
@@ -138,20 +138,24 @@ Verifying Preprocessor Configurations!
 
 [ Port Based Pattern Matching Memory ]
 +-[AC-BNFA Search Info Summary]------------------------------
-| Instances        : 3
-| Patterns         : 5
-| Pattern Chars    : 51
-| Num States       : 51
-| Num Match States : 5
-| Memory           :   5.56Kbytes
-|   Patterns       :   0.24K
-|   Match Lists    :   0.55K
-|   Transitions    :   3.57K
+| Instances        : 4
+| Patterns         : 6
+| Pattern Chars    : 68
+| Num States       : 68
+| Num Match States : 6
+| Memory           :   7.37Kbytes
+|   Patterns       :   0.30K
+|   Match Lists    :   0.72K
+|   Transitions    :   4.76K
 +-------------------------------------------------
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth1".
 Reload thread starting...
+<<<<<<< Updated upstream
 Reload thread started, thread 0x7f44388f7640 (56)
+=======
+Reload thread started, thread 0x7f8caf07a640 (54)
+>>>>>>> Stashed changes
 Decoding Ethernet
 
         --== Initialization Complete ==--
@@ -165,4 +169,90 @@ Decoding Ethernet
            Using PCRE version: 8.39 2016-06-14
            Using ZLIB version: 1.2.11
 
+<<<<<<< Updated upstream
 Commencing packet processing (pid=27)
+=======
+Commencing packet processing (pid=25)
+06/07-16:27:05.336678 172.24.0.2:38990 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:25688 IpLen:20 DgmLen:60 DF
+******S* Seq: 0x3B3CD444  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 392975901 0 NOP WS: 7 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.336762 172.24.0.3:3100 -> 172.24.0.2:38990
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:60 DF
+***A**S* Seq: 0x6714E91A  Ack: 0x3B3CD445  Win: 0xFE88  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 1186430510 392975901 
+TCP Options => NOP WS: 7 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.336780 172.24.0.2:38990 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:25689 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x3B3CD445  Ack: 0x6714E91B  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 392975901 1186430510 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.336980 172.24.0.2 -> 172.24.0.3
+ICMP TTL:64 TOS:0x0 ID:26359 IpLen:20 DgmLen:55 DF
+Type:8  Code:0  ID:9216   Seq:512  ECHO
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.337032 172.24.0.2:38990 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:25690 IpLen:20 DgmLen:232 DF
+***AP*** Seq: 0x3B3CD445  Ack: 0x6714E91B  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 392975901 1186430510 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.337038 172.24.0.3 -> 172.24.0.2
+ICMP TTL:64 TOS:0x0 ID:1410 IpLen:20 DgmLen:55
+Type:0  Code:0  ID:9216  Seq:512  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.337056 172.24.0.3:3100 -> 172.24.0.2:38990
+TCP TTL:64 TOS:0x0 ID:15205 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x6714E91B  Ack: 0x3B3CD4F9  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1186430510 392975901 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.344157 172.24.0.3:3100 -> 172.24.0.2:38990
+TCP TTL:64 TOS:0x0 ID:15206 IpLen:20 DgmLen:234 DF
+***AP*** Seq: 0x6714E91B  Ack: 0x3B3CD4F9  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1186430517 392975901 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.344180 172.24.0.2:38990 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:25691 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x3B3CD4F9  Ack: 0x6714E9D1  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 392975908 1186430517 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.344245 172.24.0.3:3100 -> 172.24.0.2:38990
+TCP TTL:64 TOS:0x0 ID:15207 IpLen:20 DgmLen:259 DF
+***AP*** Seq: 0x6714E9D1  Ack: 0x3B3CD4F9  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1186430518 392975908 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.344252 172.24.0.2:38990 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:25692 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x3B3CD4F9  Ack: 0x6714EAA0  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 392975909 1186430518 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.344791 172.24.0.2:38990 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:25693 IpLen:20 DgmLen:52 DF
+***A***F Seq: 0x3B3CD4F9  Ack: 0x6714EAA0  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 392975909 1186430518 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.345076 172.24.0.3:3100 -> 172.24.0.2:38990
+TCP TTL:64 TOS:0x0 ID:15208 IpLen:20 DgmLen:52 DF
+***A***F Seq: 0x6714EAA0  Ack: 0x3B3CD4FA  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1186430518 392975909 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/07-16:27:05.345090 172.24.0.2:38990 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:25694 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x3B3CD4FA  Ack: 0x6714EAA1  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 392975909 1186430518 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+>>>>>>> Stashed changes

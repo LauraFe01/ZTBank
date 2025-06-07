@@ -78,6 +78,7 @@ def update_trust():
                 adjust_trust(ip, -40, "HTTP POST DoS Detected")
                 updated_entries.append(ip)
 
+<<<<<<< Updated upstream
         if not updated_ips:
             logging.warning("⚠️ Nessun IP valido trovato nel payload")
         # Policy: PortScanning-HighRate-Detection
@@ -101,6 +102,26 @@ def update_trust():
             logging.warning("⚠️ Nessun IP valido trovato nel payload")
     else:
         logging.warning(f"⚠️ search_name non riconosciuto: {trust_type}")
+=======
+            # Policy: PortScanning-HighRate-Detection
+            elif trust_type == "PortScanning-HighRate-Detection":
+                logging.info("Policy: PortScanning-HighRate-Detection")
+                block_ip(ip)
+                updated_entries.append(ip)
+            
+            # Policy: Shell-code-injection
+            elif trust_type == "ShellCode-Injection-Detection":
+                logging.info("Policy: ShellCode-Injection-Detection")
+                block_ip(ip)
+                updated_entries.append(ip)
+            
+            else:
+                logging.warning(f"⚠️ search_name non riconosciuto: {trust_type}")
+                
+            
+    if not updated_entries:
+        logging.warning("⚠️ Nessuna voce valida trovata nel payload")
+>>>>>>> Stashed changes
 
     return jsonify({"status": "received"}), 200
 
