@@ -5,8 +5,6 @@ services:
     build:
       context: ./client_internal
     container_name: client_internal
-    volumes:
-      - ./pdp/data/blacklist:/app/blacklist
     networks:
       internal-net:
         ipv4_address: 172.20.0.2
@@ -22,8 +20,6 @@ services:
     build:
       context: ./client_external
     container_name: client_external
-    volumes:
-      - ./pdp/data/blacklist:/app/blacklist
     networks:
       external-net:
         ipv4_address: 172.21.0.2
@@ -39,8 +35,6 @@ services:
     build:
       context: ./client_wifi
     container_name: client_wifi
-    volumes:
-      - ./pdp/data/blacklist:/app/blacklist
     networks:
       wifi-net:
         ipv4_address: 172.22.0.2
