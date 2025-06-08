@@ -69,8 +69,32 @@ def evaluate_operation(role, operation):
     """
     if role == "Direttore":
         return True
-    if role == "Consulente" or role == "Cassiere":
+    elif role == "Consulente" or role == "Cassiere":
         if operation == "write":
             return True
         elif operation == "delete":
             return False
+        
+
+def evaluate_data(role, document_type):
+    """
+    Determina se un ruolo ha il permesso di accedere alla risorsa del db richiesta.
+    
+    - Direttore: accesso a tutti i tipi di documenti
+    - Cassiere: può accedere a dati transazionali e documenti operativi
+    - Consulente: può accedere a documenti operativi
+    - Cliente: può accedere a dati personali (i propri ma non specifichiamo)
+    """
+    if role == "Direttore":
+        return True
+    elif role == "Cassiere":
+        if document_type == "Dati Transazionali" or document_type == "Documenti Operativi":
+            return True
+    elif role == "Consulente":
+        if document_type == "Documenti Operativi":
+            return True
+    elif role == "Cliente":
+        if document_type == "Dati Personali":
+            return True
+    else:
+        return False
