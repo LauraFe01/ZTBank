@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 from utils import block_ip, check_blacklist_file, load_trust_db, save_trust_db, adjust_trust, get_network_trust
-from policies import evaluate_external_net_activity, evaluate_internal_net_activity, evaluate_ip_country, evaluate_operation, evaluate_wifi_net_activity
+from policies import evaluate_external_net_activity, evaluate_internal_net_activity, evaluate_ip_country, evaluate_operation, evaluate_wifi_net_activity, evaluate_data
 from encrypt_existing import encrypt_trust_file
 import logging
 
@@ -108,7 +108,9 @@ def decide():
     2. Esegue valutazioni di rete personalizzate in base alla provenienza dell'IP.
     3. Ottiene il punteggio di fiducia della rete e del ruolo.
     4. Calcola il punteggio combinato.
-    5. Controlla se l'operazione è compatibile col ruolo e se il punteggio è sufficiente.
+    5. Controlla se l'operazione è compatibile col ruolo
+    6. Controlla se il tipo di documento richiesto è compatibile col ruolo
+    7. Controlla se il punteggio è sufficiente.
     6. Restituisce una decisione finale (allow / deny) con dettagli.
     """
 
@@ -183,9 +185,14 @@ def decide():
     operation_allowed = evaluate_operation(role, operation)
     logging.info(f"Operation allowed: {operation_allowed}")
 
+    # Verifica se la risorsa del database richiesta  è consentita per il ruolo
+    logging.info("Verifico se l'utente ha permesso di accedere al tipo di documento richiesto")
+    resource_allowed = evaluate_data(role, document_type)
+    logging.info(f"Resource allowed: {resource_allowed}")
+
     # Decisione finale
     logging.info("Decisione finale:")
-    if combined_trust >= min_required and operation_allowed:
+    if combined_trust >= min_required and operation_allowed and resource_allowed:
         logging.info(f"Decisione finale: operation allowed")
         return jsonify({
             "decision": "allow",
