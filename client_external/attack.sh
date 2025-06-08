@@ -26,6 +26,6 @@ echo "Port scanning completato."
 
 # --- Parte 3: invio payload MIPS SGI NOOP per test Snort ---
 echo "=== Invio payload SGI NOOP sled per triggerare la regola Snort ==="
-echo -ne $'\x03\xe0\xf8%\x03\xe0\xf8%\x03\xe0\xf8%\x03\xe0\xf8%' | nc -u -w1 172.24.0.3 3100
+echo -ne $'\x03\xe0\xf8%\x03\xe0\xf8%\x03\xe0\xf8%\x03\xe0\xf8%' | nc -u -w1 $PEP_IP $PEP_PORT
 
 echo "Payload inviato!"
