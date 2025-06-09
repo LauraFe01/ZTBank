@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     hping3 \
     nmap \
     snort \
+    jq \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 

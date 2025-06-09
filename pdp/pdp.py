@@ -40,12 +40,12 @@ def update_trust():
     Endpoint per aggiornare il punteggio di fiducia o bloccare un ip in base ai dati ricevuti da Splunk.
     """
     data = request.get_json()
-    logging.info("Payload ricevuto da Splunk")
+    #logging.info("Payload ricevuto da Splunk")
     
     trust_type = data.get("search_name", "")
     result = data.get("result", {})
-    logging.info("Ip contenuto nel payload:")
-    logging.info(result)
+    #logging.info("Ip contenuto nel payload:")
+    #logging.info(result)
     results = [result] if isinstance(result, dict) else result
     
     updated_entries = []

@@ -2811,3 +2811,66 @@ TCP TTL:57 TOS:0x0 ID:47464 IpLen:20 DgmLen:44
 ******S* Seq: 0x6D9793AF  Ack: 0x0  Win: 0x400  TcpLen: 24
 TCP Options (1) => MSS: 1460 
 
+[**] [1:10000006:4] Port scanning SYN rilevato su rete 172.24.0.0/24 [**]
+[Priority: 0] 
+06/09-08:47:09.073249 172.21.0.2:32776 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:51512 IpLen:20 DgmLen:60 DF
+******S* Seq: 0x170401FC  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 1105923430 0 NOP WS: 7 
+
+[**] [1:10000006:4] Port scanning SYN rilevato su rete 172.24.0.0/24 [**]
+[Priority: 0] 
+06/09-09:24:03.284552 172.21.0.2:41200 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:37982 IpLen:20 DgmLen:60 DF
+******S* Seq: 0xE05AE2DD  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 1108137833 0 NOP WS: 7 
+
+[**] [1:10000006:4] Port scanning SYN rilevato su rete 172.24.0.0/24 [**]
+[Priority: 0] 
+06/09-09:26:00.465707 172.21.0.2:60066 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:13642 IpLen:20 DgmLen:60 DF
+******S* Seq: 0x2C538A6  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 1108255024 0 NOP WS: 7 
+
+[**] [1:10000006:4] Port scanning SYN rilevato su rete 172.24.0.0/24 [**]
+[Priority: 0] 
+06/09-09:29:04.699280 172.21.0.2:32944 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:48569 IpLen:20 DgmLen:60 DF
+******S* Seq: 0x16122424  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 1108439269 0 NOP WS: 7 
+
+[**] [1:10000006:4] Port scanning SYN rilevato su rete 172.24.0.0/24 [**]
+[Priority: 0] 
+06/09-09:47:18.954381 172.21.0.2:44492 -> 172.24.0.3:3100
+[**] [1:1000005:1] HTTP POST DoS Detected [**]
+TCP TTL:64 TOS:0x0 ID:47016 IpLen:20 DgmLen:60 DF
+[Priority: 0] 
+******S* Seq: 0x66715E05  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+06/09-09:47:19.008676 172.24.0.2:45152 -> 172.24.0.3:3100
+TCP Options (5) => MSS: 1460 SackOK TS: 1109533593 0 NOP WS: 7 
+TCP TTL:64 TOS:0x0 ID:19464 IpLen:20 DgmLen:310 DF
+
+***AP*** Seq: 0x525F2EAC  Ack: 0x400C1442  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 2993242264 1137392590 
+
+[**] [1:10000006:4] Port scanning SYN rilevato su rete 172.24.0.0/24 [**]
+[Priority: 0] 
+06/09-09:47:18.980505 172.21.0.2:44494 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:39431 IpLen:20 DgmLen:60 DF
+******S* Seq: 0x57B49CE4  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 1109533619 0 NOP WS: 7 
+
+[**] [1:10000006:4] Port scanning SYN rilevato su rete 172.24.0.0/24 [**]
+[Priority: 0] 
+06/09-09:47:19.007666 172.21.0.2:44506 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:8567 IpLen:20 DgmLen:60 DF
+******S* Seq: 0xF9E52F7D  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 1109533646 0 NOP WS: 7 
+
+[**] [1:1000005:1] HTTP POST DoS Detected [**]
+[Priority: 0] 
+06/09-09:47:19.007876 172.21.0.2:44506 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:8569 IpLen:20 DgmLen:264 DF
+***AP*** Seq: 0xF9E52F7E  Ack: 0x821F8789  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1109533647 66815806 
+

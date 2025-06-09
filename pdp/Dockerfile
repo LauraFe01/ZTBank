@@ -13,11 +13,14 @@ COPY policies.py ./
 COPY encrypt_existing.py ./
 COPY data/GeoLite2-Country.mmdb ./
 COPY data/trust_db.json ./
+COPY entrypoint.sh ./
 
 
 # installa le dipendenze necessarie
 RUN pip install flask requests cryptography python-dotenv geoip2
 
 
+# Entrypoint per resettare blacklist.txt
+ENTRYPOINT ["./entrypoint.sh"]
 # avvio
 CMD ["python", "pdp.py"]
