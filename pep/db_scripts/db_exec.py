@@ -25,11 +25,11 @@ def execute_single_operation(operation, doc_id, role):
             result = db_dao.get_file_documento_by_id(doc_id)
             if not result:
                 logging.warning("[DB_EXEC] Documento non trovato")
-                return None
+                return -10
             sensibilita = result[3]  # Assumendo che 'sensibilita' sia il 4° campo
             if sensibilita == 'sensibile' and role != "Direttore":
                 logging.warning("[DB_EXEC] Accesso negato a documento sensibile per ruolo: %s", role)
-                return None
+                return -10
             return result
 
         elif operation == "delete":
@@ -39,11 +39,11 @@ def execute_single_operation(operation, doc_id, role):
 
         else:
             logging.warning(f"[DB_EXEC] Operazione non valida: {operation}")
-            return None
+            return -10
 
     except Exception as e:
         logging.error(f"[DB_EXEC] Errore: {e}")
-        return None
+        return -10
 
 
 def execute_write_operation(nome_file, contenuto, sensibilita):
@@ -66,4 +66,4 @@ def execute_write_operation(nome_file, contenuto, sensibilita):
         return inserted_id
     except Exception as e:
         logging.error(f"[DB_EXEC] Errore: {e}")
-        return False
+        return -10

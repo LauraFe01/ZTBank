@@ -151,7 +151,7 @@ Verifying Preprocessor Configurations!
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth1".
 Reload thread starting...
-Reload thread started, thread 0x7ffa0b485640 (51)
+Reload thread started, thread 0x7f196c899640 (50)
 Decoding Ethernet
 
         --== Initialization Complete ==--
@@ -165,4 +165,4 @@ Decoding Ethernet
            Using PCRE version: 8.39 2016-06-14
            Using ZLIB version: 1.2.11
 
-Commencing packet processing (pid=24)
+Commencing packet processing (pid=23)

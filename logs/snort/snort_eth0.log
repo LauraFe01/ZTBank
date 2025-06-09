@@ -151,7 +151,7 @@ Verifying Preprocessor Configurations!
 pcap DAQ configured to passive.
 Acquiring network traffic from "eth0".
 Reload thread starting...
-Reload thread started, thread 0x7f6794bda640 (53)
+Reload thread started, thread 0x7f396713b640 (52)
 Decoding Ethernet
 
         --== Initialization Complete ==--
@@ -165,168 +165,168 @@ Decoding Ethernet
            Using PCRE version: 8.39 2016-06-14
            Using ZLIB version: 1.2.11
 
-Commencing packet processing (pid=23)
-06/09-10:54:19.385714 172.24.0.2:42382 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:13708 IpLen:20 DgmLen:60 DF
-******S* Seq: 0xC5A3709E  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
-TCP Options (5) => MSS: 1460 SackOK TS: 2997262886 0 NOP WS: 7 
+Commencing packet processing (pid=22)
+06/09-16:10:01.528613 172.21.0.2:51210 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:55811 IpLen:20 DgmLen:60 DF
+******S* Seq: 0xD47DEB9D  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 1126251977 0 NOP WS: 7 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:54:19.385939 172.24.0.3:3100 -> 172.24.0.2:42382
+06/09-16:10:01.528628 172.24.0.3:3100 -> 172.21.0.2:51210
 TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:60 DF
-***A**S* Seq: 0x3805828D  Ack: 0xC5A3709F  Win: 0xFE88  TcpLen: 40
-TCP Options (5) => MSS: 1460 SackOK TS: 1141413213 2997262886 
-TCP Options => NOP WS: 7 
+***A**S* Seq: 0x780EB17E  Ack: 0xD47DEB9E  Win: 0xFE88  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 83534137 1126251977 NOP 
+TCP Options => WS: 7 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:54:19.386016 172.24.0.2:42382 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:13709 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0xC5A3709F  Ack: 0x3805828E  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2997262887 1141413213 
+06/09-16:10:01.528654 172.21.0.2:51210 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:55812 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0xD47DEB9E  Ack: 0x780EB17F  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126251977 83534137 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:54:19.388181 172.24.0.2:42382 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:13710 IpLen:20 DgmLen:52 DF
-***A***F Seq: 0xC5A3709F  Ack: 0x3805828E  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2997262889 1141413213 
+06/09-16:10:01.528724 172.21.0.2:51210 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:55813 IpLen:20 DgmLen:249 DF
+***AP*** Seq: 0xD47DEB9E  Ack: 0x780EB17F  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126251977 83534137 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:54:19.390534 172.24.0.3:3100 -> 172.24.0.2:42382
-TCP TTL:64 TOS:0x0 ID:7671 IpLen:20 DgmLen:52 DF
-***A***F Seq: 0x3805828E  Ack: 0xC5A370A0  Win: 0x1FE  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1141413218 2997262889 
+06/09-16:10:01.528729 172.24.0.3:3100 -> 172.21.0.2:51210
+TCP TTL:64 TOS:0x0 ID:39029 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x780EB17F  Ack: 0xD47DEC63  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 83534137 1126251977 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:54:19.390555 172.24.0.2:42382 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:13711 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0xC5A370A0  Ack: 0x3805828F  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2997262892 1141413218 
+06/09-16:10:37.770376 172.24.0.3:3100 -> 172.21.0.2:51210
+TCP TTL:64 TOS:0x0 ID:39030 IpLen:20 DgmLen:552 DF
+***AP*** Seq: 0x780EB17F  Ack: 0xD47DEC63  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 83570380 1126251977 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.091612 172.24.0.2:55156 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1914 IpLen:20 DgmLen:60 DF
-******S* Seq: 0x50ED71DA  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
-TCP Options (5) => MSS: 1460 SackOK TS: 2997334596 0 NOP WS: 7 
+06/09-16:10:37.770449 172.21.0.2:51210 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:55814 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0xD47DEC63  Ack: 0x780EB373  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126288220 83570380 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.091653 172.24.0.3:3100 -> 172.24.0.2:55156
+06/09-16:10:37.770486 172.24.0.3:3100 -> 172.21.0.2:51210
+TCP TTL:64 TOS:0x0 ID:39031 IpLen:20 DgmLen:95 DF
+***AP*** Seq: 0x780EB373  Ack: 0xD47DEC63  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 83570381 1126288220 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/09-16:10:37.770496 172.21.0.2:51210 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:55815 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0xD47DEC63  Ack: 0x780EB39E  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126288221 83570381 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/09-16:10:37.775043 172.21.0.2:51210 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:55816 IpLen:20 DgmLen:52 DF
+***A***F Seq: 0xD47DEC63  Ack: 0x780EB39E  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126288225 83570381 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/09-16:10:37.775225 172.24.0.3:3100 -> 172.21.0.2:51210
+TCP TTL:64 TOS:0x0 ID:39032 IpLen:20 DgmLen:52 DF
+***A***F Seq: 0x780EB39E  Ack: 0xD47DEC64  Win: 0x1FC  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 83570385 1126288225 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/09-16:10:37.775255 172.21.0.2:51210 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:55817 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0xD47DEC64  Ack: 0x780EB39F  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126288225 83570385 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/09-16:11:06.854594 172.21.0.2:37244 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:9336 IpLen:20 DgmLen:60 DF
+******S* Seq: 0x88F2C0C4  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 1126317306 0 NOP WS: 7 
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+06/09-16:11:06.854612 172.24.0.3:3100 -> 172.21.0.2:37244
 TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:60 DF
-***A**S* Seq: 0x5C7292FC  Ack: 0x50ED71DB  Win: 0xFE88  TcpLen: 40
-TCP Options (5) => MSS: 1460 SackOK TS: 1141484922 2997334596 
-TCP Options => NOP WS: 7 
+***A**S* Seq: 0x69447152  Ack: 0x88F2C0C5  Win: 0xFE88  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 83599466 1126317306 NOP 
+TCP Options => WS: 7 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.091661 172.24.0.2:55156 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1915 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x50ED71DB  Ack: 0x5C7292FD  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2997334596 1141484922 
+06/09-16:11:06.854624 172.21.0.2:37244 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:9337 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x88F2C0C5  Ack: 0x69447153  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126317306 83599466 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.091850 172.24.0.2:55156 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1916 IpLen:20 DgmLen:232 DF
-***AP*** Seq: 0x50ED71DB  Ack: 0x5C7292FD  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2997334596 1141484922 
+06/09-16:11:06.854680 172.21.0.2:37244 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:9338 IpLen:20 DgmLen:512 DF
+***AP*** Seq: 0x88F2C0C5  Ack: 0x69447153  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126317306 83599466 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.091855 172.24.0.2 -> 172.24.0.3
-ICMP TTL:64 TOS:0x0 ID:4428 IpLen:20 DgmLen:55 DF
-Type:8  Code:0  ID:13824   Seq:512  ECHO
+06/09-16:11:06.854684 172.24.0.3:3100 -> 172.21.0.2:37244
+TCP TTL:64 TOS:0x0 ID:27899 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x69447153  Ack: 0x88F2C291  Win: 0x1FA  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 83599466 1126317306 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.091869 172.24.0.3:3100 -> 172.24.0.2:55156
-TCP TTL:64 TOS:0x0 ID:57077 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x5C7292FD  Ack: 0x50ED728F  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1141484922 2997334596 
+06/09-16:11:06.895176 172.24.0.3:3100 -> 172.21.0.2:37244
+TCP TTL:64 TOS:0x0 ID:27900 IpLen:20 DgmLen:559 DF
+***AP*** Seq: 0x69447153  Ack: 0x88F2C291  Win: 0x1FA  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 83599507 1126317306 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.091891 172.24.0.3 -> 172.24.0.2
-ICMP TTL:64 TOS:0x0 ID:55652 IpLen:20 DgmLen:55
-Type:0  Code:0  ID:13824  Seq:512  ECHO REPLY
+06/09-16:11:06.895234 172.21.0.2:37244 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:9339 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x88F2C291  Ack: 0x6944734E  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126317347 83599507 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.093614 172.24.0.3:3100 -> 172.24.0.2:55156
-TCP TTL:64 TOS:0x0 ID:57078 IpLen:20 DgmLen:234 DF
-***AP*** Seq: 0x5C7292FD  Ack: 0x50ED728F  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1141484924 2997334596 
+06/09-16:11:06.895278 172.24.0.3:3100 -> 172.21.0.2:37244
+TCP TTL:64 TOS:0x0 ID:27901 IpLen:20 DgmLen:106 DF
+***AP*** Seq: 0x6944734E  Ack: 0x88F2C291  Win: 0x1FA  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 83599507 1126317347 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.093628 172.24.0.2:55156 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1917 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x50ED728F  Ack: 0x5C7293B3  Win: 0x1F5  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2997334598 1141484924 
+06/09-16:11:06.895290 172.21.0.2:37244 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:9340 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x88F2C291  Ack: 0x69447384  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126317347 83599507 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.093688 172.24.0.3:3100 -> 172.24.0.2:55156
-TCP TTL:64 TOS:0x0 ID:57079 IpLen:20 DgmLen:259 DF
-***AP*** Seq: 0x5C7293B3  Ack: 0x50ED728F  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1141484924 2997334598 
+06/09-16:11:06.895443 172.21.0.2:37244 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:9341 IpLen:20 DgmLen:52 DF
+***A***F Seq: 0x88F2C291  Ack: 0x69447384  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126317347 83599507 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.093692 172.24.0.2:55156 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1918 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x50ED728F  Ack: 0x5C729482  Win: 0x1F5  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2997334598 1141484924 
+06/09-16:11:06.895897 172.24.0.3:3100 -> 172.21.0.2:37244
+TCP TTL:64 TOS:0x0 ID:27902 IpLen:20 DgmLen:52 DF
+***A***F Seq: 0x69447384  Ack: 0x88F2C292  Win: 0x1FA  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 83599508 1126317347 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.093915 172.24.0.2:55156 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1919 IpLen:20 DgmLen:52 DF
-***A***F Seq: 0x50ED728F  Ack: 0x5C729482  Win: 0x1F5  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2997334598 1141484924 
+06/09-16:11:06.895920 172.21.0.2:37244 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:9342 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0x88F2C292  Ack: 0x69447385  Win: 0x1F5  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126317348 83599508 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.094149 172.24.0.3:3100 -> 172.24.0.2:55156
-TCP TTL:64 TOS:0x0 ID:57080 IpLen:20 DgmLen:52 DF
-***A***F Seq: 0x5C729482  Ack: 0x50ED7290  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1141484924 2997334598 
+06/09-16:12:25.620010 172.21.0.2:36390 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:39969 IpLen:20 DgmLen:60 DF
+******S* Seq: 0xB11E9F11  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 1126396077 0 NOP WS: 7 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:55:31.094155 172.24.0.2:55156 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:1920 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x50ED7290  Ack: 0x5C729483  Win: 0x1F5  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2997334599 1141484924 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/09-10:57:10.862937 172.24.0.2:57530 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:61843 IpLen:20 DgmLen:60 DF
-******S* Seq: 0x91C3B8A9  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
-TCP Options (5) => MSS: 1460 SackOK TS: 2997434371 0 NOP WS: 7 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/09-10:57:10.862978 172.24.0.3:3100 -> 172.24.0.2:57530
+06/09-16:12:25.620029 172.24.0.3:3100 -> 172.21.0.2:36390
 TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:60 DF
-***A**S* Seq: 0xB935E1AA  Ack: 0x91C3B8AA  Win: 0xFE88  TcpLen: 40
-TCP Options (5) => MSS: 1460 SackOK TS: 1141584698 2997434371 
-TCP Options => NOP WS: 7 
+***A**S* Seq: 0x30D403A  Ack: 0xB11E9F12  Win: 0xFE88  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 83678237 1126396077 NOP 
+TCP Options => WS: 7 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
-06/09-10:57:10.862985 172.24.0.2:57530 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:61844 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0x91C3B8AA  Ack: 0xB935E1AB  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2997434372 1141584698 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/09-10:57:10.864131 172.24.0.2:57530 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:61845 IpLen:20 DgmLen:311 DF
-***AP*** Seq: 0x91C3B8AA  Ack: 0xB935E1AB  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2997434373 1141584698 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/09-10:57:10.864166 172.24.0.3:3100 -> 172.24.0.2:57530
-TCP TTL:64 TOS:0x0 ID:53203 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0xB935E1AB  Ack: 0x91C3B9AD  Win: 0x1FC  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1141584699 2997434373 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/09-10:57:10.864223 172.24.0.2:57530 -> 172.24.0.3:3100
-TCP TTL:64 TOS:0x0 ID:61846 IpLen:20 DgmLen:233 DF
-***AP*** Seq: 0x91C3B9AD  Ack: 0xB935E1AB  Win: 0x1F6  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 2997434373 1141584699 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/09-10:57:10.864228 172.24.0.3:3100 -> 172.24.0.2:57530
-TCP TTL:64 TOS:0x0 ID:53204 IpLen:20 DgmLen:52 DF
-***A**** Seq: 0xB935E1AB  Ack: 0x91C3BA62  Win: 0x1FB  TcpLen: 32
-TCP Options (3) => NOP NOP TS: 1141584699 2997434373 
-=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-06/09-10:57:10.868424 172.24.0.3:3100 -> 172.24.0.2:5753
+06/09-16:12:25.620042 172.21.0.2:36390 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:39970 IpLen:20 DgmLen:52 DF
+***A**** Seq: 0xB11E9F12  Ack: 0x30D403B  Win: 0x1F6  TcpLen: 32
+TCP Options (3) => NOP NOP TS: 1126396077 83678237 
+=+=+

@@ -126,22 +126,26 @@ def handle_request():
     if decision == "allow":
         logging.info("[PEP] Accesso CONCESSO.")
         try:
+            result = 0
             if operation == "write":
-                success = execute_write_operation(nome_file, contenuto, sensibilita)
-                if not success:
+                result = execute_write_operation(nome_file, contenuto, sensibilita)
+                if result == -10:
                     raise Exception("Fallita scrittura file nel DB")
-                result = "Operazione eseguita con successo"
+                return jsonify({
+                "result": "access granted",
+                "id_document": result
+                }), 200
             else:
                 result = execute_single_operation(operation, doc_id, role)
-                if result is None:
+                if result == -10:
                     return jsonify({
                         "result": "Documento non disponibile per l'operazione richiesta",
                     }), 200
 
-            return jsonify({
-                "result": "access granted",
-                "response": result
-            }), 200
+                return jsonify({
+                    "result": "access granted",
+                    "response": result
+                }), 200
 
         except Exception as e:
             logging.error(f"[PEP] Errore durante esecuzione operazione: {e}")
