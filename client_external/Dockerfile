@@ -21,10 +21,10 @@ WORKDIR /app
 
 # Copia gli script nel container
 COPY entrypoint.sh /app/entrypoint.sh
-COPY attack.sh /app/attack.sh
+COPY uc.sh /app/uc.sh
 
 # Rendi gli script eseguibili
-RUN chmod +x /app/entrypoint.sh /app/attack.sh
+RUN chmod +x /app/entrypoint.sh /app/uc.sh
 
 # Imposta lo script di avvio come entrypoint
 ENTRYPOINT ["/app/entrypoint.sh"]

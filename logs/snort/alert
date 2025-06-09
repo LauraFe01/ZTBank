@@ -2874,3 +2874,10 @@ TCP TTL:64 TOS:0x0 ID:8569 IpLen:20 DgmLen:264 DF
 ***AP*** Seq: 0xF9E52F7E  Ack: 0x821F8789  Win: 0x1F6  TcpLen: 32
 TCP Options (3) => NOP NOP TS: 1109533647 66815806 
 
+[**] [1:10000006:4] Port scanning SYN rilevato su rete 172.24.0.0/24 [**]
+[Priority: 0] 
+06/09-10:56:35.851007 172.21.0.2:37650 -> 172.24.0.3:3100
+TCP TTL:64 TOS:0x0 ID:57106 IpLen:20 DgmLen:60 DF
+******S* Seq: 0xB189992D  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
+TCP Options (5) => MSS: 1460 SackOK TS: 1113690740 0 NOP WS: 7 
+
