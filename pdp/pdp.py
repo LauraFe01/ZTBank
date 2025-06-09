@@ -40,12 +40,12 @@ def update_trust():
     Endpoint per aggiornare il punteggio di fiducia o bloccare un ip in base ai dati ricevuti da Splunk.
     """
     data = request.get_json()
-    logging.info("Payload ricevuto da Splunk")
+    #logging.info("Payload ricevuto da Splunk")
     
     trust_type = data.get("search_name", "")
     result = data.get("result", {})
-    logging.info("Ip contenuto nel payload:")
-    logging.info(result)
+    #logging.info("Ip contenuto nel payload:")
+    #logging.info(result)
     results = [result] if isinstance(result, dict) else result
     
     updated_entries = []
@@ -84,9 +84,16 @@ def update_trust():
                 block_ip(ip)
                 updated_entries.append(ip)
             
+            # Policy: Shell-code-injection
+            elif trust_type == "ShellCode-Injection-Detection":
+                logging.info("Policy: ShellCode-Injection-Detection")
+                block_ip(ip)
+                updated_entries.append(ip)
+            
             else:
                 logging.warning(f"⚠️ search_name non riconosciuto: {trust_type}")
-
+                
+            
     if not updated_entries:
         logging.warning("⚠️ Nessuna voce valida trovata nel payload")
 
