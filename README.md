@@ -121,7 +121,7 @@ Questo progetto implementa un'architettura di sicurezza informatica basata sul m
 │   ├── create_users.py
 │   ├── Dockerfile
 │   ├── pep.py
-│   ├── users_db.json       # Definisce i tipi di account e credenziali
+│   ├── users_db.json      
 │   └── user_auth.py
 └── splunk-apps/
     ├── dashboard/
