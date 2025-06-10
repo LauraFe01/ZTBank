@@ -43,8 +43,7 @@
   </p>
 </div>
 
-## 🚀 Overview
-
+## [🚀 Overview](#overview)
 Questo progetto implementa un'architettura di sicurezza informatica basata sul modello Zero-Trust. Utilizza servizi containerizzati e best practice di sicurezza per proteggere dati critici e operazioni di rete da accessi non autorizzati.
 
 **Team Members:**
