@@ -11,14 +11,14 @@
   </p>
   <br/>
   <p>
-    <a href="#Overview"><strong>Overview</strong></a> ·
-    <a href="#Complete Project Structure"><strong>Complete Project Structure</strong></a> .
-    <a href="#Come Buildare e Avviare"><strong>Come Buildare e Avviare</strong></a> .
-    <a href="#Verifica SSL e Interazioni PEP"><strong>Verifica SSL e Interazioni PEP</strong></a> .
-    <a href="#Esecuzione Use Cases"><strong>Esecuzione Use Cases</strong></a> .
-    <a href="#Account Types"><strong>Account Types</strong></a> .
-    <a href="#Monitoring, Logs e Splunk"><strong>Monitoring, Logs e Splunk</strong></a> .
-    <a href="#Contributing"><strong>Contributing</strong></a> .
+  <a href="#overview"><strong>Overview</strong></a> ·
+  <a href="#complete-project-structure"><strong>Complete Project Structure</strong></a> ·
+  <a href="#come-buildare-e-avviare"><strong>Come Buildare e Avviare</strong></a> ·
+  <a href="#verifica-ssl-e-interazioni-pep"><strong>Verifica SSL e Interazioni PEP</strong></a> ·
+  <a href="#esecuzione-use-cases"><strong>Esecuzione Use Cases</strong></a> ·
+  <a href="#account-types"><strong>Account Types</strong></a> ·
+  <a href="#monitoring-logs-e-splunk"><strong>Monitoring, Logs e Splunk</strong></a> ·
+  <a href="#contributing"><strong>Contributing</strong></a> .
  <p><strong>Tecnologie utilizzate: </strong></p>
   <br/>
   <p>
