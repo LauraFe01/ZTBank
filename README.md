@@ -7,7 +7,7 @@
   <br/>
   <p>
     Progetto del corso di Advanced-CyberSecurity 2024/2025 <br/>
-    Realizzazione di un architettura zero trus
+    Realizzazione di un architettura Zero Trust
   </p>
   <br/>
   <p>
@@ -49,10 +49,10 @@ Questo progetto implementa un'architettura di sicurezza informatica basata sul m
 **Team Members:**
 
 - [Luca Bellante](https://github.com/lucabellantee)
-- [Micol Zazzarini](https://github.com/MicolZazzarini)
 - [Giansimone Coccia](https://github.com/Giansimone-Coccia)
-- [Federico Staffoni](https://github.com/fedeStaffo)
-- [Laura Ferrante](https://github.com/LauraFe01)
+- [Laura Ferretti](https://github.com/LauraFe01)
+- [Federico Staffolani](https://github.com/fedeStaffo)
+- [Micol Zazzarini](https://github.com/MicolZazzarini)
 
 ---
 
