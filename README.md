@@ -154,7 +154,7 @@ Questo progetto implementa un'architettura di sicurezza informatica basata sul m
 ## [🔧 Come Buildare e Avviare](#come-buildare-e-avviare)
 
 1. **Assicurarsi di essere nella directory root del progetto**
-2. **Verificare che i file **``** usino line endings Unix (**``**)**
+2. **Verificare che i file ** usino line endings Unix**
    ```bash
    find . -type f -name "*.sh" -exec sed -i 's/\r$//' {} +
    ```
@@ -187,7 +187,7 @@ Questo progetto implementa un'architettura di sicurezza informatica basata sul m
    docker exec -it db bash
    psql "sslmode=require host=localhost dbname=bankDB user=user password=cyber_pwd"
    ```
-2. **Esempi di richieste al PEP via **``
+2. **Esempi di richieste al PEP via**``
    - **Login**:
 
      ```bash
