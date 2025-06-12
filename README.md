@@ -43,7 +43,7 @@
   </p>
 </div>
 
-## [🚀 Overview](#overview)
+## :rocket: Overview
 Questo progetto implementa un'architettura di sicurezza informatica basata sul modello Zero-Trust. Utilizza servizi containerizzati e best practice di sicurezza per proteggere dati critici e operazioni di rete da accessi non autorizzati.
 
 **Team Members:**
@@ -56,7 +56,7 @@ Questo progetto implementa un'architettura di sicurezza informatica basata sul m
 
 ---
 
-## [📁 Complete Project Structure](#complete-project-structure)
+## :file_folder: Complete Project Structure
 
 ```bash
 .
@@ -151,7 +151,7 @@ Questo progetto implementa un'architettura di sicurezza informatica basata sul m
 
 ---
 
-## [🔧 Come Buildare e Avviare](#come-buildare-e-avviare)
+## :wrench: Come Buildare e Avviare
 
 1. **Assicurarsi di essere nella directory root del progetto**
 2. **Verificare che i file ``** usino line endings Unix (**``**)**
@@ -180,7 +180,7 @@ Questo progetto implementa un'architettura di sicurezza informatica basata sul m
 
 ---
 
-## [🔐 Verifica SSL e Interazioni PEP](#verifica-ssl-e-interazioni-pep)
+## :closed_lock_with_key: Verifica SSL e Interazioni PEP
 
 1. **Controllare che PostgreSQL accetti connessioni SSL**
    ```bash
@@ -232,7 +232,7 @@ Questo progetto implementa un'architettura di sicurezza informatica basata sul m
 
 ---
 
-## [⚙️ Esecuzione Use Cases](#esecuzione-use-cases)
+## :gear: Esecuzione Use Cases
 
 Per eseguire gli script di use case (`uc.sh`) all’interno dei container:
 
@@ -248,7 +248,7 @@ docker exec -it client_internal bash ./uc.sh
 
 ---
 
-## [🔑 Account Types](#account-types)
+## :key: Account Types
 
 I tipi di account sono:
 
@@ -267,7 +267,7 @@ Modificare o aggiungere nuovi tipi di account tramite lo script `pep/create_user
 
 ---
 
-## [📊 Monitoring, Logs e Splunk](#monitoring-logs-e-splunk)
+## :closed_lock_with_key: Monitoring, Logs e Splunk
 
 I log sono raccolti in `logs/` e mostrano:
 
@@ -304,7 +304,7 @@ per accedere a Splunk e visualizzare le dashboard personalizzate. Il nome utente
 
 ---
 
-## [🤝 Contributing](#contributing)
+## :handshake: Contributing
 
 Apri issue, discussion o pull request per suggerimenti e miglioramenti!
 
