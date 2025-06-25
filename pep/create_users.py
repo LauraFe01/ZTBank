@@ -15,7 +15,7 @@ utenti = {
 
 db = load_user_db()
 
-# creazione utenti
+# Creazione utenti
 for key, (username, password, role) in utenti.items():
     ok, msg = create_user(username, password, role, db)
     logging.info(f"[{role}] {'✅' if ok else '❌'} {msg}")

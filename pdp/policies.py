@@ -7,7 +7,7 @@ from utils import adjust_trust
 logging.basicConfig(level=logging.INFO)
 
 
-# Carica il database GeoLite (devi scaricarlo prima)
+# Carica il database GeoLite (va prima scaricato)
 GEOIP_DB_PATH = 'GeoLite2-Country.mmdb'
 geo_reader = geoip2.database.Reader(GEOIP_DB_PATH)
 
@@ -58,7 +58,6 @@ def evaluate_ip_country(ip):
         logging.warning(f"❗ Impossibile geolocalizzare IP {ip}: {e}")
 
 
-# NB dobbiamo pensare a cosa può fare il ruolo cliente!!!
 def evaluate_operation(role, operation):
     """
     Determina se un ruolo ha il permesso di eseguire una determinata operazione.

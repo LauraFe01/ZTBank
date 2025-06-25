@@ -8,55 +8,67 @@ import pytz
 from datetime import datetime
 from db_scripts.db_exec import execute_single_operation, execute_write_operation
 
+app = Flask(__name__)
+app.secret_key = os.getenv("PEP_SECRET_KEY")
+PDP_URL = "http://pdp:5050/decide"
+logging.basicConfig(level=logging.INFO)
+rome = pytz.timezone("Europe/Rome")
 
-
-app = Flask(__name__) # # Inizializzazione dell'app Flask
-app.secret_key = os.getenv("PEP_SECRET_KEY") # Chiave segreta per gestire le sessioni utente
-PDP_URL = "http://pdp:5050/decide" # Endpoint del PDP (Policy Decision Point)
-logging.basicConfig(level=logging.INFO) # Configurazione logging
-rome = pytz.timezone("Europe/Rome") # Timezone locale
-
-
-
-# Endpoint per il login
 @app.route("/login", methods=["POST"])
 def login():
+    """
+    Endpoint per l'autenticazione dell'utente.
+
+    Riceve username e password via JSON, autentica l'utente tramite il database
+    e in caso di successo avvia una sessione persistente.
+
+    Returns:
+        JSON response con stato dell'autenticazione (200 se ok, 401 altrimenti).
+    """
     data = request.get_json()
     username = data.get("username")
     password = data.get("password")
-    
-    # autentichiamo l'utente e se l'operazione non va a buon fine inviamo un messaggio di errore
-    user_db = load_user_db() 
+
+    user_db = load_user_db()
     success, role_or_msg = authenticate_user(username, password, user_db)
     if not success:
         return jsonify({"status": "error", "message": role_or_msg}), 401
-    
-    # se l'autenticazione va a buon fine, avviamo la sessione per l'utente
-    session.permanent = True # Sessione persistente
+
+    session.permanent = True
     session["username"] = username
     session["role"] = role_or_msg
     return jsonify({"status": "ok", "message": "Login riuscito"}), 200
 
-
-
-# Endpoint per il logout
 @app.route("/logout", methods=["POST"])
 def logout():
+    """
+    Endpoint per terminare la sessione utente.
+
+    Cancella la sessione corrente e restituisce una conferma.
+
+    Returns:
+        JSON response con conferma di logout.
+    """
     session.clear()
     return jsonify({"status": "ok", "message": "Logout effettuato"}), 200
 
-
-
-# rotta di ricezione delle richieste
 @app.route("/request", methods=["POST"])
 def handle_request():
+    """
+    Endpoint principale del PEP (Policy Enforcement Point) per la gestione di richieste.
+
+    Valida l'autenticazione dell'utente, raccoglie i parametri dell'operazione e 
+    inoltra la richiesta al PDP per autorizzazione. Se autorizzata, esegue l'operazione.
+
+    Returns:
+        JSON response con esito dell'autorizzazione e dell'operazione (200, 403 o 500).
+    """
     logging.info("Richiesta ricevuta all'endpoint /request")
     logging.info(f"Headers: {request.headers}")
     logging.info(f"Corpo della richiesta: {request.get_data()}")
     data = request.get_json()
     logging.info(f"Dati JSON ricevuti: {data}")
 
-    # Verifica autenticazione (solo gli autenticati possono fare richieste)
     if "username" not in session or "role" not in session:
         return jsonify({"error": "Utente non autenticato"}), 401
 
@@ -67,8 +79,6 @@ def handle_request():
     logging.info(f"Username dell'utente: {username}")
 
     timestamp = datetime.now(rome).strftime("%Y-%m-%d %H:%M:%S")
-    
-    # estrazione dei parametri della richiesta (la sensibilità la mettiamo nella richiesta?????)
     operation = data.get("operation", "")
     logging.info(f"Operazione: {operation}")
 
@@ -89,14 +99,12 @@ def handle_request():
 
     logging.info(f"[PEP] Richiesta ricevuta da  Ruolo: {role}, Op: {operation}, Documento: {document_type}")
 
-    # Ottieniamo IP del client
     if request.headers.getlist("X-Forwarded-For"):
         client_ip = request.headers.getlist("X-Forwarded-For")[0]
     else:
         client_ip = request.remote_addr
     logging.info(f"client_ip: {client_ip}")
 
-    # Inoltriamo tutto al PDP
     logging.info("Invio dati al pdp")
     try:
         response = requests.post(PDP_URL, json={
@@ -121,8 +129,7 @@ def handle_request():
         required = "unknown"
 
     logging.info(f"[PEP] Decisione PDP: {decision} (Trust: {trust}, Soglia: {required})")
-    
-    # Se l'accesso è consentito, esegui l'operazione
+
     if decision == "allow":
         logging.info("[PEP] Accesso CONCESSO.")
         try:
@@ -147,16 +154,12 @@ def handle_request():
             logging.error(f"[PEP] Errore durante esecuzione operazione: {e}")
             return jsonify({"error": "Errore interno"}), 500
     else:
-        # Accesso negato 
         logging.info("[PEP] Accesso NEGATO.")
         return jsonify({
             "result": "access denied",
             "trust": trust,
             "required": required
-
         }), 403
-
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3100)

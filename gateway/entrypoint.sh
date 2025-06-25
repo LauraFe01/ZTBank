@@ -3,7 +3,7 @@ set -e
 
 echo "[Entrypoint] Cleanup completo processi Squid..."
 
-# 1) Termina tutti i processi squid esistenti (più aggressivo)
+# 1) Termina tutti i processi squid esistenti
 killall squid 2>/dev/null || true
 pkill -9 -f squid 2>/dev/null || true
 pkill -9 -f "/usr/sbin/squid" 2>/dev/null || true
@@ -26,13 +26,6 @@ fi
 # 5) Mostra i processi attivi per debug
 echo "[Entrypoint] Processi attivi:"
 ps aux | grep squid || echo "Nessun processo squid trovato"
-
-
-# # 6) Inizializza cache solo se necessario
-# if [ ! -d /var/spool/squid/00 ]; then
-#     echo "[Entrypoint] Inizializzo la cache di Squid..."
-#     squid -z
-# fi
 
 ###################
 ## AVVIO IPTABLES #
