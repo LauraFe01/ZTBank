@@ -131,6 +131,7 @@ services:
   splunk:
     image: splunk/splunk:latest
     container_name: splunk
+    platform: linux/amd64
     environment:
       - SPLUNK_START_ARGS=--accept-license
       - SPLUNK_PASSWORD=${SPLUNK_PASSWORD}

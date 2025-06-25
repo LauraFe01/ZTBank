@@ -5,7 +5,7 @@
     "last_reason": "IP in static blacklist (file)"
   },
   "172.21.0.2": {
-    "score": 85,
+    "score": 100,
     "last_seen": "2025-06-01T15:32:45.789000",
     "last_reason": "Ruolo iniziale: Direttore"
   },

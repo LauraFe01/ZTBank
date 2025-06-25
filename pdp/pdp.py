@@ -149,6 +149,11 @@ def decide():
         }), 200
     else: logging.info(f"[PDP] IP {client_ip} non presente in blacklist")
 
+    # Ottieni il punteggio di fiducia della rete
+    logging.info("Ottengo fiducia della rete pre processamento:")
+    network_trust = get_network_trust(client_ip).get("score", 50)
+    logging.info(f"Fiducia relativa a {client_ip}: {network_trust}")
+
     # Valutazioni aggiuntive
     logging.info("Esecuzione di valutazioni aggiuntive per la rete di provenienza della richiesta")
     evaluate_external_net_activity(client_ip)

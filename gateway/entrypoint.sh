@@ -27,8 +27,6 @@ fi
 echo "[Entrypoint] Processi attivi:"
 ps aux | grep squid || echo "Nessun processo squid trovato"
 
-# Ho disattivato momentaneamente la cache per fare dei test perchè secondo chat se squid gestisce richieste uguali utilizzando la cache
-# potrebbe impedire a snort di rilevare il traffico, non so se è na cazzata :)
 
 # # 6) Inizializza cache solo se necessario
 # if [ ! -d /var/spool/squid/00 ]; then
