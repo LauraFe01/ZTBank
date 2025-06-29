@@ -57,7 +57,7 @@
 
 ---
 
-## 🚀 Overview
+## :rocket: Overview
 
 Questo progetto realizza un'infrastruttura di sicurezza informatica per un sistema bancario, ispirata ai principi dell'architettura Zero Trust, su una rete suddivisa in tre segmenti: interna, esterna e Wi-Fi. L'obiettivo è monitorare e regolare rigorosamente tutto il traffico verso il database, risorsa critica dell’infrastruttura.
 
