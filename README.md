@@ -11,16 +11,16 @@
   </p>
   <br/>
   <p>
-    <a href="#🚀-overview"><strong>Overview</strong></a> ·
-    <a href="#🏛️-architettura"><strong>Architettura</strong></a> ·
-    <a href="#📁-complete-project-structure"><strong>Complete Project Structure</strong></a> ·
-    <a href="#📝-policy-implementate"><strong>Policy Implementate</strong></a> ·
-    <a href="#🛠️-come-buildare-e-avviare"><strong>Come Buildare e Avviare</strong></a> ·
-    <a href="#🔐-verifica-ssl-e-interazioni-pep"><strong>Verifica SSL e Interazioni PEP</strong></a> ·
-    <a href="#⚙️-esecuzione-use-cases"><strong>Esecuzione Use Cases</strong></a> ·
-    <a href="#🔑-account-types"><strong>Account Types</strong></a> ·
-    <a href="#📊-monitoring-logs-e-splunk"><strong>Monitoring, Logs e Splunk</strong></a> ·
-    <a href="#🤝-contributing"><strong>Contributing</strong></a>
+    <a href="#rocket-overview"><strong>Overview</strong></a> ·
+    <a href="#classical_building-architettura"><strong>Architettura</strong></a> ·
+    <a href="#file_folder-complete-project-structure"><strong>Complete Project Structure</strong></a> ·
+    <a href="#memo-policy-implementate"><strong>Policy Implementate</strong></a> ·
+    <a href="#wrench-come-buildare-e-avviare"><strong>Come Buildare e Avviare</strong></a> ·
+    <a href="#closed_lock_with_key-verifica-ssl-e-interazioni-pep"><strong>Verifica SSL e Interazioni PEP</strong></a> ·
+    <a href="#gear-esecuzione-use-cases"><strong>Esecuzione Use Cases</strong></a> ·
+    <a href="#key-account-types"><strong>Account Types</strong></a> ·
+    <a href="#bar_chart-monitoring-logs-e-splunk"><strong>Monitoring, Logs e Splunk</strong></a> ·
+    <a href="#handshake-contributing"><strong>Contributing</strong></a>
   <p><strong>Tecnologie utilizzate: </strong></p>
   <br/>
   <p>
