@@ -11,6 +11,7 @@
   </p>
   <br/>
   <p>
+    <a href="#busts_in_silhouette-team-members"><strong>Team Members</strong></a> ·
     <a href="#rocket-overview"><strong>Overview</strong></a> ·
     <a href="#classical_building-architettura"><strong>Architettura</strong></a> ·
     <a href="#file_folder-complete-project-structure"><strong>Complete Project Structure</strong></a> ·
@@ -47,7 +48,7 @@
 
 ---
 
-## 👥 Team Members
+## :busts_in_silhouette: Team Members
 
 - [Luca Bellante](https://github.com/lucabellantee)
 - [Giansimone Coccia](https://github.com/Giansimone-Coccia)
@@ -65,7 +66,7 @@ Ogni richiesta di accesso alle risorse è sottoposta a controlli rigorosi di aut
 
 ---
 
-## 🏛️ Architettura
+## :classical_building: Architettura
 
 L’architettura del sistema si fonda su un modello a microservizi, dove ogni componente di sicurezza è isolato in un container Docker dedicato. Questo approccio garantisce:
 
@@ -127,7 +128,7 @@ L’architettura del sistema si fonda su un modello a microservizi, dove ogni co
   <img src="./img/architettura.png" width="600" alt="Architettura Zero Trust"/>
 </div>
 
-## 📁 Complete Project Structure
+## :file_folder: Complete Project Structure
 
 ```bash
 .
@@ -222,7 +223,7 @@ L’architettura del sistema si fonda su un modello a microservizi, dove ogni co
 
 ---
 
-## 📝 Policy Implementate
+## :memo: Policy Implementate
 
 Le principali policy di sicurezza implementate nell’architettura Zero Trust sono:
 
@@ -277,7 +278,7 @@ Le principali policy di sicurezza implementate nell’architettura Zero Trust so
 
 ---
 
-## 🛠️ Come Buildare e Avviare
+## :wrench: Come Buildare e Avviare
 
 1. **Assicurarsi di essere nella directory root del progetto**
 2. **Verificare che i file `.sh` usino line endings Unix (`LF`)**
@@ -306,7 +307,7 @@ Le principali policy di sicurezza implementate nell’architettura Zero Trust so
 
 ---
 
-## 🔐 Verifica SSL e Interazioni PEP
+##  :closed_lock_with_key: Verifica SSL e Interazioni PEP
 
 1. **Controllare che PostgreSQL accetti connessioni SSL**
    ```bash
@@ -358,7 +359,7 @@ Le principali policy di sicurezza implementate nell’architettura Zero Trust so
 
 ---
 
-## ⚙️ Esecuzione Use Cases
+## :gear: Esecuzione Use Cases
 
 Per eseguire gli script di use case (`uc.sh`) all’interno dei container:
 
@@ -374,7 +375,7 @@ docker exec -it client_internal bash ./uc.sh
 
 ---
 
-## 🔑 Account Types
+## :key: Account Types
 
 I tipi di account sono:
 
@@ -393,7 +394,7 @@ Modificare o aggiungere nuovi tipi di account tramite lo script `pep/create_user
 
 ---
 
-## 📊 Monitoring, Logs e Splunk
+## :bar_chart: Monitoring, Logs e Splunk
 
 I log sono raccolti in `logs/` e mostrano:
 
@@ -428,6 +429,6 @@ per accedere a Splunk e visualizzare le dashboard personalizzate. Il nome utente
 
 ---
 
-## 🤝 Contributing
+## :handshake: Contributing
 
 Apri issue, discussion o pull request per suggerimenti e miglioramenti!
