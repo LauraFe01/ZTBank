@@ -1,4 +1,4 @@
-# 🛡️ ZT-Bank
+# 🛡️ ZTBank
 
 <div align="center">
   <br/>
