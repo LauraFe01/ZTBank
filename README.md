@@ -1,4 +1,4 @@
-# 🛡️ Zero-Trust Cybersecurity Project
+# 🛡️ ZT-Bank
 
 <div align="center">
   <br/>
